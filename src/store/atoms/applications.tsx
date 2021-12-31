@@ -12,7 +12,7 @@ export class Application {
 
   static icon: (() => React.ReactNode) | undefined = () => (<Icon icon='fxemoji:redapple' />);
   
-  
+  navigation = (): any[] => []
 
   component: (() => React.ReactNode) | undefined;
 

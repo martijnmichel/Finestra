@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react'
-import { Application } from '../store/atoms/applications'
-import Icon from '../icons/text-editor.png'
+import { Application } from '../../store/atoms/applications'
+import Icon from '../../icons/text-editor.png'
+import { navigation } from './navigation';
 
 export class TextEditor extends Application {
     public name = 'Text Editor';
@@ -9,6 +10,8 @@ export class TextEditor extends Application {
     static icon = () => <img src={Icon} alt="Logo" />
     
     component = () => TextEditorApp()
+
+    navigation = () => navigation(this.id)
     
 
     constructor() {

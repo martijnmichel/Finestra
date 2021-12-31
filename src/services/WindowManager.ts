@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { Applications } from "../applications";
 import { applications } from "../store/atoms/applications";
@@ -6,6 +7,7 @@ import { removeItemAtIndex } from "../store/utils/array";
 
 export const useWindowManager = () => {
   const [applicationState, setApplicationState] = useRecoilState(applications);
+  
   const [launchpadState, setLaunchpadState] = useRecoilState(launchpad);
 
   const startApp = (AppName: string) => {
@@ -29,9 +31,13 @@ export const useWindowManager = () => {
     setApplicationState(newState);
   };
 
+  const activeApp = () => applicationState.find(app => app.active)
+  
+
   return {
     startApp,
     closeApp,
-    toggleApp
+    toggleApp,
+    activeApp
   };
 };

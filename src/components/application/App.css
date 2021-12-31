@@ -1,0 +1,25 @@
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+
+
+.application-button-container {
+    @apply flex items-center gap-1 px-2;
+}
+.application-button {
+    @apply w-[13px] h-[13px] rounded-full border-[1.5px] border-[rgba(0,0,0,0.1)];
+}
+
+.application-button.close {
+    @apply bg-red-500;
+}
+
+.application-button.minimize {
+    @apply bg-amber-500;
+}
+
+.application-button.maximize {
+    @apply bg-green-500;
+}

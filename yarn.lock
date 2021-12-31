@@ -217,6 +217,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.9.2":
+  version "7.16.7"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.16.7.tgz#03ff99f64106588c9c403c6ecb8c3bafbbdff1fa"
+  integrity sha512-9E9FJowqAsytyOY6LG+1KuueckRL+aQW+mKvXRXnuFGyRAyepJPmEo9vgMfXUA6O9u3IeEdv9MAkppFcaQwogQ==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.12.13":
   version "7.12.13"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.12.13.tgz#530265be8a2589dbb37523844c5bcb55947fb327"
@@ -284,6 +291,21 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
+
+"@react-dnd/asap@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@react-dnd/asap/-/asap-4.0.0.tgz#b300eeed83e9801f51bd66b0337c9a6f04548651"
+  integrity sha512-0XhqJSc6pPoNnf8DhdsPHtUhRzZALVzYMTzRwV4VI6DJNJ/5xxfL9OQUwb8IH5/2x7lSf7nAZrnzUD+16VyOVQ==
+
+"@react-dnd/invariant@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@react-dnd/invariant/-/invariant-2.0.0.tgz#09d2e81cd39e0e767d7da62df9325860f24e517e"
+  integrity sha512-xL4RCQBCBDJ+GRwKTFhGUW8GXa4yoDfJrPbLblc3U09ciS+9ZJXJ3Qrcs/x2IODOdIE5kQxvMmE2UKyqUictUw==
+
+"@react-dnd/shallowequal@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@react-dnd/shallowequal/-/shallowequal-2.0.0.tgz#a3031eb54129f2c66b2753f8404266ec7bf67f0a"
+  integrity sha512-Pc/AFTdwZwEKJxFJvlxrSmGe/di+aAOBn60sremrpLo6VI/6cmiUYNNwlI5KNYttg7uypzA3ILPMPgxB2GYZEg==
 
 "@types/color-name@^1.1.1":
   version "1.1.1"
@@ -1037,6 +1059,15 @@ dlv@^1.1.3:
   resolved "https://registry.yarnpkg.com/dlv/-/dlv-1.1.3.tgz#5c198a8a11453596e751494d49874bc7732f2e79"
   integrity sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==
 
+dnd-core@14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-14.0.1.tgz#76d000e41c494983210fb20a48b835f81a203c2e"
+  integrity sha512-+PVS2VPTgKFPYWo3vAFEA8WPbTf7/xo43TifH9G8S1KqnrQu0o77A3unrF5yOugy4mIz7K5wAVFHUcha7wsz6A==
+  dependencies:
+    "@react-dnd/asap" "^4.0.0"
+    "@react-dnd/invariant" "^2.0.0"
+    redux "^4.1.1"
+
 electron-to-chromium@^1.3.649:
   version "1.3.700"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.700.tgz#a6999a954c698dc7da5e84c369d65432dbe895be"
@@ -1177,6 +1208,11 @@ esutils@^2.0.2:
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
+fast-deep-equal@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
+  integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
+
 fast-glob@^3.2.7:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.7.tgz#fd6cb7a2d7e9aa7a7846111e85a196d6b2f766a1"
@@ -1304,7 +1340,7 @@ history@^4.9.0:
     tiny-warning "^1.0.0"
     value-equal "^1.0.1"
 
-hoist-non-react-statics@^3.1.0:
+hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -1702,6 +1738,24 @@ quick-lru@^5.1.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
+react-dnd-html5-backend@^14.0.2:
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-14.0.2.tgz#25019388f6abdeeda3a6fea835dff155abb2085c"
+  integrity sha512-QgN6rYrOm4UUj6tIvN8ovImu6uP48xBXF2rzVsp6tvj6d5XQ7OjHI4SJ/ZgGobOneRAU3WCX4f8DGCYx0tuhlw==
+  dependencies:
+    dnd-core "14.0.1"
+
+react-dnd@^14.0.4:
+  version "14.0.4"
+  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-14.0.4.tgz#ffb4ea0e2a3a5532f9c6294d565742008a52b8b0"
+  integrity sha512-AFJJXzUIWp5WAhgvI85ESkDCawM0lhoVvfo/lrseLXwFdH3kEO3v8I2C81QPqBW2UEyJBIPStOhPMGYGFtq/bg==
+  dependencies:
+    "@react-dnd/invariant" "^2.0.0"
+    "@react-dnd/shallowequal" "^2.0.0"
+    dnd-core "14.0.1"
+    fast-deep-equal "^3.1.3"
+    hoist-non-react-statics "^3.3.2"
+
 react-dom@^17.0.0:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
@@ -1771,6 +1825,13 @@ recoil@^0.5.2:
   integrity sha512-Edibzpu3dbUMLy6QRg73WL8dvMl9Xqhp+kU+f2sJtXxsaXvAlxU/GcnDE8HXPkprXrhHF2e6SZozptNvjNF5fw==
   dependencies:
     hamt_plus "1.0.2"
+
+redux@^4.1.1:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.1.2.tgz#140f35426d99bb4729af760afcf79eaaac407104"
+  integrity sha512-SH8PglcebESbd/shgf6mii6EIoRM0zrQyjcuQ+ojmfxjTtE0z9Y8pa62iA/OJ58qjP6j27uyW4kUF4jl/jd6sw==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
 
 regenerate@^1.2.1:
   version "1.4.2"

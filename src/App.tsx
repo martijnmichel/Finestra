@@ -5,6 +5,9 @@ import { RecoilRoot } from "recoil";
 import { useAppResources } from "./hooks/useAppResources";
 import { Boot } from "./views/Boot";
 
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
+
 import Home from "./views/Home";
 
 const App = () => {
@@ -24,9 +27,11 @@ const App = () => {
   return (
     <RecoilRoot>
       <Router>
+      <DndProvider backend={HTML5Backend}>
         <div className="flex flex-col h-screen">
           <Home />
         </div>
+        </DndProvider>
       </Router>
     </RecoilRoot>
   );
