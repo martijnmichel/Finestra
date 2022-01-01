@@ -1,12 +1,14 @@
+import { Icon } from "@iconify/react";
 import React from "react";
 import { useDrag } from "react-dnd";
 import { useWindowManager } from "../../services/WindowManager";
 import { Application } from "../../store/atoms/applications";
-import { Menu } from "./AppMenu";
+
 import "./App.css";
+import { AppActions } from "./AppActions";
 
 export const ApplicationWindow = (app: Application) => {
-  const { closeApp } = useWindowManager();
+  const { closeApp, hideApp } = useWindowManager();
 
   const [{ opacity }, dragRef] = useDrag(
     () => ({
@@ -19,25 +21,25 @@ export const ApplicationWindow = (app: Application) => {
     []
   );
 
-  
-
   return (
     <div
       ref={dragRef}
       className="flex flex-col absolute left-10 top-10 border-1 border-gray-50 bg-gradient-to-t from-neutral-300 to-neutral-200 shadow-lg rounded-lg"
-      style={{ width: "400px", height: "300px", zIndex: app.active ? 1 : 0 }}
+      style={{
+        width: app.width,
+        height: app.height,
+        zIndex: app.active ? 1 : 0,
+      }}
     >
-      <div className="p-1 flex" onClick={() => closeApp(app.id)}>
-        <div className="application-button-container">
-          <div className="application-button close"></div>
-          <div className="application-button minimize"></div>
-          <div className="application-button maximize"></div>
+      {!app.titleBar && (
+        <div className="p-1 flex" onClick={() => closeApp(app.id)}>
+          <AppActions id={app.id} />
+
+          {app.name}
         </div>
+      )}
 
-        <div>{app.name}</div>
-      </div>
-
-      <div className="bg-neutral-50 flex-grow rounded-b-lg">
+      <div className={`bg-neutral-50 flex-grow rounded-b-lg ${app.titleBar ? 'rounded-t-lg' : ''}`}>
         {app.component && app.component()}
       </div>
     </div>

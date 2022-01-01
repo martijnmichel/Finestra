@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import { Applications } from "../applications";
 import { applications } from "../store/atoms/applications";
 import { launchpad } from "../store/atoms/launchpad";
-import { removeItemAtIndex } from "../store/utils/array";
+import { removeItemAtIndex, replaceItemAtIndex } from "../store/utils/array";
 
 export const useWindowManager = () => {
   const [applicationState, setApplicationState] = useRecoilState(applications);
@@ -25,8 +25,16 @@ export const useWindowManager = () => {
     setApplicationState(newApps);
   };
 
-  const toggleApp = (appId: string) => {
+  const hideApp = (appId: string) => {
+    const newState = applicationState.map(app => ({
+      ...app, active: app.id === appId ? false : app.active
+    }))
 
+    console.log(newState)
+    setApplicationState(newState);
+  }
+
+  const toggleApp = (appId: string) => {
     const newState = applicationState.map(app => ({ ...app, active: app.id === appId}))
     setApplicationState(newState);
   };
@@ -38,6 +46,7 @@ export const useWindowManager = () => {
     startApp,
     closeApp,
     toggleApp,
-    activeApp
+    activeApp,
+    hideApp
   };
 };

@@ -5,6 +5,7 @@ import { launchpad } from "../store/atoms/launchpad";
 import { applications } from "../store/atoms/applications";
 import { Icon } from "@iconify/react";
 import { AppMenu, AppMenuItem } from "./application/AppMenu";
+import { NavMenuItem } from "../applications";
 const TopBar = () => {
   const { activeApp } = useWindowManager();
   const [launchPadState, setLaunchPadState] = useRecoilState(launchpad);
@@ -12,7 +13,7 @@ const TopBar = () => {
 
   return (
     <nav
-      className={`fixed top-0 right-0 left-0 flex transform transition-all ${
+      className={`fixed z-40 top-0 right-0 left-0 flex transform transition-all ${
         launchPadState ? "-translate-y-28" : ""
       }`}
     >
@@ -28,7 +29,13 @@ const TopBar = () => {
             ?.navigation()
             .map((item) => (
               <AppMenu key={`menu-item-${item.label}`} title={item.label}>
-                {item.items.map(menuItem => <AppMenuItem label={menuItem.label} onClick={menuItem.fn} />)}
+                {item.items.map((menuItem: NavMenuItem, i: number) => (
+                  <AppMenuItem
+                    key={`menu-item-item-${item.label}${i}`}
+                    label={menuItem.label}
+                    onClick={menuItem.function}
+                  />
+                ))}
               </AppMenu>
             ))}
         </div>

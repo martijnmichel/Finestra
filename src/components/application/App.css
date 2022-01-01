@@ -9,12 +9,15 @@
     @apply flex items-center gap-1 px-2;
 }
 .application-button {
-    @apply w-[13px] h-[13px] rounded-full border-[1.5px] border-[rgba(0,0,0,0.1)];
+    @apply relative w-[14px] h-[14px] rounded-full border-[1.5px] border-[rgba(0,0,0,0.1)] flex justify-center items-center;
 }
+
 
 .application-button.close {
     @apply bg-red-500;
 }
+
+
 
 .application-button.minimize {
     @apply bg-amber-500;

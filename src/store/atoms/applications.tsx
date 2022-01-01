@@ -10,11 +10,17 @@ export class Application {
   public name = "Default App";
   id = v4();
 
+  width = 800;
+  height = 600;
+
+  titleBar = false;
+
   static icon: (() => React.ReactNode) | undefined = () => (<Icon icon='fxemoji:redapple' />);
   
   navigation = (): any[] => []
 
   component: (() => React.ReactNode) | undefined;
+  
 
   
 

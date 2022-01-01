@@ -9,6 +9,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
 
 import Home from "./views/Home";
+import { useWindowManager } from "./services/WindowManager";
 
 const App = () => {
   const { loadResources, loaded } = useAppResources();

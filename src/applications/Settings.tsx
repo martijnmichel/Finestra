@@ -1,0 +1,25 @@
+
+import React from 'react'
+import { Application } from '../store/atoms/applications'
+import Icon from '../icons/settings.png'
+
+export class Settings extends Application {
+    public name = 'Settings';
+    static icon = () => (<img src={Icon} alt="Logo" />)
+
+    
+    component = () => SettingsApp()
+    
+
+    constructor() {
+        super()
+    }
+}
+
+export const SettingsApp = () => {
+
+
+    return (
+        <h1>Settings</h1>
+    )
+}

@@ -7,7 +7,11 @@ module.exports = {
       fontWeight: ['hover', 'focus'],
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      scale: ['group-focus']
+    }
+  },
   plugins: [
    
   ]
