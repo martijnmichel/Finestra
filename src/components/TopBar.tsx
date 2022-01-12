@@ -6,10 +6,20 @@ import { applications } from "../store/atoms/applications";
 import { Icon } from "@iconify/react";
 import { AppMenu, AppMenuItem } from "./application/AppMenu";
 import { NavMenuItem } from "../applications";
+import dayjs from "dayjs";
 const TopBar = () => {
   const { activeApp } = useWindowManager();
   const [launchPadState, setLaunchPadState] = useRecoilState(launchpad);
   const [applicationState, setApplicationState] = useRecoilState(applications);
+  const [dateTime, setDateTime] = useState<number>()
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDateTime(Date.now())
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <nav
@@ -47,7 +57,7 @@ const TopBar = () => {
           <Icon className="topnav-button" icon="akar-icons:search" />
         </div>
 
-        <div className="text-sm px-2">Fri 31 Dec 07:44</div>
+        <div className="text-sm px-2">{dayjs(dateTime).format('ddd D MMM HH:mm')}</div>
       </div>
     </nav>
   );

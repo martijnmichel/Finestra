@@ -40,6 +40,11 @@ export const useWindowManager = () => {
   };
 
   const activeApp = () => applicationState.find(app => app.active)
+
+  const appIcon = (AppName: string) => {
+    const App = Applications.find((app) => app.name === AppName);
+    return App?.icon()
+  }
   
 
   return {
@@ -47,6 +52,7 @@ export const useWindowManager = () => {
     closeApp,
     toggleApp,
     activeApp,
-    hideApp
+    hideApp,
+    appIcon
   };
 };

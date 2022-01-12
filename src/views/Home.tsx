@@ -14,7 +14,7 @@ const Home = () => {
   const {startApp} = useWindowManager()
 
   useEffect(() => {
-    startApp('Safari')
+    startApp('Finder')
   }, [])
 
   const { background } = useTheme()

@@ -20,6 +20,6 @@ export const YoutubeApp = () => {
 
 
     return (
-        <h1>Youtube</h1>
+        <iframe width="100%" height="100%" className="rounded-b-lg" src="https://youtube.com" />
     )
 }

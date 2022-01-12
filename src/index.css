@@ -4,7 +4,22 @@
 
 @import 'tailwindcss/utilities';
 
+body {
+    @apply overflow-hidden;
+}
+
 .topnav-button {
     @apply p-1 h-full text-[24px] hover:bg-black/20;
 }
 
+.icon-container {
+    @apply flex text-neutral-500 text-[27px] gap-4;
+}
+
+.icon {
+    @apply hover:bg-neutral-200 p-1 rounded-md text-[27px]  text-neutral-500;
+}
+
+.icon.side {
+    @apply px-[2px];
+}

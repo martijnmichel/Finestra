@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useWindowManager } from "../services/WindowManager";
 import { Applications } from "../applications";
 import { useRecoilState } from "recoil";
 import { launchpad } from "../store/atoms/launchpad";
 import Launchpad from "../icons/launchpad.png";
-import { AppButton } from "./application/AppButton";
 import { applications } from "../store/atoms/applications";
+import { AppButton } from "./application/AppButton";
+
 
 const BottomDock = () => {
-  const { toggleApp } = useWindowManager();
+  const { toggleApp, appIcon } = useWindowManager();
   const [launchPadState, setLaunchPadState] = useRecoilState(launchpad);
   const [applicationState, setApplicationState] = useRecoilState(applications);
+
+  
 
 
   return (
@@ -21,7 +24,7 @@ const BottomDock = () => {
 
         {applicationState.map((app, index) => {
           return (
-            <AppButton key={`app-button-${index}`} appIcon={Applications[index].icon()} onClick={() => toggleApp(app.id)} />
+            <AppButton key={`app-button-${index}`} appIcon={appIcon(app.name)} onClick={() => toggleApp(app.id)} />
           );
         })}
       </div>

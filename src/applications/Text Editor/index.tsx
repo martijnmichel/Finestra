@@ -10,6 +10,7 @@ export class TextEditor extends Application {
     public name = 'Text Editor';
 
     static icon = () => <img src={Icon} alt="Logo" />
+
     
     component = () => TextEditorApp()
 
