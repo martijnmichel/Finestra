@@ -1,25 +1,25 @@
-@import 'tailwindcss/base';
+@import "tailwindcss/base";
 
-@import 'tailwindcss/components';
+@import "tailwindcss/components";
 
-@import 'tailwindcss/utilities';
+@import "tailwindcss/utilities";
 
 body {
-    @apply overflow-hidden;
+  @apply overflow-hidden text-[15px];
 }
 
 .topnav-button {
-    @apply p-1 h-full text-[24px] hover:bg-black/20;
+  @apply p-1 h-full text-[24px] hover:bg-black/20;
 }
 
 .icon-container {
-    @apply flex text-neutral-500 text-[27px] gap-4;
+  @apply flex text-neutral-500 text-[27px] gap-4;
 }
 
 .icon {
-    @apply hover:bg-neutral-200 p-1 rounded-md text-[27px]  text-neutral-500;
+  @apply hover:bg-neutral-200 p-1 rounded-md text-[27px]  text-neutral-500;
 }
 
 .icon.side {
-    @apply px-[2px];
+  @apply px-[2px];
 }

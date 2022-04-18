@@ -20,6 +20,6 @@ export const SpotifyApp = () => {
 
 
     return (
-        <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" className="rounded-b-lg" width="100%" height="100%" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" className="rounded-b-lg" width="100%" height="100%"  allow="encrypted-media"></iframe>
     )
 }

@@ -1,13 +1,10 @@
 import React from "react";
 import { Application } from "../store/atoms/applications";
 import Icon from "../icons/settings.png";
-import Screenshot from "../icons/screenshot.png";
 
-export class Settings extends Application {
+export class ExampleApp extends Application {
   public name = "Settings";
   static icon = () => <img src={Icon} alt="Logo" />;
-
-  width = 650;
 
   component = () => SettingsApp();
 
@@ -17,9 +14,5 @@ export class Settings extends Application {
 }
 
 export const SettingsApp = () => {
-  return (
-    <div className="w-full h-full overflow-y-auto rounded-b-lg">
-      <img className="w-full h-auto" src={Screenshot} alt="Logo" />
-    </div>
-  );
+  return <h1>Settings</h1>;
 };

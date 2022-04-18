@@ -11,13 +11,13 @@ import { applications } from "../store/atoms/applications";
 
 const Home = () => {
   const apps = useRecoilValue(applications);
-  const {startApp} = useWindowManager()
+  const { startApp } = useWindowManager();
 
   useEffect(() => {
-    startApp('Finder')
-  }, [])
+    startApp("About");
+  }, []);
 
-  const { background } = useTheme()
+  const { background } = useTheme();
 
   return (
     <main

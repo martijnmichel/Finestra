@@ -1,12 +1,20 @@
 import interact from "interactjs";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React from "react";
 import { Application } from "../../store/atoms/applications";
 
 import "./App.css";
 import { AppActions } from "./AppActions";
 
+import { useWindowManager } from "../../services/WindowManager";
+import { Transition } from "@headlessui/react";
+
 export const ApplicationWindow = (app: Application) => {
   const position = { x: 0, y: 0 };
+  const { toggleApp, updateWindow } = useWindowManager();
+
+  const handleWindowClick = () => {
+    toggleApp(app.id);
+  };
 
   function handleCanvas(div: HTMLElement) {
     interact(div)
@@ -24,6 +32,11 @@ export const ApplicationWindow = (app: Application) => {
             div.setAttribute("data-y", event.dy);
 
             event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+
+            updateWindow(app.id, {
+              x: position.x,
+              y: position.y,
+            });
           },
         },
       })
@@ -38,6 +51,11 @@ export const ApplicationWindow = (app: Application) => {
             // update the element's style
             target.style.width = event.rect.width + "px";
             target.style.height = event.rect.height + "px";
+
+            updateWindow(app.id, {
+              width: event.rect.width,
+              height: event.rect.height,
+            });
           },
         },
         modifiers: [
@@ -75,14 +93,23 @@ export const ApplicationWindow = (app: Application) => {
   });
 
   return (
-    <div
+    <Transition
+      as="div"
       id={app.id}
       className="flex flex-col absolute left-10 top-10 border-1 border-gray-50 bg-gradient-to-t from-neutral-300 to-neutral-200 shadow-lg rounded-lg"
       style={{
         width: app.width,
         height: app.height,
+        transform: `translateX(${app.x}) translateY(${app.y})`,
         zIndex: app.active ? 1 : 0,
       }}
+      enter="transition-all origin-bottom duration-300"
+      enterFrom="opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6]"
+      enterTo={`opacity-100 scale-x-100 scale-y-100`}
+      leave="transition-all duration-300"
+      leaveFrom={`opacity-100 scale-100`}
+      leaveTo={`opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6]`}
+      show={app.visible}
     >
       {!app.titleBar && (
         <>
@@ -96,12 +123,13 @@ export const ApplicationWindow = (app: Application) => {
       )}
 
       <div
-        className={`bg-gray-50 flex-grow rounded-b-lg ${
+        onClick={handleWindowClick}
+        className={`bg-white h-full flex-grow rounded-b-lg ${
           app.titleBar ? "rounded-t-lg" : ""
         }`}
       >
         {app.component && app.component()}
       </div>
-    </div>
+    </Transition>
   );
 };
