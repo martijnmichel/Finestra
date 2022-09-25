@@ -1,5 +1,5 @@
 import interact from "interactjs";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Application } from "../../store/atoms/applications";
 
 import "./App.css";
@@ -74,23 +74,13 @@ export const ApplicationWindow = (app: Application) => {
       });
   }
 
-  // set up the mutation observer
-  var observer = new MutationObserver(function (mutations, me) {
-    // `mutations` is an array of mutations that occurred
-    // `me` is the MutationObserver instance
+  useEffect(() => {
     var canvas = document.getElementById(app.id);
     if (canvas) {
       handleCanvas(canvas);
-      me.disconnect(); // stop observing
       return;
     }
-  });
-
-  // start observing
-  observer.observe(document, {
-    childList: true,
-    subtree: true,
-  });
+  }, []);
 
   return (
     <Transition

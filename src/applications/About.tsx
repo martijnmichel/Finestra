@@ -2,6 +2,11 @@ import React from "react";
 import { Application } from "../store/atoms/applications";
 import Icon from "../icons/user.png";
 
+export const AboutApplication = {
+  name: 'About',
+  icon: () => <img src={Icon} alt="Logo" />;
+}
+
 export class About extends Application {
   public name = "About";
   static icon = () => <img src={Icon} alt="Logo" />;

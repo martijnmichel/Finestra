@@ -60,23 +60,21 @@ const TopBar = () => {
         </div>
 
         <div className="flex-grow h-full flex gap-2">
-          {activeApp()
-            ?.navigation()
-            .map((item) => (
-              <AppMenu key={`menu-item-${item.label}`} title={item.label}>
-                {item.items.map((menuItem: NavMenuItem, i: number) => {
-                  return menuItem.label === "separator" ? (
-                    <hr />
-                  ) : (
-                    <AppMenuItem
-                      key={`menu-item-item-${item.label}${i}`}
-                      label={menuItem.label}
-                      onClick={menuItem.function}
-                    />
-                  );
-                })}
-              </AppMenu>
-            ))}
+          {activeApp?.navigation().map((item) => (
+            <AppMenu key={`menu-item-${item.label}`} title={item.label}>
+              {item.items.map((menuItem: NavMenuItem, i: number) => {
+                return menuItem.label === "separator" ? (
+                  <hr />
+                ) : (
+                  <AppMenuItem
+                    key={`menu-item-item-${item.label}${i}`}
+                    label={menuItem.label}
+                    onClick={menuItem.function}
+                  />
+                );
+              })}
+            </AppMenu>
+          ))}
         </div>
 
         <div className="flex-shrink flex gap-2 px-2">

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { ApplicationWindow } from "../components/application/ApplicationWindow";
 import BottomDock from "../components/BottomDock";
 import Header from "../components/Header";
@@ -10,8 +10,10 @@ import { useWindowManager } from "../services/WindowManager";
 import { applications } from "../store/atoms/applications";
 
 const Home = () => {
-  const apps = useRecoilValue(applications);
+  const [apps] = useRecoilState(applications);
   const { startApp } = useWindowManager();
+
+  //useEffect(() => console.log(apps), [apps]);
 
   useEffect(() => {
     startApp("About");

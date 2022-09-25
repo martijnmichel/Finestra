@@ -6,13 +6,21 @@ export const AppActions = ({ id }: { id: string }) => {
   return (
     <div className="application-button-container">
       <div
-        onClick={() => closeApp(id)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          closeApp(id);
+        }}
         className="application-button close group"
       >
         <Icon className="hidden group-hover:block" icon="ep:close" />
       </div>
       <div
-        onClick={() => hideApp(id)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          hideApp(id);
+        }}
         className="application-button minimize group"
       >
         <Icon
