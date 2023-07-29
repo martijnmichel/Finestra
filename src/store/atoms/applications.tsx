@@ -1,6 +1,6 @@
 import React from "react";
 import { atom } from "recoil";
-import { Apps } from "../../applications";
+import { Applications } from "../../applications";
 import { v4 } from "uuid";
 import { Icon } from "@iconify/react";
 

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRecoilState } from "recoil";
-import { Applications } from "../applications";
+import { Applications, App } from "../applications";
 import { applications } from "../store/atoms/applications";
 import { launchpad } from "../store/atoms/launchpad";
 import { find } from "lodash";
@@ -13,6 +13,9 @@ export const useWindowManager = () => {
   const startApp = useCallback(
     (AppName: string) => {
       const App = find(Applications, (app) => app.name === AppName);
+
+      console.log(Applications);
+      console.log({ AppName });
 
       if (App) {
         console.log(App);
