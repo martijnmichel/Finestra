@@ -30,7 +30,10 @@ const Home = () => {
       }}
     >
       {apps.map((app, index) => (
-        <ApplicationWindow key={`app-${index}`} {...app}></ApplicationWindow>
+        <ApplicationWindow
+          key={`app-window-${index}${app.name}`}
+          {...app}
+        ></ApplicationWindow>
       ))}
 
       <LaunchPad />

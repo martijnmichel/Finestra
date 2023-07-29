@@ -17,6 +17,7 @@ export const ApplicationWindow = (app: Application) => {
   };
 
   function handleCanvas(div: HTMLElement) {
+    console.log(div);
     interact(div)
       .draggable({
         allowFrom: `[data-handle="${app.id}"]`,
@@ -32,7 +33,10 @@ export const ApplicationWindow = (app: Application) => {
             div.setAttribute("data-y", event.dy);
 
             event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
-
+          },
+          stop(event) {
+            position.x += event.dx;
+            position.y += event.dy;
             updateWindow(app.id, {
               x: position.x,
               y: position.y,
@@ -78,7 +82,6 @@ export const ApplicationWindow = (app: Application) => {
     var canvas = document.getElementById(app.id);
     if (canvas) {
       handleCanvas(canvas);
-      return;
     }
   }, []);
 
@@ -100,6 +103,14 @@ export const ApplicationWindow = (app: Application) => {
       leaveFrom={`opacity-100 scale-100`}
       leaveTo={`opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6]`}
       show={app.visible}
+      afterLeave={() => {
+        var canvas = document.getElementById(app.id);
+        if (canvas) interact(canvas).off(["drag", "resize"]);
+      }}
+      afterEnter={() => {
+        var canvas = document.getElementById(app.id);
+        if (canvas) handleCanvas(canvas);
+      }}
     >
       {!app.titleBar && (
         <>

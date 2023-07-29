@@ -5,7 +5,7 @@ import Icon from "../../icons/settings.png";
 export class Sonid extends Application {
   public name = "Sonid";
   static icon = () => <img src={Icon} alt="Logo" />;
-  public static category = "project";
+  static category = "project";
 
   component = () => SonidApp();
 

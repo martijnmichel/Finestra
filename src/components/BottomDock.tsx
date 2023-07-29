@@ -27,7 +27,7 @@ const BottomDock = () => {
         {applicationState.map((app, index) => {
           return (
             <AppButton
-              key={`app-button-${index}`}
+              key={`dock-app-button-${index}${app.name}`}
               appIcon={appIcon(app.name)}
               onClick={() => toggleApp(app.id)}
             />
