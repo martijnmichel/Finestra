@@ -1,10 +1,15 @@
 import React from "react";
 import { Application } from "../../store/atoms/applications";
-import Icon from "../../icons/settings.png";
+import Icon from "../../icons/sonid.png";
+import { ProjectTemplate } from "./ProjectTemplate";
 
 export class Sonid extends Application {
   public name = "Sonid";
-  static icon = () => <img src={Icon} alt="Logo" />;
+  static icon = () => (
+    <div className="p-3">
+      <img src={Icon} className="rounded-[17%]" alt="Logo" />
+    </div>
+  );
   static category = "project";
 
   component = () => SonidApp();
@@ -15,5 +20,5 @@ export class Sonid extends Application {
 }
 
 export const SonidApp = () => {
-  return <h1>Sonid</h1>;
+  return <ProjectTemplate {...{ title: "Sonid" }} />;
 };

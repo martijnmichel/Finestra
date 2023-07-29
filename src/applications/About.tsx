@@ -42,6 +42,8 @@ export type ProjectInfo = {
   app: Apps;
   title: string;
 };
+
+export const projects = [{ title: "Sonid", app: Sonid }];
 const fieldExperiences: FieldExperience[] = [
   {
     company: "ecBase",
@@ -49,7 +51,7 @@ const fieldExperiences: FieldExperience[] = [
     jobTitle: "Medior Full Stack Developer",
     from: dayjs("01-11-2021").format("YYYY"),
     to: "present",
-    projects: [{ title: "Sonid", app: Sonid }],
+    projects,
   },
 ];
 
