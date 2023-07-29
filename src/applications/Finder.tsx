@@ -10,6 +10,8 @@ export class Finder extends Application {
 
   titleBar = true;
 
+  public category = "default";
+
   component = () => FinderApp(this.id);
 
   constructor() {

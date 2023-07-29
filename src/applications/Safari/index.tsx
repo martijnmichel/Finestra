@@ -4,10 +4,10 @@ import SafariIcon from "../../icons/safari.png";
 import { AppActions } from "../../components/application/AppActions";
 import { Icon } from "@iconify/react";
 
-
 export class Safari extends Application {
   public name = "Safari";
   static icon = () => <img src={SafariIcon} alt="Logo" />;
+  public category = "default";
   titleBar = true;
 
   width = 1280;
@@ -32,7 +32,10 @@ export const SafariApp = (id: string) => {
 
   return (
     <>
-      <div className="px-2 py-[10px] flex items-center justify-between" data-handle={id}>
+      <div
+        className="px-2 py-[10px] flex items-center justify-between"
+        data-handle={id}
+      >
         <div className="icon-container">
           <AppActions id={id} />
 

@@ -6,8 +6,9 @@ import { Youtube } from "./Youtube";
 import { Spotify } from "./Spotify";
 import { Settings } from "./Settings";
 import { About } from "./About";
+import { Sonid } from "./projects/Sonid";
 
-export const Applications = [
+export const Applications: Apps[] = [
   Finder,
   VSCode,
   TextEditor,
@@ -16,16 +17,18 @@ export const Applications = [
   Spotify,
   Settings,
   About,
+  Sonid,
 ];
 export type Apps =
-  | TextEditor
-  | VSCode
-  | Finder
-  | Safari
-  | Youtube
-  | Spotify
-  | Settings
-  | About;
+  | typeof TextEditor
+  | typeof VSCode
+  | typeof Finder
+  | typeof Safari
+  | typeof Youtube
+  | typeof Spotify
+  | typeof Settings
+  | typeof About
+  | typeof Sonid;
 
 export interface NavMenuItem {
   label: string;

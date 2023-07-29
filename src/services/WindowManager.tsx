@@ -12,7 +12,9 @@ export const useWindowManager = () => {
   const startApp = useCallback(
     (AppName: string) => {
       const App = Applications.find((app) => app.name === AppName);
+
       if (App) {
+        console.log(App);
         const newState = applicationState.map((app) => ({
           ...app,
           active: false,
@@ -100,9 +102,8 @@ export const useWindowManager = () => {
   );
 
   const appIcon = (AppName: string) => {
-    console.log(AppName);
     const App = Applications.find((app) => app.name === AppName);
-    console.log(App);
+
     return App && App.icon();
   };
 

@@ -6,6 +6,7 @@ import Screenshot from "../icons/screenshot.png";
 export class Settings extends Application {
   public name = "Settings";
   static icon = () => <img src={Icon} alt="Logo" />;
+  public category = "default";
 
   width = 650;
 

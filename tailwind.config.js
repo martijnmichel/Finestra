@@ -1,18 +1,19 @@
-
 module.exports = {
-  mode: 'jit',
-  purge: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  purge: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontWeight: ['hover', 'focus'],
+      fontWeight: ["hover", "focus"],
+    },
+
+    fontFamily: {
+      sans: "Open Sans",
+      merriweather: "Merriweather",
     },
   },
   variants: {
     extend: {
-      scale: ['group-focus']
-    }
+      scale: ["group-focus"],
+    },
   },
-  plugins: [
-   
-  ]
+  plugins: [],
 };

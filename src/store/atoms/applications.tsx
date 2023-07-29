@@ -16,6 +16,8 @@ export class Application {
   x = 0;
   y = 0;
 
+  public static category = "default";
+
   titleBar = false;
 
   static icon: (() => React.ReactNode) | undefined = () => (

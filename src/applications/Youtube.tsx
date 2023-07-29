@@ -1,25 +1,30 @@
-
-import React from 'react'
-import { Application } from '../store/atoms/applications'
-import Icon from '../icons/youtube.png'
+import React from "react";
+import { Application } from "../store/atoms/applications";
+import Icon from "../icons/youtube.png";
 
 export class Youtube extends Application {
-    public name = 'Youtube';
-    static icon = () => (<img src={Icon} alt="Logo" />)
+  public name = "Youtube";
+  static icon = () => <img src={Icon} alt="Logo" />;
+  public category = "default";
 
-    
-    component = () => YoutubeApp()
-    
+  width = 1280;
+  height = 720;
 
-    constructor() {
-        super()
-    }
+  component = () => YoutubeApp();
+
+  constructor() {
+    super();
+  }
 }
 
 export const YoutubeApp = () => {
-
-
-    return (
-        <iframe width="100%" height="100%" className="rounded-b-lg" src="https://youtube.com" />
-    )
-}
+  return (
+    <iframe
+      width="1280"
+      height="720"
+      src="https://www.youtube.com/embed/iNu_KnfXVxk"
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    ></iframe>
+  );
+};
