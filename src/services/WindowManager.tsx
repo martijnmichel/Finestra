@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { Applications } from "../applications";
 import { applications } from "../store/atoms/applications";
 import { launchpad } from "../store/atoms/launchpad";
+import { find } from "lodash";
 
 export const useWindowManager = () => {
   const [applicationState, setApplicationState] = useRecoilState(applications);
@@ -11,7 +12,7 @@ export const useWindowManager = () => {
 
   const startApp = useCallback(
     (AppName: string) => {
-      const App = Applications.find((app) => app.name === AppName);
+      const App = find(Applications, (app) => app.name === AppName);
 
       if (App) {
         console.log(App);
@@ -19,11 +20,12 @@ export const useWindowManager = () => {
           ...app,
           active: false,
         }));
+
         setApplicationState([...newState, new App()]);
         setLaunchpadState(false);
       }
     },
-    [applicationState, setApplicationState]
+    [applicationState, setApplicationState, Applications]
   );
 
   /**
@@ -102,7 +104,7 @@ export const useWindowManager = () => {
   );
 
   const appIcon = (AppName: string) => {
-    const App = Applications.find((app) => app.name === AppName);
+    const App = find(Applications, (app) => app.name === AppName);
 
     return App && App.icon();
   };

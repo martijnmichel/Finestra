@@ -4,11 +4,11 @@ import { Icon as IIcon } from "@iconify/react";
 
 import Icon from "../icons/user.png";
 import dayjs from "dayjs";
-import { Applications, Apps } from ".";
 import { Sonid } from "./projects/Sonid";
-import { AppButton } from "../components/application/AppButton";
 import { useWindowManager } from "../services/WindowManager";
-import { projects } from "./projects/projects";
+import { Project, projects } from "./projects/projects";
+import { App } from ".";
+import { map } from "lodash";
 
 export const AboutApplication = {
   name: "About",
@@ -40,9 +40,9 @@ export type FieldExperience = {
 };
 
 export type ProjectInfo = {
-  app: Apps;
+  app: string;
   title: string;
-};
+} & Project;
 
 const fieldExperiences: FieldExperience[] = [
   {
@@ -51,7 +51,18 @@ const fieldExperiences: FieldExperience[] = [
     jobTitle: "Medior Full Stack Developer",
     from: dayjs("01-11-2021").format("YYYY"),
     to: "present",
-    projects: [{ ...projects.sonid, app: Sonid }],
+    projects: [
+      { ...projects.starterApp, app: "ecBase Bestel" },
+      { ...projects.wms, app: "WMS" },
+    ],
+  },
+  {
+    company: "Tocado Vision",
+    type: "Freelance",
+    jobTitle: "Full Stack Developer",
+    from: dayjs("01-11-2017").format("YYYY"),
+    to: dayjs("01-11-2022").format("YYYY"),
+    projects: [{ ...projects.sonid, app: "Sonid" }],
   },
 ];
 
@@ -66,7 +77,7 @@ export const AboutApp = () => {
     projects,
   }: FieldExperience) => {
     return (
-      <section>
+      <section className="flex flex-col">
         <h5 className="font-merriweather text-lg">
           <span className="font-bold">{company}, </span>
           <span className="">{type} &#8212; </span>
@@ -77,12 +88,15 @@ export const AboutApp = () => {
           {from} &#8212; {to}
         </p>
 
-        {projects.map(({ title, app }) => {
+        {map(projects, ({ title, frameworks, icon }) => {
           return (
-            <div className="flex items-center gap-2" key={`project-${title}`}>
-              <button onClick={() => startApp(app.name)}>
-                {title} {app.name}
-              </button>
+            <div
+              className="flex items-center gap-2 subtitle text-xs mt-1"
+              key={`project-card-${title}`}
+            >
+              <img src={icon as string} className="w-5 h-5 rounded" />
+              <span className="font-bold">{title} &#8212; </span>
+              <span className="italic">{frameworks}</span>
             </div>
           );
         })}
@@ -110,7 +124,7 @@ export const AboutApp = () => {
             </p>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-5">
             <h2 className="fat">ERVARING</h2>
 
             {fieldExperiences.map((exp) => {

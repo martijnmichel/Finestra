@@ -4,6 +4,7 @@ import { Applications } from "../applications";
 import { useWindowManager } from "../services/WindowManager";
 import { launchpad } from "../store/atoms/launchpad";
 import { AppButton } from "./application/AppButton";
+import { filter } from "lodash";
 
 export const LaunchPad = () => {
   const [state, setState] = useRecoilState(launchpad);
@@ -39,7 +40,7 @@ export const LaunchPad = () => {
           <h2 className="text-h2 text-zinc-50 blur-xs mb-5">Apps</h2>
 
           <div className="grid grid-cols-6">
-            {Applications.filter((a) => a.category === "default")?.map(
+            {filter(Applications, (a) => a.category === "default")?.map(
               (app, index) => {
                 return (
                   <AppButton
@@ -57,7 +58,7 @@ export const LaunchPad = () => {
           <h2 className="text-h2 text-zinc-50 blur-xs mb-5 mt-20">Projects</h2>
 
           <div className="grid grid-cols-6">
-            {Applications.filter((a) => a.category === "project")?.map(
+            {filter(Applications, (a) => a.category === "project")?.map(
               (app, index) => {
                 return (
                   <AppButton

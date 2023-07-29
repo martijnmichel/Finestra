@@ -8,17 +8,28 @@ import { Settings } from "./Settings";
 import { About } from "./About";
 import { Sonid } from "./projects/Sonid";
 
-export const Applications: Apps[] = [
-  Finder,
-  VSCode,
-  TextEditor,
-  Safari,
-  Youtube,
-  Spotify,
-  Settings,
-  About,
-  Sonid,
-];
+export type App =
+  | "Finder"
+  | "VSCode"
+  | "TextEditor"
+  | "Safari"
+  | "Youtube"
+  | "Spotify"
+  | "Settings"
+  | "About"
+  | "Sonid";
+
+export const Applications: { [x in App]: Apps } = {
+  Finder: Finder,
+  VSCode: VSCode,
+  TextEditor: TextEditor,
+  Safari: Safari,
+  Youtube: Youtube,
+  Spotify: Spotify,
+  Settings: Settings,
+  About: About,
+  Sonid: Sonid,
+};
 export type Apps =
   | typeof TextEditor
   | typeof VSCode

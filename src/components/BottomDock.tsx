@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useWindowManager } from "../services/WindowManager";
-import { Applications } from "../applications";
 import { useRecoilState } from "recoil";
 import { launchpad } from "../store/atoms/launchpad";
 import Launchpad from "../icons/launchpad.png";
