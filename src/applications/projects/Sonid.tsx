@@ -2,6 +2,7 @@ import React from "react";
 import { Application } from "../../store/atoms/applications";
 import Icon from "../../icons/sonid.png";
 import { ProjectTemplate } from "./ProjectTemplate";
+import { projects } from "./projects";
 
 export class Sonid extends Application {
   public name = "Sonid";
@@ -20,5 +21,5 @@ export class Sonid extends Application {
 }
 
 export const SonidApp = () => {
-  return <ProjectTemplate {...{ title: "Sonid" }} />;
+  return <ProjectTemplate {...projects.sonid} />;
 };

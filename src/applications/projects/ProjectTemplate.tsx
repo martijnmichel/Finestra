@@ -1,11 +1,11 @@
 import React from "react";
-type Project = {
-  title: string;
-};
-export const ProjectTemplate = ({ title }: Project) => {
+import { Project } from "./projects";
+
+export const ProjectTemplate = ({ title, desc }: Project) => {
   return (
-    <section>
-      <h1>{title}</h1>
+    <section className="p-5">
+      <h1 className="text-h2">{title}</h1>
+      <p className="subtitle">{desc}</p>
     </section>
   );
 };

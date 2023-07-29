@@ -8,6 +8,7 @@ import { Applications, Apps } from ".";
 import { Sonid } from "./projects/Sonid";
 import { AppButton } from "../components/application/AppButton";
 import { useWindowManager } from "../services/WindowManager";
+import { projects } from "./projects/projects";
 
 export const AboutApplication = {
   name: "About",
@@ -43,7 +44,6 @@ export type ProjectInfo = {
   title: string;
 };
 
-export const projects = [{ title: "Sonid", app: Sonid }];
 const fieldExperiences: FieldExperience[] = [
   {
     company: "ecBase",
@@ -51,7 +51,7 @@ const fieldExperiences: FieldExperience[] = [
     jobTitle: "Medior Full Stack Developer",
     from: dayjs("01-11-2021").format("YYYY"),
     to: "present",
-    projects,
+    projects: [{ ...projects.sonid, app: Sonid }],
   },
 ];
 
