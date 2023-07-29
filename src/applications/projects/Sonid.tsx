@@ -7,7 +7,7 @@ import { projects } from "./projects";
 export class Sonid extends Application {
   public name = "Sonid";
   static icon = () => (
-    <div className="p-3">
+    <div className="p-[7px]">
       <img src={Icon} className="rounded-[17%]" alt="Logo" />
     </div>
   );

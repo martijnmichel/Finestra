@@ -48,7 +48,7 @@ const TopBar = () => {
 
   return (
     <nav
-      className={`fixed z-40 top-0 right-0 left-0 flex transform transition-all ${
+      className={`fixed z-40 top-0 right-0 p-1 left-0 flex transform transition-all ${
         launchPadState ? "-translate-y-28" : ""
       }`}
     >

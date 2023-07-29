@@ -16,7 +16,6 @@ const Home = () => {
   //useEffect(() => console.log(apps), [apps]);
 
   useEffect(() => {
-    console.log("Render Home");
     startApp("About");
   }, []);
 

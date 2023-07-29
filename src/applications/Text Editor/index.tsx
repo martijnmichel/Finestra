@@ -6,7 +6,7 @@ import { navigation } from "./navigation";
 import { Editor } from "@tinymce/tinymce-react";
 
 export class TextEditor extends Application {
-  public name = "Text Editor";
+  public name = "TextEditor";
 
   static icon = () => <img src={Icon} alt="Logo" />;
 

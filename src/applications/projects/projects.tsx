@@ -9,6 +9,7 @@ export type Project = {
   text?: JSX.Element;
   icon: ReactNode;
   frameworks: string;
+  links?: { label: string; href: string }[];
 };
 
 export const projects: { [x: string]: Project } = {
@@ -35,7 +36,26 @@ export const projects: { [x: string]: Project } = {
         <p>Ook de website is verzorgd door Tocado Vision.</p>
       </article>
     ),
+    links: [{ label: "Website", href: "https://sonid.app" }],
     frameworks: `Vue, Cordova, Firebase`,
+  },
+
+  sites: {
+    title: "Wordpress",
+    desc: "Verschillende op Wordpress gebaseerde websites voor het mkb.",
+    icon: WMS,
+    text: (
+      <article>
+        <p>Zie links voor meer informatie</p>
+      </article>
+    ),
+    links: [
+      {
+        label: "Jeruzalem Kerk",
+        href: "https://jeruzalem-kerk.nl/",
+      },
+    ],
+    frameworks: `Wordpress, jQuery, Bootstrap, PHP`,
   },
 
   wms: {
