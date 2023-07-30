@@ -20,8 +20,8 @@ export class About extends Application {
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";
 
-  width = 900;
-  height = 1000;
+  width =  window.innerWidth > 900 ? 800 : window.innerWidth - 100;
+  height = window.innerHeight - 200;
 
   component = () => AboutApp();
 
@@ -106,7 +106,7 @@ export const AboutApp = () => {
 
   return (
     <div className="p-3 h-full overflow-y-auto">
-      <div className="grid grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 @3xl/window:grid-cols-3 gap-10">
         <div className="col-span-2 flex flex-shrink flex-col gap-10">
           <div className="flex flex-col gap-3">
             <h2 className="text-h1">Martijn van der Eijk</h2>

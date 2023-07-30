@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Applications, App } from "../applications";
-import { applications } from "../store/atoms/applications";
+import { AppConfig, Application, applications } from "../store/atoms/applications";
 import { launchpad } from "../store/atoms/launchpad";
 import { find } from "lodash";
 
@@ -11,7 +11,7 @@ export const useWindowManager = () => {
   const [launchpadState, setLaunchpadState] = useRecoilState(launchpad);
 
   const startApp = useCallback(
-    (AppName: string) => {
+    (AppName: string, config?: AppConfig) => {
       const App = find(Applications, (app) => app.name === AppName);
 
       console.log(Applications);
@@ -24,7 +24,7 @@ export const useWindowManager = () => {
           active: false,
         }));
 
-        setApplicationState([...newState, new App()]);
+        setApplicationState([...newState, new App(config)]);
         setLaunchpadState(false);
       }
     },

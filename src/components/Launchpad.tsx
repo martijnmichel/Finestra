@@ -5,11 +5,14 @@ import { useWindowManager } from "../services/WindowManager";
 import { launchpad } from "../store/atoms/launchpad";
 import { AppButton } from "./application/AppButton";
 import { filter } from "lodash";
+import { useMediaQuery, useWindowSize } from "usehooks-ts";
 
 export const LaunchPad = () => {
   const [state, setState] = useRecoilState(launchpad);
 
   const { startApp } = useWindowManager();
+
+  const {width, height} = useWindowSize()
 
   useEffect(() => {
     const lp = document.querySelector<HTMLDivElement>("#launchpad");
@@ -26,25 +29,26 @@ export const LaunchPad = () => {
     <div id="launchpad" className="fixed inset-0 w-screen h-screen">
       <div
         onClick={() => setState(false)}
-        className={`absolute inset-0 bg-black/70 transition-all duration-500 backdrop-blur-2xl ${
+        className={`fixed inset-0 bg-black/70 transition-all duration-500 backdrop-blur-2xl ${
           state ? "opacity-100" : "opacity-0"
         }`}
       ></div>
 
       <div
-        className={`container max-w-80 p-20 mx-auto relative transition-all origin-center duration-300 ${
+        className={`container max-w-80 p-10 lg:p-20 mx-auto relative transition-all origin-center duration-300 ${
           state ? "scale-[1] opacity-100 delay-300" : " scale-[2] opacity-0"
         }`}
       >
-        <div className="flex flex-col">
+        <div className="flex flex-col overflow-y-auto">
           <h2 className="text-h2 text-zinc-50 blur-xs mb-5">Apps</h2>
 
-          <div className="grid grid-cols-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 justify-center">
             {filter(Applications, (a) => a.category === "default")?.map(
               (app, index) => {
                 return (
                   <AppButton
-                    size="120px"
+                    size={width > 768 ? "120px":"80px"}
+                    
                     key={`app-button-${index}`}
                     appIcon={app.icon()}
                     appName={app.name}
@@ -57,12 +61,12 @@ export const LaunchPad = () => {
 
           <h2 className="text-h2 text-zinc-50 blur-xs mb-5 mt-20">Projects</h2>
 
-          <div className="grid grid-cols-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
             {filter(Applications, (a) => a.category === "project")?.map(
               (app, index) => {
                 return (
                   <AppButton
-                    size="120px"
+                  size={width > 768 ? "120px":"80px"}
                     key={`app-button-${index}`}
                     appIcon={app.icon()}
                     appName={app.name}

@@ -15,5 +15,5 @@ module.exports = {
       scale: ["group-focus"],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/container-queries')],
 };

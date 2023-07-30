@@ -10,7 +10,8 @@ export class Safari extends Application {
   public category = "default";
   titleBar = true;
 
-  width = 1280;
+  width =  window.innerWidth - (window.innerWidth < 700 ? 100: 200);
+  height = window.innerHeight - 200;
 
   component = () => SafariApp(this.id);
 

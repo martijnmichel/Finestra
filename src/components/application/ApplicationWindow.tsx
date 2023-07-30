@@ -89,10 +89,13 @@ export const ApplicationWindow = (app: Application) => {
     <Transition
       as="div"
       id={app.id}
-      className="flex flex-col absolute left-10 top-10 border-1 border-gray-50 bg-gradient-to-t from-neutral-300 to-neutral-200 shadow-lg rounded-lg"
+      className="flex flex-col absolute border-1 border-gray-50 bg-gradient-to-t from-neutral-300 to-neutral-200 shadow-lg rounded-lg"
       style={{
         width: app.width,
         height: app.height,
+        top: 50,
+        left: '50%',
+        marginLeft: `-${app.width / 2}px`,
         transform: `translateX(${app.x}) translateY(${app.y})`,
         zIndex: app.active ? 1 : 0,
       }}
@@ -125,7 +128,7 @@ export const ApplicationWindow = (app: Application) => {
 
       <div
         onClick={handleWindowClick}
-        className={`bg-white h-full flex-grow rounded-b-lg ${
+        className={`bg-white @container/window h-full flex-grow rounded-b-lg ${
           app.titleBar ? "rounded-t-lg" : ""
         }`}
       >

@@ -3,6 +3,15 @@ import { atom } from "recoil";
 import { Applications } from "../../applications";
 import { v4 } from "uuid";
 import { Icon } from "@iconify/react";
+import { each } from "lodash";
+
+export type AppConfig = {
+  visible?: boolean;
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+}
 
 export class Application {
   active = true;
@@ -10,8 +19,8 @@ export class Application {
   public name = "Default App";
   id = v4();
 
-  width = 800;
-  height = 600;
+  width =  window.innerWidth > 900 ? 800 : window.innerWidth - 100;
+  height = window.innerHeight- 100;
 
   x = 0;
   y = 0;
@@ -27,6 +36,15 @@ export class Application {
   navigation = (): any[] => [];
 
   component: (() => React.ReactNode) | undefined;
+
+  constructor(config?: AppConfig) {
+    if (config?.visible) this.visible = config?.visible;
+    if (config?.width) this.width = config?.width;
+    if (config?.height) this.height = config?.height;
+    if (config?.x) this.x = config?.x;
+    if (config?.y) this.y = config?.y;
+
+  }
 }
 
 export const applications = atom<Application[]>({
