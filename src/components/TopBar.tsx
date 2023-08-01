@@ -8,6 +8,7 @@ import { AppMenu, AppMenuItem } from "./application/AppMenu";
 import { NavMenuItem } from "../applications";
 import dayjs from "dayjs";
 import { Menu, Popover } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
 const TopBar = () => {
   const { activeApp } = useWindowManager();
   const [launchPadState, setLaunchPadState] = useRecoilState(launchpad);
@@ -46,6 +47,8 @@ const TopBar = () => {
     );
   };
 
+  const { i18n } = useTranslation();
+
   return (
     <nav
       className={`fixed z-40 top-0 right-0 p-1 left-0 flex transform transition-all ${
@@ -78,6 +81,29 @@ const TopBar = () => {
         </div>
 
         <div className="flex-shrink flex gap-2 px-2">
+          <button
+            onClick={() => {
+              i18n.changeLanguage("nl");
+            }}
+          >
+            nl
+          </button>
+
+          <button
+            onClick={() => {
+              i18n.changeLanguage("en");
+            }}
+          >
+            en
+          </button>
+
+          <button
+            onClick={() => {
+              i18n.changeLanguage("it");
+            }}
+          >
+            it
+          </button>
           <Icon className="topnav-button" icon="bi:battery-full" />
           <Icon className="topnav-button" icon="akar-icons:bluetooth" />
           <Icon className="topnav-button" icon="akar-icons:wifi" />

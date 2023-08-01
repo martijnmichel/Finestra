@@ -8,15 +8,15 @@ import { useTranslation, initReactI18next } from "react-i18next";
 import { createRoot } from "react-dom/client";
 
 import en_apps from "./i18n/en/apps.json";
-import en_projects from "./i18n/en/projects.json";
+import en_projects from "./i18n/en/projects";
 import en_common from "./i18n/en/common.json";
 
 import nl_apps from "./i18n/nl/apps.json";
-import nl_projects from "./i18n/nl/projects.json";
+import nl_projects from "./i18n/nl/projects";
 import nl_common from "./i18n/nl/common.json";
 
 import it_apps from "./i18n/it/apps.json";
-import it_projects from "./i18n/it/projects.json";
+import it_projects from "./i18n/it/projects";
 import it_common from "./i18n/it/common.json";
 
 i18n

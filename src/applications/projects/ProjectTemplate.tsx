@@ -5,10 +5,12 @@ import { map } from "lodash";
 export const ProjectTemplate = ({
   title,
   desc,
-  text,
+  Text,
   icon,
   links,
 }: Project) => {
+  console.log(Text);
+
   return (
     <section className="content p-5 flex flex-col gap-6">
       <div className="flex items-center gap-3">
@@ -18,8 +20,10 @@ export const ProjectTemplate = ({
           <p className="subtitle">{desc}</p>
         </div>
       </div>
-
-      <div>{text}</div>
+      {
+        // @ts-ignore
+        Text && <Text />
+      }
 
       {!!links?.length && (
         <div className="">
