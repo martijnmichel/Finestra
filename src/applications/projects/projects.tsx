@@ -9,12 +9,13 @@ import Sonid from "../../icons/sonid.png";
 import WMS from "../../icons/wms.png";
 import StarterApp from "../../icons/starterApp.png";
 import { useTranslation } from "react-i18next";
+import { Frameworks, IFrameworks } from "./frameworks";
 export type Project = {
   title: string;
   desc: string;
   Text?: JSX.Element;
   icon: ReactNode;
-  frameworks: string;
+  frameworks: IFrameworks[];
   links?: { label: string; href: string }[];
 };
 
@@ -31,7 +32,7 @@ export const projects: () => { [x: string]: Project } = () => {
         interpolation: { escapeValue: false },
       }) as JSX.Element,
       links: [{ label: "Website", href: "https://sonid.app" }],
-      frameworks: `Vue, Cordova, Firebase`,
+      frameworks: [IFrameworks.Vue, IFrameworks.Cordova, IFrameworks.Firebase],
     },
 
     sites: {
@@ -48,7 +49,12 @@ export const projects: () => { [x: string]: Project } = () => {
           href: "https://jeruzalem-kerk.nl/",
         },
       ],
-      frameworks: `Wordpress, jQuery, Bootstrap, PHP`,
+      frameworks: [
+        IFrameworks.Wordpress,
+        IFrameworks.jQuery,
+        IFrameworks.Bootstrap,
+        IFrameworks.PHP,
+      ],
     },
 
     wms: {
@@ -59,7 +65,11 @@ export const projects: () => { [x: string]: Project } = () => {
         returnObjects: true,
         interpolation: { escapeValue: false },
       }) as JSX.Element,
-      frameworks: `Redux, Tanstack React (Query/Location/Table), ChartJS`,
+      frameworks: [
+        IFrameworks.Redux,
+        IFrameworks.Tanstack,
+        IFrameworks.ChartJS,
+      ],
     },
 
     starterApp: {
@@ -70,7 +80,7 @@ export const projects: () => { [x: string]: Project } = () => {
         returnObjects: true,
         interpolation: { escapeValue: false },
       }) as JSX.Element,
-      frameworks: `Expo, Tanstack React (Query/Location/Table), ChartJS`,
+      frameworks: [IFrameworks.Expo],
     },
   };
 };
