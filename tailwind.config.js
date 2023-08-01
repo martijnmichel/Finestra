@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontWeight: ["hover", "focus"],
@@ -15,5 +15,5 @@ module.exports = {
       scale: ["group-focus"],
     },
   },
-  plugins: [require('@tailwindcss/container-queries')],
+  plugins: [require("@tailwindcss/container-queries")],
 };

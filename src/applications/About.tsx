@@ -20,7 +20,7 @@ export class About extends Application {
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";
 
-  width =  window.innerWidth > 900 ? 800 : window.innerWidth - 100;
+  width = window.innerWidth > 900 ? 800 : window.innerWidth - 100;
   height = window.innerHeight - 200;
 
   component = () => AboutApp();
@@ -44,29 +44,29 @@ export type ProjectInfo = {
   title: string;
 } & Project;
 
-const fieldExperiences: FieldExperience[] = [
-  {
-    company: "ecBase",
-    type: "Remote",
-    jobTitle: "Medior Full Stack Developer",
-    from: dayjs("01-11-2021").format("YYYY"),
-    to: "present",
-    projects: [
-      { ...projects.starterApp, app: "ecBase Bestel" },
-      { ...projects.wms, app: "WMS" },
-    ],
-  },
-  {
-    company: "Tocado Vision",
-    type: "Freelance",
-    jobTitle: "Full Stack Developer",
-    from: dayjs("01-11-2017").format("YYYY"),
-    to: dayjs("01-11-2022").format("YYYY"),
-    projects: [{ ...projects.sonid, app: "Sonid" }],
-  },
-];
-
 export const AboutApp = () => {
+  const fieldExperiences: FieldExperience[] = [
+    {
+      company: "ecBase",
+      type: "Remote",
+      jobTitle: "Medior Full Stack Developer",
+      from: dayjs("01-11-2021").format("YYYY"),
+      to: "present",
+      projects: [
+        { ...projects().starterApp, app: "ecBase Bestel" },
+        { ...projects().wms, app: "WMS" },
+      ],
+    },
+    {
+      company: "Tocado Vision",
+      type: "Freelance",
+      jobTitle: "Full Stack Developer",
+      from: dayjs("01-11-2017").format("YYYY"),
+      to: dayjs("01-11-2022").format("YYYY"),
+      projects: [{ ...projects().sonid, app: "Sonid" }],
+    },
+  ];
+
   const { startApp } = useWindowManager();
   const Experience = ({
     company,
