@@ -1,1 +1,11 @@
-{}
+{
+  "about": {
+    "subtitle": "Full Stack developer with a feeling for depth.",
+    "aboutMe": "About me",
+    "aboutMeText": "EN -> Sinds 2021 woon ik met mijn vrouw in Italie. Hier is goede koffie en optimale WiFi. Wanneer ik niet werk ga ik graag tennissen, hiken, koken of lees ik een Marvel strip.",
+    "experience": "Experience",
+    "address": "Address",
+    "skills": "Skills",
+    "present": "present"
+  }
+}
