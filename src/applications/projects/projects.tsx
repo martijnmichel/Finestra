@@ -10,6 +10,7 @@ import WMS from "../../icons/wms.png";
 import StarterApp from "../../icons/starterApp.png";
 import { useTranslation } from "react-i18next";
 import { Frameworks, IFrameworks } from "./frameworks";
+import { TranslationElement } from "../../components/TranslationElement";
 export type Project = {
   title: string;
   desc: string;
@@ -27,10 +28,7 @@ export const projects: () => { [x: string]: Project } = () => {
       title: t("projects:sonid.title"),
       desc: "an app to learn and practice music theory in a fun and structured manner!",
       icon: Sonid,
-      Text: t("projects:sonid.htmlText", {
-        returnObjects: true,
-        interpolation: { escapeValue: false },
-      }) as JSX.Element,
+      Text: <TranslationElement i18nKey="projects:sonid.htmlText" />,
       links: [{ label: "Website", href: "https://sonid.app" }],
       frameworks: [IFrameworks.Vue, IFrameworks.Cordova, IFrameworks.Firebase],
     },
@@ -39,10 +37,7 @@ export const projects: () => { [x: string]: Project } = () => {
       title: "Wordpress",
       desc: "Verschillende op Wordpress gebaseerde websites voor het mkb.",
       icon: WMS,
-      Text: t("projects:sites.htmlText", {
-        returnObjects: true,
-        interpolation: { escapeValue: false },
-      }) as JSX.Element,
+      Text: <TranslationElement i18nKey="projects:sites.htmlText" />,
       links: [
         {
           label: "Jeruzalem Kerk",
@@ -61,10 +56,7 @@ export const projects: () => { [x: string]: Project } = () => {
       title: "WMS",
       desc: "ecBase WMS as a Warehouse Management System available to our private clients in addition to our backoffice.",
       icon: WMS,
-      Text: t("projects:wms.htmlText", {
-        returnObjects: true,
-        interpolation: { escapeValue: false },
-      }) as JSX.Element,
+      Text: <TranslationElement i18nKey="projects:wms.htmlText" />,
       frameworks: [
         IFrameworks.Redux,
         IFrameworks.Tanstack,
@@ -76,10 +68,7 @@ export const projects: () => { [x: string]: Project } = () => {
       title: "ecBase Bestel",
       desc: "Een React Native boilerplate voor het bestellen van producten.",
       icon: StarterApp,
-      Text: t("projects:startApp.htmlText", {
-        returnObjects: true,
-        interpolation: { escapeValue: false },
-      }) as JSX.Element,
+      Text: <TranslationElement i18nKey="projects:startApp.htmlText" />,
       frameworks: [IFrameworks.Expo],
     },
   };

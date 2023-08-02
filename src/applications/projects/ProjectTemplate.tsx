@@ -20,10 +20,7 @@ export const ProjectTemplate = ({
           <p className="subtitle">{desc}</p>
         </div>
       </div>
-      {
-        // @ts-ignore
-        Text && <Text />
-      }
+      {Text}
 
       {!!links?.length && (
         <div className="">
