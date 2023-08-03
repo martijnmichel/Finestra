@@ -9,6 +9,8 @@ import { NavMenuItem } from "../applications";
 import dayjs from "dayjs";
 import { Menu, Popover } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
+import { map } from "lodash";
+import { languages } from "../i18n";
 const TopBar = () => {
   const { activeApp } = useWindowManager();
   const [launchPadState, setLaunchPadState] = useRecoilState(launchpad);
@@ -81,29 +83,23 @@ const TopBar = () => {
         </div>
 
         <div className="flex-shrink flex gap-2 px-2">
-          <button
-            onClick={() => {
-              i18n.changeLanguage("nl");
-            }}
-          >
-            nl
-          </button>
+          <AppMenu icon="la:flag-solid">
+            {map(languages, (lang) => {
+              return <AppMenuItem
+                key={`lang-picker-${lang.label}`}
+                label={
+                  <div className="flex items-center gap-2">
+                    <img className="w-[32px] h-[32px] object-contain" src={lang.icon} />
+                    {lang.label}
+                  </div>
+                }
+                onClick={() => {
+                  i18n.changeLanguage(lang.code);
+                }}
+              />;
+            })}
+          </AppMenu>
 
-          <button
-            onClick={() => {
-              i18n.changeLanguage("en");
-            }}
-          >
-            en
-          </button>
-
-          <button
-            onClick={() => {
-              i18n.changeLanguage("it");
-            }}
-          >
-            it
-          </button>
           <Icon className="topnav-button" icon="bi:battery-full" />
           <Icon className="topnav-button" icon="akar-icons:bluetooth" />
           <Icon className="topnav-button" icon="akar-icons:wifi" />
