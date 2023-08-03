@@ -26,7 +26,7 @@ export const projects: () => { [x: string]: Project } = () => {
   return {
     sonid: {
       title: t("projects:sonid.title"),
-      desc: "an app to learn and practice music theory in a fun and structured manner!",
+      desc: t("projects:sonid.desc"),
       icon: Sonid,
       Text: <TranslationElement i18nKey="projects:sonid.htmlText" />,
       links: [{ label: "Website", href: "https://sonid.app" }],
@@ -53,7 +53,7 @@ export const projects: () => { [x: string]: Project } = () => {
     },
 
     wms: {
-      title: "WMS",
+      title: t("projects:wms.title"),
       desc: "ecBase WMS as a Warehouse Management System available to our private clients in addition to our backoffice.",
       icon: WMS,
       Text: <TranslationElement i18nKey="projects:wms.htmlText" />,

@@ -2,6 +2,7 @@ import React from "react";
 export default {
   sonid: {
     title: "Learn music theory with Sonid",
+    desc: "an app to learn and practice music theory in a fun and structured manner!",
     htmlText: () => (
       <article>
         <p>Sonid is an app, this is the english test.</p>
@@ -15,4 +16,7 @@ export default {
       </article>
     ),
   },
+  wms: {
+
+  }
 };
