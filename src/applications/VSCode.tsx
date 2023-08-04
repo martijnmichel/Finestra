@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Application } from "../store/atoms/applications";
 import Icon from "../icons/vscode.png";
+import { Icon as IIcon } from "@iconify/react";
 import { useWindowManager } from "../services/WindowManager";
 import { last, map, reduce, tail } from "lodash";
 import {
@@ -12,6 +13,7 @@ import {
 } from "@codesandbox/sandpack-react";
 import { monokaiPro, nightOwl } from "@codesandbox/sandpack-themes";
 import { modules } from "../modules";
+import { AppActions } from "../components/application/AppActions";
 
 type File = {
   ext: string;
@@ -48,30 +50,42 @@ const files = map(modules, (code, m) => {
 
 export class VSCode extends Application {
   public name = "VSCode";
-  component = () => VSCodeApp();
+  component = () => VSCodeApp(this.id);
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";
   width = window.innerWidth - 100;
   height = window.innerHeight - 300;
+  titleBar = true;
 }
 
-export const VSCodeApp = () => {
+export const VSCodeApp = (id: string) => {
   console.log(files);
   return (
-    <SandpackProvider
-      style={{ width: "100%", height: "100%" }}
-      theme={nightOwl}
-      files={modules}
-      template="vite"
+    <div
+      className="h-full rounded-lg overflow-hidden"
+      style={{ backgroundColor: "#061526" }}
     >
-      <SandpackLayout style={{ width: "100%", height: "100%" }}>
-        <SandpackFileExplorer
-          initialCollapsedFolder={["/src/applications"]}
-          style={{ height: "100%", width: 200 }}
-        />
-        <SandpackCodeEditor style={{ height: "100%" }} />
-      </SandpackLayout>
-    </SandpackProvider>
+      <div className="icon-container px-2 py-3" data-handle={id}>
+        <AppActions id={id} />
+      </div>
+      <SandpackProvider
+        style={{ width: "100%", height: "100%" }}
+        theme={nightOwl}
+        files={modules}
+        template="vite"
+      >
+        <SandpackLayout
+          className="rounded-lg"
+          style={{ width: "100%", height: "100%" }}
+        >
+          <SandpackFileExplorer
+            initialCollapsedFolder={["!/src/applications"]}
+            style={{ height: "100%", width: 300 }}
+          />
+          <SandpackCodeEditor showLineNumbers style={{ height: "100%" }} />
+        </SandpackLayout>
+      </SandpackProvider>
+    </div>
   );
 };
 
