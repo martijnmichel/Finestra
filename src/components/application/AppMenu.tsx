@@ -29,7 +29,7 @@ export const AppMenuItem = ({
   label,
   onClick,
 }: {
-  label: string;
+  label: string | JSX.Element;
   onClick: () => void;
 }) => {
   return (
