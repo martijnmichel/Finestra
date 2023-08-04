@@ -65,7 +65,10 @@ export const VSCodeApp = () => {
       template="vite"
     >
       <SandpackLayout style={{ width: "100%", height: "100%" }}>
-        <SandpackFileExplorer style={{ height: "100%", width: 200 }} />
+        <SandpackFileExplorer
+          initialCollapsedFolder={["/src/applications"]}
+          style={{ height: "100%", width: 200 }}
+        />
         <SandpackCodeEditor style={{ height: "100%" }} />
       </SandpackLayout>
     </SandpackProvider>
