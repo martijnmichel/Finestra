@@ -7,6 +7,8 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "^2.6.9",
+    "@codesandbox/sandpack-themes": "^2.0.21",
     "@headlessui/react": "^1.7.16",
     "@iconify/iconify": "^2.1.0",
     "@monaco-editor/react": "^4.5.1",

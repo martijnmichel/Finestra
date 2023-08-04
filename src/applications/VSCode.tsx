@@ -2,20 +2,23 @@ import React, { useEffect, useRef, useState } from "react";
 import { Application } from "../store/atoms/applications";
 import Icon from "../icons/vscode.png";
 import { useWindowManager } from "../services/WindowManager";
-import { Editor, EditorProps } from "@monaco-editor/react";
 import { last, map, reduce, tail } from "lodash";
-
-const modules = import.meta.glob("../../**/*.{tsx,ts,css,json}", {
-  as: "raw",
-  eager: true,
-});
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackPreview,
+  SandpackFileExplorer,
+} from "@codesandbox/sandpack-react";
+import { monokaiPro, nightOwl } from "@codesandbox/sandpack-themes";
+import { modules } from "../modules";
 
 type File = {
   ext: string;
   language: string;
   code: string;
   filename: string;
-  path: string
+  path: string;
 };
 
 const files = map(modules, (code, m) => {
@@ -43,44 +46,29 @@ const files = map(modules, (code, m) => {
   } as File;
 });
 
-
 export class VSCode extends Application {
   public name = "VSCode";
   component = () => VSCodeApp();
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";
-  width = 800;
-  height = 600;
+  width = window.innerWidth - 100;
+  height = window.innerHeight - 300;
 }
 
 export const VSCodeApp = () => {
-  const [file, setFile] = useState<File>();
-  const [tree, setTree] = useState<any>()
-
-const ref = useRef<EditorProps>(null)
-
   console.log(files);
   return (
-    <div className="h-full flex items-stretch">
-      <div className="w-[250px] text-xs h-full overflow-auto bg-black text-zinc-300 flex flex-col items-start p-2">
-      
-
-        {map(files, (f, k) => {
-          return (
-            <button key={`file${f.path}`} onClick={() => setFile(f)}>
-              {f.filename}
-            </button>
-          );
-        })}
-      </div>
-      <Editor
-        theme="vs-dark"
-        height="100%"
-        language={file?.language}
-        value={file?.code || "Selecteer een bestand..."}
-      />
-      ;
-    </div>
+    <SandpackProvider
+      style={{ width: "100%", height: "100%" }}
+      theme={nightOwl}
+      files={modules}
+      template="vite"
+    >
+      <SandpackLayout style={{ width: "100%", height: "100%" }}>
+        <SandpackFileExplorer style={{ height: "100%", width: 200 }} />
+        <SandpackCodeEditor style={{ height: "100%" }} />
+      </SandpackLayout>
+    </SandpackProvider>
   );
 };
 
