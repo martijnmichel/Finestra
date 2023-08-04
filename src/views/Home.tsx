@@ -16,7 +16,7 @@ const Home = () => {
   //useEffect(() => console.log(apps), [apps]);
 
   useEffect(() => {
-    startApp("About");
+    startApp("VSCode");
   }, []);
 
   const { background } = useTheme();
