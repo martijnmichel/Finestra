@@ -48,15 +48,14 @@ export type ProjectInfo = {
 } & Project;
 
 export const AboutApp = () => {
-
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const fieldExperiences: FieldExperience[] = [
     {
       company: "ecBase",
       type: "Remote",
       jobTitle: "Medior Full Stack Developer",
       from: dayjs("01-11-2021").format("YYYY"),
-      to: t('apps:about.present'),
+      to: t("apps:about.present"),
       projects: [
         { ...projects().starterApp, app: "ecBase Bestel" },
         { ...projects().wms, app: "WMS" },
@@ -68,7 +67,10 @@ export const AboutApp = () => {
       jobTitle: "Full Stack Developer",
       from: dayjs("01-11-2017").format("YYYY"),
       to: dayjs("01-11-2022").format("YYYY"),
-      projects: [{ ...projects().sonid, app: "Sonid" }],
+      projects: [
+        { ...projects().sonid, app: "Sonid" },
+        { ...projects().sites, app: "Sites" },
+      ],
     },
   ];
 
@@ -105,7 +107,12 @@ export const AboutApp = () => {
                 {map(frameworks, (f) => {
                   const config = Frameworks()[f];
                   return (
-                    <XTooltip label={config.label} key={`icon-f-${config.label}`}>{config.icon}</XTooltip>
+                    <XTooltip
+                      label={config.label}
+                      key={`icon-f-${config.label}`}
+                    >
+                      {config.icon}
+                    </XTooltip>
                   );
                 })}
               </div>
@@ -116,8 +123,27 @@ export const AboutApp = () => {
     );
   };
 
-  const { ReactNative, PHP, Typescript, ES6, Tailwind, Firebase, Sass, LoDash, React, Next,
-    Express, NodeJS, Expo, Vite, MySQL,Github, Vercel, Netlify, Sentry } = Frameworks();
+  const {
+    ReactNative,
+    PHP,
+    Typescript,
+    ES6,
+    Tailwind,
+    Firebase,
+    Sass,
+    LoDash,
+    React,
+    Next,
+    Express,
+    NodeJS,
+    Expo,
+    Vite,
+    MySQL,
+    Github,
+    Vercel,
+    Netlify,
+    Sentry,
+  } = Frameworks();
 
   return (
     <div className="p-3 h-full overflow-y-auto">
@@ -125,20 +151,16 @@ export const AboutApp = () => {
         <div className="col-span-2 flex flex-shrink flex-col gap-10">
           <div className="flex flex-col gap-3">
             <h2 className="text-h1">Martijn van der Eijk</h2>
-            <p className="subtitle">
-              {t('apps:about.subtitle')}
-            </p>
+            <p className="subtitle">{t("apps:about.subtitle")}</p>
           </div>
 
           <div className="flex flex-col gap-3">
-            <h2 className="fat">{t('apps:about.aboutMe')}</h2>
-            <p>
-            {t('apps:about.aboutMeText')}
-            </p>
+            <h2 className="fat">{t("apps:about.aboutMe")}</h2>
+            <p>{t("apps:about.aboutMeText")}</p>
           </div>
 
           <div className="flex flex-col gap-5">
-            <h2 className="fat">{t('apps:about.experience')}</h2>
+            <h2 className="fat">{t("apps:about.experience")}</h2>
 
             {fieldExperiences.map((exp) => {
               return <Experience {...exp} key={`field-${exp.company}`} />;
@@ -148,7 +170,7 @@ export const AboutApp = () => {
 
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-2">
-            <h4 className="fat">{t('apps:about.address')}</h4>
+            <h4 className="fat">{t("apps:about.address")}</h4>
             <p>Via Nuova 6,Villafranca in Lunigiana, MS, Italie</p>
             <a
               target="_blank"
@@ -179,7 +201,7 @@ export const AboutApp = () => {
           </div>
 
           <div className="flex flex-col gap-3">
-            <h4 className="fat">{t('apps:about.skills')}</h4>
+            <h4 className="fat">{t("apps:about.skills")}</h4>
             {/** frontend */}
             <div className="flex items-center gap-2 text-xl">
               <XTooltip label={React.label}>{React.icon}</XTooltip>
@@ -207,14 +229,10 @@ export const AboutApp = () => {
               <XTooltip label={Vite.label}>{Vite.icon}</XTooltip>
             </div>
 
-           
-
             <div className="flex items-center gap-2 text-xl">
               <XTooltip label={Github.label}>{Github.icon}</XTooltip>
               <XTooltip label={Vercel.label}>{Vercel.icon}</XTooltip>
             </div>
-
-           
           </div>
         </div>
       </div>
