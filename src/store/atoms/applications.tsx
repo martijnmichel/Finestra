@@ -11,7 +11,7 @@ export type AppConfig = {
   height?: number;
   x?: number;
   y?: number;
-}
+};
 
 export class Application {
   active = true;
@@ -19,8 +19,8 @@ export class Application {
   public name = "Default App";
   id = v4();
 
-  width =  window.innerWidth > 900 ? 800 : window.innerWidth - 100;
-  height = window.innerHeight- 100;
+  width = window.innerWidth > 900 ? 800 : window.innerWidth - 100;
+  height = window.innerHeight > 800 ? 600 : window.innerHeight - 100;
 
   x = 0;
   y = 0;
@@ -43,7 +43,6 @@ export class Application {
     if (config?.height) this.height = config?.height;
     if (config?.x) this.x = config?.x;
     if (config?.y) this.y = config?.y;
-
   }
 }
 

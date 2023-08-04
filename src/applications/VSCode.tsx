@@ -48,9 +48,42 @@ const files = map(modules, (code, m) => {
   } as File;
 });
 
+export const navigation = (id: string) => [
+  {
+    label: "File",
+    items: [
+      {
+        label: "New File",
+        function: () => {
+          const { startApp } = useWindowManager();
+          startApp("Text Editor");
+        },
+      },
+      {
+        label: "New Window",
+        function: () => {
+          const { startApp } = useWindowManager();
+          startApp("Text Editor");
+        },
+      },
+      {
+        label: "separator",
+      },
+      {
+        label: "Close",
+        function: () => {
+          const { closeApp } = useWindowManager();
+          closeApp(id);
+        },
+      },
+    ],
+  },
+];
+
 export class VSCode extends Application {
   public name = "VSCode";
   component = () => VSCodeApp(this.id);
+  navigation = () => navigation(this.id);
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";
   width = window.innerWidth - 100;
@@ -88,64 +121,3 @@ export const VSCodeApp = (id: string) => {
     </div>
   );
 };
-
-export const navigation = (id: string) => [
-  {
-    label: "File",
-    items: [
-      {
-        label: "New File",
-        function: () => {
-          const { startApp } = useWindowManager();
-          startApp("Text Editor");
-        },
-      },
-      {
-        label: "New Window",
-        function: () => {
-          const { startApp } = useWindowManager();
-          startApp("Text Editor");
-        },
-      },
-      {
-        label: "separator",
-      },
-      {
-        label: "Close",
-        function: () => {
-          const { closeApp } = useWindowManager();
-          closeApp(id);
-        },
-      },
-    ],
-  },
-  {
-    label: "Window",
-    items: [
-      {
-        label: "New File",
-        function: () => {
-          const { startApp } = useWindowManager();
-          startApp("Text Editor");
-        },
-      },
-      {
-        label: "New Window",
-        function: () => {
-          const { startApp } = useWindowManager();
-          startApp("Text Editor");
-        },
-      },
-      {
-        label: "separator",
-      },
-      {
-        label: "Close",
-        function: () => {
-          const { closeApp } = useWindowManager();
-          closeApp(id);
-        },
-      },
-    ],
-  },
-];
