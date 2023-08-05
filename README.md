@@ -4,6 +4,8 @@ Inspired by [posva's](https://github.com/posva) [vite-tailwind-starter](https://
 
 Note if you have access to [Tailwind UI](https://tailwindui.com), you can follow the following steps to add it:
 
+https://www.macosicongallery.com/
+
 1. Install `@tailwindcss/ui`:
 
 ```sh
@@ -17,8 +19,8 @@ yarn add @tailwindcss/ui
 module.exports = {
   // ...
   // rest of the config
-  plugins: [require('@tailwindcss/ui')],
-}
+  plugins: [require("@tailwindcss/ui")],
+};
 ```
 
 ## Installation

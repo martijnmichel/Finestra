@@ -18,10 +18,10 @@ body {
 }
 
 .shepherd-element {
-  @apply shadow-xl;
+  @apply shadow-xl focus:ring-0 focus:ring-offset-0;
 }
 .shepherd-content {
-  @apply flex flex-col gap-2;
+  @apply flex flex-col gap-2 focus:ring-0 focus:ring-offset-0;
 }
 .shepherd-footer {
   @apply flex items-center justify-between;
@@ -32,6 +32,22 @@ body {
 
 .shepherd-button {
   @apply text-xs;
+}
+[data-popper-placement="right"] .shepherd-arrow {
+  left: -10px;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  @apply bg-white  transform rotate-45 translate-x-1/2;
+}
+
+[data-popper-placement="top"] .shepherd-arrow {
+  left: 0px;
+  bottom: -10px;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  @apply bg-white  transform rotate-45 -translate-y-1/2;
 }
 
 .icon-container {

@@ -17,8 +17,10 @@ export const Desktop = () => {
   const tour = useRef(
     new Shepherd.Tour({
       useModalOverlay: true,
+
       defaultStepOptions: {
         scrollTo: false,
+        arrow: true,
       },
     })
   );
@@ -57,7 +59,7 @@ export const Desktop = () => {
         element: "#step-vscode",
         on: "right",
       },
-      classes: `${tourStepClasses} ml-3`,
+      classes: `${tourStepClasses} ml-3 bottom`,
       buttons: [
         {
           text: t("common:next"),
