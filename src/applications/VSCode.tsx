@@ -27,21 +27,8 @@ const files = map(modules, (code, m) => {
   const ext = last(m.split("."));
   const filename = last(m.split("/"));
 
-  const language = (ext: string) => {
-    switch (ext) {
-      case "tsx":
-        return "javascript";
-      case "json":
-        return "json";
-      case "css":
-        return "css";
-      default:
-        return "javascript";
-    }
-  };
   return {
     ext,
-    language: language(ext!),
     filename,
     path: m,
     code,

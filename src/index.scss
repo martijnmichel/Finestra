@@ -11,7 +11,27 @@ body {
 }
 
 .topnav-button {
-  @apply p-1 h-full text-[24px] hover:bg-black/20;
+  @apply flex items-center justify-center h-[28px] w-[28px]  hover:bg-black/20;
+  svg {
+    @apply text-[16px];
+  }
+}
+
+.shepherd-element {
+  @apply shadow-xl;
+}
+.shepherd-content {
+  @apply flex flex-col gap-2;
+}
+.shepherd-footer {
+  @apply flex items-center justify-between;
+}
+.shepherd-button:not(.flat) {
+  @apply bg-blue-500 text-white rounded-md px-2;
+}
+
+.shepherd-button {
+  @apply text-xs;
 }
 
 .icon-container {
@@ -83,10 +103,6 @@ h5,
   @apply mb-3;
 }
 
-
-
-
-
 .TooltipContent {
   border-radius: 4px;
   z-index: 1000;
@@ -95,22 +111,23 @@ h5,
   line-height: 1;
   color: var(--violet-11);
   background-color: white;
-  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
   user-select: none;
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
-.TooltipContent[data-state='delayed-open'][data-side='top'] {
+.TooltipContent[data-state="delayed-open"][data-side="top"] {
   animation-name: slideDownAndFade;
 }
-.TooltipContent[data-state='delayed-open'][data-side='right'] {
+.TooltipContent[data-state="delayed-open"][data-side="right"] {
   animation-name: slideLeftAndFade;
 }
-.TooltipContent[data-state='delayed-open'][data-side='bottom'] {
+.TooltipContent[data-state="delayed-open"][data-side="bottom"] {
   animation-name: slideUpAndFade;
 }
-.TooltipContent[data-state='delayed-open'][data-side='left'] {
+.TooltipContent[data-state="delayed-open"][data-side="left"] {
   animation-name: slideRightAndFade;
 }
 

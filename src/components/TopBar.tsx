@@ -53,15 +53,15 @@ const TopBar = () => {
 
   return (
     <nav
-      className={`fixed z-40 top-0 right-0 p-1 left-0 flex transform transition-all ${
+      className={`fixed z-40 top-0 right-0 left-0 flex transform transition-all ${
         launchPadState ? "-translate-y-28" : ""
       }`}
     >
       <div className="absolute inset-0 mx-auto bg-white/70 w-screen blur-50 z-0"></div>
 
       <div className="flex w-full z-1 relative items-center">
-        <div className="">
-          <Icon className="topnav-button" icon="ant-design:apple-filled" />
+        <div className="topnav-button">
+          <Icon className="" icon="ant-design:apple-filled" />
         </div>
 
         <div className="flex-grow h-full flex gap-2">
@@ -82,28 +82,47 @@ const TopBar = () => {
           ))}
         </div>
 
-        <div className="flex-shrink flex gap-2 px-2">
-          <AppMenu icon="la:flag-solid">
+        <div className="flex-shrink flex px-2">
+          <AppMenu
+            button={
+              <button className="topnav-button">
+                <Icon icon="la:flag" />
+              </button>
+            }
+          >
             {map(languages, (lang) => {
-              return <AppMenuItem
-                key={`lang-picker-${lang.label}`}
-                label={
-                  <div className="flex items-center gap-2">
-                    <img className="w-[32px] h-[32px] object-contain" src={lang.icon} />
-                    {lang.label}
-                  </div>
-                }
-                onClick={() => {
-                  i18n.changeLanguage(lang.code);
-                }}
-              />;
+              return (
+                <AppMenuItem
+                  key={`lang-picker-${lang.label}`}
+                  label={
+                    <div className="flex items-center gap-2">
+                      <img
+                        className="w-[32px] h-[32px] object-contain"
+                        src={lang.icon}
+                      />
+                      {lang.label}
+                    </div>
+                  }
+                  onClick={() => {
+                    i18n.changeLanguage(lang.code);
+                  }}
+                />
+              );
             })}
           </AppMenu>
 
-          <Icon className="topnav-button" icon="bi:battery-full" />
-          <Icon className="topnav-button" icon="akar-icons:bluetooth" />
-          <Icon className="topnav-button" icon="akar-icons:wifi" />
-          <Icon className="topnav-button" icon="akar-icons:search" />
+          <button className="topnav-button">
+            <Icon icon="bi:battery-full" />
+          </button>
+          <button className="topnav-button">
+            <Icon icon="akar-icons:bluetooth" />
+          </button>
+          <button className="topnav-button">
+            <Icon icon="akar-icons:wifi" />
+          </button>
+          <button className="topnav-button">
+            <Icon icon="akar-icons:search" />
+          </button>
         </div>
 
         <div className="text-sm px-2">

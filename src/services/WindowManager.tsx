@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Applications, App } from "../applications";
-import { AppConfig, Application, applications } from "../store/atoms/applications";
+import {
+  AppConfig,
+  Application,
+  applications,
+} from "../store/atoms/applications";
 import { launchpad } from "../store/atoms/launchpad";
 import { find } from "lodash";
 
@@ -14,11 +18,20 @@ export const useWindowManager = () => {
     (AppName: string, config?: AppConfig) => {
       const App = find(Applications, (app) => app.name === AppName);
 
-      console.log(Applications);
-      console.log({ AppName });
+      const activeAppWindow = find(
+        applicationState,
+        (app) => app.name === AppName
+      );
 
-      if (App) {
-        console.log(App);
+      console.log({ AppName, activeAppWindow });
+
+      if (
+        !!activeAppWindow &&
+        !activeAppWindow.multiple &&
+        !activeAppWindow.active
+      ) {
+        toggleApp(activeAppWindow.id);
+      } else if (App && !activeAppWindow) {
         const newState = applicationState.map((app) => ({
           ...app,
           active: false,
@@ -53,7 +66,7 @@ export const useWindowManager = () => {
     (appId: string) => {
       const newState = applicationState.map((app) => ({
         ...app,
-        visible: app.id === appId ? false : app.visible,
+        minimized: app.id === appId ? true : app.minimized,
       }));
 
       console.log(newState);
@@ -71,9 +84,10 @@ export const useWindowManager = () => {
       const newState = applicationState.map((app) => ({
         ...app,
         active: app.id === appId,
-        visible: app.id === appId ? true : app.visible,
+        minimized: app.id === appId ? false : app.minimized,
       }));
       setApplicationState(newState);
+      setLaunchpadState(false);
     },
     [applicationState, setApplicationState]
   );
@@ -97,6 +111,8 @@ export const useWindowManager = () => {
       }));
 
       setApplicationState(newState);
+
+      console.log(newState);
     },
     [applicationState, setApplicationState]
   );

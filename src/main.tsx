@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./index.scss";
 import App from "./App";
 
 import i18n from "i18next";

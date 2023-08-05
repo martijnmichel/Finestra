@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 import { each } from "lodash";
 
 export type AppConfig = {
-  visible?: boolean;
+  minimized?: boolean;
   width?: number;
   height?: number;
   x?: number;
@@ -14,10 +14,12 @@ export type AppConfig = {
 };
 
 export class Application {
-  active = true;
-  visible = true;
+  active = true; // the activated/focused app window
+  minimized = false; // minimized/unminimized
   public name = "Default App";
   id = v4();
+
+  multiple = false;
 
   width = window.innerWidth > 900 ? 800 : window.innerWidth - 100;
   height = window.innerHeight > 800 ? 600 : window.innerHeight - 100;
@@ -38,7 +40,7 @@ export class Application {
   component: (() => React.ReactNode) | undefined;
 
   constructor(config?: AppConfig) {
-    if (config?.visible) this.visible = config?.visible;
+    if (config?.minimized) this.minimized = config?.minimized;
     if (config?.width) this.width = config?.width;
     if (config?.height) this.height = config?.height;
     if (config?.x) this.x = config?.x;
