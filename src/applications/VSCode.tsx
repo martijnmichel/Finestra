@@ -73,8 +73,8 @@ export class VSCode extends Application {
   navigation = () => navigation(this.id);
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";
-  width = window.innerWidth > 1600 ? 1200 : window.innerWidth - 100;
-  height = window.innerHeight - 300;
+  width = window.innerWidth > 1600 ? 1200 : window.innerWidth * 0.667;
+  height = window.innerHeight - 200;
   titleBar = true;
 }
 
