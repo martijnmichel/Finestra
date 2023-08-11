@@ -65,11 +65,19 @@ export const projects: () => { [x: string]: Project } = () => {
     },
 
     starterApp: {
-      title: "ecBase Bestel",
+      title: "ecBase Bestel App",
       desc: "Een React Native boilerplate voor het bestellen van producten.",
       icon: StarterApp,
-      Text: <TranslationElement i18nKey="projects:startApp.htmlText" />,
+      Text: <TranslationElement i18nKey="projects:startNext.htmlText" />,
       frameworks: [IFrameworks.Expo],
+    },
+
+    starterTemplateNext: {
+      title: "ecBase Bestel Commerce",
+      desc: "Een NextJS boilerplate voor het bestellen van producten.",
+      icon: StarterApp,
+      Text: <TranslationElement i18nKey="projects:startNext.htmlText" />,
+      frameworks: [IFrameworks.Next],
     },
   };
 };

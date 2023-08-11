@@ -4,8 +4,6 @@ import { Icon as IIcon } from "@iconify/react";
 
 import Icon from "../icons/user.png";
 import dayjs from "dayjs";
-import { Sonid } from "./projects/Sonid";
-import { useWindowManager } from "../services/WindowManager";
 import { Project, projects } from "./projects/projects";
 import { App, Applications } from ".";
 import { map } from "lodash";
@@ -13,6 +11,8 @@ import { Frameworks, IFrameworks } from "./projects/frameworks";
 import XTooltip from "../components/Tooltip";
 
 import { useTranslation } from "react-i18next";
+import { useAppContext, useAppState } from "../store";
+import { startApp } from "../store/actions/startApp";
 export const AboutApplication = {
   name: "About",
   icon: () => <img src={Icon} alt="Logo" />,
@@ -49,6 +49,8 @@ export type ProjectInfo = {
 
 export const AboutApp = () => {
   const { t } = useTranslation();
+
+  const { dispatch } = useAppContext();
   const fieldExperiences: FieldExperience[] = [
     {
       company: "ecBase",
@@ -57,7 +59,8 @@ export const AboutApp = () => {
       from: dayjs("01-11-2021").format("YYYY"),
       to: t("apps:about.present"),
       projects: [
-        { ...projects().starterApp, app: "ecBase Bestel" },
+        { ...projects().starterApp, app: "ECBaseBestelExpo" },
+        { ...projects().starterTemplateNext, app: "ECBaseBestelNext" },
         { ...projects().wms, app: "WMS" },
       ],
     },
@@ -69,12 +72,11 @@ export const AboutApp = () => {
       to: dayjs("01-11-2022").format("YYYY"),
       projects: [
         { ...projects().sonid, app: "Sonid" },
-        { ...projects().sites, app: "Sites" },
+        { ...projects().sites, app: "WordPress" },
       ],
     },
   ];
 
-  const { startApp } = useWindowManager();
   const Experience = ({
     company,
     type,
@@ -95,9 +97,15 @@ export const AboutApp = () => {
           {from} &#8212; {to}
         </p>
 
-        {map(projects, ({ title, frameworks, icon }) => {
+        {map(projects, ({ title, frameworks, icon, app }) => {
           return (
             <div
+              role="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                startApp(app)(dispatch);
+              }}
               className="flex items-center gap-2 subtitle text-xs mt-1"
               key={`project-card-${title}`}
             >

@@ -8,6 +8,10 @@ import { Settings } from "./Settings";
 import { About } from "./About";
 import { Sonid } from "./projects/Sonid";
 import { Terminal } from "./Terminal";
+import { WMS } from "./projects/WMS";
+import { WordPress } from "./projects/Wordpress";
+import { ECBaseBestelExpo } from "./projects/ECBaseBestelExpo";
+import { ECBaseBestelNext } from "./projects/ECBaseBestelNext";
 
 export type App =
   | "Finder"
@@ -19,6 +23,10 @@ export type App =
   | "Settings"
   | "About"
   | "Sonid"
+  | "WMS"
+  | "WordPress"
+  | "ECBaseBestelExpo"
+  | "ECBaseBestelNext"
   | "Terminal";
 
 export const Applications: { [x in App]: Apps } = {
@@ -31,6 +39,10 @@ export const Applications: { [x in App]: Apps } = {
   Settings: Settings,
   About: About,
   Sonid: Sonid,
+  WMS: WMS,
+  WordPress: WordPress,
+  ECBaseBestelExpo: ECBaseBestelExpo,
+  ECBaseBestelNext: ECBaseBestelNext,
   Terminal: Terminal,
 };
 export type Apps =
@@ -43,11 +55,15 @@ export type Apps =
   | typeof Settings
   | typeof About
   | typeof Sonid
+  | typeof WMS
+  | typeof WordPress
+  | typeof ECBaseBestelExpo
+  | typeof ECBaseBestelNext
   | typeof Terminal;
 
 export interface NavMenuItem {
   label: string;
-  function: () => void;
+  function?: () => void;
 }
 export interface NavMenu {
   label: string;

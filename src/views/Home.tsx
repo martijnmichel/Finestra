@@ -2,22 +2,23 @@ import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { ApplicationWindow } from "../components/application/ApplicationWindow";
 import BottomDock from "../components/BottomDock";
-import Header from "../components/Header";
 import { LaunchPad } from "../components/Launchpad";
 import TopBar from "../components/TopBar";
 import { useTheme } from "../hooks/useTheme";
-import { useWindowManager } from "../services/WindowManager";
-import { applications } from "../store/atoms/applications";
 import { Desktop } from "../components/Desktop";
+import { useAppContext } from "../store";
+import { startApp } from "../store/actions/startApp";
 
 const Home = () => {
-  const [apps] = useRecoilState(applications);
-  const { startApp } = useWindowManager();
+  const {
+    state: { applications },
+    dispatch,
+  } = useAppContext();
 
-  //useEffect(() => console.log(apps), [apps]);
+  useEffect(() => console.log(applications), [applications]);
 
   useEffect(() => {
-    startApp("About");
+    startApp("About")(dispatch);
   }, []);
 
   const { background } = useTheme();
@@ -30,7 +31,7 @@ const Home = () => {
         backgroundSize: "100% 100%",
       }}
     >
-      {apps.map((app, index) => (
+      {applications.map((app, index) => (
         <ApplicationWindow
           key={`app-window-${index}${app.name}`}
           {...app}

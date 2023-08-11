@@ -12,9 +12,12 @@ export const AppMenu = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="relative group flex items-center">
+    <div className="relative h-[28px] group flex items-stretch">
       {title ? (
-        <div className="px-1 pt-[2px] hover:bg-black/20 text-sm h-full">
+        <div
+          className="px-1 hover:bg-black/20 text-sm flex items-center"
+          role="button"
+        >
           {title}
         </div>
       ) : button ? (

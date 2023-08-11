@@ -7,13 +7,16 @@ import { AppActions } from "./AppActions";
 
 import { useWindowManager } from "../../services/WindowManager";
 import { Transition } from "@headlessui/react";
+import { useAppContext } from "../../store";
+import { toggleApp } from "../../store/actions/toggleApp";
+import { updateAppWindow } from "../../store/actions/updateAppWindow";
 
 export const ApplicationWindow = (app: Application) => {
   const position = useRef({ x: 0, y: 0 });
-  const { toggleApp, updateWindow } = useWindowManager();
+  const { state, dispatch } = useAppContext();
 
   const handleWindowClick = () => {
-    toggleApp(app.id);
+    toggleApp(app.id)(dispatch);
   };
 
   function handleCanvas(div: HTMLElement) {
@@ -33,12 +36,12 @@ export const ApplicationWindow = (app: Application) => {
             event.target.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
           },
           end(event) {
-            updateWindow(app.id, {
+            updateAppWindow(app.id, {
               x: position.current.x,
               y: position.current.y,
               width: event.rect.width,
               height: event.rect.height,
-            });
+            })(dispatch);
           },
         },
       })
@@ -55,12 +58,12 @@ export const ApplicationWindow = (app: Application) => {
             target.style.height = event.rect.height + "px";
           },
           end(event) {
-            updateWindow(app.id, {
+            updateAppWindow(app.id, {
               x: position.current.x,
               y: position.current.y,
               width: event.rect.width,
               height: event.rect.height,
-            });
+            })(dispatch);
           },
         },
         modifiers: [
@@ -100,7 +103,7 @@ export const ApplicationWindow = (app: Application) => {
         left: "50%",
         marginLeft: `-${app.width / 2}px`,
         transform: `translateX(${app.x}px) translateY(${app.y}px)`,
-
+        opacity: !app.active ? 0.9 : 1,
         zIndex: app.active ? 1 : 0,
       }}
       enter=" origin-bottom duration-300"

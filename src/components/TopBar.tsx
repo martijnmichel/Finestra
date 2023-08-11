@@ -1,8 +1,5 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { useWindowManager } from "../services/WindowManager";
-import { useRecoilState } from "recoil";
-import { launchpad } from "../store/atoms/launchpad";
-import { applications } from "../store/atoms/applications";
 import { Icon } from "@iconify/react";
 import { AppMenu, AppMenuItem } from "./application/AppMenu";
 import { NavMenuItem } from "../applications";
@@ -11,10 +8,10 @@ import { Menu, Popover } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
 import { map } from "lodash";
 import { languages } from "../i18n";
+import { useAppState } from "../store";
 const TopBar = () => {
   const { activeApp } = useWindowManager();
-  const [launchPadState, setLaunchPadState] = useRecoilState(launchpad);
-  const [applicationState, setApplicationState] = useRecoilState(applications);
+  const { launchpad } = useAppState();
   const [dateTime, setDateTime] = useState<number>();
 
   useEffect(() => {
@@ -54,7 +51,7 @@ const TopBar = () => {
   return (
     <nav
       className={`fixed z-40 top-0 right-0 left-0 flex transform transition-all ${
-        launchPadState ? "-translate-y-28" : ""
+        launchpad ? "-translate-y-28" : ""
       }`}
     >
       <div className="absolute inset-0 mx-auto bg-white/70 w-screen blur-50 z-0"></div>
@@ -65,21 +62,7 @@ const TopBar = () => {
         </div>
 
         <div className="flex-grow h-full flex gap-2">
-          {activeApp?.navigation().map((item) => (
-            <AppMenu key={`menu-item-${item.label}`} title={item.label}>
-              {item.items.map((menuItem: NavMenuItem, i: number) => {
-                return menuItem.label === "separator" ? (
-                  <hr />
-                ) : (
-                  <AppMenuItem
-                    key={`menu-item-item-${item.label}${i}`}
-                    label={menuItem.label}
-                    onClick={menuItem.function}
-                  />
-                );
-              })}
-            </AppMenu>
-          ))}
+          <div id="active-app-navigation--portal" />
         </div>
 
         <div className="flex-shrink flex px-2">

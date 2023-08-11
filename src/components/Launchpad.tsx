@@ -1,42 +1,41 @@
 import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
 import { Applications } from "../applications";
-import { useWindowManager } from "../services/WindowManager";
-import { launchpad } from "../store/atoms/launchpad";
 import { AppButton } from "./application/AppButton";
 import { filter } from "lodash";
 import { useMediaQuery, useWindowSize } from "usehooks-ts";
+import { useAppDispatch, useAppState } from "../store";
+import { toggleLaunchpad } from "../store/actions/toggleLaunchPad";
+import { startApp } from "../store/actions/startApp";
 
 export const LaunchPad = () => {
-  const [state, setState] = useRecoilState(launchpad);
-
-  const { startApp } = useWindowManager();
+  const { launchpad } = useAppState();
+  const dispatch = useAppDispatch();
 
   const { width, height } = useWindowSize();
 
   useEffect(() => {
     const lp = document.querySelector<HTMLDivElement>("#launchpad");
-    if (state && lp) {
+    if (launchpad && lp) {
       lp.style.zIndex = "50";
-    } else if (!state && lp) {
+    } else if (!launchpad && lp) {
       setTimeout(() => {
         lp.style.zIndex = "-10";
       }, 500);
     }
-  }, [state]);
+  }, [launchpad]);
 
   return (
     <div id="launchpad" className="fixed inset-0 w-screen h-screen">
       <div
-        onClick={() => setState(false)}
+        onClick={() => toggleLaunchpad()(dispatch)}
         className={`fixed inset-0 bg-black/70 transition-all duration-500 backdrop-blur-2xl ${
-          state ? "opacity-100" : "opacity-0"
+          launchpad ? "opacity-100" : "opacity-0"
         }`}
       ></div>
 
       <div
         className={`container max-w-80 p-10 lg:p-20 mx-auto relative transition-all origin-center duration-300 ${
-          state ? "scale-[1] opacity-100 delay-300" : " scale-[2] opacity-0"
+          launchpad ? "scale-[1] opacity-100 delay-300" : " scale-[2] opacity-0"
         }`}
       >
         <div className="flex flex-col">
@@ -51,7 +50,7 @@ export const LaunchPad = () => {
                     key={`app-button-${index}`}
                     appIcon={app.icon()}
                     appName={app.name}
-                    onClick={() => startApp(app.name)}
+                    onClick={() => startApp(app.name)(dispatch)}
                   />
                 );
               }
@@ -69,7 +68,7 @@ export const LaunchPad = () => {
                     key={`app-button-${index}`}
                     appIcon={app.icon()}
                     appName={app.name}
-                    onClick={() => startApp(app.name)}
+                    onClick={() => startApp(app.name)(dispatch)}
                   />
                 );
               }

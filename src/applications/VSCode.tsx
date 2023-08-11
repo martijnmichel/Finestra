@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Application } from "../store/atoms/applications";
 import Icon from "../icons/vscode.png";
-import { Icon as IIcon } from "@iconify/react";
-import { useWindowManager } from "../services/WindowManager";
 import { last, map, reduce, tail } from "lodash";
 import {
   SandpackProvider,
@@ -14,6 +12,11 @@ import {
 import { monokaiPro, nightOwl } from "@codesandbox/sandpack-themes";
 import { modules } from "../modules";
 import { AppActions } from "../components/application/AppActions";
+import { useAppContext } from "../store";
+import { startApp } from "../store/actions/startApp";
+import { closeApp } from "../store/actions/closeApp";
+import { AppNavigation } from "../components/application/AppNavigation";
+import { Applications, NavMenu } from ".";
 
 type File = {
   ext: string;
@@ -35,42 +38,10 @@ const files = map(modules, (code, m) => {
   } as File;
 });
 
-export const navigation = (id: string) => [
-  {
-    label: "File",
-    items: [
-      {
-        label: "New File",
-        function: () => {
-          const { startApp } = useWindowManager();
-          startApp("Text Editor");
-        },
-      },
-      {
-        label: "New Window",
-        function: () => {
-          const { startApp } = useWindowManager();
-          startApp("Text Editor");
-        },
-      },
-      {
-        label: "separator",
-      },
-      {
-        label: "Close",
-        function: () => {
-          const { closeApp } = useWindowManager();
-          closeApp(id);
-        },
-      },
-    ],
-  },
-];
-
 export class VSCode extends Application {
   public name = "VSCode";
   component = () => VSCodeApp(this.id);
-  navigation = () => navigation(this.id);
+
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";
   width = window.innerWidth > 1600 ? 1200 : window.innerWidth * 0.667;
@@ -79,12 +50,37 @@ export class VSCode extends Application {
 }
 
 export const VSCodeApp = (id: string) => {
-  console.log(files);
+  const { dispatch } = useAppContext();
+
+  const navigation: NavMenu[] = [
+    {
+      label: "File",
+      items: [
+        {
+          label: "New Window",
+          function: () => {
+            startApp("VSCode")(dispatch);
+          },
+        },
+        {
+          label: "separator",
+        },
+        {
+          label: "Close",
+          function: () => {
+            closeApp(id)(dispatch);
+          },
+        },
+      ],
+    },
+  ];
+
   return (
     <div
       className="h-full rounded-lg overflow-hidden"
       style={{ backgroundColor: "#061526" }}
     >
+      <AppNavigation items={navigation} />
       <div className="icon-container px-2 py-3" data-handle={id}>
         <AppActions id={id} />
       </div>

@@ -1,15 +1,17 @@
 import { Icon } from "@iconify/react";
 import React from "react";
-import { useWindowManager } from "../../services/WindowManager";
+import { useAppContext } from "../../store";
+import { closeApp } from "../../store/actions/closeApp";
+import { hideApp } from "../../store/actions/hideApp";
 export const AppActions = ({ id }: { id: string }) => {
-  const { closeApp, hideApp } = useWindowManager();
+  const { dispatch } = useAppContext();
   return (
     <div className="application-button-container">
       <div
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          closeApp(id);
+          closeApp(id)(dispatch);
         }}
         className="application-button close group"
       >
@@ -19,7 +21,7 @@ export const AppActions = ({ id }: { id: string }) => {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          hideApp(id);
+          hideApp(id)(dispatch);
         }}
         className="application-button minimize group"
       >
