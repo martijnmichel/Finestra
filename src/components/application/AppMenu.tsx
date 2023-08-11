@@ -3,9 +3,11 @@ import { Icon } from "@iconify/react";
 export const AppMenu = ({
   icon = "ant-design:menu-outlined",
   title,
+  button,
   children,
 }: {
   icon?: string;
+  button?: JSX.Element;
   title?: string;
   children: React.ReactNode;
 }) => {
@@ -15,6 +17,8 @@ export const AppMenu = ({
         <div className="px-1 pt-[2px] hover:bg-black/20 text-sm h-full">
           {title}
         </div>
+      ) : button ? (
+        button
       ) : (
         <Icon icon={icon} className="m-auto" />
       )}
@@ -29,7 +33,7 @@ export const AppMenuItem = ({
   label,
   onClick,
 }: {
-  label: string;
+  label: string | JSX.Element;
   onClick: () => void;
 }) => {
   return (

@@ -8,6 +8,7 @@ import TopBar from "../components/TopBar";
 import { useTheme } from "../hooks/useTheme";
 import { useWindowManager } from "../services/WindowManager";
 import { applications } from "../store/atoms/applications";
+import { Desktop } from "../components/Desktop";
 
 const Home = () => {
   const [apps] = useRecoilState(applications);
@@ -35,6 +36,8 @@ const Home = () => {
           {...app}
         ></ApplicationWindow>
       ))}
+
+      <Desktop />
 
       <LaunchPad />
 

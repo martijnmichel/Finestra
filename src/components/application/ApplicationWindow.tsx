@@ -9,7 +9,7 @@ import { useWindowManager } from "../../services/WindowManager";
 import { Transition } from "@headlessui/react";
 
 export const ApplicationWindow = (app: Application) => {
-  const position = { x: 0, y: 0 };
+  const position = useRef({ x: 0, y: 0 });
   const { toggleApp, updateWindow } = useWindowManager();
 
   const handleWindowClick = () => {
@@ -21,25 +21,23 @@ export const ApplicationWindow = (app: Application) => {
     interact(div)
       .draggable({
         allowFrom: `[data-handle="${app.id}"]`,
+
         listeners: {
-          start(event) {
-            console.log(event.type, event.target);
-          },
           move(event) {
-            position.x += event.dx;
-            position.y += event.dy;
+            position.current.x += event.dx;
+            position.current.y += event.dy;
 
             div.setAttribute("data-x", event.dx);
             div.setAttribute("data-y", event.dy);
 
-            event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+            event.target.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
           },
-          stop(event) {
-            position.x += event.dx;
-            position.y += event.dy;
+          end(event) {
             updateWindow(app.id, {
-              x: position.x,
-              y: position.y,
+              x: position.current.x,
+              y: position.current.y,
+              width: event.rect.width,
+              height: event.rect.height,
             });
           },
         },
@@ -55,8 +53,11 @@ export const ApplicationWindow = (app: Application) => {
             // update the element's style
             target.style.width = event.rect.width + "px";
             target.style.height = event.rect.height + "px";
-
+          },
+          end(event) {
             updateWindow(app.id, {
+              x: position.current.x,
+              y: position.current.y,
               width: event.rect.width,
               height: event.rect.height,
             });
@@ -70,7 +71,7 @@ export const ApplicationWindow = (app: Application) => {
 
           // minimum size
           interact.modifiers.restrictSize({
-            min: { width: 100, height: 50 },
+            min: { width: 400, height: 300 },
           }),
         ],
 
@@ -85,27 +86,30 @@ export const ApplicationWindow = (app: Application) => {
     }
   }, []);
 
+  useEffect(() => console.log(app), [app]);
+
   return (
     <Transition
       as="div"
       id={app.id}
-      className="flex flex-col absolute border-1 border-gray-50 bg-gradient-to-t from-neutral-300 to-neutral-200 shadow-lg rounded-lg"
+      className="flex flex-col absolute border-1 origin-top-left border-gray-50 bg-gradient-to-t from-neutral-300 to-neutral-200 shadow-lg rounded-lg"
       style={{
         width: app.width,
         height: app.height,
         top: 50,
-        left: '50%',
+        left: "50%",
         marginLeft: `-${app.width / 2}px`,
-        transform: `translateX(${app.x}) translateY(${app.y})`,
+        transform: `translateX(${app.x}px) translateY(${app.y}px)`,
+
         zIndex: app.active ? 1 : 0,
       }}
-      enter="transition-all origin-bottom duration-300"
-      enterFrom="opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6]"
-      enterTo={`opacity-100 scale-x-100 scale-y-100`}
+      enter=" origin-bottom duration-300"
+      enterFrom=" transition-all opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6] skew-x-12"
+      enterTo={`opacity-100 scale-x-100 scale-y-100 skew-x-0`}
       leave="transition-all duration-300"
       leaveFrom={`opacity-100 scale-100`}
       leaveTo={`opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6]`}
-      show={app.visible}
+      show={!app.minimized}
       afterLeave={() => {
         var canvas = document.getElementById(app.id);
         if (canvas) interact(canvas).off(["drag", "resize"]);
@@ -119,7 +123,6 @@ export const ApplicationWindow = (app: Application) => {
         <>
           <div className="p-1 flex" data-handle={app.id}>
             <AppActions id={app.id} />
-
             {app.name}
           </div>
           <div className="h-[1px] w-full bg-gray-200"></div>

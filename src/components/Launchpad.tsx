@@ -12,7 +12,7 @@ export const LaunchPad = () => {
 
   const { startApp } = useWindowManager();
 
-  const {width, height} = useWindowSize()
+  const { width, height } = useWindowSize();
 
   useEffect(() => {
     const lp = document.querySelector<HTMLDivElement>("#launchpad");
@@ -39,7 +39,7 @@ export const LaunchPad = () => {
           state ? "scale-[1] opacity-100 delay-300" : " scale-[2] opacity-0"
         }`}
       >
-        <div className="flex flex-col overflow-y-auto">
+        <div className="flex flex-col">
           <h2 className="text-h2 text-zinc-50 blur-xs mb-5">Apps</h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 justify-center">
@@ -47,8 +47,7 @@ export const LaunchPad = () => {
               (app, index) => {
                 return (
                   <AppButton
-                    size={width > 768 ? "120px":"80px"}
-                    
+                    size={width > 768 ? "120px" : "80px"}
                     key={`app-button-${index}`}
                     appIcon={app.icon()}
                     appName={app.name}
@@ -66,7 +65,7 @@ export const LaunchPad = () => {
               (app, index) => {
                 return (
                   <AppButton
-                  size={width > 768 ? "120px":"80px"}
+                    size={width > 768 ? "120px" : "80px"}
                     key={`app-button-${index}`}
                     appIcon={app.icon()}
                     appName={app.name}

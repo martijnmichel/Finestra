@@ -7,6 +7,7 @@ import { Spotify } from "./Spotify";
 import { Settings } from "./Settings";
 import { About } from "./About";
 import { Sonid } from "./projects/Sonid";
+import { Terminal } from "./Terminal";
 
 export type App =
   | "Finder"
@@ -17,7 +18,8 @@ export type App =
   | "Spotify"
   | "Settings"
   | "About"
-  | "Sonid";
+  | "Sonid"
+  | "Terminal";
 
 export const Applications: { [x in App]: Apps } = {
   Finder: Finder,
@@ -29,6 +31,7 @@ export const Applications: { [x in App]: Apps } = {
   Settings: Settings,
   About: About,
   Sonid: Sonid,
+  Terminal: Terminal,
 };
 export type Apps =
   | typeof TextEditor
@@ -39,7 +42,8 @@ export type Apps =
   | typeof Spotify
   | typeof Settings
   | typeof About
-  | typeof Sonid;
+  | typeof Sonid
+  | typeof Terminal;
 
 export interface NavMenuItem {
   label: string;

@@ -27,7 +27,10 @@ export enum IFrameworks {
   Express = "Express",
   NodeJS = "NodeJS",
   Vite = "Vite",
-  Github = "Github", Vercel = "Vercel", Netlify = "Netlify", Sentry = "Sentry"
+  Github = "Github",
+  Vercel = "Vercel",
+  Netlify = "Netlify",
+  Sentry = "Sentry",
 }
 
 export type Framework = {
@@ -80,11 +83,11 @@ export const Frameworks: () => { [x in IFrameworks]: Framework } = () => ({
 
   Wordpress: {
     label: "Wordpress",
-    icon: <Icon icon="logos:wordpress" />,
+    icon: <Icon icon="logos:wordpress-icon" />,
   },
   jQuery: {
     label: "jQuery",
-    icon: <Icon icon="logos:jquery" />,
+    icon: <Icon icon="skill-icons:jquery" />,
   },
   Bootstrap: {
     label: "Bootstrap",
@@ -137,17 +140,20 @@ export const Frameworks: () => { [x in IFrameworks]: Framework } = () => ({
     icon: <Icon icon="logos:vitejs" />,
   },
 
-  Github:{
+  Github: {
     label: "Github",
     icon: <Icon icon="skill-icons:github-dark" />,
-  }, Vercel:{
+  },
+  Vercel: {
     label: "Vercel",
     icon: <Icon icon="skill-icons:vercel-dark" />,
-  }, Netlify:{
+  },
+  Netlify: {
     label: "Netlify",
     icon: <Icon icon="logos:netlify" />,
-  }, Sentry:{
+  },
+  Sentry: {
     label: "Sentry",
     icon: <Icon icon="skill-icons:sentry" />,
-  }
+  },
 });
