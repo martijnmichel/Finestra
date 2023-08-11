@@ -2,17 +2,17 @@ import React from "react";
 export default {
   sonid: {
     title: "Learn music theory with Sonid",
+    desc: "an app to learn and practice music theory in a fun and structured manner!",
     htmlText: () => (
       <article>
-        <p>Sonid is an app, this is the english test.</p>
-        <p>
-          Sonid ontstond uit reactie en noodzaak om gitaar studenten wat
-          elementaire muziektheorie te leren. Tijdens het gebruik van een aantal
-          van de bestaande web-apps voor het oefenen groeide de behoefte aan een
-          methode die op een meer gestructureerde manier kennis opbouwt.
-        </p>
-        <p>Ook de website is verzorgd door Tocado Vision.</p>
+        <p>Sonid started out as a hobby project. I was working as a guitar teacher and tried to teach my students about music theory. There was no fun and easy way to do this.
+          That's why I started to work on Sonid, an app to learn music theory. The building process was long and sometimes difficult. On the way, I learned a lot about structuring apps and bug-fixing.
+          I also made a website, which is actually a beautiful database of music theory.</p>
+        <p>Today Sonid is used by over 30.000 music students, and the app and websites are translated in four languages.</p>
       </article>
     ),
   },
+  wms: {
+
+  }
 };

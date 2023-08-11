@@ -5,20 +5,11 @@ export default {
     htmlText: () => (
       <article>
         <p>
-          Sonid is één van de eigen projecten van Tocado Vision. Naast de liefde
-          voor programmeren heeft Martijn een grote liefde voor muziek. Hij
-          heeft het conservatorium afgerond en geeft gitaarles. Zijn liefde voor
-          lesgeven en programmeren heeft hij gecombineerd in de creatie van de
-          app Sonid, een app voor iOS en Android waarmee je muziektheorie kunt
-          leren.
-        </p>
-        <p>
-          Sonid ontstond uit reactie en noodzaak om gitaar studenten wat
-          elementaire muziektheorie te leren. Tijdens het gebruik van een aantal
-          van de bestaande web-apps voor het oefenen groeide de behoefte aan een
-          methode die op een meer gestructureerde manier kennis opbouwt.
-        </p>
-        <p>Ook de website is verzorgd door Tocado Vision.</p>
+          Sonid is één van mijn hobbyprojecten. Ik heb een grote liefde voor programmeren én muziek. Toen ik gitaarles gaf, kwam ik erachter dat mijn studenten behoefte hadden aan een leuke manier om muziektheorie te leren.
+          Daarom heb ik Sonid gemaakt. Sonid is een app waarmee je muziektheorie leert, op een leuke en gestructureerde manier.</p>
+
+        <p>Door Sonid heb ik veel geleerd, zoals hoe je code modulair opbouwt. Ik heb diverse code libaries beter leren kennen. Sonid is wereldwijd meer dan 40.000 keer gedownload en een waar succes te noemen! </p>
+
       </article>
     ),
   },
