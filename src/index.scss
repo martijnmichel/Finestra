@@ -50,6 +50,15 @@ body {
   @apply bg-white  transform rotate-45 -translate-y-1/2;
 }
 
+.badge {
+  @apply flex items-center bg-gray-100 shadow shadow-gray-200 px-2 py-1 rounded-full;
+}
+
+.badge:hover {
+  svg {
+    @apply scale-125 transition-all;
+  }
+}
 .icon-container {
   @apply flex text-neutral-500 text-[27px] gap-4;
 }

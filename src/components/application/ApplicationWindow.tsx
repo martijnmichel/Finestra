@@ -103,8 +103,8 @@ export const ApplicationWindow = (app: Application) => {
         left: "50%",
         marginLeft: `-${app.width / 2}px`,
         transform: `translateX(${app.x}px) translateY(${app.y}px)`,
-        opacity: !app.active ? 0.9 : 1,
-        zIndex: app.active ? 1 : 0,
+        opacity: !app.active ? 0.95 : 1,
+        zIndex: app.active ? 2 : 1,
       }}
       enter=" origin-bottom duration-300"
       enterFrom=" transition-all opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6] skew-x-12"
@@ -113,6 +113,7 @@ export const ApplicationWindow = (app: Application) => {
       leaveFrom={`opacity-100 scale-100`}
       leaveTo={`opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6]`}
       show={!app.minimized}
+      onClick={handleWindowClick}
       afterLeave={() => {
         var canvas = document.getElementById(app.id);
         if (canvas) interact(canvas).off(["drag", "resize"]);
@@ -133,7 +134,6 @@ export const ApplicationWindow = (app: Application) => {
       )}
 
       <div
-        onClick={handleWindowClick}
         className={`bg-white @container/window h-full flex-grow rounded-b-lg ${
           app.titleBar ? "rounded-t-lg" : ""
         }`}

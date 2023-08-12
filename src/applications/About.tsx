@@ -110,7 +110,10 @@ export const AboutApp = () => {
               className="flex items-center gap-2 subtitle text-xs mt-1"
               key={`project-card-${title}`}
             >
-              <img src={icon as string} className="w-5 h-5 rounded" />
+              <img
+                src={icon as string}
+                className="w-5 h-5 object-cover rounded"
+              />
               <span className="font-bold">{title} &#8212; </span>
               <div className="flex items-center gap-1 text-lg">
                 {map(frameworks, (f) => {

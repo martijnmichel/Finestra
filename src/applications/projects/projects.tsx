@@ -7,6 +7,9 @@ import StarterApp from "../../icons/starterApp.png";
 import { useTranslation } from "react-i18next";
 import { Frameworks, IFrameworks } from "./frameworks";
 import { TranslationElement } from "../../components/TranslationElement";
+import Next from "../../icons/demo-agf.webp";
+import Wordpress from "../../icons/wordpress.png";
+
 export type Project = {
   title: string;
   desc: string;
@@ -25,7 +28,17 @@ export const projects: () => { [x: string]: Project } = () => {
       desc: t("projects:sonid.desc"),
       icon: Sonid,
       Text: <TranslationElement i18nKey="projects:sonid.htmlText" />,
-      links: [{ label: "Website", href: "https://sonid.app" }],
+      links: [
+        { label: "Website", href: "https://sonid.app" },
+        {
+          label: "Android",
+          href: "https://play.google.com/store/apps/details?id=org.stroopwafel.music.app",
+        },
+        {
+          label: "iOS",
+          href: "https://apps.apple.com/us/app/sonid/id1490221762?ls=1",
+        },
+      ],
       frameworks: [IFrameworks.Vue, IFrameworks.Cordova, IFrameworks.Firebase],
     },
 
@@ -46,7 +59,7 @@ export const projects: () => { [x: string]: Project } = () => {
     sites: {
       title: "Wordpress",
       desc: "Verschillende op Wordpress gebaseerde websites voor het mkb.",
-      icon: WMS,
+      icon: Wordpress,
       Text: <TranslationElement i18nKey="projects:sites.htmlText" />,
       links: [
         {
@@ -85,7 +98,7 @@ export const projects: () => { [x: string]: Project } = () => {
     starterTemplateNext: {
       title: "ecBase Bestel Commerce",
       desc: "Een NextJS boilerplate voor het bestellen van producten.",
-      icon: StarterApp,
+      icon: Next,
       Text: <TranslationElement i18nKey="projects:startNext.htmlText" />,
       frameworks: [IFrameworks.Next, IFrameworks.Tailwind],
     },

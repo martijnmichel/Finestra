@@ -8,7 +8,11 @@ export class MetaAssembled extends Application {
   public name = "MetaAssembled";
   static icon = () => (
     <div className="p-[7px]">
-      <img src={Icon} className="rounded-[17%]" alt="Logo" />
+      <img
+        src={Icon}
+        className="rounded-[17%] aspect-square object-cover"
+        alt="Logo"
+      />
     </div>
   );
   static category = "project";

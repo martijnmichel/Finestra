@@ -16,7 +16,7 @@ const BottomDock = () => {
         state.launchpad ? "translate-y-28" : ""
       }`}
     >
-      <div className="mx-auto bg-white/50 w-auto min-w-[300px] border-1 border-gray-700 rounded-xl mb-2 px-2 py-1">
+      <div className="mx-auto bg-white/50 flex items-center gap-1 w-auto min-w-[300px] border-1 border-gray-700 rounded-xl mb-2 px-2 py-1">
         <AppButton
           id="step-launchpad"
           appIcon={<img src={Launchpad} alt="Logo" />}

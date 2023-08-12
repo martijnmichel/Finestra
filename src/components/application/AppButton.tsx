@@ -20,7 +20,7 @@ export const AppButton = ({
       id={id}
       onClick={onClick}
       style={{ width: size }}
-      className={`bg-none border-none h-full hover:scale-[1.2] hover:-translate-y-3 transition-all cursor-pointer`}
+      className={`bg-none pointer-events-auto border-none flex flex-col justify-center items-center gap-1 h-full hover:scale-[1.2] hover:-translate-y-3 transition-all cursor-pointer`}
     >
       {appIcon}
 

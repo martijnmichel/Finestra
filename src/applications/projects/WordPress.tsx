@@ -3,13 +3,15 @@ import { Application } from "../application";
 
 import { ProjectTemplate } from "./ProjectTemplate";
 import { projects } from "./projects";
-import { Icon } from "@iconify/react";
+import Icon from "../../icons/wordpress.png";
 
 export class WordPress extends Application {
   public name = "WordPress";
   static icon = () => (
     <div className="p-[7px]">
-      <Icon className="rounded-[17%]" icon="logos:wordpress-icon" />
+      <div className="p-[5px] rounded-[17%] bg-white aspect-square">
+        <img src={Icon} className="" alt="Logo" />
+      </div>
     </div>
   );
   static category = "project";

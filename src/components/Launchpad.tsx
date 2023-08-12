@@ -25,7 +25,10 @@ export const LaunchPad = () => {
   }, [launchpad]);
 
   return (
-    <div id="launchpad" className="fixed inset-0 w-screen h-screen">
+    <div
+      id="launchpad"
+      className="fixed inset-0 w-screen h-screen overflow-y-auto overflow-x-visible"
+    >
       <div
         onClick={() => toggleLaunchpad()(dispatch)}
         className={`fixed inset-0 bg-black/70 transition-all duration-500 backdrop-blur-2xl ${
@@ -34,7 +37,7 @@ export const LaunchPad = () => {
       ></div>
 
       <div
-        className={`container max-w-80 p-10 lg:p-20 mx-auto relative transition-all origin-center duration-300 ${
+        className={`container max-w-80 pointer-events-none p-10 lg:p-20 mx-auto relative transition-all origin-center duration-300 ${
           launchpad ? "scale-[1] opacity-100 delay-300" : " scale-[2] opacity-0"
         }`}
       >
