@@ -17,7 +17,6 @@ import { startApp } from "../store/actions/startApp";
 import { closeApp } from "../store/actions/closeApp";
 import { AppNavigation } from "../components/application/AppNavigation";
 import { Applications, NavMenu } from ".";
-
 type File = {
   ext: string;
   language: string;

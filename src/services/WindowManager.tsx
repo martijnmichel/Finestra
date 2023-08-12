@@ -18,8 +18,11 @@ export const useWindowManager = () => {
     return App && App.icon();
   };
 
+  const isActive = (id: string) => activeApp?.id === id;
+
   return {
     activeApp,
     appIcon,
+    isActive,
   };
 };

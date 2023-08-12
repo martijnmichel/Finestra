@@ -12,16 +12,11 @@ export const AppNavigation = ({
 }) => {
   const el = document.querySelector(`#active-app-navigation--portal`);
 
-  const { activeApp } = useWindowManager();
+  const { isActive } = useWindowManager();
 
-  useEffect(() => {
-    return () => {
-      const $el = document.querySelector(`#app-nav--portal`);
-      if ($el) $el.remove();
-    };
-  }, []);
+  const active = isActive(id);
 
-  if (el)
+  if (el && active)
     return createPortal(
       <div id="app-nav--portal" className="flex items-center gap-2">
         {items.map((item) => (
