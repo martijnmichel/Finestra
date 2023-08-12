@@ -2,8 +2,17 @@ import { createPortal } from "react-dom";
 import { AppMenu, AppMenuItem } from "./AppMenu";
 import { NavMenu, NavMenuItem } from "../../applications";
 import React, { useEffect } from "react";
-export const AppNavigation = ({ items }: { items: NavMenu[] }) => {
+import { useWindowManager } from "../../services/WindowManager";
+export const AppNavigation = ({
+  items,
+  id,
+}: {
+  items: NavMenu[];
+  id: string;
+}) => {
   const el = document.querySelector(`#active-app-navigation--portal`);
+
+  const { activeApp } = useWindowManager();
 
   useEffect(() => {
     return () => {

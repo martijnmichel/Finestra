@@ -32,7 +32,10 @@ export const appReducer = (
           applications: newState,
           launchpad: false,
         };
-      }
+      } else
+        return {
+          ...state,
+        };
     }
 
     case ActionType.CLOSE_APP: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Application } from "../store/atoms/applications";
+import { Application } from "./application";
 import Icon from "../icons/youtube.png";
 
 export class Youtube extends Application {

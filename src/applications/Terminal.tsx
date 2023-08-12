@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Application } from "../store/atoms/applications";
+import { Application } from "./application";
 import Icon from "../icons/Terminal.png";
 import { Terminal as XTerm } from "xterm";
 import { AppActions } from "../components/application/AppActions";

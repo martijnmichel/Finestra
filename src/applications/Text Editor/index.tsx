@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Application } from "../../store/atoms/applications";
+import { Application } from "../application";
 import Icon from "../../icons/text-editor.png";
 
 import { Editor } from "@tinymce/tinymce-react";
@@ -104,7 +104,7 @@ export const TextEditorApp = (id: string) => {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <AppNavigation items={navigation} />
+      <AppNavigation items={navigation} id={id} />
     </>
   );
 };

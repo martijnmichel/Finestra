@@ -21,13 +21,11 @@ const App = () => {
 
   return (
     <AppContextProvider>
-      <RecoilRoot>
-        <Router>
-          <div className="flex flex-col h-screen">
-            <Home />
-          </div>
-        </Router>
-      </RecoilRoot>
+      <Router>
+        <div className="flex flex-col h-screen">
+          <Home />
+        </div>
+      </Router>
     </AppContextProvider>
   );
 };

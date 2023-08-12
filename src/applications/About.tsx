@@ -1,5 +1,5 @@
 import React from "react";
-import { Application } from "../store/atoms/applications";
+import { Application } from "./application";
 import { Icon as IIcon } from "@iconify/react";
 
 import Icon from "../icons/user.png";
@@ -73,6 +73,7 @@ export const AboutApp = () => {
       projects: [
         { ...projects().sonid, app: "Sonid" },
         { ...projects().sites, app: "WordPress" },
+        { ...projects().metaAssembled, app: "MetaAssembled" },
       ],
     },
   ];

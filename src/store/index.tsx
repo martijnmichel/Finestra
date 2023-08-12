@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { Application } from "./atoms/applications";
+import { Application } from "../applications/application";
 import React, { useContext } from "react";
 import { AppActions } from "./actions";
 import { appReducer } from "./reducer";

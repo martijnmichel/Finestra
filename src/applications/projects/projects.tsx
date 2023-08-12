@@ -1,10 +1,6 @@
-import React, {
-  Component,
-  FunctionComponent,
-  FunctionComponentElement,
-  ReactNode,
-} from "react";
+import React, { ReactNode } from "react";
 
+import Meta from "../../icons/meta.jpg";
 import Sonid from "../../icons/sonid.png";
 import WMS from "../../icons/wms.png";
 import StarterApp from "../../icons/starterApp.png";
@@ -31,6 +27,20 @@ export const projects: () => { [x: string]: Project } = () => {
       Text: <TranslationElement i18nKey="projects:sonid.htmlText" />,
       links: [{ label: "Website", href: "https://sonid.app" }],
       frameworks: [IFrameworks.Vue, IFrameworks.Cordova, IFrameworks.Firebase],
+    },
+
+    metaAssembled: {
+      title: t("projects:meta.title"),
+      desc: t("projects:meta.desc"),
+      icon: Meta,
+      Text: <TranslationElement i18nKey="projects:meta.htmlText" />,
+      links: [
+        {
+          label: "Steam",
+          href: "https://store.steampowered.com/app/1118640/Meta_Assembled/",
+        },
+      ],
+      frameworks: [IFrameworks.Vue, IFrameworks.Firebase, IFrameworks.GSAP],
     },
 
     sites: {
@@ -77,7 +87,7 @@ export const projects: () => { [x: string]: Project } = () => {
       desc: "Een NextJS boilerplate voor het bestellen van producten.",
       icon: StarterApp,
       Text: <TranslationElement i18nKey="projects:startNext.htmlText" />,
-      frameworks: [IFrameworks.Next],
+      frameworks: [IFrameworks.Next, IFrameworks.Tailwind],
     },
   };
 };

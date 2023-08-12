@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Application } from "../store/atoms/applications";
+import { Application } from "./application";
 import Icon from "../icons/vscode.png";
 import { last, map, reduce, tail } from "lodash";
 import {
@@ -80,7 +80,7 @@ export const VSCodeApp = (id: string) => {
       className="h-full rounded-lg overflow-hidden"
       style={{ backgroundColor: "#061526" }}
     >
-      <AppNavigation items={navigation} />
+      <AppNavigation items={navigation} id={id} />
       <div className="icon-container px-2 py-3" data-handle={id}>
         <AppActions id={id} />
       </div>

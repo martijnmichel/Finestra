@@ -1,6 +1,6 @@
 import interact from "interactjs";
 import React, { useEffect, useRef } from "react";
-import { Application } from "../../store/atoms/applications";
+import { Application } from "../../applications/application";
 
 import "./App.css";
 import { AppActions } from "./AppActions";

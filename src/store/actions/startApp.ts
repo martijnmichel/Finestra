@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { ActionType } from ".";
-import { AppConfig } from "../atoms/applications";
+import { AppConfig } from "../../applications/application";
 
 export type ActionStartApp = {
   type: ActionType.START_APP;

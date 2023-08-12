@@ -31,6 +31,7 @@ export enum IFrameworks {
   Vercel = "Vercel",
   Netlify = "Netlify",
   Sentry = "Sentry",
+  GSAP = "GSAP",
 }
 
 export type Framework = {
@@ -50,6 +51,10 @@ export const Frameworks: () => { [x in IFrameworks]: Framework } = () => ({
   Tailwind: {
     label: "Tailwind",
     icon: <Icon icon="skill-icons:tailwindcss-dark" />,
+  },
+  GSAP: {
+    label: "GSAP",
+    icon: <Icon icon="logos:greensock-icon" />,
   },
   Expo: {
     label: "Expo",

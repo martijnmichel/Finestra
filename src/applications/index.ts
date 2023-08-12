@@ -9,9 +9,10 @@ import { About } from "./About";
 import { Sonid } from "./projects/Sonid";
 import { Terminal } from "./Terminal";
 import { WMS } from "./projects/WMS";
-import { WordPress } from "./projects/Wordpress";
+import { WordPress } from "./projects/WordPress";
 import { ECBaseBestelExpo } from "./projects/ECBaseBestelExpo";
 import { ECBaseBestelNext } from "./projects/ECBaseBestelNext";
+import { MetaAssembled } from "./projects/MetaAssembled";
 
 export type App =
   | "Finder"
@@ -25,6 +26,7 @@ export type App =
   | "Sonid"
   | "WMS"
   | "WordPress"
+  | "MetaAssembled"
   | "ECBaseBestelExpo"
   | "ECBaseBestelNext"
   | "Terminal";
@@ -40,6 +42,7 @@ export const Applications: { [x in App]: Apps } = {
   About: About,
   Sonid: Sonid,
   WMS: WMS,
+  MetaAssembled: MetaAssembled,
   WordPress: WordPress,
   ECBaseBestelExpo: ECBaseBestelExpo,
   ECBaseBestelNext: ECBaseBestelNext,
@@ -56,6 +59,7 @@ export type Apps =
   | typeof About
   | typeof Sonid
   | typeof WMS
+  | typeof MetaAssembled
   | typeof WordPress
   | typeof ECBaseBestelExpo
   | typeof ECBaseBestelNext

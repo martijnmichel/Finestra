@@ -1,5 +1,5 @@
 import React from "react";
-import { Application } from "../store/atoms/applications";
+import { Application } from "./application";
 import Icon from "../icons/settings.png";
 import Screenshot from "../icons/screenshot.png";
 

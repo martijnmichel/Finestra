@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Application } from "../store/atoms/applications";
+import { Application } from "./application";
 import FinderIcon from "../icons/finder.png";
 import { AppActions } from "../components/application/AppActions";
 import { Icon } from "@iconify/react";

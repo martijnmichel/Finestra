@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Application } from "../../store/atoms/applications";
+import { Application } from "../application";
 import SafariIcon from "../../icons/safari.png";
 import { AppActions } from "../../components/application/AppActions";
 import { Icon } from "@iconify/react";
@@ -10,7 +10,7 @@ export class Safari extends Application {
   public category = "default";
   titleBar = true;
 
-  width =  window.innerWidth - (window.innerWidth < 700 ? 100: 200);
+  width = window.innerWidth - (window.innerWidth < 700 ? 100 : 200);
   height = window.innerHeight - 200;
 
   component = () => SafariApp(this.id);
