@@ -57,14 +57,22 @@ export const projects: () => { [x: string]: Project } = () => {
     },
 
     sites: {
-      title: "Wordpress",
-      desc: "Verschillende op Wordpress gebaseerde websites voor het mkb.",
+      title: t("projects:sites.title"),
+      desc: t("projects:sites.desc"),
       icon: Wordpress,
       Text: <TranslationElement i18nKey="projects:sites.htmlText" />,
       links: [
         {
           label: "Jeruzalem Kerk",
           href: "https://jeruzalem-kerk.nl/",
+        },
+        {
+          label: "Bartoon",
+          href: "https://bartoon.nl/",
+        },
+        {
+          label: "Vincent Niekerk",
+          href: "https://vincentniekerk.nl/",
         },
       ],
       frameworks: [
@@ -77,30 +85,44 @@ export const projects: () => { [x: string]: Project } = () => {
 
     wms: {
       title: t("projects:wms.title"),
-      desc: "ecBase WMS as a Warehouse Management System available to our private clients in addition to our backoffice.",
+      desc: t("projects:wms.desc"),
       icon: WMS,
       Text: <TranslationElement i18nKey="projects:wms.htmlText" />,
       frameworks: [
         IFrameworks.Redux,
         IFrameworks.Tanstack,
         IFrameworks.ChartJS,
+        IFrameworks.Vite,
       ],
     },
 
     starterApp: {
-      title: "ecBase Bestel App",
-      desc: "Een React Native boilerplate voor het bestellen van producten.",
+      title: t("projects:starterApp.title"),
+      desc: t("projects:starterApp.desc"),
+
+      Text: <TranslationElement i18nKey="projects:starterApp.htmlText" />,
       icon: StarterApp,
-      Text: <TranslationElement i18nKey="projects:startNext.htmlText" />,
       frameworks: [IFrameworks.Expo],
     },
 
     starterTemplateNext: {
-      title: "ecBase Bestel Commerce",
-      desc: "Een NextJS boilerplate voor het bestellen van producten.",
+      title: t("projects:starterNext.title"),
+      desc: t("projects:starterNext.desc"),
+
+      Text: <TranslationElement i18nKey="projects:starterNext.htmlText" />,
       icon: Next,
-      Text: <TranslationElement i18nKey="projects:startNext.htmlText" />,
-      frameworks: [IFrameworks.Next, IFrameworks.Tailwind],
+      links: [
+        {
+          label: "Demo AGF",
+          href: "https://demo-agf.ecbase.nl",
+        },
+      ],
+      frameworks: [
+        IFrameworks.Next,
+        IFrameworks.Tailwind,
+        IFrameworks.GoogleCloudRun,
+        IFrameworks.GoogleCloud,
+      ],
     },
   };
 };

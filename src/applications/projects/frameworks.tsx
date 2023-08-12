@@ -7,6 +7,7 @@ export enum IFrameworks {
   Tailwind = "Tailwind",
   Expo = "Expo",
   GoogleCloud = "GoogleCloud",
+  GoogleCloudRun = "GoogleCloudRun",
   PHP = "PHP",
   MySQL = "MySQL",
   Vue = "Vue",
@@ -48,6 +49,7 @@ export const Frameworks: () => { [x in IFrameworks]: Framework } = () => ({
     label: "React Native",
     icon: <Icon icon="logos:react" />,
   },
+
   Tailwind: {
     label: "Tailwind",
     icon: <Icon icon="skill-icons:tailwindcss-dark" />,
@@ -63,6 +65,10 @@ export const Frameworks: () => { [x in IFrameworks]: Framework } = () => ({
   GoogleCloud: {
     label: "Google Cloud",
     icon: <Icon icon="logos:google-cloud" />,
+  },
+  GoogleCloudRun: {
+    label: "Google Cloud Run",
+    icon: <Icon icon="logos:google-cloud-run" />,
   },
   PHP: {
     label: "PHP",

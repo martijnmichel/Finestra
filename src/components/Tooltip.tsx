@@ -1,19 +1,20 @@
-import React from 'react';
-import * as Tooltip from '@radix-ui/react-tooltip';
+import React from "react";
+import * as Tooltip from "@radix-ui/react-tooltip";
 
-
-const XTooltip = ({ children, label }: {children: JSX.Element,label:string}) => {
+const XTooltip = ({
+  children,
+  label,
+}: {
+  children: JSX.Element;
+  label: string;
+}) => {
   return (
-    <Tooltip.Provider>
+    <Tooltip.Provider delayDuration={100}>
       <Tooltip.Root>
-        <Tooltip.Trigger asChild>
-          
-
-          {children}
-        </Tooltip.Trigger>
+        <Tooltip.Trigger asChild>{children}</Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content className="TooltipContent" sideOffset={5}>
-          {label}
+            {label}
             <Tooltip.Arrow className="TooltipArrow" />
           </Tooltip.Content>
         </Tooltip.Portal>

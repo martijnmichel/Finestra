@@ -2,6 +2,9 @@ import React from "react";
 import { Project } from "./projects";
 import { map } from "lodash";
 import { Icon } from "@iconify/react";
+import { Frameworks } from "./frameworks";
+import XTooltip from "../../components/Tooltip";
+import { t } from "i18next";
 
 export const ProjectTemplate = ({
   title,
@@ -9,6 +12,7 @@ export const ProjectTemplate = ({
   Text,
   icon,
   links,
+  frameworks,
 }: Project) => {
   console.log(Text);
 
@@ -24,11 +28,26 @@ export const ProjectTemplate = ({
           <p className="subtitle">{desc}</p>
         </div>
       </div>
-      {Text}
+
+      <div className="flex items-center gap-3 text-3xl">
+        {map(frameworks, (f) => {
+          const config = Frameworks()[f];
+          return (
+            <XTooltip label={config.label} key={`icon-f-inapp-${config.label}`}>
+              {config.icon}
+            </XTooltip>
+          );
+        })}
+      </div>
+
+      <div className="flex flex-col gap-3">
+        <h3 className="fat">{t("common:aboutProject")}</h3>
+        {Text}
+      </div>
 
       {!!links?.length && (
         <div className="flex flex-col gap-3">
-          <h3 className="text-h3">Links</h3>
+          <h3 className="fat">Links</h3>
 
           <div className="flex items-center gap-3">
             {map(links, (link) => (

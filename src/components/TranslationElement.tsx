@@ -14,5 +14,9 @@ export const TranslationElement = ({
     interpolation: { escapeValue: false },
   }) as JSXElementConstructor<any>;
 
-  return isValidElement(<Comp />) ? <Comp {...rest} /> : null;
+  try {
+    return isValidElement(<Comp />) ? <Comp {...rest} /> : null;
+  } catch (e) {
+    return null;
+  }
 };
