@@ -17,7 +17,7 @@ export const ProjectTemplate = ({
   console.log(Text);
 
   return (
-    <section className="content p-5 flex flex-col gap-6">
+    <section className="content p-5 overflow-y-auto flex flex-col gap-6">
       <div className="flex items-center gap-3">
         <img
           className="w-[72px] aspect-square object-cover rounded-[17%]"
