@@ -13,6 +13,7 @@ import XTooltip from "../components/Tooltip";
 import { useTranslation } from "react-i18next";
 import { useAppContext, useAppState } from "../store";
 import { startApp } from "../store/actions/startApp";
+import { ShepherdTour } from "../components/ShepherdTour";
 export const AboutApplication = {
   name: "About",
   icon: () => <img src={Icon} alt="Logo" />,
@@ -24,7 +25,9 @@ export class About extends Application {
   public category = "default";
 
   width = window.innerWidth > 900 ? 800 : window.innerWidth - 100;
-  height = window.innerHeight - 200;
+  height = window.innerHeight > 1000 ? 900 : window.innerHeight - 200;
+
+  y = 150;
 
   component = () => AboutApp();
 
@@ -136,7 +139,6 @@ export const AboutApp = () => {
   };
 
   const {
-    ReactNative,
     PHP,
     Typescript,
     ES6,
@@ -153,15 +155,13 @@ export const AboutApp = () => {
     MySQL,
     Github,
     Vercel,
-    Netlify,
-    Sentry,
   } = Frameworks();
 
   return (
     <div className="p-3 h-full overflow-y-auto">
       <div className="grid grid-cols-1 @3xl/window:grid-cols-3 gap-10">
         <div className="col-span-2 flex flex-shrink flex-col gap-10">
-          <div className="flex flex-col gap-3">
+          <div id="step-about" className="flex flex-col gap-3">
             <h2 className="text-h1">Martijn van der Eijk</h2>
             <p className="subtitle">{t("apps:about.subtitle")}</p>
           </div>
@@ -248,6 +248,8 @@ export const AboutApp = () => {
           </div>
         </div>
       </div>
+
+      <ShepherdTour />
     </div>
   );
 };

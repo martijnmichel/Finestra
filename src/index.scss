@@ -18,10 +18,10 @@ body {
 }
 
 .shepherd-element {
-  @apply shadow-xl focus:ring-0 focus:ring-offset-0;
+  @apply shadow-2xl focus:ring-0 focus:ring-offset-0;
 }
 .shepherd-content {
-  @apply flex flex-col gap-2 focus:ring-0 focus:ring-offset-0;
+  @apply flex flex-col gap-2 max-w-sm focus:ring-0 focus:ring-offset-0;
 }
 .shepherd-footer {
   @apply flex items-center justify-between;
@@ -44,6 +44,15 @@ body {
 [data-popper-placement="top"] .shepherd-arrow {
   left: 0px;
   bottom: -10px;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  @apply bg-white  transform rotate-45 -translate-y-1/2;
+}
+
+[data-popper-placement="bottom"] .shepherd-arrow {
+  left: 0px;
+  top: -10px;
   position: absolute;
   width: 10px;
   height: 10px;
