@@ -45,11 +45,7 @@ export const appReducer = (
 
       return {
         ...state,
-        applications: newState.map((app, index) => ({
-          ...app,
-          active: index === newState.length - 1 ? true : app.active,
-          minimized: index === newState.length - 1 ? false : app.active,
-        })),
+        applications: newState,
       };
     }
 
