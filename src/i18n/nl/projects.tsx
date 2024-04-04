@@ -1,83 +1,90 @@
 import React from "react";
 import { Info } from "../../components/Info";
 export default {
+
+
   sonid: {
     title: "Leer muziektheorie met Sonid",
+    desc: "educatieapp voor Android en iOS",
     htmlText: () => (
-      <article>
-        <p>
-          Sonid is één van mijn hobbyprojecten. Ik heb een grote liefde voor
-          programmeren én muziek. Toen ik gitaarles gaf, kwam ik erachter dat
-          mijn studenten behoefte hadden aan een leuke manier om muziektheorie
-          te leren. Daarom heb ik Sonid gemaakt. Sonid is een app waarmee je
-          muziektheorie leert, op een leuke en gestructureerde manier.
-        </p>
+      <article className="content">
+        <Info title="Opdrachtgever" text="Eigen beheer" />
 
-        <p>
-          geleerd: opbouw map structuur en code structuur, werken/bijhouden van
-          een complexe database. het uitsplitsen van component - acties - api -
-          data{" "}
-        </p>
-        <p>
-          Door Sonid heb ik veel geleerd, zoals hoe je code modulair opbouwt. Ik
-          heb diverse code libaries beter leren kennen. Sonid is wereldwijd meer
-          dan 40.000 keer gedownload en een waar succes te noemen!
-        </p>
+        <Info
+          title="Beschrijving"
+          text={`Sonid is één van mijn hobbyprojecten. Ik heb een grote liefde voor programmeren én muziek. Toen ik gitaarles gaf, kwam ik erachter dat mijn studenten behoefte hadden aan een leuke manier om muziektheorie te leren. Daarom heb ik Sonid gemaakt. Sonid is een app waarmee je muziektheorie leert, op een leuke en gestructureerde manier.          `}
+        />
+
+        <Info
+          title="Wat heeft het mij gebracht?"
+          text={`Door Sonid heb ik veel geleerd, zoals hoe je code modulair opbouwt. Ik heb diverse code libaries beter leren kennen. Sonid is wereldwijd meer dan 40.000 keer gedownload en een waar succes te noemen!`}
+        />
       </article>
     ),
   },
-
   meta: {
     title: "Meta: Assembled",
+    desc: "online game voor Steam",
     htmlText: () => (
-      <article>
-        <p>hobby project, vertel wat leuks</p>
+      <article className="content">
+        <Info title="Opdrachtgever" text="Eigen beheer" />
 
-        <p>geleerd: realtime data verwerking met firebase database</p>
+        <Info
+          title="Beschrijving"
+          text={`Meta: assembled maakte ik als hobbyproject om mijn kennis uit te breiden. Het spel staat nog steeds op STEAM en kan gratis gespeeld worden. Het is een kaartspel dat op Magic  the Gathering en Hearthstone lijkt. Het speelt zich af in de ruimte.`}
+        />
+
+        <Info
+          title="Wat heeft het mij gebracht?"
+          text={`Ik heb geleerd om reatime data te verwerken met de Firebase database.`}
+        />
       </article>
     ),
   },
 
   sites: {
     title: "WordPress",
+    desc: "diverse Wordpress websites",
     htmlText: () => (
-      <article>
-        <p>hobby project, vertel wat leuks</p>
-
-        <p>geleerd: realtime data verwerking met firebase database</p>
+      <article className="content">
+        <Info
+          title="Jeruzalem Kerk"
+          text={'Voor de Jeruzalem Kerk Amsterdam maakte ik een nieuwe website, waarmee ze nieuwe doelgroepen willen aantrekken. De aanwezigheid van de Jeruzalem Kerk is erg belangrijk voor Amsterdam-West en dat draagt de website ook uit. Op de website kunnen de vrijwilligers van de kerk makkelijk nieuwe evenementen en nieuwsberichten plaatsen.'}
+        />
+        <Info
+          title="Bartoon"
+          text={'Bart Kranenburg is striptekenaar en cartoonist. Voor hem zeggen beelden meer dan woorden. Daarom maakte ik voor hem een compacte website, waarop zijn werk direct te zien is. '}
+        />
+        <Info
+          title="Vincent Niekerk"
+          text={'Vincent is meubelmaker in Amsterdam. Hij wilde een website waarop hij zijn projecten kan laten zien. Door de website heeft hij veel nieuwe opdrachten binnengekregen. Na meerdere jaren staat hij nog steeds in de hoogste zoekresultaten van Google.'}
+        />
       </article>
     ),
   },
 
   wms: {
     title: "WMS",
+    desc: "Warehouse management system",
     htmlText: () => (
-      <article>
-        <ul>
-          <li>gemaakt voor ecbase</li>
-          <li>warehouse management system (wms)</li>
-          <li>
-            grote applicatie voor de browser als frontend voor ons backoffice
-            pakket
-          </li>
-          <li>
-            verschillend modules zoals: inkoop/verkoop verwerking, tellingen en
-            dashboard met statistieken
-          </li>
-          <li>
-            veel geleerd over waar bijhouden van {"{ state }"}, globaal, lokaal,
-            via localstorage of browserurl. Component gerelateerd denken, hoe
-            hou je componenten zo onafhankelijk mogelijk, makkelijk leesbaar,
-            klein en met een duidelijke opdracht.
-          </li>
-        </ul>
+      <article className="content">
+        <Info title="Opdrachtgever" text="ecBase" />
+        <Info
+          title="Beschrijving"
+          text={'WMS is een grote applicatie voor de browser die werkt als frontend voor het backoffice pakket. In de web-app kunnen klanten inkopen en verkopen verwerken, tellingen uitvoeren en er is een mooi dashboard met statistieken.'}
+        />
+
+        <Info
+          title="Opgedane kennis"
+          text={'Ik heb geleerd om keuzes te maken in waar ik de {state} bijhou. Doe ik dit lokaal, globaal, via local storage of browserurl? Daarnaast heb ik mijn component gerelateerd denken verder ontwikkeld. Hoe hou je componenten zo onafhankelijk mogelijk, makkelijk leesbaar, klein en met een duidelijke opdracht?'}
+        />
       </article>
     ),
   },
 
   starterApp: {
     title: "ECBase Bestel App",
-    desc: "Whitelabel bestel applicatie, b2b model",
+    desc: "Whitelabel bestel applicatie, B2B model",
     htmlText: () => (
       <article className="content">
         <Info title="Opdrachtgever" text="ecBase" />
@@ -98,14 +105,14 @@ export default {
 
   starterNext: {
     title: "ECBase Bestel Commerce",
-    desc: "Whitelabel bestel website, b2b model",
+    desc: "Whitelabel bestel website, B2B model",
     htmlText: () => (
       <article>
         <Info title="Opdrachtgever" text="ecBase" />
 
         <Info
           title="Beschrijving"
-          text={`Via de app kunnen klanten van aangesloten bedrijven producten bestellen, bestellijsten bewerken en klantgegevens bekijken/bewerken. Assortiment pagina's van producten met oa filters en zoekfunctie. Klantgegevens zoals facturen en bestellingen inzien. Aanpassen van klantgegevens.`}
+          text={`Dit is de bestel website voor het B2B model van ecBase. Deze dienst als frontend voor bedrijven die zijn aangesloten aan het backoffice pakket. Zij leveren deze website aan hun klanten, zodat deze bestellingen kunnen plaatsen en klantgegevens kunnen bekijken/bewerken. De website wordt veel gebruikt in de horeca. Er zijn diverse modules, zoals: “bestellen van producten”, “klantgegevens”, “meest bestelde producten”, “facturen” en “bestelstatus”. `}
         />
 
         <Info
@@ -114,32 +121,11 @@ export default {
            Plus het uitgeven van OTA updates. Ook de performance van react-native bleek voor lower-end toestellen een goede leerschool.`}
         />
 
-        <ul>
-          <li>gemaakt voor ecbase</li>
-          <li>bestel website voor b2b model</li>
-          <li>
-            de bestel website dient als frontend voor de klanten van ons
-            backoffice pakket, deze kunnen zij in plaats van hun website leveren
-            aan klanten om hun producten te bestellen en klantgegevens te
-            bekijken/bewerken
-          </li>
-          <li>
-            verschillend modules zoals: bestellen van producten, klant gegevens
-            (& wijzigen), meest besteld producten, facturen, bestellingstatus.
-          </li>
-          <li>
-            veel geleerd over: nextjs interne api, authenticatie/bijhouden van
-            sessies, verminderen van bundle-size, imports en uitvoeren van
-            scripts op het juiste moment voor snelle page-load, wanneer
-            data-fetching client of server-side en de daaruit komende state.
-            filteren/sorteren producten. docker image met google filestore mount
-            voor nextjs image cache en deploy op google cloud run.
-          </li>
-        </ul>
 
-        <p className="text-xs">
-          *** cold-start van de site is traag door lage instellingen GCR
-        </p>
+        <Info
+          title="Belangrijk om te weten"
+          text="Cold-start van de site is traag door lage instellingen GCR"
+        />
       </article>
     ),
   },
