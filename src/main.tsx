@@ -43,6 +43,7 @@ i18n
     },
 
     fallbackLng: "en",
+
     supportedLngs: ["en", "nl", "it"],
     defaultNS: "common",
     interpolation: {

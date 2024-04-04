@@ -1,4 +1,5 @@
 import React from "react";
+import { Info } from "../../components/Info";
 export default {
   sonid: {
     title: "Leer muziektheorie met Sonid",
@@ -76,36 +77,44 @@ export default {
 
   starterApp: {
     title: "ECBase Bestel App",
+    desc: 'Whitelabel bestel applicatie, b2b model',
     htmlText: () => (
-      <article>
-        <ul>
-          <li>gemaakt voor ecbase</li>
-          <li>bestel applicatie (native) voor b2b model</li>
-          <li>
-            de bestel app dient als frontend voor de klanten van ons backoffice
-            pakket, deze kunnen zij in plaats van hun website leveren aan
-            klanten om hun producten te bestellen en klantgegevens te
-            bekijken/bewerken
-          </li>
-          <li>
-            verschillend modules zoals: bestellen van producten, klant gegevens
-            (& wijzigen), meest besteld producten, facturen, bestellingstatus.
-          </li>
-          <li>
-            veel geleerd over: specifiek react-native, react-navigation en expo.
-            werken met appstores intern, invoeren gegevens, builds, tests en
-            releases met verschillende app environments. over-the-air updates
-            (OTA)
-          </li>
-        </ul>
+      <article className="content">
+        <Info title="Opdrachtgever" text="ecBase" />
+       
+        <Info
+          title="Beschrijving"
+          text={`Via de app kunnen klanten van aangesloten bedrijven producten bestellen, bestellijsten bewerken en klantgegevens bekijken/bewerken. Assortiment pagina's van producten met oa filters en zoekfunctie. Klantgegevens zoals facturen en bestellingen inzien. Aanpassen van klantgegevens.`}
+        />
+
+        <Info
+          title="Wat heeft het mij gebracht"
+          text={`In dit project heb ik veel geleerd over React Native en Expo. Daarnaast heb ik intensief gewerkt met Appstore en Play Console, specifiek het bijhouden van verschillende release tracks met builds voor development/preview/staging en production.
+            Plus het uitgeven van OTA updates. Ook de performance van react-native bleek voor lower-end toestellen een goede leerschool.`}
+        />
       </article>
     ),
   },
 
   starterNext: {
     title: "ECBase Bestel Commerce",
+    desc: "Whitelabel bestel website, b2b model",
     htmlText: () => (
       <article>
+
+<Info title="Opdrachtgever" text="ecBase" />
+       
+       <Info
+         title="Beschrijving"
+         text={`Via de app kunnen klanten van aangesloten bedrijven producten bestellen, bestellijsten bewerken en klantgegevens bekijken/bewerken. Assortiment pagina's van producten met oa filters en zoekfunctie. Klantgegevens zoals facturen en bestellingen inzien. Aanpassen van klantgegevens.`}
+       />
+
+       <Info
+         title="Wat heeft het mij gebracht"
+         text={`In dit project heb ik veel geleerd over React Native en Expo. Daarnaast heb ik intensief gewerkt met Appstore en Play Console, specifiek het bijhouden van verschillende release tracks met builds voor development/preview/staging en production.
+           Plus het uitgeven van OTA updates. Ook de performance van react-native bleek voor lower-end toestellen een goede leerschool.`}
+       />
+       
         <ul>
           <li>gemaakt voor ecbase</li>
           <li>bestel website voor b2b model</li>

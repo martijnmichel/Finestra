@@ -56,5 +56,6 @@
     "tailwindcss-themeable": "^1.3.0",
     "typescript": "^4.8.2",
     "vite": "^4.4.7"
-  }
+  },
+  "packageManager": "yarn@4.0.2"
 }

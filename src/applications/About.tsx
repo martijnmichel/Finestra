@@ -25,9 +25,9 @@ export class About extends Application {
   public category = "default";
 
   width = window.innerWidth > 900 ? 800 : window.innerWidth - 100;
-  height = window.innerHeight > 1000 ? 900 : window.innerHeight - 200;
+  height = window.innerHeight > 1000 ? 800 : window.innerHeight - 200;
 
-  y = 150;
+  y = 100;
 
   component = () => AboutApp();
 
@@ -40,6 +40,7 @@ export type FieldExperience = {
   company: string;
   type: string;
   jobTitle: string;
+  jobDescription: string;
   from: string;
   to: string;
   projects: ProjectInfo[];
@@ -59,6 +60,7 @@ export const AboutApp = () => {
       company: "ecBase",
       type: "Remote",
       jobTitle: "Medior Full Stack Developer",
+      jobDescription: t('common:experience.ecbase'),
       from: dayjs("01-11-2021").format("YYYY"),
       to: t("apps:about.present"),
       projects: [
@@ -71,6 +73,7 @@ export const AboutApp = () => {
       company: "Tocado Vision",
       type: "Freelance",
       jobTitle: "Full Stack Developer",
+      jobDescription: t('common:experience.freelance'),
       from: dayjs("01-11-2017").format("YYYY"),
       to: dayjs("01-11-2022").format("YYYY"),
       projects: [
@@ -85,6 +88,7 @@ export const AboutApp = () => {
     company,
     type,
     jobTitle,
+    jobDescription,
     from,
     to,
     projects,
@@ -96,6 +100,8 @@ export const AboutApp = () => {
           <span className="">{type} &#8212; </span>
           <span className="italic font-thin">{jobTitle}</span>
         </h5>
+
+        <p className="italic text-sm text-zinc-600 py-2">{jobDescription}</p>
 
         <p className="uppercase text-zinc-400">
           {from} &#8212; {to}
@@ -183,7 +189,7 @@ export const AboutApp = () => {
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-2">
             <h4 className="fat">{t("apps:about.address")}</h4>
-            <p>Via Nuova 6,Villafranca in Lunigiana, MS, Italie</p>
+            <p>Via ca' del monte 6,Villafranca in Lunigiana, MS, Italie</p>
             <a
               target="_blank"
               className="animate-underline"
