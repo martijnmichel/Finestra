@@ -14,6 +14,8 @@ import { useTranslation } from "react-i18next";
 import { useAppContext, useAppState } from "../store";
 import { startApp } from "../store/actions/startApp";
 import { ShepherdTour } from "../components/ShepherdTour";
+import { languages } from "../i18n";
+import i18next from "i18next";
 export const AboutApplication = {
   name: "About",
   icon: () => <img src={Icon} alt="Logo" />,
@@ -60,7 +62,7 @@ export const AboutApp = () => {
       company: "ecBase",
       type: "Remote",
       jobTitle: "Medior Full Stack Developer",
-      jobDescription: t('common:experience.ecbase'),
+      jobDescription: t("common:experience.ecbase"),
       from: dayjs("01-11-2021").format("YYYY"),
       to: t("apps:about.present"),
       projects: [
@@ -73,7 +75,7 @@ export const AboutApp = () => {
       company: "Tocado Vision",
       type: "Freelance",
       jobTitle: "Full Stack Developer",
-      jobDescription: t('common:experience.freelance'),
+      jobDescription: t("common:experience.freelance"),
       from: dayjs("01-11-2017").format("YYYY"),
       to: dayjs("01-11-2022").format("YYYY"),
       projects: [
@@ -251,6 +253,28 @@ export const AboutApp = () => {
               <XTooltip label={Github.label}>{Github.icon}</XTooltip>
               <XTooltip label={Vercel.label}>{Vercel.icon}</XTooltip>
             </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <h2 className="fat">{t("common:changeLanguage")}</h2>
+            {map(languages, (lang) => {
+              return (
+                <button
+                  key={`lang-picker-${lang.label}`}
+                  onClick={() => {
+                    i18next.changeLanguage(lang.code);
+                  }}
+                >
+                  <div className="flex items-center gap-1 text-xs">
+                    <img
+                      className="w-[24px] h-[24px] object-contain"
+                      src={lang.icon}
+                    />
+                    {lang.label}
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
