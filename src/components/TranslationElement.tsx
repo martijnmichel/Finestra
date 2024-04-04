@@ -15,6 +15,7 @@ export const TranslationElement = ({
   }) as JSXElementConstructor<any>;
 
   try {
+    // @ts-ignore
     return isValidElement(<Comp />) ? <Comp {...rest} /> : null;
   } catch (e) {
     return null;
