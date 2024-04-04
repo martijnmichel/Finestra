@@ -37,7 +37,7 @@ export const LaunchPad = () => {
       ></div>
 
       <div
-        className={`container max-w-80 pointer-events-none p-10 lg:p-20 mx-auto relative transition-all origin-center duration-300 ${
+        className={`container pointer-events-none p-10 lg:p-20 mx-auto relative transition-all origin-center duration-300 ${
           launchpad ? "scale-[1] opacity-100 delay-300" : " scale-[2] opacity-0"
         }`}
       >
