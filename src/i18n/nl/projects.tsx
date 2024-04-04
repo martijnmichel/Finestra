@@ -77,11 +77,11 @@ export default {
 
   starterApp: {
     title: "ECBase Bestel App",
-    desc: 'Whitelabel bestel applicatie, b2b model',
+    desc: "Whitelabel bestel applicatie, b2b model",
     htmlText: () => (
       <article className="content">
         <Info title="Opdrachtgever" text="ecBase" />
-       
+
         <Info
           title="Beschrijving"
           text={`Via de app kunnen klanten van aangesloten bedrijven producten bestellen, bestellijsten bewerken en klantgegevens bekijken/bewerken. Assortiment pagina's van producten met oa filters en zoekfunctie. Klantgegevens zoals facturen en bestellingen inzien. Aanpassen van klantgegevens.`}
@@ -101,20 +101,19 @@ export default {
     desc: "Whitelabel bestel website, b2b model",
     htmlText: () => (
       <article>
+        <Info title="Opdrachtgever" text="ecBase" />
 
-<Info title="Opdrachtgever" text="ecBase" />
-       
-       <Info
-         title="Beschrijving"
-         text={`Via de app kunnen klanten van aangesloten bedrijven producten bestellen, bestellijsten bewerken en klantgegevens bekijken/bewerken. Assortiment pagina's van producten met oa filters en zoekfunctie. Klantgegevens zoals facturen en bestellingen inzien. Aanpassen van klantgegevens.`}
-       />
+        <Info
+          title="Beschrijving"
+          text={`Via de app kunnen klanten van aangesloten bedrijven producten bestellen, bestellijsten bewerken en klantgegevens bekijken/bewerken. Assortiment pagina's van producten met oa filters en zoekfunctie. Klantgegevens zoals facturen en bestellingen inzien. Aanpassen van klantgegevens.`}
+        />
 
-       <Info
-         title="Wat heeft het mij gebracht"
-         text={`In dit project heb ik veel geleerd over React Native en Expo. Daarnaast heb ik intensief gewerkt met Appstore en Play Console, specifiek het bijhouden van verschillende release tracks met builds voor development/preview/staging en production.
+        <Info
+          title="Wat heeft het mij gebracht"
+          text={`In dit project heb ik veel geleerd over React Native en Expo. Daarnaast heb ik intensief gewerkt met Appstore en Play Console, specifiek het bijhouden van verschillende release tracks met builds voor development/preview/staging en production.
            Plus het uitgeven van OTA updates. Ook de performance van react-native bleek voor lower-end toestellen een goede leerschool.`}
-       />
-       
+        />
+
         <ul>
           <li>gemaakt voor ecbase</li>
           <li>bestel website voor b2b model</li>
