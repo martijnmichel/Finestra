@@ -76,7 +76,7 @@ export default {
 
         <Info
           title="What I learned:"
-          text={'Where to track the {state}? I learned when it is best to do this locally, globaly or through local storage. I improved my component related thinking, through creating easy-to-read and indipendent code.'}
+          text={'Where to put state. When to save it locally, globally, on the server or through local storage. I improved my component related thinking, through creating easy-to-read and indipendent code.'}
         />
       </article>
     ),

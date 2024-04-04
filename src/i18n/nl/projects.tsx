@@ -1,8 +1,6 @@
 import React from "react";
 import { Info } from "../../components/Info";
 export default {
-
-
   sonid: {
     title: "Leer muziektheorie met Sonid",
     desc: "educatieapp voor Android en iOS",
@@ -49,15 +47,21 @@ export default {
       <article className="content">
         <Info
           title="Jeruzalem Kerk"
-          text={'Voor de Jeruzalem Kerk Amsterdam maakte ik een nieuwe website, waarmee ze nieuwe doelgroepen willen aantrekken. De aanwezigheid van de Jeruzalem Kerk is erg belangrijk voor Amsterdam-West en dat draagt de website ook uit. Op de website kunnen de vrijwilligers van de kerk makkelijk nieuwe evenementen en nieuwsberichten plaatsen.'}
+          text={
+            "Voor de Jeruzalem Kerk Amsterdam maakte ik een nieuwe website, waarmee ze nieuwe doelgroepen willen aantrekken. De aanwezigheid van de Jeruzalem Kerk is erg belangrijk voor Amsterdam-West en dat draagt de website ook uit. Op de website kunnen de vrijwilligers van de kerk makkelijk nieuwe evenementen en nieuwsberichten plaatsen."
+          }
         />
         <Info
           title="Bartoon"
-          text={'Bart Kranenburg is striptekenaar en cartoonist. Voor hem zeggen beelden meer dan woorden. Daarom maakte ik voor hem een compacte website, waarop zijn werk direct te zien is. '}
+          text={
+            "Bart Kranenburg is striptekenaar en cartoonist. Voor hem zeggen beelden meer dan woorden. Daarom maakte ik voor hem een compacte website, waarop zijn werk direct te zien is. "
+          }
         />
         <Info
           title="Vincent Niekerk"
-          text={'Vincent is meubelmaker in Amsterdam. Hij wilde een website waarop hij zijn projecten kan laten zien. Door de website heeft hij veel nieuwe opdrachten binnengekregen. Na meerdere jaren staat hij nog steeds in de hoogste zoekresultaten van Google.'}
+          text={
+            "Vincent is meubelmaker in Amsterdam. Hij wilde een website waarop hij zijn projecten kan laten zien. Door de website heeft hij veel nieuwe opdrachten binnengekregen. Na meerdere jaren staat hij nog steeds in de hoogste zoekresultaten van Google."
+          }
         />
       </article>
     ),
@@ -71,12 +75,16 @@ export default {
         <Info title="Opdrachtgever" text="ecBase" />
         <Info
           title="Beschrijving"
-          text={'WMS is een grote applicatie voor de browser die werkt als frontend voor het backoffice pakket. In de web-app kunnen klanten inkopen en verkopen verwerken, tellingen uitvoeren en er is een mooi dashboard met statistieken.'}
+          text={
+            "WMS is een grote applicatie voor de browser die werkt als frontend voor het backoffice pakket. In de web-app kunnen klanten inkopen en verkopen verwerken, tellingen uitvoeren en er is een mooi dashboard met statistieken."
+          }
         />
 
         <Info
           title="Opgedane kennis"
-          text={'Ik heb geleerd om keuzes te maken in waar ik de {state} bijhou. Doe ik dit lokaal, globaal, via local storage of browserurl? Daarnaast heb ik mijn component gerelateerd denken verder ontwikkeld. Hoe hou je componenten zo onafhankelijk mogelijk, makkelijk leesbaar, klein en met een duidelijke opdracht?'}
+          text={
+            "Ik heb geleerd om keuzes te maken in waar ik de {state} bijhou. Doe ik dit lokaal, globaal, via local storage of browserurl? Daarnaast heb ik mijn component gerelateerd denken verder ontwikkeld. Hoe hou je componenten zo onafhankelijk mogelijk, makkelijk leesbaar, klein en met een duidelijke opdracht?"
+          }
         />
       </article>
     ),
@@ -120,7 +128,6 @@ export default {
           text={`In dit project heb ik veel geleerd over React Native en Expo. Daarnaast heb ik intensief gewerkt met Appstore en Play Console, specifiek het bijhouden van verschillende release tracks met builds voor development/preview/staging en production.
            Plus het uitgeven van OTA updates. Ook de performance van react-native bleek voor lower-end toestellen een goede leerschool.`}
         />
-
 
         <Info
           title="Belangrijk om te weten"
