@@ -84,6 +84,7 @@ export const TextEditorApp = (id: string) => {
 
   return (
     <>
+    {/** @ts-ignore */}
       <Editor
         initialValue="<p>Start typing a story...</p>"
         apiKey="r6ay9fo6y8tbazrg719vx6sbn40bjzlyi0agfpbo65evbpqn"
