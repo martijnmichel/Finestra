@@ -69,7 +69,10 @@ const TopBar = () => {
           <AppMenu
             button={
               <button className="topnav-button">
-                <Icon icon="la:flag" />
+                <img
+                      className="w-[20px] h-[20px] object-contain"
+                  src={languages?.[i18n.language as keyof typeof languages]?.icon}
+                />
               </button>
             }
           >

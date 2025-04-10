@@ -1,5 +1,21 @@
 import React from "react";
+import { Info } from "../../components/Info";
 export default {
+
+  directusMobile: {
+    title: "Directus Mobile",
+    desc: "Gestisci i contenuti in movimento con l'app mobile Directus.",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Cliente" text="Progetto personale" />
+        <Info
+          title="Descrizione" 
+          text={`Directus Mobile è un progetto open source personale. È un'app mobile che permette di gestire i contenuti in movimento con Directus. È sviluppata con React Native, Expo e React Query e utilizza l'API Directus per recuperare e gestire i contenuti.`}
+        />
+      </article>
+    ),
+  },
+  
   sonid: {
     title: "Learn music theory with Sonid",
     htmlText: () => (

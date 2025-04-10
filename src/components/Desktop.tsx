@@ -33,6 +33,12 @@ export const Desktop = () => {
         appName={Applications.Sonid.name}
         onClick={() => startApp(Applications.Sonid.name)(dispatch)}
       />
+      <AppButton
+        size={"80px"}
+        appIcon={Applications.DirectusMobile.icon()}
+        appName={Applications.DirectusMobile.name}
+        onClick={() => startApp(Applications.DirectusMobile.name)(dispatch)}
+      />
     </div>
   );
 };

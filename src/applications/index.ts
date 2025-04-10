@@ -13,7 +13,7 @@ import { WordPress } from "./projects/WordPress";
 import { ECBaseBestelExpo } from "./projects/ECBaseBestelExpo";
 import { ECBaseBestelNext } from "./projects/ECBaseBestelNext";
 import { MetaAssembled } from "./projects/MetaAssembled";
-
+import { DirectusMobile } from "./projects/DirectusMobile";
 export type App =
   | "Finder"
   | "VSCode"
@@ -29,7 +29,8 @@ export type App =
   | "MetaAssembled"
   | "ECBaseBestelExpo"
   | "ECBaseBestelNext"
-  | "Terminal";
+  | "Terminal"
+  | "DirectusMobile";
 
 export const Applications: { [x in App]: Apps } = {
   Finder: Finder,
@@ -47,6 +48,7 @@ export const Applications: { [x in App]: Apps } = {
   ECBaseBestelExpo: ECBaseBestelExpo,
   ECBaseBestelNext: ECBaseBestelNext,
   Terminal: Terminal,
+  DirectusMobile: DirectusMobile,
 };
 export type Apps =
   | typeof TextEditor
@@ -63,7 +65,8 @@ export type Apps =
   | typeof WordPress
   | typeof ECBaseBestelExpo
   | typeof ECBaseBestelNext
-  | typeof Terminal;
+  | typeof Terminal
+  | typeof DirectusMobile;
 
 export interface NavMenuItem {
   label: string;

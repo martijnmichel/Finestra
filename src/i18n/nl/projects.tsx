@@ -1,6 +1,20 @@
 import React from "react";
 import { Info } from "../../components/Info";
 export default {
+  directusMobile: {
+    title: "Directus Mobile",
+    desc: "Beheer content op de go met Directus mobile app.",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Opdrachtgever" text="Eigen beheer" />
+        <Info
+          title="Description"
+          text={`Directus Mobile is een persoonlijk open source project. Het is een mobiele app voor het beheren van je Directus content, geschreven met gebruik van React Native/Expo, React Query en de Directus API.`}
+        />
+      </article>
+    ),
+  },
+
   sonid: {
     title: "Leer muziektheorie met Sonid",
     desc: "educatieapp voor Android en iOS",

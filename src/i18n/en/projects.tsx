@@ -1,6 +1,20 @@
 import React from "react";
 import { Info } from "../../components/Info";
 export default {
+  directusMobile: {
+    title: "Directus Mobile",
+    desc: "Manage content on the go with Directus mobile app.",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Client" text="Own project" />
+        <Info
+          title="Description"
+          text={`Directus Mobile is a personal open source project. It's a mobile app that allows you to manage content on the go with Directus. It is written with React Native, Expo and React Query and uses the Directus API to fetch and manage content.`}
+        />
+      </article>
+    ),
+  },
+
   sonid: {
     title: "Learn musictheory with Sonid",
     desc: "educational app for musicians who want to learn more about musictheory",
@@ -49,15 +63,21 @@ export default {
       <article className="content">
         <Info
           title="Jeruzalem Kerk"
-          text={'I created a brand-new Wordpress website for the Jeruzalem Kerk Amsterdam. They wanted to attract a new audience and needed a fresh new look. The new website is easy to manage, so that the volunteers can independently add blog-posts and new events.'}
+          text={
+            "I created a brand-new Wordpress website for the Jeruzalem Kerk Amsterdam. They wanted to attract a new audience and needed a fresh new look. The new website is easy to manage, so that the volunteers can independently add blog-posts and new events."
+          }
         />
         <Info
           title="Bartoon"
-          text={'Bart Kranenburg is a Dutch cartoonist. He wanted a small website to display his work.'}
+          text={
+            "Bart Kranenburg is a Dutch cartoonist. He wanted a small website to display his work."
+          }
         />
         <Info
           title="Vincent Niekerk"
-          text={'Vincent is a carpenter from Amsterdam. He wanted a nice looking website to display all of his projects. His new website brought him many new costumers and is ranking high in Google.'}
+          text={
+            "Vincent is a carpenter from Amsterdam. He wanted a nice looking website to display all of his projects. His new website brought him many new costumers and is ranking high in Google."
+          }
         />
       </article>
     ),
@@ -71,12 +91,16 @@ export default {
         <Info title="Client" text="ecBase" />
         <Info
           title="Description"
-          text={'WMS is a web-application that functions as a frontend for ecBases backoffice. With this web-app clients can manage their sales and stock. A dashboard with all the relevant statistics is included.'}
+          text={
+            "WMS is a web-application that functions as a frontend for ecBases backoffice. With this web-app clients can manage their sales and stock. A dashboard with all the relevant statistics is included."
+          }
         />
 
         <Info
           title="What I learned:"
-          text={'Where to put state. When to save it locally, globally, on the server or through local storage. I improved my component related thinking, through creating easy-to-read and indipendent code.'}
+          text={
+            "Where to put state. When to save it locally, globally, on the server or through local storage. I improved my component related thinking, through creating easy-to-read and indipendent code."
+          }
         />
       </article>
     ),
@@ -131,7 +155,6 @@ export default {
           - Image cache and deploy on Google Cloud Run.`}
         />
 
-
         <Info
           title="Belangrijk om te weten"
           text="Cold-start van de site is traag door lage instellingen GCR"
@@ -140,4 +163,3 @@ export default {
     ),
   },
 };
-

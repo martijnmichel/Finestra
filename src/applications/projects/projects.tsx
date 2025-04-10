@@ -4,6 +4,7 @@ import Meta from "../../icons/meta.jpg";
 import Sonid from "../../icons/sonid.png";
 import WMS from "../../icons/wms.png";
 import StarterApp from "../../icons/starterApp.png";
+import DirectusMobile from "../../icons/directusmobile.png";
 import { useTranslation } from "react-i18next";
 import { Frameworks, IFrameworks } from "./frameworks";
 import { TranslationElement } from "../../components/TranslationElement";
@@ -23,6 +24,29 @@ export const projects: () => { [x: string]: Project } = () => {
   const { t } = useTranslation();
 
   return {
+    directusMobile: {
+      title: t("projects:directusMobile.title"),
+      desc: t("projects:directusMobile.desc"),
+      icon: DirectusMobile,
+      Text: <TranslationElement i18nKey="projects:directusMobile.htmlText" />,
+      links: [
+        { label: "Website", href: "https://directusmobile.app" },
+        {
+          label: "Android",
+          href: "https://play.google.com/store/apps/details?id=com.martijnmichel.directusexpo.app",
+        },
+        {
+          label: "iOS",
+          href: "https://apps.apple.com/app/directus-mobile/id6740696350",
+        },
+        {
+          label: "Github",
+          href: "https://github.com/martijnmichel/directus-expo",
+        },
+      ],
+      frameworks: [IFrameworks.Expo, IFrameworks.ReactNative, IFrameworks.Next, IFrameworks.Tanstack],
+    },
+
     sonid: {
       title: t("projects:sonid.title"),
       desc: t("projects:sonid.desc"),
