@@ -56,20 +56,405 @@ export const VSCodeApp = (id: string) => {
       label: "File",
       items: [
         {
-          label: "New Window",
-          function: () => {
-            startApp("VSCode")(dispatch);
-          },
+          label: "New",
+          submenu: [
+            {
+              label: "New Text File",
+              shortcut: "⌘N"
+            },
+            {
+              label: "New Window",
+              shortcut: "⇧⌘N"
+            },
+            {
+              label: "New Folder"
+            },
+            {
+              label: "separator"
+            },
+            {
+              label: "New File..."
+            }
+          ]
         },
         {
-          label: "separator",
+          label: "separator"
         },
         {
-          label: "Close",
+          label: "Open...",
+          shortcut: "⌘O"
+        },
+        {
+          label: "Open Folder..."
+        },
+        {
+          label: "Open Workspace from File..."
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Save",
+          shortcut: "⌘S"
+        },
+        {
+          label: "Save As...",
+          shortcut: "⇧⌘S"
+        },
+        {
+          label: "Save All",
+          shortcut: "⌥⌘S",
+          disabled: true
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Workspace",
+          submenu: [
+            {
+              label: "Add Folder to Workspace..."
+            },
+            {
+              label: "Save Workspace As..."
+            },
+            {
+              label: "Duplicate Workspace"
+            },
+            {
+              label: "separator"
+            },
+            {
+              label: "Share"
+            }
+          ]
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Auto Save",
+          type: "checkbox",
+          checked: false
+        },
+        {
+          label: "Revert File"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Close Editor",
+          shortcut: "⌘W"
+        },
+        {
+          label: "Close Folder",
+          shortcut: "⇧⌘F"
+        },
+        {
+          label: "Close Window",
+          shortcut: "⇧⌘W",
           function: () => {
             closeApp(id)(dispatch);
           },
         },
+      ],
+    },
+    {
+      label: "Edit",
+      items: [
+        {
+          label: "Undo",
+          shortcut: "⌘Z"
+        },
+        {
+          label: "Redo",
+          shortcut: "⇧⌘Z"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Cut",
+          shortcut: "⌘X"
+        },
+        {
+          label: "Copy",
+          shortcut: "⌘C"
+        },
+        {
+          label: "Paste",
+          shortcut: "⌘V"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Find",
+          shortcut: "⌘F"
+        },
+        {
+          label: "Replace",
+          shortcut: "⌥⌘F"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Find",
+          submenu: [
+            {
+              label: "Find in Files",
+              shortcut: "⇧⌘F"
+            },
+            {
+              label: "Replace in Files",
+              shortcut: "⇧⌥⌘H"
+            },
+            {
+              label: "separator"
+            },
+            {
+              label: "Find in Selection"
+            },
+            {
+              label: "Replace in Selection"
+            }
+          ]
+        }
+      ],
+    },
+    {
+      label: "Selection",
+      items: [
+        {
+          label: "Select All",
+          shortcut: "⌘A"
+        },
+        {
+          label: "Expand Selection",
+          shortcut: "⌘⇧⌘→"
+        },
+        {
+          label: "Shrink Selection",
+          shortcut: "⌘⇧⌘←"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Copy Line Up",
+          shortcut: "⇧⌥↑"
+        },
+        {
+          label: "Copy Line Down",
+          shortcut: "⇧⌥↓"
+        },
+        {
+          label: "Move Line Up",
+          shortcut: "⌥↑"
+        },
+        {
+          label: "Move Line Down",
+          shortcut: "⌥↓"
+        }
+      ],
+    },
+    {
+      label: "View",
+      items: [
+        {
+          label: "Command Palette...",
+          shortcut: "⌘⇧P"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Explorer",
+          shortcut: "⌘⇧E"
+        },
+        {
+          label: "Search",
+          shortcut: "⌘⇧F"
+        },
+        {
+          label: "Source Control",
+          shortcut: "⌃⇧G"
+        },
+        {
+          label: "Run and Debug",
+          shortcut: "⌘⇧D"
+        },
+        {
+          label: "Extensions",
+          shortcut: "⌘⇧X"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Toggle Terminal",
+          shortcut: "⌃`"
+        },
+        {
+          label: "Toggle Output",
+          shortcut: "⌘⇧U"
+        },
+        {
+          label: "Toggle Problems",
+          shortcut: "⌘⇧M"
+        }
+      ],
+    },
+    {
+      label: "Go",
+      items: [
+        {
+          label: "Back",
+          shortcut: "⌃-"
+        },
+        {
+          label: "Forward",
+          shortcut: "⌃⇧-"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Go to File...",
+          shortcut: "⌘P"
+        },
+        {
+          label: "Go to Symbol...",
+          shortcut: "⌘⇧O"
+        },
+        {
+          label: "Go to Definition",
+          shortcut: "F12"
+        },
+        {
+          label: "Go to Declaration",
+          shortcut: "⌘F12"
+        },
+        {
+          label: "Go to Type Definition",
+          shortcut: "⌘⇧F12"
+        },
+        {
+          label: "Go to Implementations",
+          shortcut: "⌘F12"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Go to Line/Column...",
+          shortcut: "⌃G"
+        },
+        {
+          label: "Go to Bracket",
+          shortcut: "⌃⇧\\"
+        }
+      ],
+    },
+    {
+      label: "Run",
+      items: [
+        {
+          label: "Start Debugging",
+          shortcut: "F5"
+        },
+        {
+          label: "Run Without Debugging",
+          shortcut: "⌃F5"
+        },
+        {
+          label: "Stop Debugging",
+          shortcut: "⇧F5"
+        },
+        {
+          label: "Restart Debugging",
+          shortcut: "⌃⇧F5"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Toggle Breakpoint",
+          shortcut: "F9"
+        },
+        {
+          label: "New Breakpoint"
+        },
+        {
+          label: "Enable All Breakpoints"
+        },
+        {
+          label: "Disable All Breakpoints"
+        }
+      ],
+    },
+    {
+      label: "Terminal",
+      items: [
+        {
+          label: "New Terminal",
+          shortcut: "⌃⇧`"
+        },
+        {
+          label: "Split Terminal",
+          shortcut: "⌃⇧5"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Run Active File"
+        },
+        {
+          label: "Run Selected Text"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Terminal 1",
+          shortcut: "⌃1"
+        },
+        {
+          label: "Terminal 2",
+          shortcut: "⌃2"
+        }
+      ],
+    },
+    {
+      label: "Help",
+      items: [
+        {
+          label: "Welcome"
+        },
+        {
+          label: "Show All Commands"
+        },
+        {
+          label: "Documentation"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "Keyboard Shortcuts Reference"
+        },
+        {
+          label: "Video Tutorials"
+        },
+        {
+          label: "separator"
+        },
+        {
+          label: "About"
+        }
       ],
     },
   ];
