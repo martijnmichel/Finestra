@@ -14,7 +14,7 @@ export const TopBarMenu = ({
         <Popover.Panel className="absolute z-10">
           <div className="grid grid-cols-2">
             {items.map((item, index) => {
-              <Menu.Item key={`item-topnav-${index}`}>{item}</Menu.Item>;
+              return <Menu.Item key={`item-topnav-${index}`}>{item}</Menu.Item>;
             })}
           </div>
 
