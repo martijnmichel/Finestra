@@ -4,6 +4,8 @@ import SafariIcon from "../../icons/safari.png";
 import { AppActions } from "../../components/application/AppActions";
 import { Icon } from "@iconify/react";
 import { ChevronLeft, ChevronRight, Copy, Plus, Share, Shield, Sidebar } from "lucide-react";
+import { NavMenu } from "..";
+import { AppNavigation } from "../../components/application/AppNavigation";
 
 export class Safari extends Application {
   public name = "Safari";
@@ -32,8 +34,41 @@ export const SafariApp = (id: string) => {
     setHistory([...history, address]);
   };
 
+  const navigation: NavMenu[] = [
+    {
+      label: "File",
+      items: [
+        { label: "New File", function: () => {}, shortcut: "⌘N" },
+        { label: "New Window", function: () => {}, shortcut: "⇧⌘N" },
+        { label: "separator", function: () => {} },
+        { label: "Close", function: () => {}, shortcut: "⌘W" },
+      ],
+    },
+    {
+      label: "Edit",
+      items: [
+        { label: "Undo", function: () => {}, shortcut: "⌘Z" },
+        { label: "Redo", function: () => {}, shortcut: "⇧⌘Z" },
+      ],
+    },
+    {
+      label: "Window",
+      items: [
+        { label: "New Window", function: () => {}, shortcut: "⇧⌘N" },
+      ],
+    },
+    {
+      label: "Help",
+      items: [
+        { label: "Welcome", function: () => {}, shortcut: "⌘H" },
+        { label: "Show All Commands", function: () => {}, shortcut: "⌘⇧P" },
+      ],
+    },
+  ];
+
   return (
     <>
+      <AppNavigation items={navigation} id={id} />
       <div
         className="px-2 py-[10px] flex items-center justify-between"
         data-handle={id}

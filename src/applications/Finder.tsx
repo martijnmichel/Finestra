@@ -34,6 +34,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import { NavMenu } from ".";
+import { AppNavigation } from "../components/application/AppNavigation";
 
 export class Finder extends Application {
   public name = "Finder";
@@ -80,6 +82,43 @@ export const FinderApp = (id: string) => {
     getFiles();
   }, []);
 
+  const navigation: NavMenu[] = [
+    {
+      label: "File",
+      items: [
+        { label: "New File", function: () => {}, shortcut: "⌘N" },
+        { label: "New Window", function: () => {}, shortcut: "⇧⌘N" },
+        { label: "separator", function: () => {} },
+        { label: "Close", function: () => {}, shortcut: "⌘W" },
+      ],
+    },
+    {
+      label: "Edit",
+      items: [
+        { label: "Undo", function: () => {} },
+        { label: "Redo", function: () => {} },
+        { label: "Cut", function: () => {}, shortcut: "⌘X" },
+        { label: "Copy", function: () => {}, shortcut: "⌘C" },
+        { label: "Paste", function: () => {}, shortcut: "⌘V" },
+        { label: "Find", function: () => {}, shortcut: "⌘F" },
+        { label: "Replace", function: () => {}, shortcut: "⌥⌘F" },
+      ],
+    },
+    {
+      label: "Window",
+      items: [
+        { label: "New Window", function: () => {}, shortcut: "⇧⌘N" },
+      ],
+    },
+    {
+      label: "Help",
+      items: [
+        { label: "Welcome", function: () => {}, shortcut: "⌘H" },
+        { label: "Show All Commands", function: () => {}, shortcut: "⌘⇧P" },
+      ],
+    },
+  ];
+
   return (
     <SidebarProvider className="h-full min-h-0">
       <Sidebar
@@ -118,6 +157,7 @@ export const FinderApp = (id: string) => {
         </SidebarContent>
       </Sidebar>
       <div className="flex flex-col w-full flex-grow">
+        <AppNavigation items={navigation} id={id} />
         <div className="flex justify-between items-center bg-gray-100 p-2 w-full rounded-tr-lg">
           <div className="flex items-center gap-1">
             <Button variant="ghost" size="icon">

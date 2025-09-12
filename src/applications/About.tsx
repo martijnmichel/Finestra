@@ -5,7 +5,7 @@ import { Icon as IIcon } from "@iconify/react";
 import Icon from "../icons/user.png";
 import dayjs from "dayjs";
 import { Project, projects } from "./projects/projects";
-import { App, Applications } from ".";
+import { App, Applications, NavMenu } from ".";
 import { map } from "lodash";
 import { Frameworks, IFrameworks } from "./projects/frameworks";
 import XTooltip from "../components/Tooltip";
@@ -16,6 +16,7 @@ import { startApp } from "../store/actions/startApp";
 import { ShepherdTour } from "../components/ShepherdTour";
 import { languages } from "../i18n";
 import i18next from "i18next";
+import { AppNavigation } from "../components/application/AppNavigation";
 export const AboutApplication = {
   name: "About",
   icon: () => <img src={Icon} alt="Logo" />,
@@ -31,7 +32,7 @@ export class About extends Application {
 
   y = 100;
 
-  component = () => AboutApp();
+  component = () => AboutApp(this.id);
 
   constructor() {
     super();
@@ -53,7 +54,7 @@ export type ProjectInfo = {
   title: string;
 } & Project;
 
-export const AboutApp = () => {
+export const AboutApp = (id: string) => {
   const { t } = useTranslation();
 
   const { dispatch } = useAppContext();
@@ -165,8 +166,51 @@ export const AboutApp = () => {
     Vercel,
   } = Frameworks();
 
+  const navigation: NavMenu[] = [
+    {
+      label: "File",
+      items: [
+        {
+          label: "New Email",
+          function: () => {
+            window.open("mailto:martijn.michel@gmail.com", "_blank");
+          },
+        },
+        {
+          label: "New Message",
+          function: () => {
+            window.open(`https://wa.me/0031624852964?text=${encodeURIComponent(
+              "Hoi Martijn, ik nodig je graag uit voor een gesprek."
+            )}`, "_blank");
+          },
+        },
+      ],
+    },
+    {
+      label: "About",
+      items: [
+        {
+          label: "LinkedIn",
+          function: () => {
+            window.open(
+              "https://www.linkedin.com/in/martijn-ensing-159582207/",
+              "_blank"
+            );
+          },
+        },
+        {
+          label: "GitHub",
+          function: () => {
+            window.open("https://github.com/martijnmichel", "_blank");
+          },
+        },
+      ],
+    },
+  ];
+
   return (
     <div className="p-3 h-full overflow-y-auto">
+      <AppNavigation items={navigation} id={id} />
       <div className="grid grid-cols-1 @3xl/window:grid-cols-3 gap-10">
         <div className="col-span-2 flex flex-shrink flex-col gap-6">
           <div id="step-about" className="flex flex-col gap-3">
