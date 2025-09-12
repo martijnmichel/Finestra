@@ -27,6 +27,15 @@ const BottomDock = () => {
         icon: <img src={Launchpad} alt="Logo" />,
         action: () => toggleLaunchpad()(dispatch),
       },
+      {
+        id: "finder",
+        name: "Finder",
+        icon: appIcon("Finder"),
+        action: () =>
+          state.applications.some((app) => app.id === "Finder")
+            ? toggleApp("Finder")(dispatch)
+            : startApp("Finder")(dispatch),
+      },
       ...state.applications.map((app) => ({
         id: app.id,
         name: app.name,

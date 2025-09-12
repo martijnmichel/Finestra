@@ -95,7 +95,7 @@ export const ApplicationWindow = (app: Application) => {
     <Transition
       as="div"
       id={app.id}
-      className="flex flex-col absolute border-1 origin-top-left border-gray-200 dark:border-gray-800 has-[.dark]:border-gray-800 bg-gradient-to-t from-neutral-300 to-neutral-200 shadow-app-window rounded-lg"
+      className="flex flex-col absolute border-1 origin-top-left border-gray-200 dark:border-gray-800 has-[.dark]:border-gray-800 shadow-app-window rounded-xl"
       style={{
         width: app.fullscreen ? "100vw" : app.width,
         height: app.fullscreen ? "100vh" : app.height,
@@ -126,7 +126,7 @@ export const ApplicationWindow = (app: Application) => {
     >
       {!app.titleBar && (
         <>
-          <div className="p-1 flex" data-handle={app.id}>
+          <div className="p-1 flex bg-gradient-to-t from-neutral-300 to-neutral-300" data-handle={app.id}>
             <AppActions id={app.id} />
             {app.name}
           </div>
@@ -135,7 +135,7 @@ export const ApplicationWindow = (app: Application) => {
       )}
 
       <div
-        className={`bg-background @container/window h-full flex-grow rounded-b-lg ${
+        className={`bg-background @container/window flex-1 min-h-0 overflow-y-hidden rounded-b-lg ${
           app.titleBar ? "rounded-t-lg" : ""
         }`}
       >

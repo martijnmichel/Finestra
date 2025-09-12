@@ -30,7 +30,7 @@ export const AppNavigation = ({
 
   if (el && active)
     return createPortal(
-      <div id="app-nav--portal" className="flex items-center gap-2">
+      <div id="app-nav--portal" className="flex items-center gap-2 overflow-visible">
         <Menubar>
           {items.map((item) => (
             <MenubarMenu key={`menu-item-${item.label}`}>
@@ -62,7 +62,7 @@ export const AppNavigation = ({
                                 disabled={subItem.disabled}
                               >
                                 {subItem.label}
-                                {subItem.shortcut && <span className="ml-auto text-xs text-gray-500">{subItem.shortcut}</span>}
+                                {subItem.shortcut && <span className="ml-auto pl-4 text-xs text-gray-500">{subItem.shortcut}</span>}
                               </MenubarItem>
                             );
                           })}
