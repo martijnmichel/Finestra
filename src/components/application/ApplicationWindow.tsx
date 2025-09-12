@@ -95,7 +95,7 @@ export const ApplicationWindow = (app: Application) => {
     <Transition
       as="div"
       id={app.id}
-      className="flex flex-col absolute border-1 origin-top-left border-gray-200 dark:border-gray-800 has-[.dark]:border-gray-800 shadow-app-window rounded-xl"
+      className="flex flex-col absolute border-1 origin-top-left border-gray-200 dark:border-gray-800 has-[.dark]:border-gray-800 shadow-app-window overflow-hidden"
       style={{
         width: app.fullscreen ? "100vw" : app.width,
         height: app.fullscreen ? "100vh" : app.height,
@@ -105,7 +105,7 @@ export const ApplicationWindow = (app: Application) => {
         transform: app.fullscreen ? "translate(0, 0)" : `translateX(${app.x}px) translateY(${app.y}px)`,
         opacity: !app.active ? 0.95 : 1,
         zIndex: app.fullscreen ? 3 : app.active ? 2 : 1,
-        borderRadius: app.fullscreen ? "0" : "var(--radius-lg)",
+        borderRadius: app.fullscreen ? "0" : "var(--radius-xl)",
       }}
       enter=" origin-bottom duration-300"
       enterFrom=" transition-all opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6] skew-x-12"
