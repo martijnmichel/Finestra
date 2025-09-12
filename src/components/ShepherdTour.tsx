@@ -1,5 +1,5 @@
-import { useEffectOnce } from "usehooks-ts";
-import React, { useRef } from "react";
+
+import React, { useEffect, useRef } from "react";
 import { useLocalStorage, useWindowSize } from "usehooks-ts";
 import Shepherd from "shepherd.js";
 import { useTranslation } from "react-i18next";
@@ -81,7 +81,7 @@ export const ShepherdTour = () => {
     if (doIntro) tour.current.start();
   };
 
-  useEffectOnce(init);
+  useEffect(init, []);
 
   return null;
 };

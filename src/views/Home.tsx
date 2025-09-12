@@ -19,13 +19,13 @@ const Home = () => {
 
  
 
-  const { background } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <main
       className="flex-grow"
       style={{
-        background: `url(${background()}) no-repeat center center`,
+        background: `url(${theme.background}) no-repeat center center`,
         backgroundSize: "100% 100%",
       }}
     >

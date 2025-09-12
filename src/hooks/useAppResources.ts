@@ -3,7 +3,7 @@ import { useTheme } from "./useTheme"
 
 export const useAppResources = () => {
 
-    const {init, background} = useTheme()
+    const {init, theme} = useTheme()
 
     const [loaded, setLoaded] = useState(false)
 

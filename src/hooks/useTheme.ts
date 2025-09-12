@@ -1,9 +1,17 @@
+import { useLocalStorage } from "usehooks-ts";
 import {
   backgrounds,
   backgrounds as wallpapers,
 } from "../constants/background";
 
+type ThemeConfig = {
+  background: string;
+};
+
 export const useTheme = () => {
+  const [theme, setTheme] = useLocalStorage("finestra-theme", {
+    background: backgrounds[0],
+  });
   /**
    * Load the needed resources from localStorage
    */
@@ -25,10 +33,8 @@ export const useTheme = () => {
     await Promise.all(promises);
   };
 
-  const background = () => backgrounds[0];
-
   return {
     init,
-    background,
+    theme
   };
 };
