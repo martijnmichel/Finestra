@@ -27,7 +27,7 @@ export class About extends Application {
   public category = "default";
 
   width = window.innerWidth > 900 ? 800 : window.innerWidth - 100;
-  height = window.innerHeight > 1000 ? 800 : window.innerHeight - 200;
+  height = window.innerHeight > 1000 ? 850 : window.innerHeight - 200;
 
   y = 100;
 
@@ -168,7 +168,7 @@ export const AboutApp = () => {
   return (
     <div className="p-3 h-full overflow-y-auto">
       <div className="grid grid-cols-1 @3xl/window:grid-cols-3 gap-10">
-        <div className="col-span-2 flex flex-shrink flex-col gap-10">
+        <div className="col-span-2 flex flex-shrink flex-col gap-6">
           <div id="step-about" className="flex flex-col gap-3">
             <h2 className="text-h1">Martijn van der Eijk</h2>
             <p className="subtitle">{t("apps:about.subtitle")}</p>
