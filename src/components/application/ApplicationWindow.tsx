@@ -135,7 +135,7 @@ export const ApplicationWindow = (app: Application) => {
       )}
 
       <div
-        className={`bg-white @container/window h-full flex-grow rounded-b-lg ${
+        className={`bg-background @container/window h-full flex-grow rounded-b-lg ${
           app.titleBar ? "rounded-t-lg" : ""
         }`}
       >

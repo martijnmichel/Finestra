@@ -61,6 +61,7 @@ export const appReducer = (
     }
 
     case ActionType.TOGGLE_APP: {
+      
       const newState = [
         ...state.applications.map((app) => ({
           ...app,
@@ -69,6 +70,7 @@ export const appReducer = (
         })),
       ];
 
+      console.log({ newState })
       return {
         ...state,
         applications: newState,
