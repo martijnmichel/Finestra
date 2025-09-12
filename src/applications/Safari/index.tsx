@@ -3,6 +3,7 @@ import { Application } from "../application";
 import SafariIcon from "../../icons/safari.png";
 import { AppActions } from "../../components/application/AppActions";
 import { Icon } from "@iconify/react";
+import { ChevronLeft, ChevronRight, Copy, Plus, Share, Shield, Sidebar } from "lucide-react";
 
 export class Safari extends Application {
   public name = "Safari";
@@ -21,9 +22,9 @@ export class Safari extends Application {
 }
 
 export const SafariApp = (id: string) => {
-  const [address, setAddress] = useState("https://tocadovision.nl");
-  const [url, setUrl] = useState("https://tocadovision.nl");
-  const [history, setHistory] = useState(["https://tocadovision.nl"]);
+  const [address, setAddress] = useState("https://sonid.app");
+  const [url, setUrl] = useState("https://sonid.app");
+  const [history, setHistory] = useState(["https://sonid.app"]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -40,29 +41,29 @@ export const SafariApp = (id: string) => {
         <div className="icon-container">
           <AppActions id={id} />
 
-          <Icon className="icon" icon="bi:window-sidebar" />
+          <Sidebar className="size-4"/>
 
-          <Icon className="icon" icon="ic:baseline-arrow-back-ios" />
+          <ChevronLeft className="size-4"/>
 
-          <Icon className="icon" icon="ic:baseline-arrow-forward-ios" />
+          <ChevronRight className="size-4"/>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex gap-4">
-          <Icon className="icon" icon="bi:shield-shaded" />
+        <form onSubmit={handleSubmit} className="flex items-center gap-4">
+          <Shield className="size-4"/>
 
           <input
             value={address}
-            className="bg-neutral-100 text-neutral-500 text-[12px] border-[1px] shadow-sm rounded-md px-20 py-[3px]"
+            className="bg-neutral-100 text-neutral-500 text-[12px] border-0 shadow-sm rounded-md px-20 py-[3px]"
             onChange={(val) => setAddress(val.target.value)}
           />
         </form>
 
         <div className="flex gap-4">
-          <Icon className="icon" icon="entypo:share-alternitive" />
+          <Share className="size-4"/>
 
-          <Icon className="icon" icon="akar-icons:plus" />
+          <Plus className="size-4"/>
 
-          <Icon className="icon" icon="uil:apps" />
+          <Copy className="size-4"/>
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import { ActionCloseApp } from "./closeApp";
 import { ActionHideApp } from "./hideApp";
 import { ActionStartApp } from "./startApp";
 import { ActionToggleApp } from "./toggleApp";
+import { ActionToggleOrOpenApp } from "./toggleOrOpenApp";
 import { ActionToggleLaunchpad } from "./toggleLaunchPad";
 import { ActionUpdateAppWindow } from "./updateAppWindow";
 
@@ -11,6 +12,7 @@ export enum ActionType {
   CLOSE_APP = "CLOSE_APP",
   HIDE_APP = "HIDE_APP",
   TOGGLE_APP = "TOGGLE_APP",
+  TOGGLE_OR_OPEN_APP = "TOGGLE_OR_OPEN_APP",
   UPDATE_APP_WINDOW = "UPDATE_APP_WINDOW",
 }
 
@@ -20,4 +22,5 @@ export type AppActions =
   | ActionCloseApp
   | ActionToggleApp
   | ActionHideApp
-  | ActionUpdateAppWindow;
+  | ActionUpdateAppWindow
+  | ActionToggleOrOpenApp;

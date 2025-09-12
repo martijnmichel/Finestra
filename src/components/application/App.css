@@ -1,11 +1,7 @@
-@import "tailwindcss/base";
-
-@import "tailwindcss/components";
-
-@import "tailwindcss/utilities";
+@import "tailwindcss";
 
 .application-button-container {
-  @apply flex items-center gap-1 px-2;
+  @apply flex items-center gap-2 px-2;
 }
 .application-button {
   @apply relative w-[14px] h-[14px] rounded-full border-[1.5px] border-[rgba(0,0,0,0.1)] flex justify-center items-center cursor-pointer;

@@ -5,13 +5,71 @@ import { AppButton } from "./application/AppButton";
 import { useAppContext } from "../store";
 import { toggleLaunchpad } from "../store/actions/toggleLaunchPad";
 import { toggleApp } from "../store/actions/toggleApp";
+import { MacOSDock } from "./ui/shadcn-io/mac-os-dock";
+import { SettingsApp } from "@/applications/Settings";
+import { startApp } from "@/store/actions/startApp";
+import { uniqBy } from "lodash";
 
 const BottomDock = () => {
   const { appIcon } = useWindowManager();
   const { state, dispatch } = useAppContext();
 
+  console.log(state.applications);
+
+  const apps = uniqBy(
+    [
+      {
+        id: "launchpad",
+        name: "Launchpad",
+        icon: <img src={Launchpad} alt="Logo" />,
+        action: () => toggleLaunchpad()(dispatch),
+      },
+      ...state.applications.map((app) => ({
+        id: app.id,
+        name: app.name,
+        icon: appIcon(app.name),
+        action: () =>
+          state.applications.some((app) => app.id === app.id)
+            ? toggleApp(app.id)(dispatch)
+            : startApp(app.name)(dispatch),
+      })),
+      {
+        id: "safari",
+        name: "Safari",
+        icon: appIcon("Safari"),
+        action: () =>
+          state.applications.some((app) => app.id === "Safari")
+            ? toggleApp("Safari")(dispatch)
+            : startApp("Safari")(dispatch),
+      
+      },
+      {
+        id: "settings",
+        name: "Settings",
+        icon: appIcon("Settings"),
+        action: () =>
+          state.applications.some((app) => app.id === "Settings")
+            ? toggleApp("Settings")(dispatch)
+            : startApp("Settings")(dispatch),
+      },
+    ],
+    "name"
+  );
+
   return (
-    <nav
+    <div className="fixed z-30 bottom-0 right-0 left-0 p-4 flex items-center justify-center">
+      <MacOSDock
+        apps={apps}
+        onAppClick={(appId) => {
+          const app = apps.find((app) => app.id === appId);
+          if (app) {
+            app.action();
+          }
+        }}
+        openApps={state.applications.map((app) => app.id)}
+      />
+    </div>
+    /**<nav
       className={`fixed z-30 bottom-0 right-0 left-0 flex transform transition-all ${
         state.launchpad ? "translate-y-28" : ""
       }`}
@@ -33,7 +91,7 @@ const BottomDock = () => {
           );
         })}
       </div>
-    </nav>
+    </nav> */
   );
 };
 

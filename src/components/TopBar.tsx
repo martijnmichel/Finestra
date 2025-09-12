@@ -9,6 +9,24 @@ import { useTranslation } from "react-i18next";
 import { map } from "lodash";
 import { languages } from "../i18n";
 import { useAppState } from "../store";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import {
+  BatteryCharging,
+  Bluetooth,
+  Flag,
+  PanelsLeftBottom,
+  Search,
+  Settings2,
+  Wifi,
+} from "lucide-react";
+import { Dialog, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { Input } from "./ui/input";
+import { DialogContent } from "@radix-ui/react-dialog";
 const TopBar = () => {
   const { activeApp } = useWindowManager();
   const { launchpad } = useAppState();
@@ -66,21 +84,22 @@ const TopBar = () => {
         </div>
 
         <div className="flex-shrink flex px-2">
-          <AppMenu
-            button={
-              <button className="topnav-button">
-                <img
-                      className="w-[20px] h-[20px] object-contain"
-                  src={languages?.[i18n.language as keyof typeof languages]?.icon}
-                />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="topnav-button focus:outline-none">
+                <Flag />
               </button>
-            }
-          >
-            {map(languages, (lang) => {
-              return (
-                <AppMenuItem
-                  key={`lang-picker-${lang.label}`}
-                  label={
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {map(languages, (lang) => {
+                return (
+                  <DropdownMenuItem
+                    key={`lang-picker-${lang.label}`}
+                    onClick={() => {
+                      i18n.changeLanguage(lang.code);
+                    }}
+                    asChild
+                  >
                     <div className="flex items-center gap-2">
                       <img
                         className="w-[32px] h-[32px] object-contain"
@@ -88,26 +107,43 @@ const TopBar = () => {
                       />
                       {lang.label}
                     </div>
-                  }
-                  onClick={() => {
-                    i18n.changeLanguage(lang.code);
-                  }}
-                />
-              );
-            })}
-          </AppMenu>
+                  </DropdownMenuItem>
+                );
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <button className="topnav-button">
-            <Icon icon="bi:battery-full" />
+            <BatteryCharging />
           </button>
           <button className="topnav-button">
-            <Icon icon="akar-icons:bluetooth" />
+            <Bluetooth />
           </button>
           <button className="topnav-button">
-            <Icon icon="akar-icons:wifi" />
+            <Wifi />
           </button>
+
+          <Dialog modal={false}>
+            <DialogTrigger>
+              <button className="topnav-button focus:outline-none">
+                <Search />
+              </button>
+            </DialogTrigger>
+            <DialogContent className="fixed top-[20vh] left-1/2 -translate-x-1/2 bg-popover backdrop-blur-xl w-[280px] md:w-[420px] rounded-2xl">
+              <DialogHeader className="sr-only">
+                <DialogTitle>Search</DialogTitle>
+              </DialogHeader>
+              <div className="flex flex-col gap-2 relative">
+                <Search className="absolute left-2 top-1/2 -translate-y-1/2 size-6" />
+                <input
+                  placeholder="Search"
+                  className="w-full pl-10 placeholder:text-muted-foreground placeholder:font-medium text-xl h-[48px] rounded-2xl"
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
           <button className="topnav-button">
-            <Icon icon="akar-icons:search" />
+            <Settings2 />
           </button>
         </div>
 
