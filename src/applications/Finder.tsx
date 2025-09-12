@@ -3,6 +3,37 @@ import { Application } from "./application";
 import FinderIcon from "../icons/finder.png";
 import { AppActions } from "../components/application/AppActions";
 import { Icon } from "@iconify/react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  GalleryThumbnails,
+  MoreVertical,
+  Share,
+  Tag,
+} from "lucide-react";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarHeader,
+} from "@/components/ui/sidebar";
+
+import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+
+import {
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 
 export class Finder extends Application {
   public name = "Finder";
@@ -48,61 +79,74 @@ export const FinderApp = (id: string) => {
   useEffect(() => {
     getFiles();
   }, []);
+
   return (
-    <div className="flex h-full">
-      <div
-        className="h-full py-2 w-1/3 bg-gray-200/90 border-r border-neutral-200 rounded-l-lg"
-        data-handle={id}
+    <SidebarProvider className="h-full min-h-0">
+      <Sidebar
+        collapsible="none"
+        className="flex-col hidden @xl/window:flex w-64 min-h-0 h-full grow backdrop-blur-xl"
       >
-        <AppActions id={id} />
+        <SidebarContent className="grow h-full py-4" data-handle={id}>
+          <AppActions id={id} />
 
-        <div className=" px-2 py-5">
-          <h6 className="text-xs font-bold text-gray-400 mb-1">Favorites</h6>
-          {favs.map((fav) => {
-            return (
-              <div
-                className={`flex gap-2 align-center mb-1 p-1 rounded-md cursor-pointer ${
-                  active === fav.label ? "bg-blue-500 text-white" : ""
-                }`}
-                key={fav.label}
-                onClick={() => {
-                  getFiles();
-                  setActive(fav.label);
-                }}
-              >
-                <span
-                  className={`${
-                    active === fav.label ? "" : "text-blue-500"
-                  } text-sm`}
+          <div className=" px-2 py-5">
+            <h6 className="text-xs font-bold text-gray-400 mb-1">Favorites</h6>
+            {favs.map((fav) => {
+              return (
+                <div
+                  className={`flex gap-2 items-center mb-1 p-1 rounded-md cursor-pointer ${
+                    active === fav.label ? "bg-zinc-300 text-white" : ""
+                  }`}
+                  key={fav.label}
+                  onClick={() => {
+                    getFiles();
+                    setActive(fav.label);
+                  }}
                 >
-                  {fav.icon}
-                </span>{" "}
-                <span className="text-xs">{fav.label}</span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+                  <span
+                    className={`${
+                      active === fav.label ? "" : "text-blue-500"
+                    } *:size-4`}
+                  >
+                    {fav.icon}
+                  </span>{" "}
+                  <span className="text-sm font-medium">{fav.label}</span>
+                </div>
+              );
+            })}
+          </div>
+        </SidebarContent>
+      </Sidebar>
+      <div className="flex flex-col w-full flex-grow">
+        <div className="flex justify-between items-center bg-gray-100 p-2 w-full rounded-tr-lg">
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon">
+              <ChevronLeft />
+            </Button>
 
-      <div className="flex flex-col w-2/3">
-        <div className="flex justify-between items-center bg-gray-100 border-b p-2 w-full rounded-tr-lg">
-          <div className="flex">
-            <Icon className="icon" icon="ic:baseline-arrow-back-ios" />
-
-            <Icon className="icon" icon="ic:baseline-arrow-forward-ios" />
+            <Button variant="ghost" size="icon">
+              <ChevronRight />
+            </Button>
 
             <span className="text-md font-semibold ml-2">Downloads</span>
           </div>
 
-          <div className="flex">
-            <Icon className="icon" icon="bx:bx-list-ul"></Icon>
-            <Icon className="icon" icon="majesticons:selector-line" />
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon">
+              <GalleryThumbnails />
+            </Button>
 
-            <Icon className="icon" icon="fluent:share-ios-24-regular" />
+            <Button variant="ghost" size="icon">
+              <Share />
+            </Button>
 
-            <Icon className="icon" icon="fluent:tag-16-regular" />
+            <Button variant="ghost" size="icon">
+              <Tag />
+            </Button>
 
-            <Icon className="icon" icon="fluent:more-circle-32-regular" />
+            <Button variant="ghost" size="icon">
+              <MoreVertical />
+            </Button>
           </div>
         </div>
 
@@ -114,11 +158,11 @@ export const FinderApp = (id: string) => {
                   <div
                     className={`${
                       i % 2 === 1 ? "bg-gray-100" : ""
-                    } text-sm w-full px-3 flex justify-between cursor-pointer`}
+                    } text-sm w-full px-3 py-[0.125rem] rounded flex justify-between cursor-pointer`}
                     key={`itemkey-${item.id}`}
                   >
                     <span>{item.filename}</span>
-                    <span>{item.date}</span>
+                    <span className="text-sm text-gray-500">{item.date}</span>
                   </div>
                 )
               );
@@ -126,6 +170,6 @@ export const FinderApp = (id: string) => {
           </div>
         </div>
       </div>
-    </div>
+    </SidebarProvider>
   );
 };

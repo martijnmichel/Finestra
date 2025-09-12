@@ -13,5 +13,9 @@ export default defineConfig({
   },
   esbuild: {
     minifyIdentifiers: false,
+    jsx: 'automatic',
+  },
+  define: {
+    global: 'globalThis',
   },
 });
