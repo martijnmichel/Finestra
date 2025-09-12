@@ -24,7 +24,7 @@ export const AppButton = ({
     >
       {appIcon}
 
-      <p className="text-white">{appName}</p>
+      <p className="text-white/80 text-sm font-semibold">{appName}</p>
     </button>
   );
 };

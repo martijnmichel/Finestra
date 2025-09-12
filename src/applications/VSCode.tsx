@@ -77,7 +77,7 @@ export const VSCodeApp = (id: string) => {
   return (
     <div
       className="h-full rounded-lg overflow-hidden"
-      style={{ backgroundColor: "#061526" }}
+      
     >
       <AppNavigation items={navigation} id={id} />
       <div className="icon-container px-2 py-3" data-handle={id}>
@@ -85,7 +85,7 @@ export const VSCodeApp = (id: string) => {
       </div>
       <SandpackProvider
         style={{ width: "100%", height: "100%" }}
-        theme={nightOwl}
+        
         files={modules}
         template="vite"
       >
@@ -94,10 +94,11 @@ export const VSCodeApp = (id: string) => {
           style={{ width: "100%", height: "100%" }}
         >
           <SandpackFileExplorer
-            initialCollapsedFolder={["!/src/applications"]}
-            style={{ height: "100%", width: 300 }}
+            initialCollapsedFolder={["/src"]}
+            className="!min-w-70"
+            style={{ height: "100%" }}
           />
-          <SandpackCodeEditor showLineNumbers style={{ height: "100%" }} />
+          <SandpackCodeEditor showLineNumbers showTabs={false} style={{ height: "100%" }} />
         </SandpackLayout>
       </SandpackProvider>
     </div>

@@ -37,7 +37,18 @@ export const appReducer = (
           ...state,
         };
     }
-
+    case ActionType.TOGGLE_FULLSCREEN: {
+      const newState = [
+        ...state.applications.map((app) => ({
+          ...app,
+          fullscreen: app.id === action.appId ? !app.fullscreen : app.fullscreen,
+        })),
+      ];
+      return {
+        ...state,
+        applications: newState,
+      };
+    }
     case ActionType.CLOSE_APP: {
       const newState = [
         ...state.applications.filter((app, index) => app.id !== action.appId),
@@ -70,6 +81,7 @@ export const appReducer = (
         ...state.applications.map((app) => ({
           ...app,
           minimized: app.id === action.appId ? true : app.minimized,
+          fullscreen: app.id === action.appId ? false : app.fullscreen,
         })),
       ];
 
@@ -78,7 +90,12 @@ export const appReducer = (
         applications: newState,
       };
     }
-
+    case ActionType.SET_APPLICATIONS: {
+      return {
+        ...state,
+        applications: action.applications,
+      };
+    }
     case ActionType.UPDATE_APP_WINDOW: {
       const newState = [
         ...state.applications.map((app) => ({

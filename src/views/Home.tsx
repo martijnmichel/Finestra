@@ -17,9 +17,7 @@ const Home = () => {
 
   useEffect(() => console.log(applications), [applications]);
 
-  useEffect(() => {
-    startApp("About")(dispatch);
-  }, []);
+ 
 
   const { background } = useTheme();
 

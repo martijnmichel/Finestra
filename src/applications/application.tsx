@@ -17,6 +17,7 @@ export class Application {
   id = v4();
 
   multiple = false;
+  fullscreen = false;
 
   width = window.innerWidth > 900 ? 800 : window.innerWidth - 100;
   height = window.innerHeight > 800 ? 600 : window.innerHeight - 100;

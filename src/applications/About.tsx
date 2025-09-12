@@ -191,7 +191,7 @@ export const AboutApp = () => {
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-2">
             <h4 className="fat">{t("apps:about.address")}</h4>
-            <p>Via ca' del monte 6,Villafranca in Lunigiana, MS, Italie</p>
+            <p>Via ca' del monte 6, Villafranca in Lunigiana, MS, Italie</p>
             <a
               target="_blank"
               className="animate-underline"

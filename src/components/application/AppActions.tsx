@@ -3,6 +3,8 @@ import React from "react";
 import { useAppContext } from "../../store";
 import { closeApp } from "../../store/actions/closeApp";
 import { hideApp } from "../../store/actions/hideApp";
+import { ActionType } from "@/store/actions";
+import { toggleFullscreen } from "@/store/actions/toggleFullscreen";
 export const AppActions = ({ id }: { id: string }) => {
   const { dispatch } = useAppContext();
   return (
@@ -30,7 +32,9 @@ export const AppActions = ({ id }: { id: string }) => {
           icon="codicon:chrome-minimize"
         />
       </div>
-      <div className="application-button maximize group">
+      <div className="application-button maximize group" onClick={() => {
+        toggleFullscreen(id)(dispatch);
+      }}>
         <Icon
           className="hidden group-hover:block"
           icon="fluent:arrow-maximize-16-filled"

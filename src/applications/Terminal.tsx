@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Application } from "./application";
 import Icon from "../icons/Terminal.png";
-import { Terminal as XTerm } from "xterm";
+import { Terminal as XTerm } from "@xterm/xterm";
 import { AppActions } from "../components/application/AppActions";
 import "../../node_modules/xterm/css/xterm.css";
 import { FitAddon } from "xterm-addon-fit";
@@ -33,19 +33,21 @@ export const TerminalApp = (id: string) => {
       console.log(event);
       if (event.key === "\r") {
         term.writeln(event.key);
+        term.write("Thanks for showing interest in my work! \n");
+        term.write("You can find me on GitHub at https://github.com/martijnmichel\n");
+        term.write("And on LinkedIn at https://www.linkedin.com/in/martijn-ensing-159582207/\n");
         term.write("$ ");
       } else term.write(event.key);
     });
   }, []);
   return (
     <div
-      className="h-full rounded-lg overflow-hidden"
-      style={{ backgroundColor: "#061526" }}
+      className="h-full rounded-lg overflow-hidden dark"
     >
-      <div className="icon-container px-2 py-3" data-handle={id}>
+      <div className="icon-container px-2 py-3 dark:bg-black" data-handle={id}>
         <AppActions id={id} />
       </div>
-      <div className="h-full" id={`xterm-${id}`} />
+      <div className="h-full overflow-hidden  dark:bg-black" id={`xterm-${id}`} />
     </div>
   );
 };

@@ -95,16 +95,17 @@ export const ApplicationWindow = (app: Application) => {
     <Transition
       as="div"
       id={app.id}
-      className="flex flex-col absolute border-1 origin-top-left border-gray-50 bg-gradient-to-t from-neutral-300 to-neutral-200 shadow-lg rounded-lg"
+      className="flex flex-col absolute border-1 origin-top-left border-gray-200 dark:border-gray-800 has-[.dark]:border-gray-800 bg-gradient-to-t from-neutral-300 to-neutral-200 shadow-app-window rounded-lg"
       style={{
-        width: app.width,
-        height: app.height,
-        top: 50,
-        left: "50%",
-        marginLeft: `-${app.width / 2}px`,
-        transform: `translateX(${app.x}px) translateY(${app.y}px)`,
+        width: app.fullscreen ? "100vw" : app.width,
+        height: app.fullscreen ? "100vh" : app.height,
+        top: app.fullscreen ? 28 : 50,
+        left: app.fullscreen ? "0" : "50%",
+        marginLeft: app.fullscreen ? "0" : `-${app.width / 2}px`,
+        transform: app.fullscreen ? "translate(0, 0)" : `translateX(${app.x}px) translateY(${app.y}px)`,
         opacity: !app.active ? 0.95 : 1,
-        zIndex: app.active ? 2 : 1,
+        zIndex: app.fullscreen ? 3 : app.active ? 2 : 1,
+        borderRadius: app.fullscreen ? "0" : "var(--radius-lg)",
       }}
       enter=" origin-bottom duration-300"
       enterFrom=" transition-all opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6] skew-x-12"

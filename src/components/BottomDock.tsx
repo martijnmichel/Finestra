@@ -9,12 +9,15 @@ import { MacOSDock } from "./ui/shadcn-io/mac-os-dock";
 import { SettingsApp } from "@/applications/Settings";
 import { startApp } from "@/store/actions/startApp";
 import { uniqBy } from "lodash";
+import { cn } from "@/lib/utils";
 
 const BottomDock = () => {
   const { appIcon } = useWindowManager();
   const { state, dispatch } = useAppContext();
 
   console.log(state.applications);
+
+  const hasFullscreenApp = state.applications.some((app) => app.fullscreen);
 
   const apps = uniqBy(
     [
@@ -41,7 +44,6 @@ const BottomDock = () => {
           state.applications.some((app) => app.id === "Safari")
             ? toggleApp("Safari")(dispatch)
             : startApp("Safari")(dispatch),
-      
       },
       {
         id: "settings",
@@ -59,6 +61,7 @@ const BottomDock = () => {
   return (
     <div className="fixed z-30 bottom-0 right-0 left-0 p-4 flex items-center justify-center">
       <MacOSDock
+        className={cn(hasFullscreenApp && "hidden")}
         apps={apps}
         onAppClick={(appId) => {
           const app = apps.find((app) => app.id === appId);
