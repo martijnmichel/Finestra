@@ -1,56 +1,56 @@
 import React from "react";
 import { Info } from "../../components/Info";
+
 export default {
   directusMobile: {
     title: "Directus Mobile",
-    desc: "Manage content on the go with Directus mobile app.",
+    desc: "Production iOS & Android CMS client for Directus",
     htmlText: () => (
       <article className="content">
-        <Info title="Client" text="Own project" />
+        <Info title="Client" text="Own product" />
         <Info
           title="Description"
-          text={`Directus Mobile is a personal open source project. It's a mobile app that allows you to manage content on the go with Directus. It is written with React Native, Expo and React Query and uses the Directus API to fetch and manage content.`}
+          text={`Directus Mobile is a production iOS and Android app for managing Directus content and media on the go. Users connect multiple Directus instances, browse and edit collections, upload assets, receive push notifications, and add home-screen widgets. It supports a wide range of Directus interfaces, including relational fields (M2O, O2M, M2M, M2A), translations, files/images, and common input types. Built with Expo / React Native and the Directus SDK; shipped to the App Store and Google Play.`}
+        />
+        <Info
+          title="What I worked on"
+          text={`Owned product and engineering end to end: multi-server auth, content CRUD, relational editors, media uploads, push notifications, widgets, store releases, and ongoing production maintenance.`}
         />
       </article>
     ),
   },
 
   sonid: {
-    title: "Learn musictheory with Sonid",
-    desc: "educational app for musicians who want to learn more about musictheory",
+    title: "Sonid",
+    desc: "Cross-platform music theory learning apps & web",
     htmlText: () => (
       <article className="content">
-        <Info title="Client" text="Own project" />
-
+        <Info title="Client" text="Own product" />
         <Info
-          title="description"
-          text={`Sonid is one of my bigger hobby projects. I love programming and music. When I was teaching kids how to play guitar, I noticed that they needed a fun way to learn musictheory. 
-          This is why I started working on Sonid. With Sonid you can learn musictheory in a fun and structured order.`}
+          title="Description"
+          text={`Sonid is a music theory learning product for musicians and students who want structured practice — not only reference charts. It teaches intervals, chords, scales, keys, and progressions through guided exercises on iOS and Android, with a multi-locale website and educational content. The ecosystem grew into related practice tools and school workflows from the same monorepo.`}
         />
-
         <Info
-          title="What did I learn?"
-          text={`First of all, I learned how to build my code in a strucured manner. I learned how to de-bug my own coding and build an app from the ground up.
-          I got to know many code libraries.`}
+          title="What I worked on"
+          text={`As founder and core developer I owned product direction, native apps (Swift / Kotlin), web (Next.js), backend (Firebase, Postgres, Google Cloud), i18n, store releases, and long-term iteration from MVP to production.`}
         />
       </article>
     ),
   },
+
   meta: {
     title: "Meta: Assembled",
-    desc: "online game for Steam",
+    desc: "Free online card game on Steam",
     htmlText: () => (
       <article className="content">
-        <Info title="Client" text="Own project" />
-
+        <Info title="Client" text="Own product" />
         <Info
           title="Description"
-          text={`Meta: assembled was a hobbyproject to expand my knowledge. The game is still on Steam and can be played for free. It's a cardgame that's lightly inspired by Magic the Gathering and Hearthstone.`}
+          text={`Meta: Assembled is a free online card game on Steam, lightly inspired by Magic: The Gathering and Hearthstone. Built as a learning project to ship a realtime multiplayer experience.`}
         />
-
         <Info
-          title="What did I learn?"
-          text={`I learned to process realtime data in the Firebase database.`}
+          title="What I worked on"
+          text={`Implemented realtime game state with Firebase, Vue client UI, and Steam distribution for a playable free title.`}
         />
       </article>
     ),
@@ -58,25 +58,25 @@ export default {
 
   sites: {
     title: "WordPress",
-    desc: "several websites",
+    desc: "Client websites",
     htmlText: () => (
       <article className="content">
         <Info
           title="Jeruzalem Kerk"
           text={
-            "I created a brand-new Wordpress website for the Jeruzalem Kerk Amsterdam. They wanted to attract a new audience and needed a fresh new look. The new website is easy to manage, so that the volunteers can independently add blog-posts and new events."
+            "Built a new WordPress site for Jeruzalem Kerk Amsterdam so volunteers can manage blog posts and events independently, with a fresher look aimed at a wider audience."
           }
         />
         <Info
           title="Bartoon"
           text={
-            "Bart Kranenburg is a Dutch cartoonist. He wanted a small website to display his work."
+            "Small portfolio site for Dutch cartoonist Bart Kranenburg to display his work."
           }
         />
         <Info
           title="Vincent Niekerk"
           text={
-            "Vincent is a carpenter from Amsterdam. He wanted a nice looking website to display all of his projects. His new website brought him many new costumers and is ranking high in Google."
+            "Portfolio site for an Amsterdam carpenter. Helped attract new customers and ranks well in Google."
           }
         />
       </article>
@@ -85,79 +85,53 @@ export default {
 
   wms: {
     title: "WMS",
-    desc: "Warehouse management system",
+    desc: "Warehouse management web app",
     htmlText: () => (
       <article className="content">
         <Info title="Client" text="ecBase" />
         <Info
           title="Description"
-          text={
-            "WMS is a web-application that functions as a frontend for ecBases backoffice. With this web-app clients can manage their sales and stock. A dashboard with all the relevant statistics is included."
-          }
+          text={`Browser-based warehouse management frontend for a backoffice ERP. Users manage purchasing and sales, run inventory counts, and monitor operations from a statistics dashboard. Focused on complex data UI and reliable day-to-day business workflows.`}
         />
-
         <Info
-          title="What I learned:"
-          text={
-            "Where to put state. When to save it locally, globally, on the server or through local storage. I improved my component related thinking, through creating easy-to-read and indipendent code."
-          }
+          title="What I worked on"
+          text={`Implemented WMS flows for sales, stock, and counts; built dashboard/chart views; structured client state (local vs global vs server vs storage); and shipped reusable components for large tables and filters (Vite, React, TanStack, Chart.js).`}
         />
       </article>
     ),
   },
 
   starterApp: {
-    title: "ECBase Order App",
-    desc: "Whitelabel ordering application, B2B model",
+    title: "B2B Order App",
+    desc: "Whitelabel B2B ordering app (Expo)",
     htmlText: () => (
       <article className="content">
         <Info title="Client" text="ecBase" />
-
         <Info
           title="Description"
-          text={`The app is used by clients of affiliated companies to order products, update orderlists and view or update costumer data.
-          They can search through all the products and use filters. Costumer data like orders and invoices are always up-to-date, and can be managed easily.`}
+          text={`Whitelabel mobile ordering app for B2B customers of affiliated companies — mainly catering and wholesale. Users browse assortments with search/filters, manage order lists, and view or update customer data such as orders and invoices.`}
         />
-
         <Info
-          title="What did I learn?"
-          text={`I learned a lot about working with React Native and Expo. 
-          I also had to work intensively with the Appstore and Play Console and had to keep track of the different release tracks with builds for development, preview, staging and production.
-          Moreover, the performance of react-native on lower-end devices was a good learning experience.`}
+          title="What I worked on"
+          text={`Built the Expo / React Native app, handled App Store and Play release tracks (dev, preview, staging, production), OTA updates, and performance on lower-end devices.`}
         />
       </article>
     ),
   },
 
   starterNext: {
-    title: "ECBase Order Commerce",
-    desc: "Whitelabel ordering website, B2B model",
+    title: "B2B Order Commerce",
+    desc: "Whitelabel B2B ordering website (Next.js)",
     htmlText: () => (
-      <article>
+      <article className="content">
         <Info title="Client" text="ecBase" />
-
         <Info
           title="Description"
-          text={`This is the whitelabel ordering website for the B2B model of EcBase. 
-          This is the frontend for the EcBase clients. 
-          They can offer this website to there costumers, so they can place orders and have insight in their customer profile.
-          The website is mostly used in the catering industry.`}
+          text={`Whitelabel B2B ordering website that affiliated businesses offer to their customers. Modules include product ordering, customer profile, most-ordered products, invoices, and order status. Widely used in catering.`}
         />
-
         <Info
-          title="What did I learn?"
-          text={`- Next JS internal API;
-          - Authentication and keeping track of sessions;
-          - Minimalising bundle-size;
-          - Imports and executing scripts for a fast page-load;
-          - Filtering and sorting products;
-          - Docker image with Google Filestore mount for NextJS;
-          - Image cache and deploy on Google Cloud Run.`}
-        />
-
-        <Info
-          title="Belangrijk om te weten"
-          text="Cold-start van de site is traag door lage instellingen GCR"
+          title="What I worked on"
+          text={`Built the Next.js frontend with auth/sessions, product filtering and sorting, performance work (bundle size, image cache), and deployment on Google Cloud Run with Docker.`}
         />
       </article>
     ),

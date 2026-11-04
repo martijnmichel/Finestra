@@ -1,54 +1,56 @@
 import React from "react";
 import { Info } from "../../components/Info";
+
 export default {
   directusMobile: {
     title: "Directus Mobile",
-    desc: "Beheer content op de go met Directus mobile app.",
+    desc: "Productie iOS- & Android-CMS-app voor Directus",
     htmlText: () => (
       <article className="content">
-        <Info title="Opdrachtgever" text="Eigen beheer" />
+        <Info title="Opdrachtgever" text="Eigen product" />
         <Info
-          title="Description"
-          text={`Directus Mobile is een persoonlijk open source project. Het is een mobiele app voor het beheren van je Directus content, geschreven met gebruik van React Native/Expo, React Query en de Directus API.`}
+          title="Beschrijving"
+          text={`Directus Mobile is een productie-app voor iOS en Android om Directus-content en media onderweg te beheren. Gebruikers koppelen meerdere Directus-instances, bekijken en bewerken collecties, uploaden bestanden, ontvangen pushmeldingen en voegen homescreen-widgets toe. De app ondersteunt veel Directus-interfaces, waaronder relationele velden (M2O, O2M, M2M, M2A), vertalingen, bestanden/afbeeldingen en gangbare inputtypes. Gebouwd met Expo / React Native en de Directus SDK; live in de App Store en Google Play.`}
+        />
+        <Info
+          title="Wat ik deed"
+          text={`Product en engineering end-to-end: multi-server auth, content CRUD, relationele editors, media-uploads, push, widgets, store-releases en doorlopend onderhoud.`}
         />
       </article>
     ),
   },
 
   sonid: {
-    title: "Leer muziektheorie met Sonid",
-    desc: "educatieapp voor Android en iOS",
+    title: "Sonid",
+    desc: "Cross-platform muziektheorie-apps & website",
     htmlText: () => (
       <article className="content">
-        <Info title="Opdrachtgever" text="Eigen beheer" />
-
+        <Info title="Opdrachtgever" text="Eigen product" />
         <Info
           title="Beschrijving"
-          text={`Sonid is één van mijn hobbyprojecten. Ik heb een grote liefde voor programmeren én muziek. Toen ik gitaarles gaf, kwam ik erachter dat mijn studenten behoefte hadden aan een leuke manier om muziektheorie te leren. Daarom heb ik Sonid gemaakt. Sonid is een app waarmee je muziektheorie leert, op een leuke en gestructureerde manier.          `}
+          text={`Sonid is een muziektheorieproduct voor musici en studenten die gestructureerd willen oefenen — niet alleen naslag. Intervals, akkoorden, toonladders, toonsoorten en progressies via begeleide oefeningen op iOS en Android, met een meertalige website en educatieve content. Uit dezelfde monorepo groeiden gerelateerde oefentools en schoolworkflows.`}
         />
-
         <Info
-          title="Wat heeft het mij gebracht?"
-          text={`Door Sonid heb ik veel geleerd, zoals hoe je code modulair opbouwt. Ik heb diverse code libaries beter leren kennen. Sonid is wereldwijd meer dan 40.000 keer gedownload en een waar succes te noemen!`}
+          title="Wat ik deed"
+          text={`Als founder en kernontwikkelaar: productrichting, native apps (Swift / Kotlin), web (Next.js), backend (Firebase, Postgres, Google Cloud), i18n, store-releases en langetermijn-iteratie van MVP tot productie.`}
         />
       </article>
     ),
   },
+
   meta: {
     title: "Meta: Assembled",
-    desc: "online game voor Steam",
+    desc: "Gratis online kaartspel op Steam",
     htmlText: () => (
       <article className="content">
-        <Info title="Opdrachtgever" text="Eigen beheer" />
-
+        <Info title="Opdrachtgever" text="Eigen product" />
         <Info
           title="Beschrijving"
-          text={`Meta: assembled maakte ik als hobbyproject om mijn kennis uit te breiden. Het spel staat nog steeds op STEAM en kan gratis gespeeld worden. Het is een kaartspel dat op Magic  the Gathering en Hearthstone lijkt. Het speelt zich af in de ruimte.`}
+          text={`Meta: Assembled is een gratis online kaartspel op Steam, licht geïnspireerd op Magic: The Gathering en Hearthstone. Gemaakt als leerproject om een realtime multiplayer-ervaring te shipten.`}
         />
-
         <Info
-          title="Wat heeft het mij gebracht?"
-          text={`Ik heb geleerd om reatime data te verwerken met de Firebase database.`}
+          title="Wat ik deed"
+          text={`Realtime gamestate met Firebase, Vue-client en Steam-distributie voor een speelbare gratis titel.`}
         />
       </article>
     ),
@@ -56,25 +58,25 @@ export default {
 
   sites: {
     title: "WordPress",
-    desc: "diverse Wordpress websites",
+    desc: "Klantwebsites",
     htmlText: () => (
       <article className="content">
         <Info
           title="Jeruzalem Kerk"
           text={
-            "Voor de Jeruzalem Kerk Amsterdam maakte ik een nieuwe website, waarmee ze nieuwe doelgroepen willen aantrekken. De aanwezigheid van de Jeruzalem Kerk is erg belangrijk voor Amsterdam-West en dat draagt de website ook uit. Op de website kunnen de vrijwilligers van de kerk makkelijk nieuwe evenementen en nieuwsberichten plaatsen."
+            "Nieuwe WordPress-site voor Jeruzalem Kerk Amsterdam, zodat vrijwilligers zelf blogs en events kunnen beheren, met een frissere uitstraling voor een breder publiek."
           }
         />
         <Info
           title="Bartoon"
           text={
-            "Bart Kranenburg is striptekenaar en cartoonist. Voor hem zeggen beelden meer dan woorden. Daarom maakte ik voor hem een compacte website, waarop zijn werk direct te zien is. "
+            "Kleine portfoliosite voor cartoonist Bart Kranenburg om zijn werk te tonen."
           }
         />
         <Info
           title="Vincent Niekerk"
           text={
-            "Vincent is meubelmaker in Amsterdam. Hij wilde een website waarop hij zijn projecten kan laten zien. Door de website heeft hij veel nieuwe opdrachten binnengekregen. Na meerdere jaren staat hij nog steeds in de hoogste zoekresultaten van Google."
+            "Portfoliosite voor een Amsterdamse timmerman. Bracht nieuwe klanten en scoort goed in Google."
           }
         />
       </article>
@@ -83,69 +85,53 @@ export default {
 
   wms: {
     title: "WMS",
-    desc: "Warehouse management system",
+    desc: "Warehouse management webapp",
     htmlText: () => (
       <article className="content">
         <Info title="Opdrachtgever" text="ecBase" />
         <Info
           title="Beschrijving"
-          text={
-            "WMS is een grote applicatie voor de browser die werkt als frontend voor het backoffice pakket. In de web-app kunnen klanten inkopen en verkopen verwerken, tellingen uitvoeren en er is een mooi dashboard met statistieken."
-          }
+          text={`Browsergebaseerde warehouse-management frontend voor een backoffice-ERP. Gebruikers verwerken inkopen en verkopen, doen tellingen en volgen operaties via een statistiekendashboard. Gericht op complexe data-UI en betrouwbare dagelijkse workflows.`}
         />
-
         <Info
-          title="Opgedane kennis"
-          text={
-            "Ik heb geleerd om keuzes te maken in waar ik de {state} bijhou. Doe ik dit lokaal, globaal, via local storage of browserurl? Daarnaast heb ik mijn component gerelateerd denken verder ontwikkeld. Hoe hou je componenten zo onafhankelijk mogelijk, makkelijk leesbaar, klein en met een duidelijke opdracht?"
-          }
+          title="Wat ik deed"
+          text={`WMS-flows voor verkoop, voorraad en tellingen; dashboard/charts; state bewust lokaal/globaal/server/storage; herbruikbare componenten voor grote tabellen en filters (Vite, React, TanStack, Chart.js).`}
         />
       </article>
     ),
   },
 
   starterApp: {
-    title: "ECBase Bestel App",
-    desc: "Whitelabel bestel applicatie, B2B model",
+    title: "B2B Bestel App",
+    desc: "Whitelabel B2B-bestelapp (Expo)",
     htmlText: () => (
       <article className="content">
         <Info title="Opdrachtgever" text="ecBase" />
-
         <Info
           title="Beschrijving"
-          text={`Via de app kunnen klanten van aangesloten bedrijven producten bestellen, bestellijsten bewerken en klantgegevens bekijken/bewerken. Assortiment pagina's van producten met oa filters en zoekfunctie. Klantgegevens zoals facturen en bestellingen inzien. Aanpassen van klantgegevens.`}
+          text={`Whitelabel mobiele bestelapp voor B2B-klanten van aangesloten bedrijven — vooral horeca en wholesale. Assortiment met zoeken/filters, bestellijsten beheren, en klantgegevens zoals orders en facturen inzien of bijwerken.`}
         />
-
         <Info
-          title="Wat heeft het mij gebracht"
-          text={`In dit project heb ik veel geleerd over React Native en Expo. Daarnaast heb ik intensief gewerkt met Appstore en Play Console, specifiek het bijhouden van verschillende release tracks met builds voor development/preview/staging en production.
-            Plus het uitgeven van OTA updates. Ook de performance van react-native bleek voor lower-end toestellen een goede leerschool.`}
+          title="Wat ik deed"
+          text={`Expo / React Native-app gebouwd, App Store- en Play-releasetracks (dev, preview, staging, production), OTA-updates, en performance op lagere-end toestellen.`}
         />
       </article>
     ),
   },
 
   starterNext: {
-    title: "ECBase Bestel Commerce",
-    desc: "Whitelabel bestel website, B2B model",
+    title: "B2B Bestel Commerce",
+    desc: "Whitelabel B2B-bestelsite (Next.js)",
     htmlText: () => (
-      <article>
+      <article className="content">
         <Info title="Opdrachtgever" text="ecBase" />
-
         <Info
           title="Beschrijving"
-          text={`Dit is de bestel website voor het B2B model van ecBase. Deze dienst als frontend voor bedrijven die zijn aangesloten aan het backoffice pakket. Zij leveren deze website aan hun klanten, zodat deze bestellingen kunnen plaatsen en klantgegevens kunnen bekijken/bewerken. De website wordt veel gebruikt in de horeca. Er zijn diverse modules, zoals: “bestellen van producten”, “klantgegevens”, “meest bestelde producten”, “facturen” en “bestelstatus”. `}
+          text={`Whitelabel B2B-bestelwebsite die aangesloten bedrijven aan hun klanten aanbieden. Modules: producten bestellen, klantprofiel, meest bestelde producten, facturen en bestelstatus. Veel gebruikt in de horeca.`}
         />
-
         <Info
-          title="Wat heeft het mij gebracht"
-          text={`In dit project heb ik veel geleerd over React Native en Expo. Daarnaast heb ik intensief gewerkt met Appstore en Play Console, specifiek het bijhouden van verschillende release tracks met builds voor development/preview/staging en production.
-           Plus het uitgeven van OTA updates. Ook de performance van react-native bleek voor lower-end toestellen een goede leerschool.`}
-        />
-
-        <Info
-          title="Belangrijk om te weten"
-          text="Cold-start van de site is traag door lage instellingen GCR"
+          title="Wat ik deed"
+          text={`Next.js-frontend met auth/sessies, filteren en sorteren van producten, performance (bundle size, image cache) en deploy op Google Cloud Run met Docker.`}
         />
       </article>
     ),

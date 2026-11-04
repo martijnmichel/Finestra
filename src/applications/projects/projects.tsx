@@ -44,8 +44,15 @@ export const projects: () => { [x: string]: Project } = () => {
           href: "https://github.com/martijnmichel/directus-expo",
         },
       ],
-      frameworks: [IFrameworks.Expo, IFrameworks.ReactNative, IFrameworks.Next, IFrameworks.Tanstack],
+      frameworks: [
+        IFrameworks.Expo,
+        IFrameworks.ReactNative,
+        IFrameworks.Typescript,
+        IFrameworks.Tanstack,
+        IFrameworks.Directus,
+      ],
     },
+
 
     sonid: {
       title: t("projects:sonid.title"),
@@ -63,8 +70,17 @@ export const projects: () => { [x: string]: Project } = () => {
           href: "https://apps.apple.com/us/app/sonid/id1490221762?ls=1",
         },
       ],
-      frameworks: [IFrameworks.Vue, IFrameworks.Cordova, IFrameworks.Firebase],
+      frameworks: [
+        IFrameworks.Swift,
+        IFrameworks.Kotlin,
+        IFrameworks.Next,
+        IFrameworks.React,
+        IFrameworks.Typescript,
+        IFrameworks.Firebase,
+        IFrameworks.Postgres,
+      ],
     },
+
 
     metaAssembled: {
       title: t("projects:meta.title"),
@@ -126,8 +142,14 @@ export const projects: () => { [x: string]: Project } = () => {
 
       Text: <TranslationElement i18nKey="projects:starterApp.htmlText" />,
       icon: StarterApp,
-      frameworks: [IFrameworks.Expo],
+      frameworks: [
+        IFrameworks.Expo,
+        IFrameworks.ReactNative,
+        IFrameworks.Typescript,
+        IFrameworks.Redux,
+      ],
     },
+
 
     starterTemplateNext: {
       title: t("projects:starterNext.title"),

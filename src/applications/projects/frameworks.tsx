@@ -33,6 +33,10 @@ export enum IFrameworks {
   Netlify = "Netlify",
   Sentry = "Sentry",
   GSAP = "GSAP",
+  Swift = "Swift",
+  Kotlin = "Kotlin",
+  Postgres = "Postgres",
+  Directus = "Directus",
 }
 
 export type Framework = {
@@ -166,5 +170,21 @@ export const Frameworks: () => { [x in IFrameworks]: Framework } = () => ({
   Sentry: {
     label: "Sentry",
     icon: <Icon icon="skill-icons:sentry" />,
+  },
+  Swift: {
+    label: "Swift",
+    icon: <Icon icon="logos:swift" />,
+  },
+  Kotlin: {
+    label: "Kotlin",
+    icon: <Icon icon="logos:kotlin-icon" />,
+  },
+  Postgres: {
+    label: "Postgres",
+    icon: <Icon icon="logos:postgresql" />,
+  },
+  Directus: {
+    label: "Directus",
+    icon: <Icon icon="simple-icons:directus" />,
   },
 });

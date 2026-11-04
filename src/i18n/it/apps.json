@@ -1,5 +1,14 @@
 {
+  "about": {
+    "subtitle": "Full Stack developer con occhio per i dettagli.",
+    "aboutMe": "Su di me",
+    "aboutMeText": "Nel 2021 mi sono trasferito in Italia e mi piace ancora moltissimo. Vivo con mia moglie, due gatti e un cane in un piccolo paese della Toscana settentrionale — buon cibo, ottimo caffè e Wi‑Fi stabile. Quando non programmo gioco a tennis, leggo fumetti Marvel o lavoro in giardino.",
+    "experience": "Esperienza",
+    "address": "Indirizzo",
+    "skills": "Competenze",
+    "present": "oggi"
+  },
   "sonid": {
-    "title": "Learn music theory with Sonid"
+    "title": "Impara la teoria musicale con Sonid"
   }
 }
