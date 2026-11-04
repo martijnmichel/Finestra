@@ -215,7 +215,7 @@ export const AboutApp = (id: string) => {
 
   return (
     <div className="p-3 h-full overflow-y-auto">
-      <AppNavigation items={navigation} id={id} />
+      <AppNavigation items={navigation} id={id} appName="About" />
       <div className="grid grid-cols-1 @3xl/window:grid-cols-3 gap-10">
         <div className="col-span-2 flex flex-shrink flex-col gap-6">
           <div id="step-about" className="flex flex-col gap-3">

@@ -23,7 +23,11 @@ export const AppButton = ({
     >
       {appIcon}
 
-      <p className="text-white/80 text-sm font-semibold">{appName}</p>
+      {appName ? (
+        <p className="os-chrome-sm text-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
+          {appName}
+        </p>
+      ) : null}
     </button>
   );
 };

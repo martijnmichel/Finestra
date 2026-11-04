@@ -105,7 +105,7 @@ export const TextEditorApp = (id: string) => {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <AppNavigation items={navigation} id={id} />
+      <AppNavigation items={navigation} id={id} appName="TextEdit" />
     </>
   );
 };

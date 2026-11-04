@@ -95,17 +95,20 @@ export const ApplicationWindow = (app: Application) => {
     <Transition
       as="div"
       id={app.id}
-      className="flex flex-col absolute border-1 origin-top-left border-gray-200 dark:border-gray-800 has-[.dark]:border-gray-800 shadow-app-window overflow-hidden"
+      className="flex flex-col absolute origin-top-left shadow-app-window overflow-hidden bg-background"
       style={{
         width: app.fullscreen ? "100vw" : app.width,
         height: app.fullscreen ? "100vh" : app.height,
         top: app.fullscreen ? 28 : 50,
         left: app.fullscreen ? "0" : "50%",
         marginLeft: app.fullscreen ? "0" : `-${app.width / 2}px`,
-        transform: app.fullscreen ? "translate(0, 0)" : `translateX(${app.x}px) translateY(${app.y}px)`,
-        opacity: !app.active ? 0.95 : 1,
+        transform: app.fullscreen
+          ? "translate(0, 0)"
+          : `translateX(${app.x}px) translateY(${app.y}px)`,
         zIndex: app.fullscreen ? 3 : app.active ? 2 : 1,
-        borderRadius: app.fullscreen ? "0" : "var(--radius-xl)",
+        borderRadius: app.fullscreen ? "0" : "var(--window-radius)",
+        border: app.fullscreen ? "none" : "0.5px solid var(--window-border)",
+        filter: app.active ? "none" : "saturate(0.9) brightness(0.98)",
       }}
       enter=" origin-bottom duration-300"
       enterFrom=" transition-all opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6] skew-x-12"
@@ -125,19 +128,28 @@ export const ApplicationWindow = (app: Application) => {
       }}
     >
       {!app.titleBar && (
-        <>
-          <div className="p-1 flex bg-gradient-to-t from-neutral-300 to-neutral-300" data-handle={app.id}>
-            <AppActions id={app.id} />
+        <div
+          className={`window-titlebar ${app.active ? "" : "window-titlebar-inactive"}`}
+          data-handle={app.id}
+        >
+          <AppActions id={app.id} />
+          <span className="flex-1 text-center pr-[52px] truncate">
             {app.name}
-          </div>
-          <div className="h-[1px] w-full bg-gray-200"></div>
-        </>
+          </span>
+        </div>
       )}
 
       <div
-        className={`bg-background @container/window flex-1 min-h-0 overflow-y-hidden rounded-b-lg ${
-          app.titleBar ? "rounded-t-lg" : ""
+        className={`bg-background @container/window flex-1 min-h-0 overflow-y-hidden ${
+          app.titleBar ? "" : ""
         }`}
+        style={{
+          borderRadius: app.fullscreen
+            ? 0
+            : app.titleBar
+              ? "var(--window-radius)"
+              : "0 0 var(--window-radius) var(--window-radius)",
+        }}
       >
         {app.component && app.component()}
       </div>

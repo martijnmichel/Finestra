@@ -67,9 +67,9 @@ export const SafariApp = (id: string) => {
 
   return (
     <>
-      <AppNavigation items={navigation} id={id} />
+      <AppNavigation items={navigation} id={id} appName="Safari" />
       <div
-        className="px-2 py-[10px] flex items-center justify-between"
+        className="window-toolbar px-2 py-[7px] flex items-center justify-between rounded-t-[var(--window-radius)]"
         data-handle={id}
       >
         <div className="icon-container">
@@ -87,12 +87,12 @@ export const SafariApp = (id: string) => {
 
           <input
             value={address}
-            className="bg-neutral-100 text-neutral-500 text-[12px] border-0 shadow-sm rounded-md px-20 py-[3px]"
+            className="bg-[#e8e8ed] text-[#6e6e73] text-[12px] border-0 rounded-[6px] px-20 py-[4px] focus:outline-none focus:ring-2 focus:ring-[#007aff]/40"
             onChange={(val) => setAddress(val.target.value)}
           />
         </form>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 text-[#6e6e73]">
           <Share className="size-4"/>
 
           <Plus className="size-4"/>
@@ -100,8 +100,6 @@ export const SafariApp = (id: string) => {
           <Copy className="size-4"/>
         </div>
       </div>
-
-      <div className="h-[1px] w-full bg-gray-200"></div>
 
       <iframe
         src={url}

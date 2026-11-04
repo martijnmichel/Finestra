@@ -1,20 +1,28 @@
 @import "tailwindcss";
 
 .application-button-container {
-  @apply flex items-center gap-2 px-2;
+  @apply flex items-center gap-[7.5px] px-[9px] py-[2px];
 }
+
 .application-button {
-  @apply relative w-[14px] h-[14px] rounded-full border-[1.5px] border-[rgba(0,0,0,0.1)] flex justify-center items-center cursor-pointer;
+  @apply relative size-[12px] rounded-full flex justify-center items-center cursor-default;
 }
 
 .application-button.close {
-  @apply bg-red-500;
+  background: #ff5f57;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.18);
 }
 
 .application-button.minimize {
-  @apply bg-amber-500;
+  background: #febc2e;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.18);
 }
 
 .application-button.maximize {
-  @apply bg-green-500;
+  background: #28c840;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.18);
+}
+
+.application-button svg {
+  @apply size-[6.5px] text-black/50;
 }

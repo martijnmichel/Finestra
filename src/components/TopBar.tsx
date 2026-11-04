@@ -21,6 +21,7 @@ import {
 import { Icon } from "@iconify/react";
 import { Dialog, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { DialogContent } from "@radix-ui/react-dialog";
+
 const TopBar = () => {
   const { launchpad } = useAppState();
   const [dateTime, setDateTime] = useState<number>();
@@ -33,28 +34,38 @@ const TopBar = () => {
     return () => clearInterval(timer);
   }, []);
 
-
-
   const { i18n } = useTranslation();
 
   return (
     <nav
-      className={`fixed z-40 top-0 right-0 left-0 flex transform transition-all ${
+      className={`os-chrome fixed z-40 top-0 right-0 left-0 flex h-[25px] items-center transform transition-all ${
         launchpad ? "-translate-y-28" : ""
       }`}
+      style={{ color: "var(--menubar-fg)" }}
     >
-      <div className="absolute inset-0 mx-auto bg-white/70 w-screen blur-50 z-0"></div>
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background: "var(--menubar-bg)",
+          backdropFilter: "blur(40px) saturate(180%)",
+          WebkitBackdropFilter: "blur(40px) saturate(180%)",
+          borderBottom: "0.5px solid rgba(0,0,0,0.08)",
+        }}
+      />
 
-      <div className="flex w-full z-1 relative items-center">
+      <div className="relative z-[1] flex w-full h-full items-center px-1.5">
         <div className="topnav-button">
-          <Icon icon="ant-design:apple-filled" />
+          <Icon icon="ant-design:apple-filled" className="!size-[14px]" />
         </div>
 
-        <div className="flex-grow h-full flex gap-2">
-          <div id="active-app-navigation--portal" />
+        <div className="flex-grow h-full flex items-center min-w-0">
+          <div
+            id="active-app-navigation--portal"
+            className="flex items-center h-full"
+          />
         </div>
 
-        <div className="flex-shrink flex px-2">
+        <div className="flex-shrink-0 flex items-center gap-0.5 px-1">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="topnav-button focus:outline-none">
@@ -73,7 +84,7 @@ const TopBar = () => {
                   >
                     <div className="flex items-center gap-2">
                       <img
-                        className="w-[32px] h-[32px] object-contain"
+                        className="w-[20px] h-[20px] object-contain"
                         src={lang.icon}
                       />
                       {lang.label}
@@ -95,7 +106,7 @@ const TopBar = () => {
           </button>
 
           <Dialog modal={false}>
-            <DialogTrigger>
+            <DialogTrigger asChild>
               <button className="topnav-button focus:outline-none">
                 <Search />
               </button>
@@ -105,10 +116,10 @@ const TopBar = () => {
                 <DialogTitle>Search</DialogTitle>
               </DialogHeader>
               <div className="flex flex-col gap-2 relative">
-                <Search className="absolute left-2 top-1/2 -translate-y-1/2 size-6" />
+                <Search className="absolute left-2 top-1/2 -translate-y-1/2 size-5 text-[#86868b]" />
                 <input
                   placeholder="Search"
-                  className="w-full pl-10 placeholder:text-muted-foreground placeholder:font-medium text-xl h-[48px] rounded-2xl"
+                  className="os-chrome w-full pl-9 placeholder:text-[#86868b] font-[400] text-[15px] tracking-[-0.2px] h-[40px] rounded-xl bg-transparent outline-none"
                 />
               </div>
             </DialogContent>
@@ -118,7 +129,7 @@ const TopBar = () => {
           </button>
         </div>
 
-        <div className="text-sm px-2">
+        <div className="os-chrome px-2 tabular-nums text-[13px] tracking-[-0.08px]">
           {dayjs(dateTime).format("ddd D MMM HH:mm")}
         </div>
       </div>

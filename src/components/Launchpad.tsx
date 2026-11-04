@@ -50,7 +50,7 @@ export const LaunchPad = () => {
           onChange={(e) => setSearch(e.target.value)}
           type="text"
           placeholder="Search"
-          className="w-full pr-2 pl-8 py-1 rounded-md border-1 border-white/30 focus:outline-none text-white/80 focus:ring-1 focus:ring-white/30 placeholder:text-white/40"
+          className="os-chrome w-full pr-2 pl-8 py-[5px] rounded-[8px] border border-white/25 bg-white/10 focus:outline-none text-white/90 text-[13px] tracking-[-0.08px] focus:ring-1 focus:ring-white/35 placeholder:text-white/45"
         />
       </div>
 
@@ -60,7 +60,9 @@ export const LaunchPad = () => {
         }`}
       >
         <div className="flex flex-col">
-          <h2 className="text-h2 text-zinc-50 mb-5">Apps</h2>
+          <h2 className="os-chrome-em mb-5 text-[22px] tracking-[-0.3px] text-white/95">
+            Apps
+          </h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-y-10 justify-center">
             {filter(Applications, (a) => a.category === "default" && a.name.toLowerCase().includes(search.toLowerCase()))?.map(
@@ -78,7 +80,9 @@ export const LaunchPad = () => {
             )}
           </div>
 
-          <h2 className="text-h2 text-zinc-50 mb-5 mt-20">Projects</h2>
+          <h2 className="os-chrome-em mb-5 mt-20 text-[22px] tracking-[-0.3px] text-white/95">
+            Projects
+          </h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-y-10">
             {filter(Applications, (a) => a.category === "project" && a.name.toLowerCase().includes(search.toLowerCase()))?.map(

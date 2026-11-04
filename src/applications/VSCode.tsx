@@ -464,7 +464,7 @@ export const VSCodeApp = (id: string) => {
       className="h-full rounded-lg overflow-hidden"
       
     >
-      <AppNavigation items={navigation} id={id} />
+      <AppNavigation items={navigation} id={id} appName="VS Code" />
       <div className="icon-container px-2 py-3" data-handle={id}>
         <AppActions id={id} />
       </div>

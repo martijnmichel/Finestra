@@ -125,18 +125,30 @@ export const FinderApp = (id: string) => {
     <SidebarProvider className="h-full min-h-0">
       <Sidebar
         collapsible="none"
-        className="flex-col hidden @xl/window:flex w-64 min-h-0 h-full grow backdrop-blur-xl"
+        className="flex-col hidden @xl/window:flex w-[210px] min-h-0 h-full grow border-r border-black/[0.08]"
+        style={{
+          background: "var(--sidebar)",
+          backdropFilter: "blur(40px) saturate(180%)",
+          WebkitBackdropFilter: "blur(40px) saturate(180%)",
+        }}
       >
-        <SidebarContent className="grow h-full py-4" data-handle={id}>
-          <AppActions id={id} />
+        <SidebarContent className="grow h-full pt-1" data-handle={id}>
+          <div className="px-2 pt-1 pb-1">
+            <AppActions id={id} />
+          </div>
 
-          <div className=" px-2 py-5">
-            <h6 className="text-xs font-bold text-gray-400 mb-1">Favorites</h6>
+          <div className="px-2.5 pt-3 pb-2">
+            <h6 className="os-chrome-sm text-[#86868b] mb-1 px-1.5">
+              Favorites
+            </h6>
             {favs.map((fav) => {
+              const selected = active === fav.label;
               return (
                 <div
-                  className={`flex gap-2 items-center mb-1 p-1 rounded-md cursor-pointer ${
-                    active === fav.label ? "bg-zinc-300 text-white" : ""
+                  className={`flex gap-[7px] items-center px-[7px] py-[3px] rounded-[6px] cursor-default ${
+                    selected
+                      ? "bg-black/[0.08] text-[#1d1d1f]"
+                      : "text-[#1d1d1f] hover:bg-black/[0.04]"
                   }`}
                   key={fav.label}
                   onClick={() => {
@@ -144,33 +156,29 @@ export const FinderApp = (id: string) => {
                     setActive(fav.label);
                   }}
                 >
-                  <span
-                    className={`${
-                      active === fav.label ? "" : "text-blue-500"
-                    } *:size-4`}
-                  >
+                  <span className="text-[#007aff] *:size-[15px] shrink-0">
                     {fav.icon}
-                  </span>{" "}
-                  <span className="text-sm font-medium">{fav.label}</span>
+                  </span>
+                  <span className="os-chrome truncate">{fav.label}</span>
                 </div>
               );
             })}
           </div>
         </SidebarContent>
       </Sidebar>
-      <div className="flex flex-col w-full flex-grow">
-        <AppNavigation items={navigation} id={id} />
-        <div className="flex justify-between items-center bg-gray-100 p-2 w-full rounded-tr-lg">
-          <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon">
-              <ChevronLeft />
+      <div className="flex flex-col w-full flex-grow min-w-0 bg-white">
+        <AppNavigation items={navigation} id={id} appName="Finder" />
+        <div className="window-toolbar flex justify-between items-center px-2 py-1.5 w-full">
+          <div className="flex items-center gap-0.5">
+            <Button variant="ghost" size="icon" className="size-7">
+              <ChevronLeft className="size-4" />
             </Button>
 
-            <Button variant="ghost" size="icon">
-              <ChevronRight />
+            <Button variant="ghost" size="icon" className="size-7">
+              <ChevronRight className="size-4" />
             </Button>
 
-            <span className="text-md font-semibold ml-2">Downloads</span>
+            <span className="os-chrome-em ml-1.5">{active}</span>
           </div>
 
           <div className="flex items-center gap-1">
@@ -199,12 +207,12 @@ export const FinderApp = (id: string) => {
                 i < 20 && (
                   <div
                     className={`${
-                      i % 2 === 1 ? "bg-gray-100" : ""
-                    } text-sm w-full px-3 py-[0.125rem] rounded flex justify-between cursor-pointer`}
+                      i % 2 === 1 ? "bg-[#f5f5f7]" : ""
+                    } os-chrome w-full px-3 py-[2px] rounded-[4px] flex justify-between cursor-default hover:bg-black/[0.05]`}
                     key={`itemkey-${item.id}`}
                   >
                     <span>{item.filename}</span>
-                    <span className="text-sm text-gray-500">{item.date}</span>
+                    <span className="os-chrome text-[#86868b]">{item.date}</span>
                   </div>
                 )
               );
