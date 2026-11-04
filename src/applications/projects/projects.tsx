@@ -14,7 +14,7 @@ import Wordpress from "../../icons/wordpress.png";
 export type Project = {
   title: string;
   desc: string;
-  Text?: JSX.Element;
+  Text?: React.ReactElement;
   icon: ReactNode;
   frameworks: IFrameworks[];
   links?: { label: string; href: string }[];

@@ -1,13 +1,14 @@
 import React from "react";
-import { Icon } from "@iconify/react";
+import { LucideIcon, Menu } from "lucide-react";
+
 export const AppMenu = ({
-  icon = "ant-design:menu-outlined",
+  icon: Icon = Menu,
   title,
   button,
   children,
 }: {
-  icon?: string;
-  button?: JSX.Element;
+  icon?: LucideIcon;
+  button?: React.ReactElement;
   title?: string;
   children: React.ReactNode;
 }) => {
@@ -23,7 +24,7 @@ export const AppMenu = ({
       ) : button ? (
         button
       ) : (
-        <Icon icon={icon} className="m-auto" />
+        <Icon className="m-auto size-4" />
       )}
       <div className="min-w-[150px] absolute bg-gradient-to-t from-[rgba(255,255,255,0.5)] to-[rgba(255,255,255,0.7)] backdrop-blur-sm rounded-md border-[1px] border-[rgba(0,0,0,0.1)] px-1 py-1 left-0 top-6 scale-y-0 origin-top group-hover:scale-y-100">
         {children}
@@ -36,7 +37,7 @@ export const AppMenuItem = ({
   label,
   onClick,
 }: {
-  label: string | JSX.Element;
+  label: string | React.ReactElement;
   onClick: () => void;
 }) => {
   return (

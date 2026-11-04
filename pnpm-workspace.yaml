@@ -1,0 +1,9 @@
+allowBuilds:
+  "@parcel/watcher": false
+  core-js: false
+  es5-ext: false
+minimumReleaseAgeExclude:
+  - framer-motion@14.9.1
+  - lucide-react@1.68.0
+  - motion-dom@14.9.1
+  - motion@14.9.1

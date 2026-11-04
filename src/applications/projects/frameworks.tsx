@@ -1,6 +1,35 @@
-import { Icon } from "@iconify/react";
-import { ReactNode } from "react";
 import React from "react";
+import {
+  Atom,
+  Bird,
+  Boxes,
+  Braces,
+  Bug,
+  ChartColumn,
+  Cloud,
+  CloudCog,
+  Code2,
+  Component,
+  Cpu,
+  Database,
+  FileCode2,
+  Flame,
+  FolderKanban,
+  GitBranch,
+  Globe,
+  Hexagon,
+  LayoutTemplate,
+  Library,
+  Palette,
+  RefreshCw,
+  Server,
+  Smartphone,
+  Triangle,
+  Wind,
+  Workflow,
+  Zap,
+} from "lucide-react";
+
 export enum IFrameworks {
   React = "React",
   ReactNative = "ReactNative",
@@ -41,150 +70,150 @@ export enum IFrameworks {
 
 export type Framework = {
   label: string;
-  icon: JSX.Element;
+  icon: React.ReactElement;
 };
 
 export const Frameworks: () => { [x in IFrameworks]: Framework } = () => ({
   React: {
     label: "React",
-    icon: <Icon icon="logos:react" />,
+    icon: <Atom />,
   },
   ReactNative: {
     label: "React Native",
-    icon: <Icon icon="logos:react" />,
+    icon: <Atom />,
   },
 
   Tailwind: {
     label: "Tailwind",
-    icon: <Icon icon="skill-icons:tailwindcss-dark" />,
+    icon: <Wind />,
   },
   GSAP: {
     label: "GSAP",
-    icon: <Icon icon="logos:greensock-icon" />,
+    icon: <Zap />,
   },
   Expo: {
     label: "Expo",
-    icon: <Icon icon="logos:expo-icon" />,
+    icon: <Smartphone />,
   },
   GoogleCloud: {
     label: "Google Cloud",
-    icon: <Icon icon="logos:google-cloud" />,
+    icon: <Cloud />,
   },
   GoogleCloudRun: {
     label: "Google Cloud Run",
-    icon: <Icon icon="logos:google-cloud-run" />,
+    icon: <CloudCog />,
   },
   PHP: {
     label: "PHP",
-    icon: <Icon icon="logos:php-alt" />,
+    icon: <Code2 />,
   },
   MySQL: {
     label: "MySQL",
-    icon: <Icon icon="logos:mysql-icon" />,
+    icon: <Database />,
   },
 
   Vue: {
     label: "Vue",
-    icon: <Icon icon="logos:vue" />,
+    icon: <Component />,
   },
   Cordova: {
     label: "Cordova",
-    icon: <Icon icon="logos:cordova" />,
+    icon: <Smartphone />,
   },
   Firebase: {
     label: "Firebase",
-    icon: <Icon icon="logos:firebase" />,
+    icon: <Flame />,
   },
 
   Wordpress: {
     label: "Wordpress",
-    icon: <Icon icon="logos:wordpress-icon" />,
+    icon: <Globe />,
   },
   jQuery: {
     label: "jQuery",
-    icon: <Icon icon="skill-icons:jquery" />,
+    icon: <Code2 />,
   },
   Bootstrap: {
     label: "Bootstrap",
-    icon: <Icon icon="logos:bootstrap" />,
+    icon: <LayoutTemplate />,
   },
 
   Redux: {
     label: "Redux",
-    icon: <Icon icon="logos:redux" />,
+    icon: <RefreshCw />,
   },
   Tanstack: {
     label: "Tanstack React",
-    icon: <Icon icon="logos:react-query-icon" />,
+    icon: <Workflow />,
   },
   ChartJS: {
     label: "ChartJS",
-    icon: <Icon icon="file-icons:chartjs" />,
+    icon: <ChartColumn />,
   },
 
   Typescript: {
     label: "Typescript",
-    icon: <Icon icon="logos:typescript-icon" />,
+    icon: <FileCode2 />,
   },
   ES6: {
     label: "ES6",
-    icon: <Icon icon="logos:es6" />,
+    icon: <Braces />,
   },
   Sass: {
     label: "Sass",
-    icon: <Icon icon="logos:sass" />,
+    icon: <Palette />,
   },
   LoDash: {
     label: "LoDash",
-    icon: <Icon icon="logos:lodash" />,
+    icon: <Library />,
   },
   Next: {
     label: "Next",
-    icon: <Icon icon="logos:nextjs-icon" />,
+    icon: <Triangle />,
   },
   Express: {
     label: "Express",
-    icon: <Icon icon="skill-icons:expressjs-light" />,
+    icon: <Server />,
   },
   NodeJS: {
     label: "NodeJS",
-    icon: <Icon icon="logos:nodejs-icon" />,
+    icon: <Cpu />,
   },
   Vite: {
     label: "Vite",
-    icon: <Icon icon="logos:vitejs" />,
+    icon: <Zap />,
   },
 
   Github: {
     label: "Github",
-    icon: <Icon icon="skill-icons:github-dark" />,
+    icon: <GitBranch />,
   },
   Vercel: {
     label: "Vercel",
-    icon: <Icon icon="skill-icons:vercel-dark" />,
+    icon: <Triangle />,
   },
   Netlify: {
     label: "Netlify",
-    icon: <Icon icon="logos:netlify" />,
+    icon: <Globe />,
   },
   Sentry: {
     label: "Sentry",
-    icon: <Icon icon="skill-icons:sentry" />,
+    icon: <Bug />,
   },
   Swift: {
     label: "Swift",
-    icon: <Icon icon="logos:swift" />,
+    icon: <Bird />,
   },
   Kotlin: {
     label: "Kotlin",
-    icon: <Icon icon="logos:kotlin-icon" />,
+    icon: <Hexagon />,
   },
   Postgres: {
     label: "Postgres",
-    icon: <Icon icon="logos:postgresql" />,
+    icon: <Database />,
   },
   Directus: {
     label: "Directus",
-    icon: <Icon icon="simple-icons:directus" />,
+    icon: <Boxes />,
   },
 });

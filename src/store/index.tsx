@@ -22,7 +22,7 @@ const AppContext = createContext<IAppContext>({
   dispatch: () => {},
 });
 
-const AppContextProvider = ({ children }: { children: JSX.Element }) => {
+const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(appReducer, initialState as IAppState);
   const [init, setInit] = useState(false);
   const value = { state, dispatch };

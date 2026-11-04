@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Application } from "./application";
 import FinderIcon from "../icons/finder.png";
 import { AppActions } from "../components/application/AppActions";
-import { Icon } from "@iconify/react";
 import {
+  AppWindow,
   ChevronLeft,
   ChevronRight,
+  Clock,
+  Download,
+  FileText,
   GalleryThumbnails,
+  Monitor,
   MoreVertical,
   Share,
   Tag,
@@ -23,8 +27,6 @@ import {
   SidebarGroup,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 
 import {
   SidebarGroupContent,
@@ -67,14 +69,14 @@ export const FinderApp = (id: string) => {
   const favs = [
     {
       label: "Recents",
-      icon: <Icon icon="bi:clock" />,
+      icon: <Clock className="size-4" />,
     },
-    { label: "Applications", icon: <Icon icon="simple-icons:appstore" /> },
-    { label: "Desktop", icon: <Icon icon="akar-icons:desktop-device" /> },
-    { label: "Documents", icon: <Icon icon="carbon:document-blank" /> },
+    { label: "Applications", icon: <AppWindow className="size-4" /> },
+    { label: "Desktop", icon: <Monitor className="size-4" /> },
+    { label: "Documents", icon: <FileText className="size-4" /> },
     {
       label: "Downloads",
-      icon: <Icon icon="iconoir:download-circled-outline" />,
+      icon: <Download className="size-4" />,
     },
   ];
 

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Application } from "../application";
 import SafariIcon from "../../icons/safari.png";
 import { AppActions } from "../../components/application/AppActions";
-import { Icon } from "@iconify/react";
 import { ChevronLeft, ChevronRight, Copy, Plus, Share, Shield, Sidebar } from "lucide-react";
 import { NavMenu } from "..";
 import { AppNavigation } from "../../components/application/AppNavigation";

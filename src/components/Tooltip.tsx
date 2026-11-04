@@ -5,7 +5,7 @@ const XTooltip = ({
   children,
   label,
 }: {
-  children: JSX.Element;
+  children: React.ReactElement;
   label: string;
 }) => {
   return (

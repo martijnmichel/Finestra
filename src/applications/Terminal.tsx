@@ -3,8 +3,8 @@ import { Application } from "./application";
 import Icon from "../icons/Terminal.png";
 import { Terminal as XTerm } from "@xterm/xterm";
 import { AppActions } from "../components/application/AppActions";
-import "../../node_modules/xterm/css/xterm.css";
-import { FitAddon } from "xterm-addon-fit";
+import "@xterm/xterm/css/xterm.css";
+import { FitAddon } from "@xterm/addon-fit";
 export class Terminal extends Application {
   public name = "Terminal";
   component = () => TerminalApp(this.id);

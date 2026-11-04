@@ -1,6 +1,6 @@
 import React from "react";
 import { Application } from "./application";
-import { Icon as IIcon } from "@iconify/react";
+import { Inbox, MessageCircle, Network } from "lucide-react";
 
 import Icon from "../icons/user.png";
 import dayjs from "dayjs";
@@ -244,7 +244,7 @@ export const AboutApp = (id: string) => {
                 "Hoi Martijn, ik nodig je graag uit voor een gesprek."
               )}`}
             >
-              <IIcon icon="la:whatsapp" /> +31624852964
+              <MessageCircle className="inline size-4" /> +31624852964
             </a>
 
             <a
@@ -252,7 +252,7 @@ export const AboutApp = (id: string) => {
               className="animate-underline"
               href={`mailto:martijn.michel@gmail.com`}
             >
-              <IIcon icon="la:inbox" /> martijn.michel@gmail.com
+              <Inbox className="inline size-4" /> martijn.michel@gmail.com
             </a>
 
             <a
@@ -260,7 +260,7 @@ export const AboutApp = (id: string) => {
               className="animate-underline"
               href={`https://www.linkedin.com/in/martijn-ensing-159582207/`}
             >
-              <IIcon icon="la:linkedin" /> LinkedIn
+              <Network className="inline size-4" /> LinkedIn
             </a>
             <p></p>
           </div>

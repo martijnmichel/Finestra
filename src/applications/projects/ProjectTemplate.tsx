@@ -1,7 +1,7 @@
 import React from "react";
 import { Project } from "./projects";
 import { map } from "lodash";
-import { Icon } from "@iconify/react";
+import { ExternalLink } from "lucide-react";
 import { Frameworks } from "./frameworks";
 import XTooltip from "../../components/Tooltip";
 import { t } from "i18next";
@@ -58,7 +58,7 @@ export const ProjectTemplate = ({
                 href={link.href}
               >
                 {link.label}{" "}
-                <Icon className="text-sm" icon="ei:external-link" />
+                <ExternalLink className="inline size-3.5" />
               </a>
             ))}
           </div>

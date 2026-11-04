@@ -1,21 +1,16 @@
 import { defineConfig } from "vite";
-import path from 'path';
+import path from "path";
 import react from "@vitejs/plugin-react";
-import { telefunc } from "telefunc/vite";
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from "@tailwindcss/vite";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
-  esbuild: {
-    minifyIdentifiers: false,
-    jsx: 'automatic',
-  },
   define: {
-    global: 'globalThis',
+    global: "globalThis",
   },
 });

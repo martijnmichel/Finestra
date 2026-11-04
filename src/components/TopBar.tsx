@@ -1,10 +1,6 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWindowManager } from "../services/WindowManager";
-import { Icon } from "@iconify/react";
-import { AppMenu, AppMenuItem } from "./application/AppMenu";
-import { NavMenuItem } from "../applications";
 import dayjs from "dayjs";
-import { Menu, Popover } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
 import { map } from "lodash";
 import { languages } from "../i18n";
@@ -16,16 +12,15 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import {
+  Apple,
   BatteryCharging,
   Bluetooth,
   Flag,
-  PanelsLeftBottom,
   Search,
   Settings2,
   Wifi,
 } from "lucide-react";
 import { Dialog, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
-import { Input } from "./ui/input";
 import { DialogContent } from "@radix-ui/react-dialog";
 const TopBar = () => {
   const { activeApp } = useWindowManager();
@@ -54,7 +49,7 @@ const TopBar = () => {
 
       <div className="flex w-full z-1 relative items-center">
         <div className="topnav-button">
-          <Icon className="" icon="ant-design:apple-filled" />
+          <Apple className="size-4" />
         </div>
 
         <div className="flex-grow h-full flex gap-2">
