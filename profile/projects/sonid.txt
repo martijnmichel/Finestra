@@ -1,0 +1,26 @@
+Project or company name:
+Sonid
+
+Project link:
+https://sonid.app
+
+Start date:
+Oct 2017
+
+End date:
+Ongoing
+
+Your official role:
+Founder & Full Stack Developer
+
+Project overview:
+Built a cross-platform music theory learning product for musicians and students who want structured practice — not just reference charts. The product teaches intervals, chords, scales, keys, and progressions through guided exercises on iOS and Android, backed by a multi-locale marketing site and educational content. Main features include step-by-step practice flows, interactive theory tools (piano / guitar / notation), localized content, and a broader product suite that grew from the same codebase (practice apps and school tooling). As founder and sole/core developer, owned product direction, architecture, native apps, web, backend, and releases end to end.
+
+Project domain & product type:
+Education / MusicTech — Mobile app + web platform (consumer SaaS / freemium learning)
+
+Accomplishments and responsibilities:
+Designed and shipped native iOS and Android apps for music theory practice (intervals, chords, scales, progressions, keys). Built and maintained the production web platform and content system (Next.js, localized SEO pages, educational reference content). Owned backend and cloud architecture (Firebase, Postgres, Google Cloud), auth, data models, and app–web sync. Grew the product into a multi-app ecosystem (practice tools and classroom workflows) on a shared monorepo. Handled App Store / Play releases, CI, i18n across multiple locales, and ongoing product iteration based on user feedback. Balanced product, UX, and engineering as founder — from MVP to long-running production apps.
+
+Technologies:
+Swift, Kotlin, Next.js, React, TypeScript, Firebase, Postgres, Google Cloud, Tailwind, shadcn/ui, Turborepo

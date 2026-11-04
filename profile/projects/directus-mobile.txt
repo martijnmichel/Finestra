@@ -1,0 +1,31 @@
+Project or company name:
+Directus Mobile
+
+Project link:
+https://www.directusmobile.app/
+
+Start date:
+Jan 2025
+
+End date:
+Ongoing
+
+Your official role:
+Founder & Full Stack Developer
+
+Project overview:
+Built a production iOS and Android CMS client for Directus so teams can manage content and media on the go. Users connect multiple Directus instances, browse and edit collections, upload assets, receive push notifications on data changes, and add home-screen widgets for quick access. The app supports a wide range of Directus field interfaces including relational fields (M2O, O2M, M2M, M2A), translations, files/images, and common input/selection types. Shipped to the App Store and Google Play as an independent product for the Directus community.
+
+Project domain & product type:
+Developer tools / CMS — Native mobile app (iOS + Android)
+
+Accomplishments and responsibilities:
+Designed and shipped a full Directus mobile client with multi-server support and account switching. Implemented content CRUD flows and a large set of Directus interfaces on mobile, including relational and media fields. Added push notifications for content updates and configurable home-screen widgets. Handled App Store and Play releases, Expo/React Native architecture, and ongoing production maintenance. Built supporting web presence and notification backend pieces needed for a real mobile CMS product.
+
+Technologies:
+Expo, React Native, TypeScript, Directus SDK, TanStack Query, Expo Router, Expo Notifications, Unistyles
+
+Store links:
+iOS: https://apps.apple.com/app/directus-mobile/id6740696350
+Android: https://play.google.com/store/apps/details?id=com.martijnmichel.directusexpo.app
+GitHub: https://github.com/martijnmichel/directus-expo

@@ -1,0 +1,26 @@
+Project or company name:
+WMS
+
+Project link:
+(leave blank unless you have a public demo)
+
+Start date:
+2021
+
+End date:
+2026
+
+Your official role:
+Full Stack Developer
+
+Project overview:
+Built a browser-based warehouse management frontend for a backoffice ERP. Users managed purchasing and sales flows, ran inventory counts, and monitored operations from a statistics dashboard. Focused on complex data UI, state management, and keeping the app fast and maintainable for daily business use.
+
+Project domain & product type:
+Logistics / ERP / B2B SaaS — Web application (SPA)
+
+Accomplishments and responsibilities:
+Implemented core WMS workflows for sales, stock, and inventory counts. Built dashboard views and charts for operational statistics. Structured client state carefully (local vs global vs server vs storage) for large data-heavy screens. Delivered reusable, readable UI components for complex tables and filters.
+
+Technologies:
+Vite, React, TypeScript, TanStack Query, TanStack Table, Chart.js, Headless UI, Redux

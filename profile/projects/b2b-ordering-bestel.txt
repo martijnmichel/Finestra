@@ -1,0 +1,26 @@
+Project or company name:
+B2B Ordering Platform (Bestel)
+
+Project link:
+https://demo-agf.ecbase.nl
+
+Start date:
+2021
+
+End date:
+2026
+
+Your official role:
+Full Stack Developer
+
+Project overview:
+Built a whitelabel B2B ordering product for catering and wholesale customers: a mobile app and a companion commerce website. End customers browsed assortments, placed orders, managed order lists, and viewed invoices/profile data. Affiliated businesses offered the white-label frontend on top of the shared backoffice.
+
+Project domain & product type:
+B2B commerce / catering wholesale — Whitelabel mobile app + web commerce
+
+Accomplishments and responsibilities:
+Developed the Expo/React Native order app (catalog, filters, order lists, customer profile/invoices). Built the Next.js whitelabel commerce site with auth/sessions, product filtering/sorting, and order status modules. Managed App Store / Play release tracks (dev, preview, staging, production). Optimized Next.js performance (bundle size, image caching) and deployed on Google Cloud Run with Docker. Improved UX/performance on lower-end mobile devices.
+
+Technologies:
+Expo, React Native, Next.js, React, TypeScript, Tailwind, Tamagui, Redux, React Navigation, Google Cloud Run, Docker

@@ -1,0 +1,5 @@
+Full-stack developer focused on shipping product — native mobile apps (Swift / Kotlin / React Native) and modern web (Next.js, React, TypeScript) with Firebase, Postgres, and cloud backends.
+
+Since 2017 I’ve freelanced end-to-end on music and education products (Sonid, Toka, Capo, Classroom) and spent several years as a remote medior full-stack developer at EcBase building WMS features, Expo apps, and shared UI libraries. I care about clean architecture, usable UI, and getting details right before they become tech debt.
+
+Based in Italy (CET). Native Dutch, fluent English and Italian. Comfortable owning a feature from idea to release, or joining an existing codebase and moving fast with clear communication.
