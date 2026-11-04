@@ -65,19 +65,22 @@ export const LaunchPad = () => {
           </h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-y-10 justify-center">
-            {filter(Applications, (a) => a.category === "default" && a.name.toLowerCase().includes(search.toLowerCase()))?.map(
-              (app, index) => {
-                return (
-                  <AppButton
-                    size={width > 768 ? "120px" : "80px"}
-                    key={`app-button-${index}`}
-                    appIcon={app.icon()}
-                    appName={app.name}
-                    onClick={() => startApp(app.name)(dispatch)}
-                  />
-                );
-              }
-            )}
+            {filter(
+              Applications,
+              (a) =>
+                a.category === "default" &&
+                a.appName.toLowerCase().includes(search.toLowerCase())
+            )?.map((app, index) => {
+              return (
+                <AppButton
+                  size={width > 768 ? "120px" : "80px"}
+                  key={`app-button-${index}`}
+                  appIcon={app.icon()}
+                  appName={app.appName}
+                  onClick={() => startApp(app.appName)(dispatch)}
+                />
+              );
+            })}
           </div>
 
           <h2 className="os-chrome-em mb-5 mt-20 text-[22px] tracking-[-0.3px] text-white/95">
@@ -85,19 +88,22 @@ export const LaunchPad = () => {
           </h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-y-10">
-            {filter(Applications, (a) => a.category === "project" && a.name.toLowerCase().includes(search.toLowerCase()))?.map(
-              (app, index) => {
-                return (
-                  <AppButton
-                    size={width > 768 ? "120px" : "80px"}
-                    key={`app-button-${index}`}
-                    appIcon={app.icon()}
-                    appName={app.name}
-                    onClick={() => startApp(app.name)(dispatch)}
-                  />
-                );
-              }
-            )}
+            {filter(
+              Applications,
+              (a) =>
+                a.category === "project" &&
+                a.appName.toLowerCase().includes(search.toLowerCase())
+            )?.map((app, index) => {
+              return (
+                <AppButton
+                  size={width > 768 ? "120px" : "80px"}
+                  key={`app-button-${index}`}
+                  appIcon={app.icon()}
+                  appName={app.appName}
+                  onClick={() => startApp(app.appName)(dispatch)}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

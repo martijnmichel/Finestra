@@ -13,6 +13,8 @@ export type AppConfig = {
 export class Application {
   active = true; // the activated/focused app window
   minimized = false; // minimized/unminimized
+  /** Stable app id/label — do not use Class.name (mangled in production). */
+  static appName = "Default App";
   public name = "Default App";
   id = v4();
 
@@ -36,6 +38,7 @@ export class Application {
   component: (() => React.ReactNode) | undefined;
 
   constructor(config?: AppConfig) {
+    this.name = (this.constructor as typeof Application).appName;
     if (config?.minimized) this.minimized = config?.minimized;
     if (config?.width) this.width = config?.width;
     if (config?.height) this.height = config?.height;

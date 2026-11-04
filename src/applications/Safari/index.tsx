@@ -7,6 +7,7 @@ import { NavMenu } from "..";
 import { AppNavigation } from "../../components/application/AppNavigation";
 
 export class Safari extends Application {
+  static appName = "Safari";
   public name = "Safari";
   static icon = () => <img src={SafariIcon} alt="Logo" />;
   public category = "default";

@@ -6,6 +6,7 @@ import { projects } from "./projects";
 import Icon from "../../icons/demo-agf.webp";
 
 export class ECBaseBestelNext extends Application {
+  static appName = "ECBaseBestelNext";
   public name = "ECBaseBestelNext";
   static icon = () => (
     <div className="p-[9px]">

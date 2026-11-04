@@ -5,6 +5,7 @@ import { ProjectTemplate } from "./ProjectTemplate";
 import { projects } from "./projects";
 
 export class DirectusMobile extends Application {
+  static appName = "DirectusMobile";
   public name = "DirectusMobile";
   static icon = () => (
     <div className="p-[7px]">

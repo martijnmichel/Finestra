@@ -3,6 +3,7 @@ import { Application } from "./application";
 import Icon from "../icons/settings.png";
 
 export class ExampleApp extends Application {
+  static appName = "Settings";
   public name = "Settings";
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";

@@ -13,4 +13,13 @@ export default defineConfig({
   define: {
     global: "globalThis",
   },
+  // Vite 8 / Rolldown: keepNames preserves Function.name if anything still reads it.
+  // App identity should use Application.appName / Applications keys (not Class.name).
+  build: {
+    rolldownOptions: {
+      output: {
+        keepNames: true,
+      },
+    },
+  },
 });

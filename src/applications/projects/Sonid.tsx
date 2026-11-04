@@ -5,6 +5,7 @@ import { ProjectTemplate } from "./ProjectTemplate";
 import { projects } from "./projects";
 
 export class Sonid extends Application {
+  static appName = "Sonid";
   public name = "Sonid";
   static icon = () => (
     <div className="p-[7px]">

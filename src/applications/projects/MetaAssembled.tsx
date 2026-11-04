@@ -5,6 +5,7 @@ import { ProjectTemplate } from "./ProjectTemplate";
 import { projects } from "./projects";
 
 export class MetaAssembled extends Application {
+  static appName = "MetaAssembled";
   public name = "MetaAssembled";
   static icon = () => (
     <div className="p-[7px]">

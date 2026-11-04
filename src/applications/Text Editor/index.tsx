@@ -9,6 +9,7 @@ import { closeApp } from "../../store/actions/closeApp";
 import { AppNavigation } from "../../components/application/AppNavigation";
 
 export class TextEditor extends Application {
+  static appName = "TextEditor";
   public name = "TextEditor";
 
   static icon = () => <img src={Icon} alt="Logo" />;

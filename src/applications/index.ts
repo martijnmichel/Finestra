@@ -59,6 +59,10 @@ export const Applications: { [x in App]: Apps } = {
   Terminal: Terminal,
   DirectusMobile: DirectusMobile,
 };
+
+/** Resolve an app class by its stable registry key (never Class.name). */
+export const getApplication = (appName: string): Apps | undefined =>
+  Applications[appName as App];
 export type Apps =
   | typeof TextEditor
   | typeof VSCode

@@ -1,7 +1,7 @@
 import { find } from "lodash";
 import { IAppState, initialState } from ".";
 import { ActionType, AppActions } from "./actions";
-import { Applications } from "../applications";
+import { getApplication } from "../applications";
 
 export const appReducer = (
   state: IAppState,
@@ -11,7 +11,7 @@ export const appReducer = (
 
   switch (action.type) {
     case ActionType.START_APP: {
-      const App = find(Applications, (app) => app.name === action.appName);
+      const App = getApplication(action.appName);
 
       const activeAppWindow = find(
         state.applications,

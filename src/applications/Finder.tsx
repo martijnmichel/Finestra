@@ -40,6 +40,7 @@ import { NavMenu } from ".";
 import { AppNavigation } from "../components/application/AppNavigation";
 
 export class Finder extends Application {
+  static appName = "Finder";
   public name = "Finder";
   static icon = () => <img src={FinderIcon} alt="Logo" />;
 

@@ -3,6 +3,7 @@ import { Application } from "./application";
 import Icon from "../icons/spotify.png";
 
 export class Spotify extends Application {
+  static appName = "Spotify";
   public name = "Spotify";
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";

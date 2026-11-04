@@ -5,6 +5,7 @@ import { ProjectTemplate } from "./ProjectTemplate";
 import { projects } from "./projects";
 
 export class Toka extends Application {
+  static appName = "Toka";
   public name = "Toka";
   static icon = () => (
     <div className="p-[7px]">

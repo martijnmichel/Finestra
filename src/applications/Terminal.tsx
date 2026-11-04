@@ -6,6 +6,7 @@ import { AppActions } from "../components/application/AppActions";
 import "@xterm/xterm/css/xterm.css";
 import { FitAddon } from "@xterm/addon-fit";
 export class Terminal extends Application {
+  static appName = "Terminal";
   public name = "Terminal";
   component = () => TerminalApp(this.id);
   static icon = () => <img src={Icon} alt="Logo" />;

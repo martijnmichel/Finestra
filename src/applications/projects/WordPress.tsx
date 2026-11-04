@@ -6,6 +6,7 @@ import { projects } from "./projects";
 import Icon from "../../icons/wordpress.png";
 
 export class WordPress extends Application {
+  static appName = "WordPress";
   public name = "WordPress";
   static icon = () => (
     <div className="p-[7px]">

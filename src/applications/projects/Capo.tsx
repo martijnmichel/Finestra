@@ -5,6 +5,7 @@ import { ProjectTemplate } from "./ProjectTemplate";
 import { projects } from "./projects";
 
 export class Capo extends Application {
+  static appName = "Capo";
   public name = "Capo";
   static icon = () => (
     <div className="p-[7px]">

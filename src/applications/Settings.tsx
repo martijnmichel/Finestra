@@ -4,6 +4,7 @@ import Icon from "../icons/settings.png";
 import Screenshot from "../icons/screenshot.png";
 
 export class Settings extends Application {
+  static appName = "Settings";
   public name = "Settings";
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";

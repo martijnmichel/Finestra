@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 
-import { Applications, App } from "../applications";
-import { find } from "lodash";
+import { getApplication } from "../applications";
 import { useAppState } from "../store";
 
 export const useWindowManager = () => {
@@ -13,7 +12,7 @@ export const useWindowManager = () => {
   );
 
   const appIcon = (AppName: string) => {
-    const App = find(Applications, (app) => app.name === AppName);
+    const App = getApplication(AppName);
 
     return App && App.icon();
   };

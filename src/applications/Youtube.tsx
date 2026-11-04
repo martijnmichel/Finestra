@@ -3,6 +3,7 @@ import { Application } from "./application";
 import Icon from "../icons/youtube.png";
 
 export class Youtube extends Application {
+  static appName = "Youtube";
   public name = "Youtube";
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";

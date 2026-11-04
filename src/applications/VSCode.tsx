@@ -38,6 +38,7 @@ const files = map(modules, (code, m) => {
 });
 
 export class VSCode extends Application {
+  static appName = "VSCode";
   public name = "VSCode";
   component = () => VSCodeApp(this.id);
 

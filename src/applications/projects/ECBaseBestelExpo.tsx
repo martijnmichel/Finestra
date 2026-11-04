@@ -6,6 +6,7 @@ import { projects } from "./projects";
 import Icon from "../../icons/expo-app.png";
 
 export class ECBaseBestelExpo extends Application {
+  static appName = "ECBaseBestelExpo";
   public name = "ECBaseBestelExpo";
   static icon = () => (
     <div className="p-[7px]">

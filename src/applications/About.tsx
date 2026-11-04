@@ -24,6 +24,7 @@ export const AboutApplication = {
 };
 
 export class About extends Application {
+  static appName = "About";
   public name = "About";
   static icon = () => <img src={Icon} alt="Logo" />;
   public category = "default";
