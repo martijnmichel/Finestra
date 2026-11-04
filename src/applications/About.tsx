@@ -61,6 +61,23 @@ export const AboutApp = (id: string) => {
   const { dispatch } = useAppContext();
   const fieldExperiences: FieldExperience[] = [
     {
+      company: "Kurbo / independent",
+      type: "Freelance",
+      jobTitle: "Full Stack Developer",
+      jobDescription: t("common:experience.freelance"),
+      from: dayjs("01-11-2017").format("YYYY"),
+      to: "NOW",
+      projects: [
+        { ...projects().directusMobile, app: "DirectusMobile" },
+        { ...projects().sonid, app: "Sonid" },
+        { ...projects().capo, app: "Capo" },
+        { ...projects().toka, app: "Toka" },
+        { ...projects().classroom, app: "Classroom" },
+        { ...projects().sites, app: "WordPress" },
+        { ...projects().metaAssembled, app: "MetaAssembled" },
+      ],
+    },
+    {
       company: "ecBase",
       type: "Remote",
       jobTitle: "Medior Full Stack Developer",
@@ -71,23 +88,6 @@ export const AboutApp = (id: string) => {
         { ...projects().wms, app: "WMS" },
         { ...projects().starterApp, app: "ECBaseBestelExpo" },
         { ...projects().starterTemplateNext, app: "ECBaseBestelNext" },
-      ],
-    },
-    {
-      company: "Tocado Vision / independent",
-      type: "Freelance",
-      jobTitle: "Full Stack Developer",
-      jobDescription: t("common:experience.freelance"),
-      from: dayjs("01-11-2017").format("YYYY"),
-      to: t("apps:about.present"),
-      projects: [
-        { ...projects().directusMobile, app: "DirectusMobile" },
-        { ...projects().sonid, app: "Sonid" },
-        { ...projects().capo, app: "Capo" },
-        { ...projects().toka, app: "Toka" },
-        { ...projects().classroom, app: "Classroom" },
-        { ...projects().sites, app: "WordPress" },
-        { ...projects().metaAssembled, app: "MetaAssembled" },
       ],
     },
   ];
