@@ -38,6 +38,60 @@ export default {
     ),
   },
 
+  capo: {
+    title: "Capo",
+    desc: "Tastiera interattiva per accordi, scale e teoria",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Cliente" text="Prodotto proprio (Sonid)" />
+        <Info
+          title="Descrizione"
+          text={`Capo porta la libreria di accordi e scale di Sonid su un manico interattivo per chitarra, basso, ukulele, mandolino e altro. I musicisti esplorano voicing, vista a manico intero, accordature alternative e articoli di teoria collegati allo stesso catalogo di sonid.app — con deep link condivisibili tra web e mobile.`}
+        />
+        <Info
+          title="Cosa ho fatto"
+          text={`App native iOS (Swift) e Android (Kotlin) più sito marketing Next.js (getcapo.sonid.app). UX del manico, layout strumento/accordatura, integrazione libreria Sonid, temi, deep link e release store nel turborepo Sonid.`}
+        />
+      </article>
+    ),
+  },
+
+  toka: {
+    title: "Toka",
+    desc: "Metronomo di pratica con groove di batteria reali",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Cliente" text="Prodotto proprio (Sonid)" />
+        <Info
+          title="Descrizione"
+          text={`Toka è un metronomo di pratica e step sequencer con feel di batteria reali — non solo un click. Imposta BPM e metro, scegli groove di genere (pop, rock, jazz, boom-bap, reggae, bossa, samba e altro), disegna i passi e pratica con swing e suddivisioni. Nucleo gratuito con Pro e sample pack opzionali una tantum.`}
+        />
+        <Info
+          title="Cosa ho fatto"
+          text={`App native iOS (Swift) e Android (Kotlin), packaging desktop e sito gettoka.sonid.app. Motore groove/sequencer, temi, acquisti in-app, deep link dal metronomo web di Sonid e release store nel monorepo condiviso.`}
+        />
+      </article>
+    ),
+  },
+
+  classroom: {
+    title: "Sonid Classroom",
+    desc: "Piattaforma per scuole di musica, docenti e studenti",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Cliente" text="Prodotto proprio (Sonid)" />
+        <Info
+          title="Descrizione"
+          text={`Sonid Classroom è una piattaforma web per insegnanti e scuole di musica: classi, ruoli, inviti studenti, compiti collegati agli esercizi Sonid, orari, disponibilità, vacanze, fatture, file scolastici e hub studenti. Piano Free per iniziare; tier a pagamento per scuole in crescita. Live su classroom.sonid.app.`}
+        />
+        <Info
+          title="Cosa ho fatto"
+          text={`App Next.js Classroom end-to-end nel turborepo Sonid: auth e dati multi-tenant su Firebase, piani/billing, gestione classi e ruoli, compiti, workflow calendario, i18n e integrazioni con i package practice/curriculum di Sonid.`}
+        />
+      </article>
+    ),
+  },
+
   meta: {
     title: "Meta: Assembled",
     desc: "Gioco di carte online gratuito su Steam",

@@ -1,6 +1,6 @@
 import React from "react";
 import { v4 } from "uuid";
-import { Apple } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 export type AppConfig = {
   minimized?: boolean;
@@ -30,7 +30,7 @@ export class Application {
   titleBar = false;
 
   static icon: (() => React.ReactNode) | undefined = () => (
-    <Apple className="size-8" />
+    <Icon icon="fxemoji:redapple" />
   );
 
   component: (() => React.ReactNode) | undefined;

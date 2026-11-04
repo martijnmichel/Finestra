@@ -38,6 +38,60 @@ export default {
     ),
   },
 
+  capo: {
+    title: "Capo",
+    desc: "Interactive fretboard for chords, scales & theory",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Client" text="Own product (Sonid)" />
+        <Info
+          title="Description"
+          text={`Capo puts Sonid’s chord and scale library on an interactive neck for guitar, bass, ukulele, mandolin, and more. Musicians explore voicings, full-neck views, alternate tunings, and theory articles tied to the same catalog that powers sonid.app — with shareable deep links between web and mobile.`}
+        />
+        <Info
+          title="What I worked on"
+          text={`Designed and shipped native iOS (Swift) and Android (Kotlin) apps plus a Next.js marketing site (getcapo.sonid.app). Built fretboard UX, instrument/tuning layouts, Sonid library integration, themes, deep links, and App Store / Play releases inside the Sonid turborepo.`}
+        />
+      </article>
+    ),
+  },
+
+  toka: {
+    title: "Toka",
+    desc: "Practice metronome with real drum grooves",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Client" text="Own product (Sonid)" />
+        <Info
+          title="Description"
+          text={`Toka is a practice metronome and step sequencer with real drum feels — not just a click. Set BPM and meter, pick genre grooves (pop, rock, jazz, boom-bap, reggae, bossa, samba, and more), paint steps on a sequencer, and practice with swing and subdivisions. Free core with optional one-time Pro and sample packs.`}
+        />
+        <Info
+          title="What I worked on"
+          text={`Built native iOS (Swift) and Android (Kotlin) apps, desktop packaging, and the gettoka.sonid.app marketing site. Owned groove engine/sequencer UX, themes, in-app purchases, deep links from Sonid’s web metronome, and store releases in the shared Sonid monorepo.`}
+        />
+      </article>
+    ),
+  },
+
+  classroom: {
+    title: "Sonid Classroom",
+    desc: "Music school platform for teachers & students",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Client" text="Own product (Sonid)" />
+        <Info
+          title="Description"
+          text={`Sonid Classroom is a web platform for music teachers and schools: classes, roles, student invites, assignments tied to Sonid practice exercises, schedules, availability, holidays, invoices, school files, and a student hub. Free plan for getting started; paid tiers for growing schools. Live at classroom.sonid.app.`}
+        />
+        <Info
+          title="What I worked on"
+          text={`Owned the Next.js Classroom app end to end in the Sonid turborepo: auth and multi-tenant school data on Firebase, plans/billing, class & role management, assignments, calendar workflows, i18n, and integrations with the Sonid practice/curriculum packages.`}
+        />
+      </article>
+    ),
+  },
+
   meta: {
     title: "Meta: Assembled",
     desc: "Free online card game on Steam",

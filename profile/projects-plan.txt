@@ -2,12 +2,13 @@ Suggested freelance profile project set
 (Use on Lemon, Contra, Upwork, Gun.io, Arc, etc.)
 
 1. Sonid — founder, full product ownership
-2. WMS — complex B2B web (ecBase client work)
-3. B2B Ordering / Bestel — Expo app + Next site as one product
-4. Directus Mobile — public RN/Expo production app
+2. Capo — fretboard practice app (Swift/Kotlin + getcapo.sonid.app)
+3. Toka — metronome / drum-groove practice app (Swift/Kotlin + gettoka.sonid.app)
+4. Sonid Classroom — school SaaS (classroom.sonid.app)
+5. WMS — complex B2B web (ecBase client work)
+6. B2B Ordering / Bestel — Expo app + Next site as one product
+7. Directus Mobile — public RN/Expo production app
 
-Optional later: Toka (native Swift/Kotlin)
-Skip: Capo (too similar to Sonid/Toka)
 Skip: naming a project just "EcBase" (that is the company)
 Skip: a third EcBase project if WMS + Bestel are already listed
 

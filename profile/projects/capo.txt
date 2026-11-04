@@ -1,0 +1,26 @@
+Project or company name:
+Capo (by Sonid)
+
+Project link:
+https://getcapo.sonid.app
+
+Start date:
+2025
+
+End date:
+Ongoing
+
+Your official role:
+Founder & Full Stack Developer
+
+Project overview:
+Built Capo, an interactive fretboard app that puts Sonid’s chord and scale library on guitar, bass, ukulele, mandolin, and more. Musicians explore voicings, full-neck views, alternate tunings, and theory articles with shareable deep links between web and mobile. Native iOS/Android plus marketing site, shipped from the Sonid turborepo.
+
+Project domain & product type:
+Education / MusicTech — Mobile app + marketing web (consumer freemium)
+
+Accomplishments and responsibilities:
+Designed and shipped native iOS (Swift) and Android (Kotlin) Capo apps. Built interactive fretboard UX, instrument/tuning layouts, and Sonid theory library integration. Shipped getcapo.sonid.app (Next.js) with localized marketing and deep links. Handled App Store / Play releases and ongoing iteration inside the shared Sonid monorepo.
+
+Technologies:
+Swift, Kotlin, Next.js, React, TypeScript, Tailwind, Turborepo

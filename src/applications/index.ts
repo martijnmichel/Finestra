@@ -7,6 +7,9 @@ import { Spotify } from "./Spotify";
 import { Settings } from "./Settings";
 import { About } from "./About";
 import { Sonid } from "./projects/Sonid";
+import { Capo } from "./projects/Capo";
+import { Toka } from "./projects/Toka";
+import { Classroom } from "./projects/Classroom";
 import { Terminal } from "./Terminal";
 import { WMS } from "./projects/WMS";
 import { WordPress } from "./projects/WordPress";
@@ -24,6 +27,9 @@ export type App =
   | "Settings"
   | "About"
   | "Sonid"
+  | "Capo"
+  | "Toka"
+  | "Classroom"
   | "WMS"
   | "WordPress"
   | "MetaAssembled"
@@ -42,6 +48,9 @@ export const Applications: { [x in App]: Apps } = {
   Settings: Settings,
   About: About,
   Sonid: Sonid,
+  Capo: Capo,
+  Toka: Toka,
+  Classroom: Classroom,
   WMS: WMS,
   MetaAssembled: MetaAssembled,
   WordPress: WordPress,
@@ -60,6 +69,9 @@ export type Apps =
   | typeof Settings
   | typeof About
   | typeof Sonid
+  | typeof Capo
+  | typeof Toka
+  | typeof Classroom
   | typeof WMS
   | typeof MetaAssembled
   | typeof WordPress

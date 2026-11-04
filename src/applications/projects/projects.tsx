@@ -2,11 +2,14 @@ import React, { ReactNode } from "react";
 
 import Meta from "../../icons/meta.jpg";
 import Sonid from "../../icons/sonid.png";
+import Capo from "../../icons/capo.png";
+import Toka from "../../icons/toka.png";
+import Classroom from "../../icons/classroom.png";
 import WMS from "../../icons/wms.png";
 import StarterApp from "../../icons/starterApp.png";
 import DirectusMobile from "../../icons/directusmobile.png";
 import { useTranslation } from "react-i18next";
-import { Frameworks, IFrameworks } from "./frameworks";
+import { IFrameworks } from "./frameworks";
 import { TranslationElement } from "../../components/TranslationElement";
 import Next from "../../icons/demo-agf.webp";
 import Wordpress from "../../icons/wordpress.png";
@@ -81,6 +84,76 @@ export const projects: () => { [x: string]: Project } = () => {
       ],
     },
 
+    capo: {
+      title: t("projects:capo.title"),
+      desc: t("projects:capo.desc"),
+      icon: Capo,
+      Text: <TranslationElement i18nKey="projects:capo.htmlText" />,
+      links: [
+        { label: "Website", href: "https://getcapo.sonid.app" },
+        {
+          label: "Android",
+          href: "https://play.google.com/store/apps/details?id=org.fretty.music.app",
+        },
+        {
+          label: "iOS",
+          href: "https://apps.apple.com/app/id1523517953",
+        },
+      ],
+      frameworks: [
+        IFrameworks.Swift,
+        IFrameworks.Kotlin,
+        IFrameworks.Next,
+        IFrameworks.React,
+        IFrameworks.Typescript,
+        IFrameworks.Tailwind,
+      ],
+    },
+
+    toka: {
+      title: t("projects:toka.title"),
+      desc: t("projects:toka.desc"),
+      icon: Toka,
+      Text: <TranslationElement i18nKey="projects:toka.htmlText" />,
+      links: [
+        { label: "Website", href: "https://gettoka.sonid.app" },
+        {
+          label: "Android",
+          href: "https://play.google.com/store/apps/details?id=org.toka.music.app",
+        },
+        {
+          label: "iOS",
+          href: "https://apps.apple.com/us/app/toka-metronome-drums/id6804649271",
+        },
+      ],
+      frameworks: [
+        IFrameworks.Swift,
+        IFrameworks.Kotlin,
+        IFrameworks.Next,
+        IFrameworks.React,
+        IFrameworks.Typescript,
+        IFrameworks.Tailwind,
+      ],
+    },
+
+    classroom: {
+      title: t("projects:classroom.title"),
+      desc: t("projects:classroom.desc"),
+      icon: Classroom,
+      Text: <TranslationElement i18nKey="projects:classroom.htmlText" />,
+      links: [
+        { label: "Website", href: "https://classroom.sonid.app" },
+        { label: "Sonid", href: "https://sonid.app" },
+      ],
+      frameworks: [
+        IFrameworks.Next,
+        IFrameworks.React,
+        IFrameworks.Typescript,
+        IFrameworks.Firebase,
+        IFrameworks.Tailwind,
+        IFrameworks.Postgres,
+      ],
+    },
 
     metaAssembled: {
       title: t("projects:meta.title"),

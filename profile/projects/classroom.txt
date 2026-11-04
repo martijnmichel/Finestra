@@ -1,0 +1,26 @@
+Project or company name:
+Sonid Classroom
+
+Project link:
+https://classroom.sonid.app
+
+Start date:
+2026
+
+End date:
+Ongoing
+
+Your official role:
+Founder & Full Stack Developer
+
+Project overview:
+Built Sonid Classroom, a web platform for music teachers and schools: classes, roles, student invites, assignments tied to Sonid practice exercises, schedules, availability, holidays, invoices, school files, and a student hub. Free plan to start; paid tiers for growing schools. Lives alongside Sonid in the same turborepo.
+
+Project domain & product type:
+Education / MusicTech — B2B SaaS web platform for schools & teachers
+
+Accomplishments and responsibilities:
+Owned the Next.js Classroom app end to end: multi-tenant school auth and data on Firebase, plans/billing, class & role management, assignments linked to Sonid practice, calendar workflows (schedule, availability, holidays), i18n, and integrations with shared practice/curriculum packages.
+
+Technologies:
+Next.js, React, TypeScript, Firebase, Postgres, Tailwind, Turborepo

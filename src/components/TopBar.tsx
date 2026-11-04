@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useWindowManager } from "../services/WindowManager";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { map } from "lodash";
@@ -12,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import {
-  Apple,
   BatteryCharging,
   Bluetooth,
   Flag,
@@ -20,10 +18,10 @@ import {
   Settings2,
   Wifi,
 } from "lucide-react";
+import { Icon } from "@iconify/react";
 import { Dialog, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { DialogContent } from "@radix-ui/react-dialog";
 const TopBar = () => {
-  const { activeApp } = useWindowManager();
   const { launchpad } = useAppState();
   const [dateTime, setDateTime] = useState<number>();
 
@@ -49,7 +47,7 @@ const TopBar = () => {
 
       <div className="flex w-full z-1 relative items-center">
         <div className="topnav-button">
-          <Apple className="size-4" />
+          <Icon icon="ant-design:apple-filled" />
         </div>
 
         <div className="flex-grow h-full flex gap-2">

@@ -1,10 +1,11 @@
 import React from "react";
-import { Apple, Loader2 } from "lucide-react";
+import { Icon } from "@iconify/react";
+import { Loader2 } from "lucide-react";
 
 export const Boot = () => {
   return (
     <div className="w-screen h-screen bg-gray-900 flex flex-col gap-10 justify-center items-center">
-      <Apple className="text-white size-[7em]" />
+      <Icon className="text-[7em] text-white" icon="ant-design:apple-filled" />
 
       <Loader2 className="text-white size-8 animate-spin" />
 

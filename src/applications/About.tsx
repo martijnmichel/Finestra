@@ -3,6 +3,7 @@ import { Application } from "./application";
 import { Inbox, MessageCircle, Network } from "lucide-react";
 
 import Icon from "../icons/user.png";
+import Headshot from "../../profile/assets/headshot.png";
 import dayjs from "dayjs";
 import { Project, projects } from "./projects/projects";
 import { App, Applications, NavMenu } from ".";
@@ -82,6 +83,9 @@ export const AboutApp = (id: string) => {
       projects: [
         { ...projects().directusMobile, app: "DirectusMobile" },
         { ...projects().sonid, app: "Sonid" },
+        { ...projects().capo, app: "Capo" },
+        { ...projects().toka, app: "Toka" },
+        { ...projects().classroom, app: "Classroom" },
         { ...projects().sites, app: "WordPress" },
         { ...projects().metaAssembled, app: "MetaAssembled" },
       ],
@@ -234,6 +238,11 @@ export const AboutApp = (id: string) => {
         </div>
 
         <div className="flex flex-col gap-10">
+          <img
+            src={Headshot}
+            alt="Martijn van der Eijk"
+            className="w-full max-w-[220px] aspect-square object-cover rounded-2xl"
+          />
           <div className="flex flex-col gap-2">
             <h4 className="fat">{t("apps:about.address")}</h4>
             <p>Via ca' del monte 6, Villafranca in Lunigiana, MS, Italie</p>

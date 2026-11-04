@@ -38,6 +38,60 @@ export default {
     ),
   },
 
+  capo: {
+    title: "Capo",
+    desc: "Interactief fretboard voor akkoorden, ladders & theorie",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Opdrachtgever" text="Eigen product (Sonid)" />
+        <Info
+          title="Beschrijving"
+          text={`Capo zet Sonids akkoord- en ladderbibliotheek op een interactieve hals voor gitaar, bas, ukelele, mandoline en meer. Musici verkennen voicings, volledige-halsweergaven, alternative stemmingen en theorie-artikelen uit dezelfde catalogus als sonid.app — met deelbare deep links tussen web en mobiel.`}
+        />
+        <Info
+          title="Wat ik deed"
+          text={`Native iOS (Swift) en Android (Kotlin) apps plus Next.js-marketingsite (getcapo.sonid.app). Fretboard-UX, instrument/stemmingen, Sonid-bibliotheekintegratie, thema’s, deep links en store-releases in de Sonid-turborepo.`}
+        />
+      </article>
+    ),
+  },
+
+  toka: {
+    title: "Toka",
+    desc: "Oefenmetronoom met echte drumgrooves",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Opdrachtgever" text="Eigen product (Sonid)" />
+        <Info
+          title="Beschrijving"
+          text={`Toka is een oefenmetronoom en step sequencer met echte drumfeels — niet alleen een klik. BPM en maatsoort instellen, genre-grooves kiezen (pop, rock, jazz, boom-bap, reggae, bossa, samba en meer), stappen schilderen en oefenen met swing en subdivisions. Gratis kern met optionele eenmalige Pro- en sample packs.`}
+        />
+        <Info
+          title="Wat ik deed"
+          text={`Native iOS (Swift) en Android (Kotlin) apps, desktop packaging en gettoka.sonid.app. Groove-engine/sequencer-UX, thema’s, in-app purchases, deep links vanaf Sonids webmetronoom, en store-releases in de gedeelde monorepo.`}
+        />
+      </article>
+    ),
+  },
+
+  classroom: {
+    title: "Sonid Classroom",
+    desc: "Muziekschoolplatform voor leraren & studenten",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Opdrachtgever" text="Eigen product (Sonid)" />
+        <Info
+          title="Beschrijving"
+          text={`Sonid Classroom is een webplatform voor muziekleraren en scholen: klassen, rollen, studentuitnodigingen, opdrachten gekoppeld aan Sonid-oefeningen, rooster, beschikbaarheid, vakanties, facturen, schoolbestanden en een studentenhub. Gratis plan om te starten; betaalde tiers voor groeiende scholen. Live op classroom.sonid.app.`}
+        />
+        <Info
+          title="Wat ik deed"
+          text={`Next.js Classroom-app end-to-end in de Sonid-turborepo: auth en multi-tenant schooldata op Firebase, plannen/billing, klas- & rolbeheer, opdrachten, kalenderworkflows, i18n en koppelingen met Sonid practice/curriculum-packages.`}
+        />
+      </article>
+    ),
+  },
+
   meta: {
     title: "Meta: Assembled",
     desc: "Gratis online kaartspel op Steam",

@@ -1,0 +1,26 @@
+Project or company name:
+Toka (by Sonid)
+
+Project link:
+https://gettoka.sonid.app
+
+Start date:
+2026
+
+End date:
+Ongoing
+
+Your official role:
+Founder & Full Stack Developer
+
+Project overview:
+Built Toka, a practice metronome and step sequencer with real drum grooves — not just a click track. Musicians set BPM and meter, pick genre feels (pop, rock, jazz, boom-bap, reggae, bossa, samba, and more), paint steps, and practice with swing and subdivisions. Free core with optional one-time Pro and sample packs. Native apps, desktop packaging, and marketing site from the Sonid turborepo.
+
+Project domain & product type:
+Education / MusicTech — Mobile (+ desktop) practice tool (consumer freemium, one-time IAP)
+
+Accomplishments and responsibilities:
+Built native iOS (Swift) and Android (Kotlin) apps plus desktop packaging. Owned groove engine / sequencer UX, themes, in-app purchases, and deep links from Sonid’s web metronome. Shipped gettoka.sonid.app (Next.js) and store releases in the shared monorepo.
+
+Technologies:
+Swift, Kotlin, Next.js, React, TypeScript, Tailwind, Turborepo
