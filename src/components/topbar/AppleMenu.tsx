@@ -1,16 +1,32 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
+import {
+  CircleX,
+  Clock,
+  Laptop,
+  Lock,
+  LogOut,
+  Moon,
+  Power,
+  RotateCcw,
+  Settings2,
+  ShoppingBag,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { startApp } from "@/store/actions/startApp";
 import { useAppContext } from "@/store";
+import { useWindowManager } from "@/services/WindowManager";
 import { cn } from "@/lib/utils";
 import { AboutThisMac } from "./AboutThisMac";
 import {
@@ -19,16 +35,28 @@ import {
   SystemAlertDialog,
   type SystemAlertKind,
 } from "./SystemAlerts";
-import { OS_NAME } from "@/lib/os";
+
+const USER_NAME = "Martijn van der Eijk";
+
+const MenuIcon = ({ children }: { children: ReactNode }) => (
+  <span className="macos-menu-icon" aria-hidden>
+    {children}
+  </span>
+);
 
 export const AppleMenu = () => {
   const { t } = useTranslation();
   const { dispatch } = useAppContext();
+  const { activeApp } = useWindowManager();
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [alertKind, setAlertKind] = useState<SystemAlertKind>(null);
   const [sleeping, setSleeping] = useState(false);
   const [locked, setLocked] = useState(false);
+
+  const forceQuitLabel = activeApp?.name
+    ? t("common:menuBar.forceQuitApp", { app: activeApp.name })
+    : t("common:menuBar.forceQuit");
 
   return (
     <>
@@ -45,24 +73,31 @@ export const AppleMenu = () => {
             <Icon icon="ant-design:apple-filled" className="!size-[14px]" />
           </button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" sideOffset={4} className="min-w-[220px]">
+        <DropdownMenuContent align="start" sideOffset={6} className="min-w-[248px]">
           <DropdownMenuItem
             onClick={() => {
               setMenuOpen(false);
               setAboutOpen(true);
             }}
           >
+            <MenuIcon>
+              <Laptop strokeWidth={1.75} />
+            </MenuIcon>
             {t("common:menuBar.aboutThisMac")}
           </DropdownMenuItem>
+
           <DropdownMenuSeparator />
+
           <DropdownMenuItem
             onClick={() => {
               setMenuOpen(false);
               startApp("Settings")(dispatch);
             }}
           >
+            <MenuIcon>
+              <Settings2 strokeWidth={1.75} />
+            </MenuIcon>
             {t("common:menuBar.systemSettings")}
-            <DropdownMenuShortcut>⌘,</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -70,29 +105,58 @@ export const AppleMenu = () => {
               setAlertKind("appStore");
             }}
           >
+            <MenuIcon>
+              <ShoppingBag strokeWidth={1.75} />
+            </MenuIcon>
             {t("common:menuBar.appStore")}
           </DropdownMenuItem>
+
           <DropdownMenuSeparator />
-          <DropdownMenuItem disabled>
-            {t("common:menuBar.recentItems")}
-          </DropdownMenuItem>
+
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>
+              <MenuIcon>
+                <Clock strokeWidth={1.75} />
+              </MenuIcon>
+              {t("common:menuBar.recentItems")}
+            </DropdownMenuSubTrigger>
+            <DropdownMenuSubContent className="min-w-[180px]">
+              <DropdownMenuItem disabled>
+                {t("common:menuBar.recentEmpty")}
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem disabled>
+                {t("common:menuBar.clearRecent")}
+              </DropdownMenuItem>
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
+
           <DropdownMenuSeparator />
+
           <DropdownMenuItem
             onClick={() => {
               setMenuOpen(false);
               setAlertKind("forceQuit");
             }}
           >
-            {t("common:menuBar.forceQuit")}
+            <MenuIcon>
+              <CircleX strokeWidth={1.75} />
+            </MenuIcon>
+            {forceQuitLabel}
             <DropdownMenuShortcut>⌥⌘⎋</DropdownMenuShortcut>
           </DropdownMenuItem>
+
           <DropdownMenuSeparator />
+
           <DropdownMenuItem
             onClick={() => {
               setMenuOpen(false);
               setSleeping(true);
             }}
           >
+            <MenuIcon>
+              <Moon strokeWidth={1.75} />
+            </MenuIcon>
             {t("common:menuBar.sleep")}
           </DropdownMenuItem>
           <DropdownMenuItem
@@ -101,6 +165,9 @@ export const AppleMenu = () => {
               setAlertKind("restart");
             }}
           >
+            <MenuIcon>
+              <RotateCcw strokeWidth={1.75} />
+            </MenuIcon>
             {t("common:menuBar.restart")}
           </DropdownMenuItem>
           <DropdownMenuItem
@@ -109,15 +176,23 @@ export const AppleMenu = () => {
               setAlertKind("shutDown");
             }}
           >
+            <MenuIcon>
+              <Power strokeWidth={1.75} />
+            </MenuIcon>
             {t("common:menuBar.shutDown")}
           </DropdownMenuItem>
+
           <DropdownMenuSeparator />
+
           <DropdownMenuItem
             onClick={() => {
               setMenuOpen(false);
               setLocked(true);
             }}
           >
+            <MenuIcon>
+              <Lock strokeWidth={1.75} />
+            </MenuIcon>
             {t("common:menuBar.lockScreen")}
             <DropdownMenuShortcut>⌃⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
@@ -127,7 +202,10 @@ export const AppleMenu = () => {
               setAlertKind("logOut");
             }}
           >
-            {t("common:menuBar.logOut", { os: OS_NAME })}
+            <MenuIcon>
+              <LogOut strokeWidth={1.75} />
+            </MenuIcon>
+            {t("common:menuBar.logOut", { name: USER_NAME })}
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>

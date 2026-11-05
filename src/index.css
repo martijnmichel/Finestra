@@ -615,6 +615,106 @@
       0 0 0 0.5px rgba(255, 255, 255, 0.08),
       0 10px 40px rgba(0, 0, 0, 0.45);
   }
+
+  /* Sequoia / Tahoe menu surfaces */
+  .macos-menu {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",
+      sans-serif;
+    font-size: 13px;
+    line-height: 1.23077;
+    letter-spacing: -0.08px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    border-radius: 10px;
+    padding: 5px;
+    border: 0.5px solid rgba(0, 0, 0, 0.18);
+    background: color-mix(in srgb, var(--popover) 88%, transparent);
+    color: var(--popover-foreground);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    box-shadow:
+      0 0 0 0.5px rgba(255, 255, 255, 0.35) inset,
+      0 0 0 0.5px rgba(0, 0, 0, 0.04),
+      0 14px 40px rgba(0, 0, 0, 0.22);
+  }
+
+  .dark .macos-menu {
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow:
+      0 0 0 0.5px rgba(255, 255, 255, 0.08) inset,
+      0 0 0 0.5px rgba(0, 0, 0, 0.4),
+      0 18px 50px rgba(0, 0, 0, 0.55);
+  }
+
+  .macos-menu-item {
+    position: relative;
+    display: flex;
+    cursor: default;
+    user-select: none;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    padding: 4px 8px;
+    min-height: 26px;
+    outline: none;
+  }
+
+  .macos-menu-item[data-highlighted],
+  .macos-menu-item:focus {
+    background: var(--macos-accent);
+    color: #fff;
+  }
+
+  .macos-menu-item[data-disabled] {
+    pointer-events: none;
+    opacity: 0.35;
+  }
+
+  .macos-menu-item[data-highlighted] .macos-menu-shortcut,
+  .macos-menu-item:focus .macos-menu-shortcut {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .macos-menu-item[data-highlighted] .macos-menu-icon,
+  .macos-menu-item:focus .macos-menu-icon {
+    opacity: 1;
+    color: #fff;
+  }
+
+  .macos-menu-icon {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    color: inherit;
+  }
+
+  .macos-menu-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .macos-menu-separator {
+    height: 1px;
+    margin: 5px 10px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .macos-menu-separator {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .macos-menu-shortcut {
+    margin-left: auto;
+    padding-left: 24px;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: #86868b;
+  }
 }
 
 .shepherd-element {
@@ -948,6 +1048,34 @@ html[data-sidebar-icon-size="large"] {
   --sidebar-icon-size: 28px;
 }
 
+/* Terminal.app-style glass chrome */
+.terminal-window {
+  background: rgba(20, 20, 22, 0.72);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur))
+    saturate(var(--glass-saturate));
+}
+
+.terminal-titlebar {
+  background: rgba(36, 36, 38, 0.55);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.terminal-body .xterm {
+  height: 100%;
+  padding: 2px 0 0;
+}
+
+.terminal-body .xterm-viewport {
+  background-color: transparent !important;
+}
+
+.terminal-body .xterm-screen {
+  background-color: transparent !important;
+}
+
 .xterm .xterm-viewport::-webkit-scrollbar {
   width: 10px;
 }
@@ -958,11 +1086,149 @@ html[data-sidebar-icon-size="large"] {
 }
 
 .xterm .xterm-viewport::-webkit-scrollbar-thumb {
-  background: oklch(0.3 0 0 / 0.6);
+  background: oklch(0.7 0 0 / 0.35);
   border-radius: 5px;
   border: 1px solid transparent;
 }
 
 .xterm .xterm-viewport::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.4 0 0 / 0.8);
+  background: oklch(0.8 0 0 / 0.5);
+}
+
+/* Visual Studio Code (Dark+) chrome around Sandpack */
+.vscode-window {
+  background: #1e1e1e;
+  color: #cccccc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.vscode-titlebar {
+  background: #3c3c3c;
+  border-bottom: 1px solid #252526;
+}
+
+.vscode-activitybar {
+  background: #333333;
+  border-right: 1px solid #252526;
+}
+
+.vscode-sidebar {
+  background: #252526;
+}
+
+.vscode-statusbar {
+  background: #007acc;
+}
+
+.vscode-input {
+  background: #3c3c3c;
+  box-shadow: inset 0 0 0 1px transparent;
+}
+
+.vscode-input:focus {
+  box-shadow: inset 0 0 0 1px #007acc;
+}
+
+.vscode-sandpack,
+.vscode-sandpack .sp-wrapper,
+.vscode-sandpack .sp-stack,
+.vscode-sandpack .sp-editor,
+.vscode-sandpack .sp-code-editor {
+  height: 100% !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+}
+
+.vscode-sandpack .sp-wrapper {
+  border: none !important;
+  background: transparent !important;
+}
+
+.vscode-explorer.sp-file-explorer,
+.vscode-sidebar .sp-file-explorer {
+  background: #252526 !important;
+  border: none !important;
+  padding: 0 0 8px !important;
+}
+
+.vscode-explorer .sp-button,
+.vscode-sidebar .sp-file-explorer .sp-button {
+  color: #cccccc !important;
+  border-radius: 0 !important;
+  font-size: 13px !important;
+}
+
+.vscode-explorer .sp-button[data-active="true"],
+.vscode-sidebar .sp-file-explorer .sp-button[data-active="true"] {
+  background: #37373d !important;
+  color: #ffffff !important;
+}
+
+.vscode-editor .sp-tabs {
+  background: #252526 !important;
+  border-bottom: 1px solid #252526 !important;
+  min-height: 35px !important;
+}
+
+.vscode-editor .sp-tabs-scrollable-container {
+  min-height: 35px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.vscode-editor .sp-tab-container {
+  padding-right: 28px !important;
+  margin: 0 !important;
+  border-right: 1px solid #252526 !important;
+  background: #2d2d2d !important;
+}
+
+.vscode-editor .sp-tab-button {
+  color: #969696 !important;
+  padding: 0 10px !important;
+  height: 35px !important;
+  font-size: 13px !important;
+  background: transparent !important;
+}
+
+.vscode-editor .sp-tab-button[data-active="true"] {
+  color: #ffffff !important;
+  background: #1e1e1e !important;
+}
+
+.vscode-editor .sp-tab-container:has(.sp-tab-button[data-active="true"]) {
+  background: #1e1e1e !important;
+  box-shadow: inset 0 -1px 0 #007acc;
+}
+
+.vscode-editor .sp-cm {
+  background: #1e1e1e !important;
+}
+
+.vscode-editor .cm-editor,
+.vscode-editor .cm-scroller {
+  background: #1e1e1e !important;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.vscode-editor .cm-gutters {
+  background: #1e1e1e !important;
+  border-right: none !important;
+  color: #858585 !important;
+}
+
+.vscode-editor .cm-activeLineGutter {
+  background: #2a2d2e !important;
+  color: #c6c6c6 !important;
+}
+
+.vscode-editor .cm-activeLine {
+  background: #2a2d2e !important;
+}
+
+.vscode-panel .sp-console {
+  background: #1e1e1e !important;
+  border: none !important;
 }

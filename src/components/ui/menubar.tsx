@@ -40,10 +40,7 @@ const Menubar = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <MenubarPrimitive.Root
     ref={ref}
-    className={cn(
-      "os-chrome flex items-center gap-0 h-full",
-      className
-    )}
+    className={cn("os-chrome flex items-center gap-0 h-full", className)}
     {...props}
   />
 ))
@@ -56,7 +53,7 @@ const MenubarTrigger = React.forwardRef<
   <MenubarPrimitive.Trigger
     ref={ref}
     className={cn(
-      "os-chrome flex cursor-default select-none items-center rounded-[4px] px-[10px] h-[20px] outline-none hover:bg-black/[0.06] focus:bg-black/[0.06] data-[state=open]:bg-[var(--macos-accent)] data-[state=open]:text-white",
+      "os-chrome flex cursor-default select-none items-center rounded-[5px] px-[9px] h-[22px] outline-none hover:bg-black/[0.06] focus:bg-black/[0.06] data-[state=open]:bg-[var(--macos-accent)] data-[state=open]:text-white dark:hover:bg-white/[0.1] dark:focus:bg-white/[0.1]",
       className
     )}
     {...props}
@@ -72,15 +69,11 @@ const MenubarSubTrigger = React.forwardRef<
 >(({ className, inset, children, ...props }, ref) => (
   <MenubarPrimitive.SubTrigger
     ref={ref}
-    className={cn(
-      "os-chrome flex cursor-default select-none items-center rounded-[4px] px-[10px] py-[2px] outline-none focus:bg-[var(--macos-accent)] focus:text-white data-[state=open]:bg-[var(--macos-accent)] data-[state=open]:text-white",
-      inset && "pl-8",
-      className
-    )}
+    className={cn("macos-menu-item", inset && "pl-8", className)}
     {...props}
   >
     {children}
-    <ChevronRight className="ml-auto h-3 w-3 opacity-60" />
+    <ChevronRight className="ml-auto size-3.5 opacity-50" />
   </MenubarPrimitive.SubTrigger>
 ))
 MenubarSubTrigger.displayName = MenubarPrimitive.SubTrigger.displayName
@@ -92,7 +85,8 @@ const MenubarSubContent = React.forwardRef<
   <MenubarPrimitive.SubContent
     ref={ref}
     className={cn(
-      "os-chrome z-[60] min-w-[11.5rem] rounded-[6px] border border-black/[0.12] bg-popover backdrop-blur-[40px] backdrop-saturate-150 p-[4px] text-popover-foreground shadow-[0_0_0_0.5px_rgba(0,0,0,0.12),0_8px_30px_rgba(0,0,0,0.2)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-menubar-content-transform-origin]",
+      "macos-menu z-[60] min-w-[11.5rem] overflow-hidden text-popover-foreground",
+      "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-menubar-content-transform-origin]",
       className
     )}
     {...props}
@@ -105,7 +99,7 @@ const MenubarContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Content>
 >(
   (
-    { className, align = "start", alignOffset = -4, sideOffset = 4, ...props },
+    { className, align = "start", alignOffset = -3, sideOffset = 6, ...props },
     ref
   ) => (
     <MenubarPrimitive.Portal>
@@ -115,7 +109,8 @@ const MenubarContent = React.forwardRef<
         alignOffset={alignOffset}
         sideOffset={sideOffset}
         className={cn(
-          "os-chrome z-50 min-w-[11.5rem] rounded-[6px] border border-black/[0.12] bg-popover backdrop-blur-[40px] backdrop-saturate-150 p-[4px] text-popover-foreground shadow-[0_0_0_0.5px_rgba(0,0,0,0.12),0_8px_30px_rgba(0,0,0,0.2)] data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-menubar-content-transform-origin]",
+          "macos-menu z-50 min-w-[11.5rem] overflow-hidden text-popover-foreground",
+          "data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-menubar-content-transform-origin]",
           className
         )}
         {...props}
@@ -133,11 +128,7 @@ const MenubarItem = React.forwardRef<
 >(({ className, inset, ...props }, ref) => (
   <MenubarPrimitive.Item
     ref={ref}
-    className={cn(
-      "os-chrome relative flex cursor-default select-none items-center rounded-[4px] px-[10px] py-[2px] outline-none focus:bg-[var(--macos-accent)] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
-      inset && "pl-8",
-      className
-    )}
+    className={cn("macos-menu-item", inset && "pl-8", className)}
     {...props}
   />
 ))
@@ -149,10 +140,7 @@ const MenubarCheckboxItem = React.forwardRef<
 >(({ className, children, checked, ...props }, ref) => (
   <MenubarPrimitive.CheckboxItem
     ref={ref}
-    className={cn(
-      "os-chrome relative flex cursor-default select-none items-center rounded-[4px] py-[2px] pl-8 pr-[10px] outline-none focus:bg-[var(--macos-accent)] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
-      className
-    )}
+    className={cn("macos-menu-item pl-8", className)}
     checked={checked}
     {...props}
   >
@@ -172,10 +160,7 @@ const MenubarRadioItem = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <MenubarPrimitive.RadioItem
     ref={ref}
-    className={cn(
-      "os-chrome relative flex cursor-default select-none items-center rounded-[4px] py-[2px] pl-8 pr-[10px] outline-none focus:bg-[var(--macos-accent)] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
-      className
-    )}
+    className={cn("macos-menu-item pl-8", className)}
     {...props}
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
@@ -197,7 +182,7 @@ const MenubarLabel = React.forwardRef<
   <MenubarPrimitive.Label
     ref={ref}
     className={cn(
-      "os-chrome-em px-[10px] py-[2px] text-[13px]",
+      "os-chrome-em px-2 py-1 text-[13px]",
       inset && "pl-8",
       className
     )}
@@ -212,7 +197,7 @@ const MenubarSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <MenubarPrimitive.Separator
     ref={ref}
-    className={cn("mx-2 my-[3px] h-px bg-black/[0.1]", className)}
+    className={cn("macos-menu-separator", className)}
     {...props}
   />
 ))
@@ -223,13 +208,7 @@ const MenubarShortcut = ({
   ...props
 }: React.HTMLAttributes<HTMLSpanElement>) => {
   return (
-    <span
-      className={cn(
-        "os-chrome-shortcut ml-auto pl-6 [[data-highlighted]_&]:text-white/80",
-        className
-      )}
-      {...props}
-    />
+    <span className={cn("macos-menu-shortcut", className)} {...props} />
   )
 }
 MenubarShortcut.displayname = "MenubarShortcut"

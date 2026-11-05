@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import { NavMenu, NavMenuItem } from "../../applications";
+import type { NavMenu, NavMenuItem } from "../../applications/types";
 import React from "react";
 import { useWindowManager } from "../../services/WindowManager";
 import {
