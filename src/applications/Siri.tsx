@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from "react";
-import { Search, Sparkles } from "lucide-react";
+import { Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Application } from "./application";
+import { AppIcon } from "../components/application/AppIcon";
 import { useAppContext } from "../store";
 import { closeApp } from "../store/actions/closeApp";
 import {
@@ -10,27 +11,12 @@ import {
 } from "@/lib/assistant/actions";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-const SiriIcon = () => (
-  <span className="relative block size-full overflow-hidden rounded-[22%]">
-    <span
-      className="absolute inset-0"
-      style={{
-        background:
-          "radial-gradient(circle at 30% 25%, #8ec5ff 0%, #a78bfa 45%, #f472b6 100%)",
-      }}
-    />
-    <Sparkles
-      className="absolute left-1/2 top-1/2 size-[42%] -translate-x-1/2 -translate-y-1/2 text-white drop-shadow"
-      strokeWidth={1.75}
-    />
-  </span>
-);
+import Icon from "../icons/siri.png";
 
 export class Siri extends Application {
   static appName = "Siri";
   public name = "Siri";
-  static icon = () => <SiriIcon />;
+  static icon = () => <AppIcon src={Icon} alt="Siri" />;
   public category = "default";
 
   width = 420;
@@ -71,15 +57,12 @@ export const SiriApp = (id: string) => {
   return (
     <div className="flex h-full flex-col gap-4 p-4">
       <div className="flex flex-col items-center gap-3 pt-2 text-center">
-        <span
-          className="flex size-14 items-center justify-center rounded-full shadow-sm"
-          style={{
-            background:
-              "radial-gradient(circle at 30% 25%, #8ec5ff 0%, #a78bfa 45%, #f472b6 100%)",
-          }}
-        >
-          <Sparkles className="size-7 text-white" strokeWidth={1.75} />
-        </span>
+        <img
+          src={Icon}
+          alt=""
+          className="size-14 object-contain drop-shadow-sm"
+          draggable={false}
+        />
         <div>
           <h1 className="os-chrome-em text-[17px] tracking-[-0.3px]">
             {t("apps:siri.greeting")}

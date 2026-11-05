@@ -10,7 +10,56 @@ import { useAppContext } from "../../store";
 import { toggleApp } from "../../store/actions/toggleApp";
 import { updateAppWindow } from "../../store/actions/updateAppWindow";
 import { useOsFormFactor } from "../../hooks/useOsFormFactor";
+import { useShellGestureOptional } from "../shell/ShellGestureContext";
 import { cn } from "@/lib/utils";
+
+/** Ease helpers for the genie curve (driven by gesture progress 0–1). */
+const easeInCubic = (t: number) => t * t * t;
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+/**
+ * Map scrub progress → a macOS-ish genie suck toward the home indicator.
+ * Early progress: cardify (uniform scale + radius). Late: neck + pour down.
+ */
+function genieFromProgress(
+  p: number,
+  mode: "home" | "switcher",
+  dx: number,
+  dy: number
+) {
+  if (mode === "switcher") {
+    const scale = 1 - p * 0.42;
+    return {
+      transform: `translate3d(${dx}px, ${dy}px, 0) scale(${scale})`,
+      origin: "50% 50%",
+      radius: 12 + p * 28,
+      opacity: 1,
+      scrubbing: p > 0.01 || Math.abs(dx) > 1 || Math.abs(dy) > 1,
+    };
+  }
+
+  // Phase blend: card follow → genie neck into home indicator.
+  const card = Math.min(1, p / 0.45);
+  const pour = Math.max(0, (p - 0.35) / 0.65);
+  const pourE = easeInCubic(pour);
+
+  const scaleX = lerp(1, 0.1, easeOutCubic(p));
+  const scaleY = lerp(1, 0.045, easeInCubic(Math.min(1, p * 1.05)));
+  // Converge horizontally to center as it pours; keep finger Y early, then suck down.
+  const tx = dx * (1 - pourE * 0.92);
+  const ty = dy * (1 - pourE * 0.35) + pourE * (window.innerHeight * 0.42);
+  const radius = lerp(0, 44, Math.min(1, card * 1.2 + pourE * 0.4));
+  const opacity = p > 0.78 ? 1 - (p - 0.78) / 0.22 : 1;
+
+  return {
+    transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scaleX}, ${scaleY})`,
+    origin: "50% 100%",
+    radius,
+    opacity: Math.max(0, opacity),
+    scrubbing: p > 0.008 || Math.abs(dx) > 1 || Math.abs(dy) > 1,
+  };
+}
 
 export const ApplicationWindow = (app: Application) => {
   const position = useRef({ x: app.x, y: app.y });
@@ -19,6 +68,10 @@ export const ApplicationWindow = (app: Application) => {
     dispatch,
   } = useAppContext();
   const { isIos, isIpados, isMobileShell } = useOsFormFactor();
+  const gesture = useShellGestureOptional();
+  const scrubbingRef = useRef(false);
+  /** True when the window was already genie-poured — skip Transition leave flash. */
+  const exitViaGenieRef = useRef(false);
 
   const phoneFullscreen = isIos;
   const showChrome = !phoneFullscreen && !app.titleBar;
@@ -30,6 +83,80 @@ export const ApplicationWindow = (app: Application) => {
       toggleApp(app.id)(dispatch);
     }
   };
+
+  const clearScrubStyles = (el: HTMLElement) => {
+    scrubbingRef.current = false;
+    el.style.willChange = "";
+    el.style.transition = "";
+    el.style.transformOrigin = "";
+    // Don't clear transform here — desktop/iPad interact owns it; phone idle has none.
+    if (phoneFullscreen) {
+      el.style.transform = "";
+      el.style.borderRadius = "";
+      el.style.opacity = hideForSwitcher ? "0" : "";
+      el.style.backdropFilter = "";
+      (
+        el.style as CSSStyleDeclaration & { webkitBackdropFilter?: string }
+      ).webkitBackdropFilter = "";
+    }
+  };
+
+  // iPhone only: drive genie scrub via direct DOM (no React re-renders per frame).
+  useEffect(() => {
+    if (!gesture || !isIos || !app.active) return;
+
+    // Keep the final genie frame painted while Transition unmounts.
+    if (app.minimized) return;
+
+    const apply = () => {
+      const el = document.getElementById(app.id);
+      if (!el) return;
+      const mode = gesture.mode.get();
+      const p = gesture.progress.get();
+
+      if (mode === "home" && p > 0.55) exitViaGenieRef.current = true;
+      else if (mode === "idle" || p < 0.15) exitViaGenieRef.current = false;
+
+      if (mode !== "home" && mode !== "switcher") {
+        if (scrubbingRef.current) clearScrubStyles(el);
+        return;
+      }
+
+      const visual = genieFromProgress(
+        p,
+        mode,
+        gesture.dragX.get(),
+        gesture.dragY.get()
+      );
+
+      if (!visual.scrubbing) {
+        if (scrubbingRef.current) clearScrubStyles(el);
+        return;
+      }
+
+      scrubbingRef.current = true;
+      el.style.willChange = "transform, opacity, border-radius";
+      el.style.transition = "none";
+      el.style.transformOrigin = visual.origin;
+      el.style.transform = visual.transform;
+      el.style.borderRadius = `${visual.radius}px`;
+      el.style.opacity = hideForSwitcher ? "0" : String(visual.opacity);
+      // Backdrop blur while warping is expensive and looks muddy.
+      el.style.backdropFilter = "none";
+      (
+        el.style as CSSStyleDeclaration & { webkitBackdropFilter?: string }
+      ).webkitBackdropFilter = "none";
+    };
+
+    const unsubs = [
+      gesture.progress.on("change", apply),
+      gesture.dragX.on("change", apply),
+      gesture.dragY.on("change", apply),
+      gesture.mode.on("change", apply),
+    ];
+    apply();
+    return () => unsubs.forEach((u) => u());
+  }, [gesture, isIos, app.active, app.minimized, app.id, hideForSwitcher]);
 
   // Desktop + iPad: interact.js (same path — custom iPad drag was ending on pointercancel).
   // iPhone: no window drag.
@@ -93,7 +220,6 @@ export const ApplicationWindow = (app: Application) => {
       })
       .resizable({
         edges: { left: false, right: true, bottom: true, top: false },
-        // Hit area from the edge — 0 effectively disables resize on desktop.
         margin: isIpados ? 14 : 8,
         listeners: {
           move(event) {
@@ -130,11 +256,23 @@ export const ApplicationWindow = (app: Application) => {
   const menubarOffset = isIpados ? 36 : 28;
   const desktopTop = app.fullscreen ? menubarOffset : isIpados ? 48 : 50;
 
+  const genieExit = phoneFullscreen && exitViaGenieRef.current;
+  const phoneLeave = genieExit
+    ? "duration-0"
+    : "duration-[480ms] ease-[cubic-bezier(0.32,0.72,0,1)]";
+  const phoneLeaveTo = genieExit
+    ? "opacity-0"
+    : "opacity-0 origin-bottom translate-y-[42vh] scale-x-[0.1] scale-y-[0.05]";
+
   return (
     <Transition
       as="div"
       id={app.id}
       className="app-window flex flex-col absolute origin-center overflow-hidden"
+      afterLeave={() => {
+        exitViaGenieRef.current = false;
+        scrubbingRef.current = false;
+      }}
       style={{
         width: phoneFullscreen || isFullscreen ? "100vw" : app.width,
         height: phoneFullscreen
@@ -173,12 +311,24 @@ export const ApplicationWindow = (app: Application) => {
           ? "none"
           : "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
       }}
-      enter="origin-bottom duration-300"
-      enterFrom="opacity-0 translate-y-[40vh] scale-[0.92]"
+      enter={
+        phoneFullscreen
+          ? "duration-[420ms] ease-[cubic-bezier(0.32,0.72,0,1)] origin-bottom"
+          : "origin-bottom duration-300"
+      }
+      enterFrom={
+        phoneFullscreen
+          ? "opacity-0 translate-y-[28vh] scale-x-[0.88] scale-y-[0.92]"
+          : "opacity-0 translate-y-[40vh] scale-[0.92]"
+      }
       enterTo="opacity-100 scale-100 translate-y-0"
-      leave="duration-250"
-      leaveFrom="opacity-100"
-      leaveTo="opacity-0 translate-y-[30vh] scale-[0.88]"
+      leave={phoneFullscreen ? phoneLeave : "duration-250"}
+      leaveFrom="opacity-100 scale-100"
+      leaveTo={
+        phoneFullscreen
+          ? phoneLeaveTo
+          : "opacity-0 translate-y-[30vh] scale-[0.88]"
+      }
       show={!app.minimized}
       onMouseDown={handleWindowFocus}
     >

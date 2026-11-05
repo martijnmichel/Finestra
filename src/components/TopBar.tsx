@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Search, Sparkles } from "lucide-react";
+import { Search } from "lucide-react";
 import { useAppContext, useAppState } from "../store";
 import { Dialog, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { DialogContent } from "@radix-ui/react-dialog";
@@ -17,6 +17,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { cn } from "@/lib/utils";
 import { storageKey } from "@/lib/os";
 import { startApp } from "@/store/actions/startApp";
+import SiriIcon from "../icons/siri.png";
 
 const TopBar = () => {
   const { launchpad } = useAppState();
@@ -115,7 +116,12 @@ const TopBar = () => {
             title={t("common:menuBar.siri")}
             onClick={() => startApp("Siri")(dispatch)}
           >
-            <Sparkles className="size-3.5" strokeWidth={2} />
+            <img
+              src={SiriIcon}
+              alt=""
+              className="size-3.5 object-contain"
+              draggable={false}
+            />
           </button>
 
           <ControlCenter />

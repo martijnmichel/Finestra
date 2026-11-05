@@ -8,6 +8,7 @@ import {
   animate,
   useMotionValue,
   type MotionValue,
+  type ValueAnimationTransition,
 } from "motion/react";
 
 export type ShellGestureMode = "idle" | "library" | "home" | "switcher";
@@ -20,12 +21,37 @@ type ShellGestureApi = {
   setProgress: (value: number) => void;
   setDragOffset: (x: number, y: number) => void;
   setMode: (mode: ShellGestureMode) => void;
-  settleProgress: (to: number) => Promise<void>;
-  settleDrag: () => Promise<void>;
+  settleProgress: (
+    to: number,
+    transition?: ValueAnimationTransition<number>
+  ) => Promise<void>;
+  settleDrag: (
+    transition?: ValueAnimationTransition<number>
+  ) => Promise<void>;
   reset: () => void;
 };
 
 const ShellGestureContext = createContext<ShellGestureApi | null>(null);
+
+const SPRING_PROGRESS: ValueAnimationTransition<number> = {
+  type: "spring",
+  stiffness: 380,
+  damping: 36,
+  mass: 0.85,
+};
+
+const SPRING_DRAG: ValueAnimationTransition<number> = {
+  type: "spring",
+  stiffness: 420,
+  damping: 34,
+};
+
+/** Ease used for the home-dismiss “genie suck”. */
+export const GENIE_SETTLE: ValueAnimationTransition<number> = {
+  type: "tween",
+  duration: 0.48,
+  ease: [0.32, 0.72, 0, 1],
+};
 
 export const ShellGestureProvider = ({ children }: { children: ReactNode }) => {
   const progress = useMotionValue(0);
@@ -47,31 +73,24 @@ export const ShellGestureProvider = ({ children }: { children: ReactNode }) => {
         dragY.set(y);
       },
       setMode: (next) => mode.set(next),
-      settleProgress: (to: number) =>
+      settleProgress: (to, transition = SPRING_PROGRESS) =>
         new Promise((resolve) => {
           animate(progress, to, {
-            type: "spring",
-            stiffness: 380,
-            damping: 36,
-            mass: 0.85,
+            ...transition,
             onComplete: () => resolve(),
           });
         }),
-      settleDrag: () =>
+      settleDrag: (transition = SPRING_DRAG) =>
         Promise.all([
           new Promise<void>((resolve) => {
             animate(dragX, 0, {
-              type: "spring",
-              stiffness: 420,
-              damping: 34,
+              ...transition,
               onComplete: () => resolve(),
             });
           }),
           new Promise<void>((resolve) => {
             animate(dragY, 0, {
-              type: "spring",
-              stiffness: 420,
-              damping: 34,
+              ...transition,
               onComplete: () => resolve(),
             });
           }),
