@@ -1,44 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
 import FinderIcon from "../icons/finder.png";
 import { AppActions } from "../components/application/AppActions";
 import {
   AppWindow,
-  ChevronLeft,
-  ChevronRight,
+  Cloud,
   Clock,
+  Columns3,
   Download,
   FileText,
+  Film,
   GalleryThumbnails,
+  HardDrive,
+  Home,
+  Image,
+  Laptop,
+  LayoutGrid,
+  List,
   Monitor,
-  MoreVertical,
+  MoreHorizontal,
+  Music,
+  Network,
+  Search,
   Share,
   Tag,
+  Users,
+  type LucideIcon,
 } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarHeader,
-} from "@/components/ui/sidebar";
-
-import {
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
+  FloatingGroup,
+  FloatingGroupButton,
+} from "@/components/ui/floating-group";
+import { FloatingContent } from "@/components/ui/floating-content";
 import { NavMenu } from ".";
 import { AppNavigation } from "../components/application/AppNavigation";
+import { cn } from "@/lib/utils";
+import {
+  FINDER_SIDEBAR,
+  filesForFolder,
+  type FinderSidebarItem,
+} from "./finder/data";
 
 export class Finder extends Application {
   static appName = "Finder";
@@ -56,174 +59,247 @@ export class Finder extends Application {
   }
 }
 
+const SIDEBAR_ICONS: Record<FinderSidebarItem["icon"], LucideIcon> = {
+  clock: Clock,
+  "app-window": AppWindow,
+  monitor: Monitor,
+  "file-text": FileText,
+  download: Download,
+  image: Image,
+  music: Music,
+  film: Film,
+  cloud: Cloud,
+  users: Users,
+  "hard-drive": HardDrive,
+  laptop: Laptop,
+  network: Network,
+  home: Home,
+};
+
+const SECTION_LABELS: Record<FinderSidebarItem["section"], string> = {
+  favorites: "Favorites",
+  icloud: "iCloud",
+  locations: "Locations",
+  tags: "Tags",
+};
+
 export const FinderApp = (id: string) => {
-  const [items, setItems] = useState<
-    { id: number; filename: string; date: string }[]
-  >([]);
+  const [activeId, setActiveId] = useState("recents");
+  const [view, setView] = useState<"icons" | "list" | "columns" | "gallery">(
+    "list"
+  );
+  const [query, setQuery] = useState("");
 
-  const [active, setActive] = useState("Recents");
+  const activeItem =
+    FINDER_SIDEBAR.find((item) => item.id === activeId) ?? FINDER_SIDEBAR[0];
 
-  const getFiles = () => {
-    fetch("https://my.api.mockaroo.com/files.json?key=25574bd0")
-      .then((response) => response.json())
-      .then((json) => setItems(json));
-  };
-  const favs = [
-    {
-      label: "Recents",
-      icon: <Clock className="size-4" />,
-    },
-    { label: "Applications", icon: <AppWindow className="size-4" /> },
-    { label: "Desktop", icon: <Monitor className="size-4" /> },
-    { label: "Documents", icon: <FileText className="size-4" /> },
-    {
-      label: "Downloads",
-      icon: <Download className="size-4" />,
-    },
-  ];
+  const items = useMemo(() => {
+    const files = filesForFolder(activeId);
+    const q = query.trim().toLowerCase();
+    if (!q) return files;
+    return files.filter(
+      (f) =>
+        f.name.toLowerCase().includes(q) || f.kind.toLowerCase().includes(q)
+    );
+  }, [activeId, query]);
 
-  useEffect(() => {
-    getFiles();
-  }, []);
+  const sections = (
+    ["favorites", "icloud", "locations", "tags"] as const
+  ).map((section) => ({
+    section,
+    label: SECTION_LABELS[section],
+    items: FINDER_SIDEBAR.filter((item) => item.section === section),
+  }));
 
   const navigation: NavMenu[] = [
     {
       label: "File",
       items: [
-        { label: "New File", function: () => {}, shortcut: "⌘N" },
-        { label: "New Window", function: () => {}, shortcut: "⇧⌘N" },
+        { label: "New Finder Window", function: () => {}, shortcut: "⌘N" },
+        { label: "New Folder", function: () => {}, shortcut: "⇧⌘N" },
         { label: "separator", function: () => {} },
-        { label: "Close", function: () => {}, shortcut: "⌘W" },
+        { label: "Close Window", function: () => {}, shortcut: "⌘W" },
       ],
     },
     {
       label: "Edit",
       items: [
-        { label: "Undo", function: () => {} },
-        { label: "Redo", function: () => {} },
+        { label: "Undo", function: () => {}, shortcut: "⌘Z" },
         { label: "Cut", function: () => {}, shortcut: "⌘X" },
         { label: "Copy", function: () => {}, shortcut: "⌘C" },
         { label: "Paste", function: () => {}, shortcut: "⌘V" },
-        { label: "Find", function: () => {}, shortcut: "⌘F" },
-        { label: "Replace", function: () => {}, shortcut: "⌥⌘F" },
+        { label: "Select All", function: () => {}, shortcut: "⌘A" },
       ],
     },
     {
-      label: "Window",
+      label: "View",
       items: [
-        { label: "New Window", function: () => {}, shortcut: "⇧⌘N" },
+        { label: "as Icons", function: () => setView("icons") },
+        { label: "as List", function: () => setView("list") },
+        { label: "as Columns", function: () => setView("columns") },
+        { label: "as Gallery", function: () => setView("gallery") },
       ],
     },
     {
-      label: "Help",
+      label: "Go",
       items: [
-        { label: "Welcome", function: () => {}, shortcut: "⌘H" },
-        { label: "Show All Commands", function: () => {}, shortcut: "⌘⇧P" },
+        { label: "Recents", function: () => setActiveId("recents") },
+        { label: "Documents", function: () => setActiveId("documents") },
+        { label: "Downloads", function: () => setActiveId("downloads") },
       ],
     },
   ];
 
   return (
-    <SidebarProvider className="h-full min-h-0">
-      <Sidebar
-        collapsible="none"
-        className="flex-col hidden @xl/window:flex w-[210px] min-h-0 h-full grow border-r border-black/[0.08]"
-        style={{
-          background: "var(--sidebar)",
-          backdropFilter:
-            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
-          WebkitBackdropFilter:
-            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
-        }}
-      >
-        <SidebarContent className="grow h-full pt-1" data-handle={id}>
-          <div className="px-2 pt-1 pb-1">
-            <AppActions id={id} />
-          </div>
+    <div
+      className="@container/window flex h-full min-h-0 w-full"
+      style={{
+        background: "var(--sidebar)",
+        backdropFilter:
+          "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
+        WebkitBackdropFilter:
+          "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
+      }}
+    >
+      <aside className="hidden @xl/window:flex w-[210px] shrink-0 min-h-0 flex-col">
+        <div className="px-2 pt-1 pb-1" data-handle={id}>
+          <AppActions id={id} />
+        </div>
 
-          <div className="px-2.5 pt-3 pb-2">
-            <h6 className="os-chrome-sm text-[#86868b] mb-1 px-1.5">
-              Favorites
-            </h6>
-            {favs.map((fav) => {
-              const selected = active === fav.label;
-              return (
-                <div
-                  className={`flex gap-[7px] items-center px-[7px] py-[3px] rounded-[6px] cursor-default ${
-                    selected
-                      ? "bg-black/[0.08] text-[#1d1d1f]"
-                      : "text-[#1d1d1f] hover:bg-black/[0.04]"
-                  }`}
-                  key={fav.label}
-                  onClick={() => {
-                    getFiles();
-                    setActive(fav.label);
-                  }}
-                >
-                  <span className="text-[var(--macos-accent)] *:size-[15px] shrink-0">
-                    {fav.icon}
-                  </span>
-                  <span className="os-chrome truncate">{fav.label}</span>
-                </div>
-              );
-            })}
-          </div>
-        </SidebarContent>
-      </Sidebar>
-      <div className="flex flex-col w-full flex-grow min-w-0 bg-white">
+        <div className="px-2 pt-1 pb-3 flex-1 min-h-0 overflow-y-auto space-y-3">
+          {sections.map(({ section, label, items: sectionItems }) => (
+            <div key={section}>
+              <h6 className="os-chrome-sm text-[#86868b] mb-1 px-2">{label}</h6>
+              <div className="space-y-px">
+                {sectionItems.map((item) => {
+                  const selected = item.id === activeId;
+                  const Icon = SIDEBAR_ICONS[item.icon];
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setActiveId(item.id)}
+                      className={cn(
+                        "w-full flex gap-[7px] items-center px-[7px] py-[3px] rounded-[6px] cursor-default text-left",
+                        selected
+                          ? "bg-black/[0.08] dark:bg-white/[0.14]"
+                          : "hover:bg-black/[0.04] dark:hover:bg-white/[0.07]"
+                      )}
+                    >
+                      {item.section === "tags" ? (
+                        <span
+                          className="size-[10px] rounded-full shrink-0 ml-0.5"
+                          style={{ background: item.tagColor }}
+                        />
+                      ) : (
+                        <span className="text-[var(--macos-accent)] shrink-0">
+                          <Icon className="size-[15px]" strokeWidth={2.25} />
+                        </span>
+                      )}
+                      <span className="os-chrome truncate text-[13px] text-foreground">
+                        {item.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </aside>
+
+      <div className="flex flex-1 min-w-0 min-h-0 flex-col pr-2.5 pb-2.5 gap-1.5">
         <AppNavigation items={navigation} id={id} appName="Finder" />
-        <div className="window-toolbar flex justify-between items-center px-2 py-1.5 w-full">
-          <div className="flex items-center gap-0.5">
-            <Button variant="ghost" size="icon" className="size-7">
-              <ChevronLeft className="size-4" />
-            </Button>
 
-            <Button variant="ghost" size="icon" className="size-7">
-              <ChevronRight className="size-4" />
-            </Button>
+        <div
+          className="flex items-center gap-2 px-1 py-1 w-full shrink-0"
+          data-handle={id}
+        >
+          <span className="os-chrome-em text-[13px] min-w-0 truncate px-1 text-foreground">
+            {activeItem.label}
+          </span>
 
-            <span className="os-chrome-em ml-1.5">{active}</span>
-          </div>
+          <div className="flex-1" />
 
-          <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon">
+          <FloatingGroup>
+            <FloatingGroupButton
+              active={view === "icons"}
+              onClick={() => setView("icons")}
+            >
+              <LayoutGrid />
+            </FloatingGroupButton>
+            <FloatingGroupButton
+              active={view === "list"}
+              onClick={() => setView("list")}
+            >
+              <List />
+            </FloatingGroupButton>
+            <FloatingGroupButton
+              active={view === "columns"}
+              onClick={() => setView("columns")}
+            >
+              <Columns3 />
+            </FloatingGroupButton>
+            <FloatingGroupButton
+              active={view === "gallery"}
+              onClick={() => setView("gallery")}
+            >
               <GalleryThumbnails />
-            </Button>
+            </FloatingGroupButton>
+          </FloatingGroup>
 
-            <Button variant="ghost" size="icon">
+          <FloatingGroup>
+            <FloatingGroupButton>
               <Share />
-            </Button>
-
-            <Button variant="ghost" size="icon">
+            </FloatingGroupButton>
+            <FloatingGroupButton>
               <Tag />
-            </Button>
+            </FloatingGroupButton>
+            <FloatingGroupButton>
+              <MoreHorizontal />
+            </FloatingGroupButton>
+          </FloatingGroup>
 
-            <Button variant="ghost" size="icon">
-              <MoreVertical />
-            </Button>
+          <div className="relative w-[128px] shrink-0">
+            <Search className="absolute left-1.5 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground pointer-events-none" />
+            <Input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search"
+              className="macos-input-plain h-[28px] pl-6 pr-1 text-[13px] text-muted-foreground placeholder:text-muted-foreground"
+            />
           </div>
         </div>
 
-        <div className="h-full overflow-y-auto px-3 py-1">
-          <div>
-            {items.map((item, i) => {
-              return (
-                i < 20 && (
-                  <div
-                    className={`${
-                      i % 2 === 1 ? "bg-[#f5f5f7]" : ""
-                    } os-chrome w-full px-3 py-[2px] rounded-[4px] flex justify-between cursor-default hover:bg-black/[0.05]`}
-                    key={`itemkey-${item.id}`}
-                  >
-                    <span>{item.filename}</span>
-                    <span className="os-chrome text-[#86868b]">{item.date}</span>
-                  </div>
-                )
-              );
-            })}
+        <FloatingContent>
+          <div className="sticky top-0 z-[1] grid grid-cols-[minmax(0,1fr)_140px_110px] gap-2 px-3 py-1.5 border-b border-black/[0.08] bg-[#f5f5f7]/95 os-chrome-sm text-[#86868b]">
+            <span>Name</span>
+            <span>Date Modified</span>
+            <span className="text-right">Size</span>
           </div>
-        </div>
+          <div className="h-full overflow-y-auto px-1.5 py-1">
+            {items.map((item) => (
+              <div
+                key={item.id}
+                className="os-chrome grid grid-cols-[minmax(0,1fr)_140px_110px] gap-2 w-full px-2 py-[3px] rounded-[5px] cursor-default text-[#1d1d1f] hover:bg-[var(--macos-accent)] hover:text-white group"
+              >
+                <span className="truncate">{item.name}</span>
+                <span className="truncate text-[#86868b] group-hover:text-white/85">
+                  {item.date}
+                </span>
+                <span className="truncate text-right text-[#86868b] group-hover:text-white/85">
+                  {item.size}
+                </span>
+              </div>
+            ))}
+            {items.length === 0 && (
+              <div className="os-chrome text-center text-[#86868b] py-10">
+                No items to show
+              </div>
+            )}
+          </div>
+        </FloatingContent>
       </div>
-    </SidebarProvider>
+    </div>
   );
 };

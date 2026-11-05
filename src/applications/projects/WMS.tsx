@@ -8,7 +8,7 @@ import { projects } from "./projects";
 export class WMS extends Application {
   static appName = "WMS";
   public name = "WMS";
-  static icon = () => <AppIcon src={Icon} alt="WMS" />;
+  static icon = () => <AppIcon src={Icon} alt="WMS" squircle />;
   static category = "project";
 
   component = () => WMSApp();

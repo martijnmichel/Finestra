@@ -8,7 +8,7 @@ import { projects } from "./projects";
 export class Classroom extends Application {
   static appName = "Classroom";
   public name = "Classroom";
-  static icon = () => <AppIcon src={Icon} alt="Classroom" />;
+  static icon = () => <AppIcon src={Icon} alt="Classroom" squircle />;
   static category = "project";
 
   component = () => ClassroomApp();

@@ -8,7 +8,7 @@ import { projects } from "./projects";
 export class Capo extends Application {
   static appName = "Capo";
   public name = "Capo";
-  static icon = () => <AppIcon src={Icon} alt="Capo" />;
+  static icon = () => <AppIcon src={Icon} alt="Capo" squircle />;
   static category = "project";
 
   component = () => CapoApp();

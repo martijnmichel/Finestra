@@ -8,7 +8,7 @@ import { projects } from "./projects";
 export class Sonid extends Application {
   static appName = "Sonid";
   public name = "Sonid";
-  static icon = () => <AppIcon src={Icon} alt="Sonid" />;
+  static icon = () => <AppIcon src={Icon} alt="Sonid" squircle />;
   static category = "project";
 
   component = () => SonidApp();

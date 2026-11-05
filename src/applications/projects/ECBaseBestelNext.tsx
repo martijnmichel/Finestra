@@ -9,9 +9,7 @@ import Icon from "../../icons/demo-agf.webp";
 export class ECBaseBestelNext extends Application {
   static appName = "ECBaseBestelNext";
   public name = "ECBaseBestelNext";
-  static icon = () => (
-    <AppIcon src={Icon} alt="ECBaseBestelNext" className="rounded-[22%] object-cover" />
-  );
+  static icon = () => <AppIcon src={Icon} alt="ECBaseBestelNext" squircle />;
   static category = "project";
 
   component = () => ECBaseBestelApp();

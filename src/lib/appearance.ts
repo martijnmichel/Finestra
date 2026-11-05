@@ -108,11 +108,11 @@ const glassTokens = (liquidGlass: LiquidGlass, isDark: boolean) => {
       dockBg: isDark ? "rgba(40, 40, 42, 0.45)" : "rgba(245, 245, 247, 0.45)",
       windowBody: isDark ? "rgba(30, 30, 30, 0.86)" : "rgba(255, 255, 255, 0.86)",
       settingsContent: isDark
-        ? "rgba(44, 44, 46, 0.55)"
-        : "rgba(242, 242, 247, 0.72)",
+        ? "rgba(28, 28, 30, 0.45)"
+        : "rgba(232, 232, 237, 0.55)",
       settingsGroup: isDark
-        ? "rgba(58, 58, 60, 0.78)"
-        : "rgba(255, 255, 255, 0.82)",
+        ? "rgba(58, 58, 60, 0.88)"
+        : "rgba(255, 255, 255, 0.9)",
       blur: "40px",
       saturate: "190%",
     };
@@ -129,9 +129,11 @@ const glassTokens = (liquidGlass: LiquidGlass, isDark: boolean) => {
     dockBg: isDark ? "rgba(40, 40, 42, 0.72)" : "rgba(245, 245, 247, 0.72)",
     windowBody: isDark ? "rgba(30, 30, 30, 0.94)" : "rgba(255, 255, 255, 0.94)",
     settingsContent: isDark
-      ? "rgba(44, 44, 46, 0.88)"
-      : "rgba(242, 242, 247, 0.92)",
-    settingsGroup: isDark ? "rgba(58, 58, 60, 0.95)" : "rgba(255, 255, 255, 0.95)",
+      ? "rgba(28, 28, 30, 0.72)"
+      : "rgba(235, 235, 240, 0.88)",
+    settingsGroup: isDark
+      ? "rgba(58, 58, 60, 0.96)"
+      : "rgba(255, 255, 255, 0.96)",
     blur: "28px",
     saturate: "160%",
   };

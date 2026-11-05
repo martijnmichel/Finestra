@@ -6,20 +6,28 @@ alwaysApply: false
 
 # macOS shadcn components
 
-Controls should read as macOS, not generic Material/shadcn defaults.
+Controls should read as current macOS (Tahoe / Liquid Glass) — context decides fill.
 
-## Do
+## Inputs / selects / textarea
 
-- Height ~28px, radius ~6px, `os-chrome` / 13px SF-like type
-- Fills: `var(--control-fill)` / hover `var(--control-fill-hover)` — classes `.macos-input`, `.macos-select`, `.macos-button`
-- Focus ring: accent mix, e.g. `color-mix(in srgb, var(--macos-accent) 35%, transparent)`
-- Primary actions / checked switch / selected radio / menu highlight: `var(--macos-accent)`
-- Select trigger: double chevron (`ChevronsUpDown`), not a single chevron
-- Switch: 38×21 pill, white thumb; Radio: filled accent circle with white center dot
-- Popovers/menus: translucent `bg-popover` + backdrop blur; item focus `bg-[var(--macos-accent)] text-white`
+| Class | When | Look |
+|-------|------|------|
+| `.macos-input` (default Input/Textarea) | Boxed entry (time fields, compact fields) | Subtle grey well + soft `0.5px` border + ~6px radius |
+| `.macos-input-plain` | Stacked label forms (Request) | Transparent, no border |
+| `.macos-select` | Settings row values | Text + `ChevronsUpDown` only, no well |
+| `.macos-search` | Finder / Settings / Safari search | Capsule fill, no hard border |
 
-## Don't
+- Focus on boxed fields: accent ring via `color-mix(... var(--macos-accent) ...)`
+- Never hardcode `#007aff` — use `var(--macos-accent)`
 
-- Hardcode blue hex for selection/focus
-- Use tall Material-style inputs (h-10+) for OS chrome
-- Rely on opaque white-only surfaces that ignore Liquid Glass / dark mode
+## Switch & radio
+
+- Switch: accent on, flat `#e5e5ea` off, white thumb
+- Radio: flat grey off; accent + white center dot on
+
+## Floating chrome (Tahoe) — two patterns
+
+- Toolbar actions: `FloatingGroup` / `FloatingGroupButton`
+- **Settings-style:** `FloatingSidebar` (+ Shell/Content) — **sidebar floats**, content flush
+- **Finder-style:** flush dark chrome + sidebar; **`FloatingContent`** inset card floats (top toolbar stays on chrome; search often plain/`macos-input-plain`)
+- Don’t mix both floating surfaces in one window

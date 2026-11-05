@@ -385,9 +385,9 @@ export const AppearancePane = () => {
                 updateTheme({ highlightColor: v as HighlightColorId })
               }
             >
-              <SelectTrigger className="macos-select w-[148px]">
+              <SelectTrigger className="macos-select w-auto justify-end">
                 <SelectValue>
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-1.5">
                     <ColorDot id={theme.highlightColor} />
                     {accentLabel(theme.highlightColor)}
                   </span>
@@ -435,7 +435,7 @@ export const AppearancePane = () => {
                 })
               }
             >
-              <SelectTrigger className="macos-select w-[148px]">
+              <SelectTrigger className="macos-select w-auto justify-end">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -472,7 +472,7 @@ export const AppearancePane = () => {
                 updateTheme({ sidebarIconSize: v as SidebarIconSize })
               }
             >
-              <SelectTrigger className="macos-select w-[120px]">
+              <SelectTrigger className="macos-select w-auto justify-end">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

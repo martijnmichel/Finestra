@@ -4,7 +4,6 @@ import Launchpad from "../icons/launchpad.png";
 import { AppButton } from "./application/AppButton";
 import { useAppContext } from "../store";
 import { toggleLaunchpad } from "../store/actions/toggleLaunchPad";
-import { toggleApp } from "../store/actions/toggleApp";
 import { MacOSDock } from "./ui/shadcn-io/mac-os-dock";
 import { startApp } from "@/store/actions/startApp";
 import { uniqBy } from "lodash";
@@ -30,37 +29,25 @@ const BottomDock = () => {
         id: "finder",
         name: "Finder",
         icon: appIcon("Finder"),
-        action: () =>
-          state.applications.some((app) => app.id === "Finder")
-            ? toggleApp("Finder")(dispatch)
-            : startApp("Finder")(dispatch),
+        action: () => startApp("Finder")(dispatch),
       },
       ...state.applications.map((app) => ({
         id: app.id,
         name: app.name,
         icon: appIcon(app.name),
-        action: () =>
-          state.applications.some((app) => app.id === app.id)
-            ? toggleApp(app.id)(dispatch)
-            : startApp(app.name)(dispatch),
+        action: () => startApp(app.name)(dispatch),
       })),
       {
         id: "safari",
         name: "Safari",
         icon: appIcon("Safari"),
-        action: () =>
-          state.applications.some((app) => app.id === "Safari")
-            ? toggleApp("Safari")(dispatch)
-            : startApp("Safari")(dispatch),
+        action: () => startApp("Safari")(dispatch),
       },
       {
         id: "settings",
         name: "Settings",
         icon: appIcon("Settings"),
-        action: () =>
-          state.applications.some((app) => app.id === "Settings")
-            ? toggleApp("Settings")(dispatch)
-            : startApp("Settings")(dispatch),
+        action: () => startApp("Settings")(dispatch),
       },
     ],
     "name"

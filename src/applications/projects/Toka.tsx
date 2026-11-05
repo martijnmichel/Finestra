@@ -8,7 +8,7 @@ import { projects } from "./projects";
 export class Toka extends Application {
   static appName = "Toka";
   public name = "Toka";
-  static icon = () => <AppIcon src={Icon} alt="Toka" />;
+  static icon = () => <AppIcon src={Icon} alt="Toka" squircle />;
   static category = "project";
 
   component = () => TokaApp();

@@ -3,9 +3,22 @@ import { Application } from "../application";
 import { AppIcon } from "../../components/application/AppIcon";
 import SafariIcon from "../../icons/safari.png";
 import { AppActions } from "../../components/application/AppActions";
-import { ChevronLeft, ChevronRight, Copy, Plus, Share, Shield, Sidebar } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Copy,
+  Plus,
+  Share,
+  Shield,
+  Sidebar,
+} from "lucide-react";
 import { NavMenu } from "..";
 import { AppNavigation } from "../../components/application/AppNavigation";
+import {
+  FloatingGroup,
+  FloatingGroupButton,
+} from "@/components/ui/floating-group";
+import { Input } from "@/components/ui/input";
 
 export class Safari extends Application {
   static appName = "Safari";
@@ -29,7 +42,7 @@ export const SafariApp = (id: string) => {
   const [url, setUrl] = useState("https://sonid.app");
   const [history, setHistory] = useState(["https://sonid.app"]);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setUrl(address);
     setHistory([...history, address]);
@@ -71,36 +84,67 @@ export const SafariApp = (id: string) => {
     <>
       <AppNavigation items={navigation} id={id} appName="Safari" />
       <div
-        className="window-toolbar px-2 py-[7px] flex items-center justify-between rounded-t-[var(--window-radius)]"
+        className="px-2.5 py-2 flex items-center gap-2 rounded-t-[var(--window-radius)]"
         data-handle={id}
+        style={{
+          background: "var(--window-toolbar)",
+          backdropFilter:
+            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
+          WebkitBackdropFilter:
+            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
+        }}
       >
-        <div className="icon-container">
-          <AppActions id={id} />
+        <AppActions id={id} />
 
-          <Sidebar className="size-4"/>
+        <FloatingGroup>
+          <FloatingGroupButton>
+            <Sidebar />
+          </FloatingGroupButton>
+        </FloatingGroup>
 
-          <ChevronLeft className="size-4"/>
+        <FloatingGroup>
+          <FloatingGroupButton
+            disabled={history.length < 2}
+            onClick={() => {
+              if (history.length < 2) return;
+              const prev = history[history.length - 2];
+              setAddress(prev);
+              setUrl(prev);
+              setHistory(history.slice(0, -1));
+            }}
+          >
+            <ChevronLeft />
+          </FloatingGroupButton>
+          <FloatingGroupButton disabled>
+            <ChevronRight />
+          </FloatingGroupButton>
+        </FloatingGroup>
 
-          <ChevronRight className="size-4"/>
-        </div>
-
-        <form onSubmit={handleSubmit} className="flex items-center gap-4">
-          <Shield className="size-4"/>
-
-          <input
-            value={address}
-            className="bg-[#e8e8ed] text-[#6e6e73] text-[12px] border-0 rounded-[6px] px-20 py-[4px] focus:outline-none focus:ring-2 focus:ring-[var(--macos-accent)]/40"
-            onChange={(val) => setAddress(val.target.value)}
-          />
+        <form
+          onSubmit={handleSubmit}
+          className="flex-1 flex items-center justify-center min-w-0"
+        >
+          <div className="relative w-full max-w-[420px]">
+            <Shield className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground pointer-events-none" />
+            <Input
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="macos-search h-[28px] pl-8 pr-3 text-center text-[12px] text-muted-foreground"
+            />
+          </div>
         </form>
 
-        <div className="flex gap-4 text-[#6e6e73]">
-          <Share className="size-4"/>
-
-          <Plus className="size-4"/>
-
-          <Copy className="size-4"/>
-        </div>
+        <FloatingGroup>
+          <FloatingGroupButton>
+            <Share />
+          </FloatingGroupButton>
+          <FloatingGroupButton>
+            <Plus />
+          </FloatingGroupButton>
+          <FloatingGroupButton>
+            <Copy />
+          </FloatingGroupButton>
+        </FloatingGroup>
       </div>
 
       <iframe
@@ -108,6 +152,7 @@ export const SafariApp = (id: string) => {
         width="100%"
         height="100%"
         className="rounded-b-lg bg-white"
+        title="Safari"
       />
     </>
   );

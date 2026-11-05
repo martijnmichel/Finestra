@@ -38,6 +38,15 @@ import {
 } from "lucide-react";
 import { AppActions } from "@/components/application/AppActions";
 import { Input } from "@/components/ui/input";
+import {
+  FloatingGroup,
+  FloatingGroupButton,
+} from "@/components/ui/floating-group";
+import {
+  FloatingSidebar,
+  FloatingSidebarContent,
+  FloatingSidebarShell,
+} from "@/components/ui/floating-sidebar";
 import { cn } from "@/lib/utils";
 import { AppearancePane } from "./AppearancePane";
 import {
@@ -123,7 +132,7 @@ const SettingsIconBadge = ({
 const StubPane = ({ item }: { item: SettingsNavItem }) => (
   <div className="os-chrome max-w-[560px] mx-auto w-full flex flex-col items-center text-center pt-10 gap-3">
     <SettingsIconBadge item={item} size="lg" />
-    <h2 className="text-[22px] font-semibold tracking-tight text-foreground">
+    <h2 className="text-[15px] font-semibold tracking-[-0.2px] text-foreground">
       {item.label}
     </h2>
     <p className="text-[13px] text-muted-foreground max-w-sm leading-relaxed">
@@ -170,7 +179,7 @@ const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
     <div className="os-chrome max-w-[560px] mx-auto w-full flex flex-col gap-5">
       <div className="flex flex-col items-center text-center gap-2 pt-2 pb-1">
         <SettingsIconBadge item={item} size="lg" />
-        <h2 className="text-[22px] font-semibold tracking-tight">{item.label}</h2>
+        <h2 className="text-[15px] font-semibold tracking-[-0.2px]">{item.label}</h2>
         <p className="text-[13px] text-muted-foreground max-w-sm">
           {item.description}
         </p>
@@ -242,29 +251,22 @@ export const SettingsApp = (id: string) => {
   };
 
   return (
-    <div className="flex h-full min-h-0 w-full">
-      <aside
-        className="flex flex-col w-[220px] shrink-0 min-h-0 border-r border-black/[0.08] dark:border-white/[0.08]"
-        style={{
-          background: "var(--sidebar)",
-          backdropFilter:
-            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
-          WebkitBackdropFilter:
-            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
-        }}
-      >
+    <FloatingSidebarShell
+      shellStyle={{ background: "var(--settings-content)" }}
+    >
+      <FloatingSidebar width={220}>
         <div className="px-2 pt-1 pb-1" data-handle={id}>
           <AppActions id={id} />
         </div>
 
         <div className="px-2.5 pb-2">
           <div className="relative">
-            <Search className="absolute left-2 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground pointer-events-none" />
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground pointer-events-none" />
             <Input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search"
-              className="macos-input h-[28px] pl-7 pr-2 text-[13px] rounded-[7px]"
+              className="macos-search h-[28px] pl-7 pr-2 text-[13px]"
             />
           </div>
         </div>
@@ -314,44 +316,35 @@ export const SettingsApp = (id: string) => {
             );
           })}
         </div>
-      </aside>
+      </FloatingSidebar>
 
-      <main
-        className="flex-1 min-w-0 min-h-0 flex flex-col relative"
-        style={{
-          background: "var(--settings-content)",
-          backdropFilter:
-            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
-          WebkitBackdropFilter:
-            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
-        }}
-      >
+      <FloatingSidebarContent className="rounded-tl-[16px] bg-white/70 dark:bg-[#1c1c1e]/55">
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none rounded-tl-[16px]"
           style={{ background: "var(--window-tint)" }}
         />
 
         <header
-          className="relative z-[1] flex items-center gap-1 px-3 h-[44px] shrink-0"
+          className="relative z-[1] flex items-center gap-2.5 px-4 h-[48px] shrink-0"
           data-handle={id}
         >
-          <button
-            type="button"
-            onClick={goBack}
-            disabled={historyIndex <= 0}
-            className="size-7 inline-flex items-center justify-center rounded-[6px] text-muted-foreground hover:bg-black/[0.05] dark:hover:bg-white/[0.08] disabled:opacity-30 cursor-default"
-          >
-            <ChevronLeft className="size-5" />
-          </button>
-          <button
-            type="button"
-            onClick={goForward}
-            disabled={historyIndex >= history.length - 1}
-            className="size-7 inline-flex items-center justify-center rounded-[6px] text-muted-foreground hover:bg-black/[0.05] dark:hover:bg-white/[0.08] disabled:opacity-30 cursor-default"
-          >
-            <ChevronRight className="size-5" />
-          </button>
-          <h1 className="os-chrome-em ml-1.5 text-[13px]">{activeItem.label}</h1>
+          <FloatingGroup>
+            <FloatingGroupButton
+              onClick={goBack}
+              disabled={historyIndex <= 0}
+            >
+              <ChevronLeft />
+            </FloatingGroupButton>
+            <FloatingGroupButton
+              onClick={goForward}
+              disabled={historyIndex >= history.length - 1}
+            >
+              <ChevronRight />
+            </FloatingGroupButton>
+          </FloatingGroup>
+          <span className="os-chrome text-[13px] font-semibold tracking-[-0.08px] text-foreground">
+            {activeItem.label}
+          </span>
         </header>
 
         <div className="relative z-[1] flex-1 min-h-0 overflow-y-auto px-8 pb-6">
@@ -363,7 +356,7 @@ export const SettingsApp = (id: string) => {
             <StubPane item={activeItem} />
           )}
         </div>
-      </main>
-    </div>
+      </FloatingSidebarContent>
+    </FloatingSidebarShell>
   );
 };

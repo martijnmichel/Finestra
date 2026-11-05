@@ -9,7 +9,7 @@ import Icon from "../../icons/wordpress.png";
 export class WordPress extends Application {
   static appName = "WordPress";
   public name = "WordPress";
-  static icon = () => <AppIcon src={Icon} alt="WordPress" />;
+  static icon = () => <AppIcon src={Icon} alt="WordPress" squircle />;
   static category = "project";
 
   component = () => WordPressApp();

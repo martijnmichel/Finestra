@@ -8,9 +8,7 @@ import { projects } from "./projects";
 export class MetaAssembled extends Application {
   static appName = "MetaAssembled";
   public name = "MetaAssembled";
-  static icon = () => (
-    <AppIcon src={Icon} alt="MetaAssembled" className="rounded-[22%] object-cover" />
-  );
+  static icon = () => <AppIcon src={Icon} alt="MetaAssembled" squircle />;
   static category = "project";
 
   component = () => MetaAssembledApp();

@@ -8,7 +8,7 @@ import { projects } from "./projects";
 export class DirectusMobile extends Application {
   static appName = "DirectusMobile";
   public name = "DirectusMobile";
-  static icon = () => <AppIcon src={Icon} alt="DirectusMobile" />;
+  static icon = () => <AppIcon src={Icon} alt="DirectusMobile" squircle />;
   static category = "project";
 
   component = () => DirectusMobileApp();
