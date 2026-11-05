@@ -5,6 +5,7 @@ export type SettingsPaneId =
   | "vpn"
   | "energy"
   | "general"
+  | "language-region"
   | "accessibility"
   | "appearance"
   | "apple-intelligence"
@@ -36,6 +37,13 @@ export type SettingsNavItem = {
   iconBg: string;
   /** Lucide icon name key used in SettingsApp */
   icon: string;
+};
+
+/** Nested under General — deep-linkable, not shown in the sidebar list. */
+export const LANGUAGE_REGION_PANE: SettingsNavItem = {
+  id: "language-region",
+  iconBg: "#007aff",
+  icon: "globe",
 };
 
 export const SETTINGS_NAV: SettingsNavItem[] = [
@@ -75,3 +83,23 @@ export const SETTINGS_NAV: SettingsNavItem[] = [
   { id: "trackpad", iconBg: "#8e8e93", icon: "tablet" },
   { id: "printers", iconBg: "#8e8e93", icon: "printer" },
 ];
+
+export const ALL_SETTINGS_PANES: SettingsNavItem[] = [
+  ...SETTINGS_NAV,
+  LANGUAGE_REGION_PANE,
+];
+
+export const isSettingsPaneId = (
+  value: string | undefined
+): value is SettingsPaneId =>
+  !!value && ALL_SETTINGS_PANES.some((item) => item.id === value);
+
+export const getSettingsPaneItem = (
+  id: SettingsPaneId
+): SettingsNavItem | undefined =>
+  ALL_SETTINGS_PANES.find((item) => item.id === id);
+
+/** Sidebar selection parent for nested panes. */
+export const settingsSidebarSelection = (
+  pane: SettingsPaneId
+): SettingsPaneId => (pane === "language-region" ? "general" : pane);

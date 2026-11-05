@@ -20,6 +20,9 @@ import { useAppContext } from "../store";
 import type { NavMenu } from "./types";
 import { cn } from "@/lib/utils";
 import type { AssistantActionDef } from "@/lib/assistant/types";
+import { useOsFormFactor } from "@/hooks/useOsFormFactor";
+import { PhoneAppChrome } from "@/components/application/PhoneAppChrome";
+import { goHome } from "@/store/actions/goHome";
 
 const DEFAULT_ACTIVE_FILE = (() => {
   const paths = Object.keys(modules);
@@ -294,8 +297,10 @@ const SidebarPanel = ({
 
 export const VSCodeApp = (id: string) => {
   const { dispatch } = useAppContext();
+  const { isIos } = useOsFormFactor();
   const [activity, setActivity] = useState<ActivityId>("explorer");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  // Phone: editor-first — files open from the activity bar as an overlay.
+  const [sidebarOpen, setSidebarOpen] = useState(!isIos);
   const [panelOpen, setPanelOpen] = useState(false);
 
   const showSidebar = (next: ActivityId) => {
@@ -458,7 +463,15 @@ export const VSCodeApp = (id: string) => {
 
   return (
     <div className="vscode-window flex h-full flex-col overflow-hidden rounded-[inherit]">
-      <AppNavigation items={navigation} id={id} appName="Code" />
+      {!isIos ? (
+        <AppNavigation items={navigation} id={id} appName="Code" />
+      ) : (
+        <PhoneAppChrome
+          title="Code"
+          onDone={() => goHome()(dispatch)}
+          className="border-b-[#3c3c3c] bg-[#323233] text-[#cccccc]"
+        />
+      )}
 
       <SandpackProvider
         theme={vscodeDarkPlus}
@@ -483,17 +496,24 @@ export const VSCodeApp = (id: string) => {
         }}
         className="vscode-sandpack min-h-0 flex-1"
       >
-        <div
-          className="vscode-titlebar relative flex h-[38px] shrink-0 items-center px-3"
-          data-handle={id}
-        >
-          <AppActions id={id} />
-          <TitleBarLabel />
-        </div>
+        {!isIos ? (
+          <div
+            className="vscode-titlebar relative flex h-[38px] shrink-0 items-center px-3"
+            data-handle={id}
+          >
+            <AppActions id={id} />
+            <TitleBarLabel />
+          </div>
+        ) : null}
 
-        <div className="flex min-h-0 flex-1">
+        <div className="relative flex min-h-0 flex-1">
           {/* Activity bar */}
-          <div className="vscode-activitybar flex w-12 shrink-0 flex-col items-center justify-between py-1">
+          <div
+            className={cn(
+              "vscode-activitybar flex shrink-0 flex-col items-center justify-between py-1",
+              isIos ? "w-10" : "w-12"
+            )}
+          >
             <div className="flex w-full flex-col items-center">
               {ACTIVITY_ITEMS.map((item) => {
                 const active = sidebarOpen && activity === item.id;
@@ -518,30 +538,49 @@ export const VSCodeApp = (id: string) => {
                 );
               })}
             </div>
-            <div className="flex w-full flex-col items-center pb-1">
-              <button
-                type="button"
-                title="Accounts"
-                className="flex h-12 w-full items-center justify-center text-[#858585] hover:text-white"
-              >
-                <Icon icon="codicon:account" className="size-6" />
-              </button>
-              <button
-                type="button"
-                title="Manage"
-                className="flex h-12 w-full items-center justify-center text-[#858585] hover:text-white"
-              >
-                <Icon icon="codicon:settings-gear" className="size-6" />
-              </button>
-            </div>
+            {!isIos ? (
+              <div className="flex w-full flex-col items-center pb-1">
+                <button
+                  type="button"
+                  title="Accounts"
+                  className="flex h-12 w-full items-center justify-center text-[#858585] hover:text-white"
+                >
+                  <Icon icon="codicon:account" className="size-6" />
+                </button>
+                <button
+                  type="button"
+                  title="Manage"
+                  className="flex h-12 w-full items-center justify-center text-[#858585] hover:text-white"
+                >
+                  <Icon icon="codicon:settings-gear" className="size-6" />
+                </button>
+              </div>
+            ) : (
+              <span />
+            )}
           </div>
 
-          {/* Side bar */}
+          {/* Side bar — full overlay on phone so the editor stays usable */}
           {sidebarOpen && (
-            <div className="vscode-sidebar flex w-[260px] shrink-0 flex-col border-r border-[#1e1e1e]">
+            <div
+              className={cn(
+                "vscode-sidebar flex shrink-0 flex-col border-r border-[#1e1e1e] bg-[#252526]",
+                isIos
+                  ? "absolute inset-y-0 left-10 z-10 w-[min(280px,calc(100%-2.5rem))] shadow-xl"
+                  : "w-[260px]"
+              )}
+            >
               <SidebarPanel activity={activity} />
             </div>
           )}
+          {isIos && sidebarOpen ? (
+            <button
+              type="button"
+              aria-label="Close sidebar"
+              className="absolute inset-0 z-[5] bg-black/40"
+              onClick={() => setSidebarOpen(false)}
+            />
+          ) : null}
 
           {/* Editor + panel */}
           <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-[#1e1e1e]">

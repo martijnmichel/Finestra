@@ -10,7 +10,7 @@ import Icon from "../icons/siri.png";
 export class Siri extends Application {
   static appName = "Siri";
   public name = "Siri";
-  static icon = () => <AppIcon src={Icon} alt="Siri" />;
+  static icon = () => <AppIcon src={Icon} alt="Siri" squircle />;
   public category = "default";
 
   component = () => null;

@@ -29,7 +29,6 @@ const homeApps = [
   Applications.Finder,
   Applications.Safari,
   Applications.Settings,
-  Applications.VSCode,
   Applications.Terminal,
   Applications.Sonid,
   Applications.DirectusMobile,

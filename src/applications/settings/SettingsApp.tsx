@@ -49,10 +49,16 @@ import {
   FloatingSidebarContent,
   FloatingSidebarShell,
 } from "@/components/ui/floating-sidebar";
+import { PhoneAppChrome } from "@/components/application/PhoneAppChrome";
 import { cn } from "@/lib/utils";
+import { useOsFormFactor } from "@/hooks/useOsFormFactor";
 import { AppearancePane } from "./AppearancePane";
+import { LanguageRegionPane } from "./LanguageRegionPane";
 import {
   SETTINGS_NAV,
+  getSettingsPaneItem,
+  isSettingsPaneId,
+  settingsSidebarSelection,
   type SettingsNavItem,
   type SettingsPaneId,
 } from "./nav";
@@ -106,7 +112,7 @@ const SettingsIconBadge = ({
   size = "sm",
 }: {
   item: SettingsNavItem;
-  size?: "sm" | "lg";
+  size?: "sm" | "lg" | "ios";
 }) => {
   const Icon = ICONS[item.icon] ?? SettingsIcon;
   const needsDarkIcon =
@@ -117,11 +123,13 @@ const SettingsIconBadge = ({
       data-settings-icon
       className={cn(
         "settings-icon-badge inline-flex items-center justify-center shrink-0 shadow-sm",
-        size === "lg" ? "size-14 rounded-[14px]" : "rounded-[6px]",
+        size === "lg" && "size-14 rounded-[14px]",
+        size === "ios" && "size-[29px] rounded-[7px]",
+        size === "sm" && "rounded-[6px]",
         needsDarkIcon ? "text-black border border-black/10" : "text-white"
       )}
       style={
-        size === "lg"
+        size === "lg" || size === "ios"
           ? { background: item.iconBg }
           : {
               background: item.iconBg,
@@ -131,7 +139,9 @@ const SettingsIconBadge = ({
       }
     >
       <Icon
-        className={size === "lg" ? "size-7" : "size-[55%]"}
+        className={
+          size === "lg" ? "size-7" : size === "ios" ? "size-[16px]" : "size-[55%]"
+        }
         strokeWidth={2.25}
       />
     </span>
@@ -217,8 +227,21 @@ const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
 const isSettingsPaneId = (value: string | undefined): value is SettingsPaneId =>
   !!value && SETTINGS_NAV.some((item) => item.id === value);
 
+const PaneBody = ({
+  active,
+  activeItem,
+}: {
+  active: SettingsPaneId;
+  activeItem: SettingsNavItem;
+}) => {
+  if (active === "appearance") return <AppearancePane />;
+  if (active === "general") return <GeneralPane item={activeItem} />;
+  return <StubPane item={activeItem} />;
+};
+
 export const SettingsApp = (id: string) => {
   const { t } = useTranslation();
+  const { isIos } = useOsFormFactor();
   const { applications } = useAppState();
   const settingsInstance = applications.find((app) => app.id === id);
   const requestedPane = isSettingsPaneId(settingsInstance?.settingsPane)
@@ -229,8 +252,11 @@ export const SettingsApp = (id: string) => {
   const [query, setQuery] = useState("");
   const [history, setHistory] = useState<SettingsPaneId[]>([requestedPane]);
   const [historyIndex, setHistoryIndex] = useState(0);
+  /** iPhone: list first unless deep-linked into a pane. */
+  const [mobileView, setMobileView] = useState<"list" | "detail">(() =>
+    isSettingsPaneId(settingsInstance?.settingsPane) ? "detail" : "list"
+  );
 
-  // Deep-link from Siri / Spotlight (`startApp("Settings", { settingsPane })`).
   useEffect(() => {
     if (!isSettingsPaneId(settingsInstance?.settingsPane)) return;
     const pane = settingsInstance.settingsPane;
@@ -238,6 +264,7 @@ export const SettingsApp = (id: string) => {
     setActive(pane);
     setHistory((prev) => [...prev, pane]);
     setHistoryIndex((i) => i + 1);
+    if (isIos) setMobileView("detail");
   }, [settingsInstance?.settingsPane]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const filtered = useMemo(() => {
@@ -252,12 +279,14 @@ export const SettingsApp = (id: string) => {
     SETTINGS_NAV.find((item) => item.id === active) ?? SETTINGS_NAV[0];
 
   const navigate = (pane: SettingsPaneId) => {
-    if (pane === active) return;
-    const next = history.slice(0, historyIndex + 1);
-    next.push(pane);
-    setHistory(next);
-    setHistoryIndex(next.length - 1);
-    setActive(pane);
+    if (pane !== active) {
+      const next = history.slice(0, historyIndex + 1);
+      next.push(pane);
+      setHistory(next);
+      setHistoryIndex(next.length - 1);
+      setActive(pane);
+    }
+    if (isIos) setMobileView("detail");
   };
 
   const goBack = () => {
@@ -273,6 +302,88 @@ export const SettingsApp = (id: string) => {
     setHistoryIndex(next);
     setActive(history[next]);
   };
+
+  const goToList = () => setMobileView("list");
+
+  if (isIos) {
+    return (
+      <div
+        className="flex h-full min-h-0 flex-col"
+        style={{ background: "var(--settings-bg, var(--window-body))" }}
+      >
+        {mobileView === "list" ? (
+          <>
+            <div className="px-4 pb-2 pt-3">
+              <h1 className="os-chrome-em text-[34px] tracking-[-0.5px]">
+                {t("apps:settings.name", { defaultValue: "Settings" })}
+              </h1>
+              <div className="relative mt-3">
+                <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder={t("apps:settings.search")}
+                  className="macos-search h-[36px] pl-9 pr-3 text-[16px]"
+                />
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="mx-4 mb-4 flex items-center gap-3 rounded-[12px] px-3 py-3 text-left"
+              style={{ background: "var(--settings-group)" }}
+            >
+              <span className="inline-flex size-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#7eb6ff] to-[#4c7dff] text-[18px] font-semibold text-white">
+                Mv
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="os-chrome-em block truncate text-[17px]">
+                  Martijn van der Eijk
+                </span>
+                <span className="os-chrome block text-[14px] text-muted-foreground">
+                  {t("apps:settings.appleAccount")}
+                </span>
+              </span>
+              <ChevronRight className="size-5 text-black/25 dark:text-white/30" />
+            </button>
+
+            <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-8">
+              <div
+                className="overflow-hidden rounded-[12px] divide-y divide-black/[0.08] dark:divide-white/[0.08]"
+                style={{ background: "var(--settings-group)" }}
+              >
+                {filtered.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => navigate(item.id)}
+                    className="flex w-full items-center gap-3 px-3.5 py-[11px] text-left active:bg-black/[0.04] dark:active:bg-white/[0.06]"
+                  >
+                    <SettingsIconBadge item={item} size="ios" />
+                    <span className="os-chrome min-w-0 flex-1 truncate text-[17px] tracking-[-0.4px]">
+                      {paneLabel(t, item.id)}
+                    </span>
+                    <ChevronRight className="size-5 shrink-0 text-black/25 dark:text-white/30" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <PhoneAppChrome
+              title={paneLabel(t, activeItem.id)}
+              onBack={goToList}
+              backLabel={t("apps:settings.name", { defaultValue: "Settings" })}
+            />
+            <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-8 pt-4">
+              <PaneBody active={active} activeItem={activeItem} />
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <FloatingSidebarShell>
@@ -370,13 +481,7 @@ export const SettingsApp = (id: string) => {
         </header>
 
         <div className="relative z-[1] flex-1 min-h-0 overflow-y-auto px-8 pb-6">
-          {active === "appearance" ? (
-            <AppearancePane />
-          ) : active === "general" ? (
-            <GeneralPane item={activeItem} />
-          ) : (
-            <StubPane item={activeItem} />
-          )}
+          <PaneBody active={active} activeItem={activeItem} />
         </div>
       </FloatingSidebarContent>
     </FloatingSidebarShell>

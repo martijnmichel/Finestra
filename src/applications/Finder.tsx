@@ -8,6 +8,7 @@ import type { AssistantActionDef } from "@/lib/assistant/types";
 import { AppActions } from "../components/application/AppActions";
 import {
   AppWindow,
+  ChevronRight,
   Cloud,
   Clock,
   Columns3,
@@ -41,9 +42,11 @@ import {
   FloatingSidebarContent,
   FloatingSidebarShell,
 } from "@/components/ui/floating-sidebar";
+import { PhoneAppChrome } from "@/components/application/PhoneAppChrome";
 import { NavMenu } from ".";
 import { AppNavigation } from "../components/application/AppNavigation";
 import { cn } from "@/lib/utils";
+import { useOsFormFactor } from "@/hooks/useOsFormFactor";
 import {
   FINDER_SIDEBAR,
   filesForFolder,
@@ -94,11 +97,13 @@ const SIDEBAR_ICONS: Record<FinderSidebarItem["icon"], LucideIcon> = {
 
 export const FinderApp = (id: string) => {
   const { t } = useTranslation();
+  const { isIos } = useOsFormFactor();
   const [activeId, setActiveId] = useState("recents");
   const [view, setView] = useState<"icons" | "list" | "columns" | "gallery">(
     "list"
   );
   const [query, setQuery] = useState("");
+  const [mobileView, setMobileView] = useState<"browse" | "folder">("browse");
 
   const sidebarLabel = (itemId: string) =>
     t(`apps:finder.sidebar.${itemId}`);
@@ -123,6 +128,11 @@ export const FinderApp = (id: string) => {
     label: t(`apps:finder.sections.${section}`),
     items: FINDER_SIDEBAR.filter((item) => item.section === section),
   }));
+
+  const openFolder = (folderId: string) => {
+    setActiveId(folderId);
+    if (isIos) setMobileView("folder");
+  };
 
   const navigation: NavMenu[] = [
     {
@@ -202,19 +212,112 @@ export const FinderApp = (id: string) => {
       items: [
         {
           label: t("apps:finder.menus.recents"),
-          function: () => setActiveId("recents"),
+          function: () => openFolder("recents"),
         },
         {
           label: t("apps:finder.menus.documents"),
-          function: () => setActiveId("documents"),
+          function: () => openFolder("documents"),
         },
         {
           label: t("apps:finder.menus.downloads"),
-          function: () => setActiveId("downloads"),
+          function: () => openFolder("downloads"),
         },
       ],
     },
   ];
+
+  if (isIos) {
+    return (
+      <div className="flex h-full min-h-0 flex-col bg-[var(--window-body)]">
+        {mobileView === "browse" ? (
+          <>
+            <div className="px-4 pb-2 pt-3">
+              <h1 className="os-chrome-em text-[34px] tracking-[-0.5px]">
+                {t("apps:finder.name")}
+              </h1>
+              <div className="relative mt-3">
+                <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder={t("apps:finder.search")}
+                  className="macos-search h-[36px] pl-9 pr-3 text-[16px]"
+                />
+              </div>
+            </div>
+            <div className="min-h-0 flex-1 space-y-5 overflow-y-auto px-4 pb-8">
+              {sections.map(({ section, label, items: sectionItems }) => (
+                <div key={section}>
+                  <h6 className="os-chrome-em mb-1.5 px-1 text-[13px] uppercase tracking-[-0.08px] text-muted-foreground">
+                    {label}
+                  </h6>
+                  <div
+                    className="overflow-hidden rounded-[12px] divide-y divide-black/[0.08] dark:divide-white/[0.08]"
+                    style={{ background: "var(--settings-group, rgba(255,255,255,0.72))" }}
+                  >
+                    {sectionItems.map((item) => {
+                      const Icon = SIDEBAR_ICONS[item.icon];
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => openFolder(item.id)}
+                          className="flex w-full items-center gap-3 px-3.5 py-[11px] text-left active:bg-black/[0.04]"
+                        >
+                          {item.section === "tags" ? (
+                            <span
+                              className="size-3 shrink-0 rounded-full"
+                              style={{ background: item.tagColor }}
+                            />
+                          ) : (
+                            <span className="inline-flex size-7 items-center justify-center text-[var(--macos-accent)]">
+                              <Icon className="size-[18px]" strokeWidth={2.25} />
+                            </span>
+                          )}
+                          <span className="os-chrome min-w-0 flex-1 truncate text-[17px]">
+                            {sidebarLabel(item.id)}
+                          </span>
+                          <ChevronRight className="size-5 text-black/25 dark:text-white/30" />
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <PhoneAppChrome
+              title={sidebarLabel(activeItem.id)}
+              onBack={() => setMobileView("browse")}
+              backLabel={t("apps:finder.name")}
+            />
+            <div className="min-h-0 flex-1 overflow-y-auto px-2 py-1">
+              {items.map((item) => (
+                <div
+                  key={item.id}
+                  className="os-chrome flex items-center gap-3 rounded-[10px] px-3 py-2.5 text-foreground"
+                >
+                  <span className="min-w-0 flex-1 truncate text-[16px]">
+                    {item.name}
+                  </span>
+                  <span className="shrink-0 text-[13px] text-muted-foreground">
+                    {item.size}
+                  </span>
+                </div>
+              ))}
+              {items.length === 0 && (
+                <div className="os-chrome py-10 text-center text-muted-foreground">
+                  {t("apps:finder.empty")}
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <FloatingSidebarShell>
