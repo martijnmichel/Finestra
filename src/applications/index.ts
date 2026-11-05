@@ -7,6 +7,7 @@ import { Spotify } from "./Spotify";
 import { Settings } from "./Settings";
 import { About } from "./About";
 import { RequestApplication } from "./Request";
+import { Siri } from "./Siri";
 import { Sonid } from "./projects/Sonid";
 export type { NavMenu, NavMenuItem } from "./types";
 import { Capo } from "./projects/Capo";
@@ -29,6 +30,7 @@ export type App =
   | "Settings"
   | "About"
   | "Request"
+  | "Siri"
   | "Sonid"
   | "Capo"
   | "Toka"
@@ -51,6 +53,7 @@ export const Applications: { [x in App]: Apps } = {
   Settings: Settings,
   About: About,
   Request: RequestApplication,
+  Siri: Siri,
   Sonid: Sonid,
   Capo: Capo,
   Toka: Toka,
@@ -77,6 +80,7 @@ export type Apps =
   | typeof Settings
   | typeof About
   | typeof RequestApplication
+  | typeof Siri
   | typeof Sonid
   | typeof Capo
   | typeof Toka

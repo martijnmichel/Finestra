@@ -12,6 +12,24 @@
     "contact": "Contatti",
     "present": "oggi"
   },
+  "siri": {
+    "greeting": "Ciao — come posso aiutarti?",
+    "subtitle": "Scegli un suggerimento o cerca qualcosa in MartijnOS.",
+    "placeholder": "Cerca azioni…",
+    "noResults": "Nessuna azione corrispondente.",
+    "done": "Fatto",
+    "actions": {
+      "changeLanguage": "Cambia lingua",
+      "seeProjects": "Vedi progetti",
+      "openAbout": "Apri About",
+      "requestProject": "Richiedi un progetto",
+      "openSettings": "Apri Impostazioni",
+      "exportCv": "Esporta CV",
+      "openVscode": "Vedi il codice",
+      "openTerminal": "Apri Terminal",
+      "openFinder": "Apri Finder"
+    }
+  },
   "request": {
     "title": "Richiedi un progetto",
     "subtitle": "Dimmi cosa vuoi costruire. Ti rispondo via email.",

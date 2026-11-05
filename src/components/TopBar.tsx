@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Search } from "lucide-react";
-import { useAppState } from "../store";
+import { Search, Sparkles } from "lucide-react";
+import { useAppContext, useAppState } from "../store";
 import { Dialog, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { DialogContent } from "@radix-ui/react-dialog";
 import { AppleMenu } from "./topbar/AppleMenu";
@@ -16,9 +16,11 @@ import {
 import { useLocalStorage } from "usehooks-ts";
 import { cn } from "@/lib/utils";
 import { storageKey } from "@/lib/os";
+import { startApp } from "@/store/actions/startApp";
 
 const TopBar = () => {
   const { launchpad } = useAppState();
+  const { dispatch } = useAppContext();
   const [dateTime, setDateTime] = useState<number>(Date.now());
   const [focus] = useLocalStorage(storageKey("focus"), false);
   const [brightness] = useLocalStorage(storageKey("brightness"), 85);
@@ -105,6 +107,16 @@ const TopBar = () => {
               </div>
             </DialogContent>
           </Dialog>
+
+          <button
+            type="button"
+            className="topnav-button focus:outline-none"
+            aria-label={t("common:menuBar.siri")}
+            title={t("common:menuBar.siri")}
+            onClick={() => startApp("Siri")(dispatch)}
+          >
+            <Sparkles className="size-3.5" strokeWidth={2} />
+          </button>
 
           <ControlCenter />
         </div>

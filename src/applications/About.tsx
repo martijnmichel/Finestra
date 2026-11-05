@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 import { useAppContext } from "../store";
 import { startApp } from "../store/actions/startApp";
 import { toggleLaunchpad } from "../store/actions/toggleLaunchPad";
-import { ShepherdTour } from "../components/ShepherdTour";
 import { languages } from "../i18n";
 import i18next from "i18next";
 import { AppNavigation } from "../components/application/AppNavigation";
@@ -251,8 +250,6 @@ export const AboutApp = (id: string) => {
           </div>
         </div>
       </div>
-
-      <ShepherdTour />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { ApplicationWindow } from "../components/application/ApplicationWindow";
 import BottomDock from "../components/BottomDock";
 import { LaunchPad } from "../components/Launchpad";
@@ -14,14 +14,19 @@ import { useOsFormFactor } from "../hooks/useOsFormFactor";
 import { ShellGestureProvider } from "../components/shell/ShellGestureContext";
 import { useLocalStorage } from "usehooks-ts";
 import { storageKey } from "@/lib/os";
+import { startApp } from "@/store/actions/startApp";
+
+const SIRI_SEEN_KEY = storageKey("siri-seen");
 
 const Home = () => {
   const {
     state: { applications },
+    dispatch,
   } = useAppContext();
   const { theme } = useTheme();
   const { isMobileShell, isMacos, isIpados, isIos } = useOsFormFactor();
   const [brightness] = useLocalStorage(storageKey("brightness"), 85);
+  const siriIntroScheduled = useRef(false);
 
   // iPhone has no menubar/StatusStrip — still apply display brightness.
   useEffect(() => {
@@ -31,6 +36,21 @@ const Home = () => {
       String(Math.max(0.35, brightness / 100))
     );
   }, [isIos, brightness]);
+
+  // First visit: open Siri after a short delay (once per browser).
+  useEffect(() => {
+    if (siriIntroScheduled.current) return;
+    if (typeof window === "undefined") return;
+    if (localStorage.getItem(SIRI_SEEN_KEY) === "1") return;
+
+    siriIntroScheduled.current = true;
+    const timer = window.setTimeout(() => {
+      localStorage.setItem(SIRI_SEEN_KEY, "1");
+      startApp("Siri")(dispatch);
+    }, 3000);
+
+    return () => window.clearTimeout(timer);
+  }, [dispatch]);
 
   // iPhone: no mocked status bar — the device draws it; we only respect safe-area.
   const topChrome = isMacos ? (

@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 const homeApps = [
   Applications.About,
+  Applications.Siri,
   Applications.Request,
   Applications.Finder,
   Applications.Safari,

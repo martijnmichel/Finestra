@@ -152,9 +152,6 @@ importers:
       resend:
         specifier: ^6.37.0
         version: 6.37.0
-      shepherd.js:
-        specifier: ^15.3.0
-        version: 15.3.0
       tailwind-merge:
         specifier: ^3.7.0
         version: 3.7.0
@@ -1823,10 +1820,6 @@ packages:
       supports-color:
         optional: true
 
-  deepmerge-ts@8.0.2:
-    resolution: {integrity: sha512-uqbvqLUMrc6p0MO+WBRtTxY55hmyh94WRwI5a++PZe54X+bfVh59FSN7uWCBCW1CCVjzjnrwzfI8zidE2obMMw==}
-    engines: {node: '>=16.9.0'}
-
   dequal@2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
@@ -2454,10 +2447,6 @@ packages:
 
   set-cookie-parser@2.7.3:
     resolution: {integrity: sha512-irZHtTqurLna57KQG/s+fzOwv/J6XSH4cs8M/vsrY3uCaQ3S6+QJguAH0WdN47SXlk82voMZ4naWMQf8fdEoIg==}
-
-  shepherd.js@15.3.0:
-    resolution: {integrity: sha512-A9plZQ1qGX1aDLTrX0cbVowdnE0mOc1pjRie7O9c2cQHiDHI1zaxH2fVe65WH/2ch5nbK0JPu+vQecD7WYw5zw==}
-    engines: {node: '>= 20'}
 
   source-map-js@1.2.2:
     resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==}
@@ -4202,8 +4191,6 @@ snapshots:
     dependencies:
       ms: 2.0.0
 
-  deepmerge-ts@8.0.2: {}
-
   dequal@2.0.3: {}
 
   detect-libc@2.1.2: {}
@@ -4773,11 +4760,6 @@ snapshots:
   scheduler@0.28.0: {}
 
   set-cookie-parser@2.7.3: {}
-
-  shepherd.js@15.3.0:
-    dependencies:
-      '@floating-ui/dom': 1.8.0
-      deepmerge-ts: 8.0.2
 
   source-map-js@1.2.2: {}
 

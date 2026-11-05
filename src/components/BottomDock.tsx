@@ -35,10 +35,10 @@ const BottomDock = () => {
         action: () => toggleLaunchpad()(dispatch),
       },
       {
-        id: "finder",
-        name: "Finder",
-        icon: appIcon("Finder"),
-        action: () => startApp("Finder")(dispatch),
+        id: "siri",
+        name: "Siri",
+        icon: appIcon("Siri"),
+        action: () => startApp("Siri")(dispatch),
       },
       ...state.applications.map((app) => ({
         id: app.id,
