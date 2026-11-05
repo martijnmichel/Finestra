@@ -1,5 +1,6 @@
 import React from "react";
 import { Application } from "../application";
+import { AppIcon } from "../../components/application/AppIcon";
 import Icon from "../../icons/sonid.png";
 import { ProjectTemplate } from "./ProjectTemplate";
 import { projects } from "./projects";
@@ -7,11 +8,7 @@ import { projects } from "./projects";
 export class Sonid extends Application {
   static appName = "Sonid";
   public name = "Sonid";
-  static icon = () => (
-    <div className="p-[7px]">
-      <img src={Icon} className="rounded-[17%]" alt="Logo" />
-    </div>
-  );
+  static icon = () => <AppIcon src={Icon} alt="Sonid" />;
   static category = "project";
 
   component = () => SonidApp();

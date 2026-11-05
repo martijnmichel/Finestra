@@ -6,7 +6,6 @@ import { useAppContext } from "../store";
 import { toggleLaunchpad } from "../store/actions/toggleLaunchPad";
 import { toggleApp } from "../store/actions/toggleApp";
 import { MacOSDock } from "./ui/shadcn-io/mac-os-dock";
-import { SettingsApp } from "@/applications/Settings";
 import { startApp } from "@/store/actions/startApp";
 import { uniqBy } from "lodash";
 import { cn } from "@/lib/utils";

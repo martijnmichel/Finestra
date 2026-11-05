@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Application } from "../application";
+import { AppIcon } from "../../components/application/AppIcon";
 import Icon from "../../icons/text-editor.png";
 
 import { Editor } from "@tinymce/tinymce-react";
@@ -12,7 +13,7 @@ export class TextEditor extends Application {
   static appName = "TextEditor";
   public name = "TextEditor";
 
-  static icon = () => <img src={Icon} alt="Logo" />;
+  static icon = () => <AppIcon src={Icon} alt="TextEdit" />;
 
   public category = "default";
 

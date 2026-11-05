@@ -253,7 +253,11 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
       className={cn("backdrop-blur-md", className)}
       style={{
         width: `${contentWidth + padding * 2}px`,
-        background: "rgba(245, 245, 247, 0.55)",
+        background: "var(--dock-bg)",
+        backdropFilter:
+          "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
+        WebkitBackdropFilter:
+          "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
         borderRadius: `${Math.max(16, baseIconSize * 0.45)}px`,
         border: "0.5px solid rgba(255, 255, 255, 0.35)",
         boxShadow: `
@@ -303,28 +307,33 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
                 zIndex: Math.round(scale * 10),
               }}
             >
-              {typeof app.icon === "string" ? (
-                <img
-                  src={app.icon}
-                  alt={app.name}
-                  width={scaledSize}
-                  height={scaledSize}
-                  className="object-contain"
-                  style={{
-                    filter: `drop-shadow(0 ${
-                      scale > 1.2
-                        ? Math.max(2, baseIconSize * 0.05)
-                        : Math.max(1, baseIconSize * 0.03)
-                    }px ${
-                      scale > 1.2
-                        ? Math.max(4, baseIconSize * 0.1)
-                        : Math.max(2, baseIconSize * 0.06)
-                    }px rgba(0,0,0,${0.2 + (scale - 1) * 0.15}))`,
-                  }}
-                />
-              ) : (
-                app.icon
-              )}
+              <div
+                className="w-full h-full flex items-center justify-center overflow-hidden"
+                style={{
+                  filter: `drop-shadow(0 ${
+                    scale > 1.2
+                      ? Math.max(2, baseIconSize * 0.05)
+                      : Math.max(1, baseIconSize * 0.03)
+                  }px ${
+                    scale > 1.2
+                      ? Math.max(4, baseIconSize * 0.1)
+                      : Math.max(2, baseIconSize * 0.06)
+                  }px rgba(0,0,0,${0.2 + (scale - 1) * 0.15}))`,
+                }}
+              >
+                {typeof app.icon === "string" ? (
+                  <img
+                    src={app.icon}
+                    alt={app.name}
+                    width={scaledSize}
+                    height={scaledSize}
+                    className="size-full object-contain"
+                    draggable={false}
+                  />
+                ) : (
+                  app.icon
+                )}
+              </div>
 
               {openApps.includes(app.id) && (
                 <div

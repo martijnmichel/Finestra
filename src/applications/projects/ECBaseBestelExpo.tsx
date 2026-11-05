@@ -1,5 +1,6 @@
 import React from "react";
 import { Application } from "../application";
+import { AppIcon } from "../../components/application/AppIcon";
 
 import { ProjectTemplate } from "./ProjectTemplate";
 import { projects } from "./projects";
@@ -8,11 +9,7 @@ import Icon from "../../icons/expo-app.png";
 export class ECBaseBestelExpo extends Application {
   static appName = "ECBaseBestelExpo";
   public name = "ECBaseBestelExpo";
-  static icon = () => (
-    <div className="p-[7px]">
-      <img src={Icon} className="rounded-[17%]" alt="Logo" />
-    </div>
-  );
+  static icon = () => <AppIcon src={Icon} alt="ECBaseBestelExpo" />;
   static category = "project";
 
   component = () => ECBaseBestelApp();

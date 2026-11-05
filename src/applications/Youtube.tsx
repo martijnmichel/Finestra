@@ -1,11 +1,12 @@
 import React from "react";
+import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
 import Icon from "../icons/youtube.png";
 
 export class Youtube extends Application {
   static appName = "Youtube";
   public name = "Youtube";
-  static icon = () => <img src={Icon} alt="Logo" />;
+  static icon = () => <AppIcon src={Icon} alt="YouTube" />;
   public category = "default";
 
   width = 1280;

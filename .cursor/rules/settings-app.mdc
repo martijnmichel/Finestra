@@ -1,0 +1,25 @@
+---
+description: macOS-style System Settings app conventions
+globs: src/applications/Settings.tsx,src/applications/settings/**
+alwaysApply: false
+---
+
+# Settings app
+
+Mirror macOS System Settings: sidebar search + account row + coloured icon list; detail pane with back/forward + title.
+
+## Structure
+
+- Entry: `src/applications/Settings.tsx` (`titleBar = true`, ~780×620)
+- Shell/nav: `src/applications/settings/SettingsApp.tsx`
+- Nav list: `src/applications/settings/nav.ts` (`SETTINGS_NAV`)
+- Real pane: `AppearancePane.tsx` — stub others via `StubPane` / `GeneralPane`
+
+## Patterns
+
+- Traffic lights live in the sidebar (`AppActions` + `data-handle`), not a separate titlebar
+- Selected nav item uses `background: var(--macos-accent)` + white label
+- Grouped rows: rounded `[10px]` container, `var(--settings-group)`, hairline dividers
+- Prefer existing shadcn `Switch` / `Select` / `RadioGroup` / `Input` styled as macOS
+- New panes: add to `SETTINGS_NAV`, then branch in `SettingsApp` content area (implement or stub)
+- Appearance changes go through `useTheme().updateTheme` only

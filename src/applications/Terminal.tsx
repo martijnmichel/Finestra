@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
 import Icon from "../icons/Terminal.png";
 import { Terminal as XTerm } from "@xterm/xterm";
@@ -9,7 +10,7 @@ export class Terminal extends Application {
   static appName = "Terminal";
   public name = "Terminal";
   component = () => TerminalApp(this.id);
-  static icon = () => <img src={Icon} alt="Logo" />;
+  static icon = () => <AppIcon src={Icon} alt="Terminal" />;
   public category = "default";
   width = 800;
   height = 600;

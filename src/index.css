@@ -23,7 +23,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: rgba(0, 0, 0, 0.12);
   --input: rgba(0, 0, 0, 0.12);
-  --ring: #0a84ff;
+  --ring: #007aff;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -33,12 +33,24 @@
   /* Finder sidebar — translucent so wallpaper tints through */
   --sidebar: rgba(246, 246, 246, 0.72);
   --sidebar-foreground: #1d1d1f;
-  --sidebar-primary: #0a84ff;
+  --sidebar-primary: #007aff;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: rgba(0, 0, 0, 0.08);
   --sidebar-accent-foreground: #1d1d1f;
   --sidebar-border: rgba(0, 0, 0, 0.08);
-  --sidebar-ring: #0a84ff;
+  --sidebar-ring: #007aff;
+
+  --macos-accent: #007aff;
+  --macos-highlight: #007aff;
+  --dock-bg: rgba(245, 245, 247, 0.55);
+  --window-body: rgba(255, 255, 255, 0.92);
+  --settings-content: rgba(242, 242, 247, 0.85);
+  --settings-group: rgba(255, 255, 255, 0.9);
+  --glass-blur: 40px;
+  --glass-saturate: 180%;
+  --window-tint: transparent;
+  --control-fill: rgba(0, 0, 0, 0.06);
+  --control-fill-hover: rgba(0, 0, 0, 0.09);
 
   --window-radius: 12px;
   --window-titlebar: linear-gradient(
@@ -92,6 +104,15 @@
   --sidebar-accent-foreground: #f5f5f7;
   --sidebar-border: rgba(255, 255, 255, 0.08);
   --sidebar-ring: #0a84ff;
+
+  --macos-accent: #0a84ff;
+  --macos-highlight: #0a84ff;
+  --dock-bg: rgba(40, 40, 42, 0.55);
+  --window-body: rgba(30, 30, 30, 0.92);
+  --settings-content: rgba(44, 44, 46, 0.78);
+  --settings-group: rgba(58, 58, 60, 0.9);
+  --control-fill: rgba(255, 255, 255, 0.1);
+  --control-fill-hover: rgba(255, 255, 255, 0.14);
 
   --window-titlebar: linear-gradient(180deg, #3a3a3c 0%, #2c2c2e 100%);
   --window-titlebar-inactive: linear-gradient(180deg, #3a3a3c 0%, #2c2c2e 100%);
@@ -174,6 +195,11 @@
   html {
     overflow: hidden;
   }
+
+  ::selection {
+    background: color-mix(in srgb, var(--macos-highlight) 35%, transparent);
+    color: inherit;
+  }
 }
 
 /* ===== OS chrome type (plain CSS — do not @apply these) ===== */
@@ -230,8 +256,9 @@
 
   .window-titlebar {
     background: var(--window-titlebar);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur))
+      saturate(var(--glass-saturate));
     border-bottom: 0.5px solid var(--window-titlebar-border);
     @apply flex items-center gap-2 px-1 min-h-[32px] select-none;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
@@ -242,6 +269,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  .dark .window-titlebar {
+    color: #f5f5f7;
+  }
+
   .window-titlebar-inactive {
     background: var(--window-titlebar-inactive);
     color: #8e8e93;
@@ -250,12 +281,65 @@
 
   .window-toolbar {
     background: var(--window-toolbar);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur))
+      saturate(var(--glass-saturate));
     border-bottom: 0.5px solid var(--window-titlebar-border);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
     font-size: 13px;
     letter-spacing: -0.08px;
+  }
+
+  /* macOS-style form controls */
+  .macos-input {
+    @apply os-chrome h-[28px] rounded-[6px] border-0 shadow-none px-2 text-[13px];
+    background: var(--control-fill);
+    color: var(--foreground);
+  }
+
+  .macos-input:hover {
+    background: var(--control-fill-hover);
+  }
+
+  .macos-input:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--macos-accent) 35%, transparent);
+    background: var(--background);
+  }
+
+  .macos-select {
+    @apply os-chrome h-[28px] rounded-[6px] border-0 shadow-none px-2.5 text-[13px] gap-1.5;
+    background: var(--control-fill);
+    color: var(--foreground);
+  }
+
+  .macos-select:hover {
+    background: var(--control-fill-hover);
+  }
+
+  .macos-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--macos-accent) 35%, transparent);
+  }
+
+  .macos-button {
+    @apply os-chrome inline-flex items-center justify-center h-[28px] rounded-[6px] px-3 text-[13px] font-medium border-0 shadow-none;
+    background: var(--control-fill);
+    color: var(--foreground);
+  }
+
+  .macos-button:hover {
+    background: var(--control-fill-hover);
+  }
+
+  .macos-button-primary {
+    background: var(--macos-accent);
+    color: #fff;
+  }
+
+  .macos-button-primary:hover {
+    filter: brightness(1.05);
+    background: var(--macos-accent);
   }
 
   .window-separator {
@@ -545,6 +629,47 @@ h5,
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: oklch(0.7 0 0 / 0.6);
+}
+
+html[data-scroll-bars="when-scrolling"] ::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+html[data-scroll-bars="when-scrolling"] *:hover::-webkit-scrollbar-thumb {
+  background: oklch(0.5 0 0 / 0.3);
+}
+
+html[data-scroll-bars="automatic"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html[data-icon-style="dark"] .settings-icon-badge,
+html[data-icon-style="dark"] [data-settings-icon] {
+  filter: brightness(0.72) saturate(0.85);
+}
+
+html[data-icon-style="clear"] .settings-icon-badge,
+html[data-icon-style="clear"] [data-settings-icon] {
+  opacity: 0.72;
+  backdrop-filter: blur(4px);
+}
+
+html[data-icon-style="tinted"] .settings-icon-badge,
+html[data-icon-style="tinted"] [data-settings-icon] {
+  filter: saturate(1.2);
+}
+
+html[data-sidebar-icon-size="small"] {
+  --sidebar-icon-size: 18px;
+}
+
+html[data-sidebar-icon-size="medium"] {
+  --sidebar-icon-size: 23px;
+}
+
+html[data-sidebar-icon-size="large"] {
+  --sidebar-icon-size: 28px;
 }
 
 .xterm .xterm-viewport::-webkit-scrollbar {

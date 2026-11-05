@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Application } from "../application";
+import { AppIcon } from "../../components/application/AppIcon";
 import SafariIcon from "../../icons/safari.png";
 import { AppActions } from "../../components/application/AppActions";
 import { ChevronLeft, ChevronRight, Copy, Plus, Share, Shield, Sidebar } from "lucide-react";
@@ -9,7 +10,7 @@ import { AppNavigation } from "../../components/application/AppNavigation";
 export class Safari extends Application {
   static appName = "Safari";
   public name = "Safari";
-  static icon = () => <img src={SafariIcon} alt="Logo" />;
+  static icon = () => <AppIcon src={SafariIcon} alt="Safari" />;
   public category = "default";
   titleBar = true;
 
@@ -88,7 +89,7 @@ export const SafariApp = (id: string) => {
 
           <input
             value={address}
-            className="bg-[#e8e8ed] text-[#6e6e73] text-[12px] border-0 rounded-[6px] px-20 py-[4px] focus:outline-none focus:ring-2 focus:ring-[#007aff]/40"
+            className="bg-[#e8e8ed] text-[#6e6e73] text-[12px] border-0 rounded-[6px] px-20 py-[4px] focus:outline-none focus:ring-2 focus:ring-[var(--macos-accent)]/40"
             onChange={(val) => setAddress(val.target.value)}
           />
         </form>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Application } from "../application";
+import { AppIcon } from "../../components/application/AppIcon";
 
 import { ProjectTemplate } from "./ProjectTemplate";
 import { projects } from "./projects";
@@ -8,13 +9,7 @@ import Icon from "../../icons/wordpress.png";
 export class WordPress extends Application {
   static appName = "WordPress";
   public name = "WordPress";
-  static icon = () => (
-    <div className="p-[7px]">
-      <div className="p-[5px] rounded-[17%] bg-white aspect-square">
-        <img src={Icon} className="" alt="Logo" />
-      </div>
-    </div>
-  );
+  static icon = () => <AppIcon src={Icon} alt="WordPress" />;
   static category = "project";
 
   component = () => WordPressApp();

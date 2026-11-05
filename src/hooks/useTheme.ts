@@ -1,29 +1,29 @@
+import { useCallback, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { backgrounds as wallpapers } from "../constants/background";
 import {
-  backgrounds,
-  backgrounds as wallpapers,
-} from "../constants/background";
-
-type ThemeConfig = {
-  background: string;
-};
+  applyAppearance,
+  DEFAULT_THEME,
+  type ThemeConfig,
+} from "../lib/appearance";
 
 export const useTheme = () => {
-  const [theme, setTheme] = useLocalStorage("finestra-theme", {
-    background: backgrounds[0],
-  });
-  /**
-   * Load the needed resources from localStorage
-   */
-  const init = async () => {
-    await cacheImages();
-  };
+  const [theme, setTheme] = useLocalStorage<ThemeConfig>(
+    "finestra-theme",
+    DEFAULT_THEME
+  );
+
+  const updateTheme = useCallback(
+    (patch: Partial<ThemeConfig>) => {
+      setTheme((prev) => ({ ...prev, ...patch }));
+    },
+    [setTheme]
+  );
 
   const cacheImages = async () => {
     const promises = wallpapers.map((src) => {
       return new Promise((resolve, reject) => {
         const img = new Image();
-
         img.src = src;
         img.onload = () => resolve(img);
         img.onerror = () => reject();
@@ -33,8 +33,28 @@ export const useTheme = () => {
     await Promise.all(promises);
   };
 
+  const init = async () => {
+    applyAppearance({ ...DEFAULT_THEME, ...theme });
+    await cacheImages();
+  };
+
+  useEffect(() => {
+    applyAppearance({ ...DEFAULT_THEME, ...theme });
+  }, [theme]);
+
+  useEffect(() => {
+    if (theme.mode !== "auto") return;
+
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = () => applyAppearance({ ...DEFAULT_THEME, ...theme });
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, [theme]);
+
   return {
     init,
-    theme
+    theme: { ...DEFAULT_THEME, ...theme },
+    setTheme,
+    updateTheme,
   };
 };

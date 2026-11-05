@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { map } from "lodash";
 import { languages } from "../i18n";
-import { useAppState } from "../store";
+import { useAppContext, useAppState } from "../store";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,9 +21,11 @@ import {
 import { Icon } from "@iconify/react";
 import { Dialog, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { DialogContent } from "@radix-ui/react-dialog";
+import { startApp } from "../store/actions/startApp";
 
 const TopBar = () => {
   const { launchpad } = useAppState();
+  const { dispatch } = useAppContext();
   const [dateTime, setDateTime] = useState<number>();
 
   useEffect(() => {
@@ -47,8 +49,10 @@ const TopBar = () => {
         className="absolute inset-0 z-0"
         style={{
           background: "var(--menubar-bg)",
-          backdropFilter: "blur(40px) saturate(180%)",
-          WebkitBackdropFilter: "blur(40px) saturate(180%)",
+          backdropFilter:
+            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
+          WebkitBackdropFilter:
+            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
           borderBottom: "0.5px solid rgba(0,0,0,0.08)",
         }}
       />
@@ -124,7 +128,10 @@ const TopBar = () => {
               </div>
             </DialogContent>
           </Dialog>
-          <button className="topnav-button">
+          <button
+            className="topnav-button"
+            onClick={() => startApp("Settings")(dispatch)}
+          >
             <Settings2 />
           </button>
         </div>

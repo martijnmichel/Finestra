@@ -1,5 +1,6 @@
 import React from "react";
 import { Application } from "../application";
+import { AppIcon } from "../../components/application/AppIcon";
 import Icon from "../../icons/meta.jpg";
 import { ProjectTemplate } from "./ProjectTemplate";
 import { projects } from "./projects";
@@ -8,13 +9,7 @@ export class MetaAssembled extends Application {
   static appName = "MetaAssembled";
   public name = "MetaAssembled";
   static icon = () => (
-    <div className="p-[7px]">
-      <img
-        src={Icon}
-        className="rounded-[17%] aspect-square object-cover"
-        alt="Logo"
-      />
-    </div>
+    <AppIcon src={Icon} alt="MetaAssembled" className="rounded-[22%] object-cover" />
   );
   static category = "project";
 

@@ -1,0 +1,25 @@
+---
+description: macOS look for shadcn UI components in Finestra
+globs: src/components/ui/**
+alwaysApply: false
+---
+
+# macOS shadcn components
+
+Controls should read as macOS, not generic Material/shadcn defaults.
+
+## Do
+
+- Height ~28px, radius ~6px, `os-chrome` / 13px SF-like type
+- Fills: `var(--control-fill)` / hover `var(--control-fill-hover)` — classes `.macos-input`, `.macos-select`, `.macos-button`
+- Focus ring: accent mix, e.g. `color-mix(in srgb, var(--macos-accent) 35%, transparent)`
+- Primary actions / checked switch / selected radio / menu highlight: `var(--macos-accent)`
+- Select trigger: double chevron (`ChevronsUpDown`), not a single chevron
+- Switch: 38×21 pill, white thumb; Radio: filled accent circle with white center dot
+- Popovers/menus: translucent `bg-popover` + backdrop blur; item focus `bg-[var(--macos-accent)] text-white`
+
+## Don't
+
+- Hardcode blue hex for selection/focus
+- Use tall Material-style inputs (h-10+) for OS chrome
+- Rely on opaque white-only surfaces that ignore Liquid Glass / dark mode

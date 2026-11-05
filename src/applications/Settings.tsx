@@ -1,27 +1,24 @@
 import React from "react";
+import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
 import Icon from "../icons/settings.png";
-import Screenshot from "../icons/screenshot.png";
+import { SettingsApp } from "./settings/SettingsApp";
+
+export { SettingsApp };
 
 export class Settings extends Application {
   static appName = "Settings";
   public name = "Settings";
-  static icon = () => <img src={Icon} alt="Logo" />;
+  static icon = () => <AppIcon src={Icon} alt="Settings" />;
   public category = "default";
 
-  width = 650;
+  titleBar = true;
+  width = 780;
+  height = 620;
 
-  component = () => SettingsApp();
+  component = () => SettingsApp(this.id);
 
   constructor() {
     super();
   }
 }
-
-export const SettingsApp = () => {
-  return (
-    <div className="w-full h-full overflow-y-auto rounded-b-lg">
-      <img className="w-full h-auto" src={Screenshot} alt="Logo" />
-    </div>
-  );
-};

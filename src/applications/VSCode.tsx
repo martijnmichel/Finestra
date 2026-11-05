@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
 import Icon from "../icons/vscode.png";
 import { last, map, reduce, tail } from "lodash";
@@ -42,7 +43,7 @@ export class VSCode extends Application {
   public name = "VSCode";
   component = () => VSCodeApp(this.id);
 
-  static icon = () => <img src={Icon} alt="Logo" />;
+  static icon = () => <AppIcon src={Icon} alt="VSCode" />;
   public category = "default";
   width = window.innerWidth > 1600 ? 1200 : window.innerWidth * 0.667;
   height = window.innerHeight - 200;

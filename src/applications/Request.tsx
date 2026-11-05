@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { AppIcon } from "../components/application/AppIcon";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Application } from "./application";
 import { AppNavigation } from "../components/application/AppNavigation";
@@ -31,6 +31,7 @@ import {
   type RequestFormValues,
 } from "./request/schema";
 import { submitRequest } from "./request/submitRequest.telefunc";
+import MailIcon from "../icons/mail.png";
 
 export class RequestApplication extends Application {
   static appName = "Request";
@@ -40,11 +41,7 @@ export class RequestApplication extends Application {
   width = window.innerWidth > 900 ? 560 : window.innerWidth - 100;
   height = window.innerHeight > 900 ? 720 : window.innerHeight - 160;
 
-  static icon = () => (
-    <div className="w-full h-full flex items-center justify-center rounded-[22%] bg-gradient-to-br from-sky-400 to-blue-600">
-      <Mail className="text-white w-[48%] h-[48%]" strokeWidth={2.25} />
-    </div>
-  );
+  static icon = () => <AppIcon src={MailIcon} alt="Mail" />;
 
   component = () => RequestForm(this.id);
 

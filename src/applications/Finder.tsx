@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
 import FinderIcon from "../icons/finder.png";
 import { AppActions } from "../components/application/AppActions";
@@ -42,7 +43,7 @@ import { AppNavigation } from "../components/application/AppNavigation";
 export class Finder extends Application {
   static appName = "Finder";
   public name = "Finder";
-  static icon = () => <img src={FinderIcon} alt="Logo" />;
+  static icon = () => <AppIcon src={FinderIcon} alt="Finder" />;
 
   titleBar = true;
 
@@ -129,8 +130,10 @@ export const FinderApp = (id: string) => {
         className="flex-col hidden @xl/window:flex w-[210px] min-h-0 h-full grow border-r border-black/[0.08]"
         style={{
           background: "var(--sidebar)",
-          backdropFilter: "blur(40px) saturate(180%)",
-          WebkitBackdropFilter: "blur(40px) saturate(180%)",
+          backdropFilter:
+            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
+          WebkitBackdropFilter:
+            "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
         }}
       >
         <SidebarContent className="grow h-full pt-1" data-handle={id}>
@@ -157,7 +160,7 @@ export const FinderApp = (id: string) => {
                     setActive(fav.label);
                   }}
                 >
-                  <span className="text-[#007aff] *:size-[15px] shrink-0">
+                  <span className="text-[var(--macos-accent)] *:size-[15px] shrink-0">
                     {fav.icon}
                   </span>
                   <span className="os-chrome truncate">{fav.label}</span>

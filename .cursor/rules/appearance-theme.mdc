@@ -1,0 +1,24 @@
+---
+description: Finestra OS appearance, Liquid Glass, accent/highlight theming
+alwaysApply: true
+---
+
+# Appearance & theming
+
+Appearance is OS-wide and owned by `useTheme` + `src/lib/appearance.ts`. Persist in `finestra-theme` localStorage. Apply with `applyAppearance()` (sets `html` class/data attrs + CSS vars).
+
+## Controls (Settings → Appearance)
+
+- **Mode:** `light` | `dark` | `auto` → toggles `.dark` (auto follows `prefers-color-scheme`)
+- **Liquid Glass:** `clear` | `tinted` → `--glass-blur`, `--glass-saturate`, chrome alphas (`--menubar-bg`, `--sidebar`, `--dock-bg`, `--window-body`, `--settings-*`)
+- **Accent colour:** `--macos-accent`, also `--ring` / `--sidebar-primary`
+- **Text highlight:** `--macos-highlight` + `::selection`
+- Also: icon style, folder colour, sidebar icon size, wallpaper window tint, scroll bars
+
+## Rules
+
+- Never hardcode `#007aff` / `#0a84ff` for interactive chrome — use `var(--macos-accent)` or Tailwind `bg-[var(--macos-accent)]`
+- Glass surfaces use `blur(var(--glass-blur)) saturate(var(--glass-saturate))` and token backgrounds, not fixed rgba
+- Shadcn controls should look macOS: prefer `.macos-input`, `.macos-select`, `.macos-button`, `Switch`, `RadioGroup` from `src/components/ui/`
+- New OS chrome (dock, menubar, titlebar, sidebars) must read appearance tokens so Settings changes apply immediately
+- Do not invent a second theme store; extend `ThemeConfig` in `appearance.ts` + `useTheme`

@@ -1,4 +1,5 @@
 import React from "react";
+import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
 import { Inbox, MessageCircle, Network } from "lucide-react";
 
@@ -23,13 +24,13 @@ import { exportCvPdf } from "@/lib/exportCvPdf";
 
 export const AboutApplication = {
   name: "About",
-  icon: () => <img src={Icon} alt="Logo" />,
+  icon: () => <AppIcon src={Icon} alt="About" />,
 };
 
 export class About extends Application {
   static appName = "About";
   public name = "About";
-  static icon = () => <img src={Icon} alt="Logo" />;
+  static icon = () => <AppIcon src={Icon} alt="About" />;
   public category = "default";
 
   width = window.innerWidth > 900 ? 800 : window.innerWidth - 100;

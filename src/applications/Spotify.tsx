@@ -1,11 +1,12 @@
 import React from "react";
+import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
 import Icon from "../icons/spotify.png";
 
 export class Spotify extends Application {
   static appName = "Spotify";
   public name = "Spotify";
-  static icon = () => <img src={Icon} alt="Logo" />;
+  static icon = () => <AppIcon src={Icon} alt="Spotify" />;
   public category = "default";
 
   component = () => SpotifyApp();

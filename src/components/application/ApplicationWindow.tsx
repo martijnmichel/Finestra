@@ -95,7 +95,7 @@ export const ApplicationWindow = (app: Application) => {
     <Transition
       as="div"
       id={app.id}
-      className="flex flex-col absolute origin-top-left shadow-app-window overflow-hidden bg-background"
+      className="flex flex-col absolute origin-top-left shadow-app-window overflow-hidden"
       style={{
         width: app.fullscreen ? "100vw" : app.width,
         height: app.fullscreen ? "100vh" : app.height,
@@ -109,6 +109,11 @@ export const ApplicationWindow = (app: Application) => {
         borderRadius: app.fullscreen ? "0" : "var(--window-radius)",
         border: app.fullscreen ? "none" : "0.5px solid var(--window-border)",
         filter: app.active ? "none" : "saturate(0.9) brightness(0.98)",
+        background: "var(--window-body)",
+        backdropFilter:
+          "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
+        WebkitBackdropFilter:
+          "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
       }}
       enter=" origin-bottom duration-300"
       enterFrom=" transition-all opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6] skew-x-12"
@@ -140,7 +145,7 @@ export const ApplicationWindow = (app: Application) => {
       )}
 
       <div
-        className={`bg-background @container/window flex-1 min-h-0 overflow-y-hidden ${
+        className={`@container/window flex-1 min-h-0 overflow-y-hidden relative ${
           app.titleBar ? "" : ""
         }`}
         style={{
@@ -149,6 +154,7 @@ export const ApplicationWindow = (app: Application) => {
             : app.titleBar
               ? "var(--window-radius)"
               : "0 0 var(--window-radius) var(--window-radius)",
+          background: "var(--window-tint)",
         }}
       >
         {app.component && app.component()}
