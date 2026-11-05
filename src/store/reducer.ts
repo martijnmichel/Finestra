@@ -125,6 +125,11 @@ export const appReducer = (
             action.config?.relatedProject !== undefined
               ? action.config.relatedProject
               : app.relatedProject,
+          settingsPane:
+            app.name === action.appName &&
+            action.config?.settingsPane !== undefined
+              ? action.config.settingsPane
+              : app.settingsPane,
         }));
 
         return {

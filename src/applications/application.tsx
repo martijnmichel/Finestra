@@ -1,6 +1,7 @@
 import React from "react";
 import { v4 } from "uuid";
 import { Icon } from "@iconify/react";
+import type { AssistantActionDef } from "@/lib/assistant/types";
 
 export type AppConfig = {
   minimized?: boolean;
@@ -10,6 +11,8 @@ export type AppConfig = {
   y?: number;
   /** Prefill for Request app (project key from projects()). */
   relatedProject?: string;
+  /** Open Settings to this pane (SettingsPaneId). */
+  settingsPane?: string;
 };
 
 export class Application {
@@ -36,10 +39,17 @@ export class Application {
   titleBar = false;
 
   relatedProject?: string;
+  settingsPane?: string;
 
   static icon: (() => React.ReactNode) | undefined = () => (
     <Icon icon="fxemoji:redapple" />
   );
+
+  /**
+   * Siri / Spotlight actions contributed by this app.
+   * Declare on the class in each app file — collected at runtime.
+   */
+  static assistantActions: AssistantActionDef[] = [];
 
   component: (() => React.ReactNode) | undefined;
 
@@ -51,5 +61,6 @@ export class Application {
     if (config?.x) this.x = config?.x;
     if (config?.y) this.y = config?.y;
     if (config?.relatedProject) this.relatedProject = config.relatedProject;
+    if (config?.settingsPane) this.settingsPane = config.settingsPane;
   }
 }

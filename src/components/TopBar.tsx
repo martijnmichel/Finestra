@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { storageKey } from "@/lib/os";
 import { openSiri } from "@/store/actions/siri";
 import SiriIcon from "../icons/siri.png";
+import { AssistantSearch } from "./AssistantSearch";
 
 const TopBar = () => {
   const { launchpad } = useAppState();
@@ -25,6 +26,7 @@ const TopBar = () => {
   const [dateTime, setDateTime] = useState<number>(Date.now());
   const [focus] = useLocalStorage(storageKey("focus"), false);
   const [brightness] = useLocalStorage(storageKey("brightness"), 85);
+  const [spotlightOpen, setSpotlightOpen] = useState(false);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -85,7 +87,7 @@ const TopBar = () => {
           <BluetoothMenu />
           <WifiMenu />
 
-          <Dialog modal={false}>
+          <Dialog modal={false} open={spotlightOpen} onOpenChange={setSpotlightOpen}>
             <DialogTrigger asChild>
               <button
                 type="button"
@@ -99,13 +101,10 @@ const TopBar = () => {
               <DialogHeader className="sr-only">
                 <DialogTitle>{t("common:menuBar.spotlight")}</DialogTitle>
               </DialogHeader>
-              <div className="flex flex-col gap-2 relative">
-                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-5 text-[#86868b]" />
-                <input
-                  placeholder={t("common:menuBar.spotlight")}
-                  className="os-chrome w-full pl-10 placeholder:text-[#86868b] font-[400] text-[15px] tracking-[-0.2px] h-[40px] rounded-xl bg-transparent outline-none"
-                />
-              </div>
+              <AssistantSearch
+                onRan={() => setSpotlightOpen(false)}
+                placeholder={t("common:menuBar.spotlight")}
+              />
             </DialogContent>
           </Dialog>
 

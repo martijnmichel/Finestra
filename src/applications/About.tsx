@@ -20,6 +20,7 @@ import i18next from "i18next";
 import { AppNavigation } from "../components/application/AppNavigation";
 import { Button } from "@/components/ui/button";
 import { exportCvPdf } from "@/lib/exportCvPdf";
+import type { AssistantActionDef } from "@/lib/assistant/types";
 
 export const AboutApplication = {
   name: "About",
@@ -38,6 +39,23 @@ export class About extends Application {
   height = 698;
 
   y = 100;
+
+  static assistantActions: AssistantActionDef[] = [
+    {
+      id: "about:open",
+      labelKey: "apps:siri.actions.openAbout",
+      keywords: ["about", "over", "cv", "martijn", "profile", "me"],
+      suggest: true,
+      run: ({ dispatch }) => startApp("About")(dispatch),
+    },
+    {
+      id: "about:export-cv",
+      labelKey: "apps:siri.actions.exportCv",
+      keywords: ["cv", "resume", "pdf", "export", "download"],
+      suggest: true,
+      run: () => exportCvPdf(),
+    },
+  ];
 
   component = () => AboutApp(this.id);
 

@@ -6,6 +6,7 @@ import { useAppContext } from "@/store";
 import { setSiriOpen } from "@/store/actions/siri";
 import {
   matchAssistantActions,
+  resolveActionLabel,
   runAssistantAction,
 } from "@/lib/assistant/actions";
 import { cn } from "@/lib/utils";
@@ -13,7 +14,7 @@ import SiriIcon from "@/icons/siri.png";
 
 /**
  * Spotlight-style Siri: bottom-centered FAB — glass suggestions, glass search,
- * animated orb. Click outside (or Esc) to dismiss. No window chrome.
+ * circular animated orb. Click outside (or Esc) to dismiss. No window chrome.
  */
 export const SiriOverlay = () => {
   const { t } = useTranslation();
@@ -57,11 +58,12 @@ export const SiriOverlay = () => {
         />
         <Dialog.Content
           className={cn(
-            "fixed z-[91] left-1/2 -translate-x-1/2 outline-none",
-            "bottom-[calc(var(--home-dock-offset,var(--mobile-dock-offset,96px))+28px)]",
-            "md:bottom-[calc(88px+env(safe-area-inset-bottom,0px))]",
-            "w-[min(360px,calc(100vw-32px))]",
-            "flex flex-col items-center gap-3",
+            "fixed z-[91] outline-none",
+            // Safe inset box — avoids 100vw / translate overflow on iPhone
+            "left-4 right-4 mx-auto w-auto max-w-[300px]",
+            "bottom-[calc(var(--mobile-dock-offset,0px)+20px)]",
+            "sm:bottom-[calc(88px+env(safe-area-inset-bottom,0px))]",
+            "flex max-h-[min(70dvh,560px)] flex-col items-center gap-2.5",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -69,10 +71,8 @@ export const SiriOverlay = () => {
             "duration-200"
           )}
           onOpenAutoFocus={(e) => {
-            // Focus the search field, not the dialog shell.
             e.preventDefault();
-            const input = document.getElementById("siri-overlay-input");
-            input?.focus();
+            document.getElementById("siri-overlay-input")?.focus();
           }}
         >
           <Dialog.Title className="sr-only">
@@ -85,8 +85,8 @@ export const SiriOverlay = () => {
           {/* Glass suggestions menu */}
           <div
             className={cn(
-              "w-full overflow-hidden rounded-2xl border border-black/10 dark:border-white/10",
-              "shadow-2xl"
+              "flex min-h-0 w-full flex-col overflow-hidden rounded-2xl",
+              "border border-black/10 dark:border-white/10 shadow-2xl"
             )}
             style={{
               background: "var(--dock-bg, rgba(245,245,247,0.72))",
@@ -96,14 +96,14 @@ export const SiriOverlay = () => {
                 "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
             }}
           >
-            <div className="px-3.5 pt-3 pb-1.5">
-              <p className="os-chrome-em text-[13px] tracking-[-0.08px]">
+            <div className="shrink-0 px-3 pt-2.5 pb-1">
+              <p className="os-chrome-em text-[12px] tracking-[-0.08px] sm:text-[13px]">
                 {t("apps:siri.greeting")}
               </p>
             </div>
-            <ul className="max-h-[40vh] overflow-y-auto py-1">
+            <ul className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-0.5">
               {actions.length === 0 ? (
-                <li className="os-chrome-muted px-3.5 py-2 text-[13px]">
+                <li className="os-chrome-muted px-3 py-2 text-[13px]">
                   {t("apps:siri.noResults")}
                 </li>
               ) : (
@@ -113,12 +113,12 @@ export const SiriOverlay = () => {
                       type="button"
                       onClick={() => run(action.id)}
                       className={cn(
-                        "os-chrome flex w-full items-center px-3.5 py-2 text-left text-[14px] tracking-[-0.2px]",
+                        "os-chrome flex w-full items-center px-3 py-2 text-left text-[13px] tracking-[-0.2px] sm:text-[14px]",
                         "hover:bg-black/[0.06] dark:hover:bg-white/[0.08]",
                         "focus-visible:outline-none focus-visible:bg-black/[0.06] dark:focus-visible:bg-white/[0.08]"
                       )}
                     >
-                      {t(action.labelKey)}
+                      {resolveActionLabel(action, t)}
                     </button>
                   </li>
                 ))
@@ -129,8 +129,8 @@ export const SiriOverlay = () => {
           {/* Glass search bar */}
           <div
             className={cn(
-              "relative w-full rounded-full border border-black/10 dark:border-white/10",
-              "shadow-xl"
+              "relative w-full shrink-0 rounded-full",
+              "border border-black/10 dark:border-white/10 shadow-xl"
             )}
             style={{
               background: "var(--dock-bg, rgba(245,245,247,0.72))",
@@ -140,7 +140,7 @@ export const SiriOverlay = () => {
                 "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
             }}
           >
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-[color:var(--macos-secondary-label,#86868b)]" />
+            <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[color:var(--macos-secondary-label,#86868b)]" />
             <input
               id="siri-overlay-input"
               value={query}
@@ -152,22 +152,25 @@ export const SiriOverlay = () => {
                 }
               }}
               placeholder={t("apps:siri.placeholder")}
-              className="os-chrome w-full bg-transparent py-3 pl-10 pr-4 text-[15px] tracking-[-0.2px] outline-none placeholder:text-[#86868b]"
+              className="os-chrome w-full bg-transparent py-2.5 pl-9 pr-3.5 text-[14px] tracking-[-0.2px] outline-none placeholder:text-[#86868b] sm:py-3 sm:text-[15px]"
             />
           </div>
 
-          {/* Animated Siri orb */}
+          {/* Circular animated orb — clip square PNG to a circle */}
           <button
             type="button"
             aria-label={t("common:menuBar.siri")}
             onClick={close}
-            className="siri-orb-fab relative mt-1 size-[72px] shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--macos-accent)]"
+            className={cn(
+              "siri-orb-fab relative mt-0.5 size-14 shrink-0 overflow-hidden rounded-full sm:size-[68px]",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--macos-accent)]"
+            )}
           >
             <img
               src={SiriIcon}
               alt=""
               draggable={false}
-              className="siri-orb-spin pointer-events-none absolute inset-0 size-full select-none object-contain drop-shadow-lg"
+              className="siri-orb-spin pointer-events-none absolute inset-0 size-full select-none object-cover"
             />
           </button>
         </Dialog.Content>

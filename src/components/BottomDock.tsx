@@ -5,7 +5,6 @@ import { useAppContext } from "../store";
 import { toggleLaunchpad } from "../store/actions/toggleLaunchPad";
 import { MacOSDock } from "./ui/shadcn-io/mac-os-dock";
 import { startApp } from "@/store/actions/startApp";
-import { openSiri } from "@/store/actions/siri";
 import { uniqBy } from "lodash";
 import { cn } from "@/lib/utils";
 import { useOsFormFactor } from "@/hooks/useOsFormFactor";
@@ -36,10 +35,10 @@ const BottomDock = () => {
         action: () => toggleLaunchpad()(dispatch),
       },
       {
-        id: "siri",
-        name: "Siri",
-        icon: appIcon("Siri"),
-        action: () => openSiri()(dispatch),
+        id: "finder",
+        name: "Finder",
+        icon: appIcon("Finder"),
+        action: () => startApp("Finder")(dispatch),
       },
       ...state.applications.map((app) => ({
         id: app.id,

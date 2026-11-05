@@ -15,9 +15,11 @@ import { modules } from "../modules";
 import { AppActions } from "../components/application/AppActions";
 import { AppNavigation } from "../components/application/AppNavigation";
 import { closeApp } from "../store/actions/closeApp";
+import { startApp } from "../store/actions/startApp";
 import { useAppContext } from "../store";
 import type { NavMenu } from "./types";
 import { cn } from "@/lib/utils";
+import type { AssistantActionDef } from "@/lib/assistant/types";
 
 const DEFAULT_ACTIVE_FILE = (() => {
   const paths = Object.keys(modules);
@@ -135,6 +137,15 @@ export class VSCode extends Application {
   width = window.innerWidth > 1600 ? 1200 : window.innerWidth * 0.667;
   height = window.innerHeight - 200;
   titleBar = true;
+
+  static assistantActions: AssistantActionDef[] = [
+    {
+      id: "vscode:open",
+      labelKey: "apps:siri.actions.openVscode",
+      keywords: ["code", "vscode", "source", "github", "editor"],
+      run: ({ dispatch }) => startApp("VSCode")(dispatch),
+    },
+  ];
 }
 
 const TitleBarLabel = () => {

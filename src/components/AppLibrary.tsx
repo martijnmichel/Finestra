@@ -10,6 +10,7 @@ import { Search } from "lucide-react";
 import {
   motion,
   useMotionTemplate,
+  useMotionValue,
   useMotionValueEvent,
   useTransform,
 } from "motion/react";
@@ -27,22 +28,34 @@ export const AppLibrary = () => {
   const [raised, setRaised] = useState(false);
   const { width } = useWindowSize();
   const { isIos } = useOsFormFactor();
-  const { progress, settleProgress, setMode, reset } = useShellGesture();
+  const { progress, mode, settleProgress, setMode, reset } = useShellGesture();
+  // Only scrub library visuals from Home — ignore shared progress during app→home / switcher.
+  const libraryProgress = useMotionValue(0);
 
-  useMotionValueEvent(progress, "change", (p) => {
-    setRaised(p > 0.02 || open);
-  });
+  const syncLibraryProgress = (p: number, m = mode.get()) => {
+    const active = open || m === "library";
+    libraryProgress.set(active ? p : 0);
+    setRaised(active && (open || p > 0.02));
+  };
+
+  useMotionValueEvent(progress, "change", (p) => syncLibraryProgress(p));
+  useMotionValueEvent(mode, "change", (m) =>
+    syncLibraryProgress(progress.get(), m)
+  );
 
   useEffect(() => {
-    setRaised(open || progress.get() > 0.02);
     if (open) {
       setMode("library");
       void settleProgress(1);
-    } else if (progress.get() > 0) {
+      syncLibraryProgress(1, "library");
+    } else if (mode.get() === "library" && progress.get() > 0) {
       void (async () => {
         await settleProgress(0);
         reset();
+        syncLibraryProgress(0, "idle");
       })();
+    } else {
+      syncLibraryProgress(0);
     }
   }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -62,15 +75,23 @@ export const AppLibrary = () => {
     (a) => a.category === "project" && a.appName.toLowerCase().includes(q)
   ) as AppClass[];
 
-  const overlayOpacity = useTransform(progress, [0, 0.12, 1], [0, 0.4, 0.78]);
-  const blurPx = useTransform(progress, [0, 1], [0, 40]);
+  const overlayOpacity = useTransform(
+    libraryProgress,
+    [0, 0.12, 1],
+    [0, 0.4, 0.78]
+  );
+  const blurPx = useTransform(libraryProgress, [0, 1], [0, 40]);
   const backdropFilter = useMotionTemplate`blur(${blurPx}px) saturate(180%)`;
 
-  const contentY = useTransform(progress, [0, 1], [88, 0]);
-  const contentOpacity = useTransform(progress, [0, 0.18, 1], [0, 0.5, 1]);
-  const contentScale = useTransform(progress, [0, 1], [1.08, 1]);
-  const searchY = useTransform(progress, [0, 1], [-28, 0]);
-  const searchOpacity = useTransform(progress, [0, 0.4, 1], [0, 0, 1]);
+  const contentY = useTransform(libraryProgress, [0, 1], [88, 0]);
+  const contentOpacity = useTransform(
+    libraryProgress,
+    [0, 0.18, 1],
+    [0, 0.5, 1]
+  );
+  const contentScale = useTransform(libraryProgress, [0, 1], [1.08, 1]);
+  const searchY = useTransform(libraryProgress, [0, 1], [-28, 0]);
+  const searchOpacity = useTransform(libraryProgress, [0, 0.4, 1], [0, 0, 1]);
 
   const dismiss = () => {
     if (open) toggleLaunchpad()(dispatch);

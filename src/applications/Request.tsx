@@ -32,6 +32,8 @@ import {
 } from "./request/schema";
 import { submitRequest } from "./request/submitRequest.telefunc";
 import MailIcon from "../icons/mail.png";
+import { startApp } from "@/store/actions/startApp";
+import type { AssistantActionDef } from "@/lib/assistant/types";
 
 export class RequestApplication extends Application {
   static appName = "Request";
@@ -42,6 +44,16 @@ export class RequestApplication extends Application {
   height = window.innerHeight > 900 ? 720 : window.innerHeight - 160;
 
   static icon = () => <AppIcon src={MailIcon} alt="Mail" />;
+
+  static assistantActions: AssistantActionDef[] = [
+    {
+      id: "request:open",
+      labelKey: "apps:siri.actions.requestProject",
+      keywords: ["request", "aanvraag", "hire", "contact", "project", "email"],
+      suggest: true,
+      run: ({ dispatch }) => startApp("Request")(dispatch),
+    },
+  ];
 
   component = () => RequestForm(this.id);
 

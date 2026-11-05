@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
 import FinderIcon from "../icons/finder.png";
+import { startApp } from "@/store/actions/startApp";
+import type { AssistantActionDef } from "@/lib/assistant/types";
 import { AppActions } from "../components/application/AppActions";
 import {
   AppWindow,
@@ -56,6 +58,15 @@ export class Finder extends Application {
   titleBar = true;
 
   public category = "default";
+
+  static assistantActions: AssistantActionDef[] = [
+    {
+      id: "finder:open",
+      labelKey: "apps:siri.actions.openFinder",
+      keywords: ["finder", "files", "bestanden", "file"],
+      run: ({ dispatch }) => startApp("Finder")(dispatch),
+    },
+  ];
 
   component = () => FinderApp(this.id);
 

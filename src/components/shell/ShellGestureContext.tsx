@@ -46,11 +46,19 @@ const SPRING_DRAG: ValueAnimationTransition<number> = {
   damping: 34,
 };
 
-/** Ease used for the home-dismiss “genie suck”. */
+/** Finish the remaining genie after release past the commit threshold. */
 export const GENIE_SETTLE: ValueAnimationTransition<number> = {
   type: "tween",
-  duration: 0.48,
-  ease: [0.32, 0.72, 0, 1],
+  duration: 0.62,
+  ease: [0.22, 1, 0.36, 1],
+};
+
+/** Spring back when the user releases below the dismiss threshold. */
+export const GENIE_CANCEL: ValueAnimationTransition<number> = {
+  type: "spring",
+  stiffness: 420,
+  damping: 38,
+  mass: 0.9,
 };
 
 export const ShellGestureProvider = ({ children }: { children: ReactNode }) => {

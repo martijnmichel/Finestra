@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
 import Icon from "../icons/Terminal.png";
+import { startApp } from "@/store/actions/startApp";
+import type { AssistantActionDef } from "@/lib/assistant/types";
 import { Terminal as XTerm } from "@xterm/xterm";
 import { AppActions } from "../components/application/AppActions";
 import "@xterm/xterm/css/xterm.css";
@@ -192,6 +194,15 @@ export class Terminal extends Application {
   height = 440;
   titleBar = true;
   multiple = true;
+
+  static assistantActions: AssistantActionDef[] = [
+    {
+      id: "terminal:open",
+      labelKey: "apps:siri.actions.openTerminal",
+      keywords: ["terminal", "shell", "cli", "command"],
+      run: ({ dispatch }) => startApp("Terminal")(dispatch),
+    },
+  ];
 }
 
 export const TerminalApp = (id: string) => {

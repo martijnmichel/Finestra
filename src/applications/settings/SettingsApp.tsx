@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useAppState } from "@/store";
 import {
   Accessibility,
   AtSign,
@@ -213,12 +214,31 @@ const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
   );
 };
 
+const isSettingsPaneId = (value: string | undefined): value is SettingsPaneId =>
+  !!value && SETTINGS_NAV.some((item) => item.id === value);
+
 export const SettingsApp = (id: string) => {
   const { t } = useTranslation();
-  const [active, setActive] = useState<SettingsPaneId>("appearance");
+  const { applications } = useAppState();
+  const settingsInstance = applications.find((app) => app.id === id);
+  const requestedPane = isSettingsPaneId(settingsInstance?.settingsPane)
+    ? settingsInstance.settingsPane
+    : "appearance";
+
+  const [active, setActive] = useState<SettingsPaneId>(requestedPane);
   const [query, setQuery] = useState("");
-  const [history, setHistory] = useState<SettingsPaneId[]>(["appearance"]);
+  const [history, setHistory] = useState<SettingsPaneId[]>([requestedPane]);
   const [historyIndex, setHistoryIndex] = useState(0);
+
+  // Deep-link from Siri / Spotlight (`startApp("Settings", { settingsPane })`).
+  useEffect(() => {
+    if (!isSettingsPaneId(settingsInstance?.settingsPane)) return;
+    const pane = settingsInstance.settingsPane;
+    if (pane === active) return;
+    setActive(pane);
+    setHistory((prev) => [...prev, pane]);
+    setHistoryIndex((i) => i + 1);
+  }, [settingsInstance?.settingsPane]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
