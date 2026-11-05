@@ -17,6 +17,11 @@ export function isMobileShell(formFactor: OsFormFactor = getOsFormFactor()) {
   return formFactor !== "macos";
 }
 
+/** iPhone single-app shell (no window chrome). */
+export function isIosPhone(formFactor: OsFormFactor = getOsFormFactor()) {
+  return formFactor === "ios";
+}
+
 function applyFormFactorDataset(formFactor: OsFormFactor) {
   document.documentElement.dataset.osFormFactor = formFactor;
 }

@@ -181,6 +181,23 @@ export const applyAppearance = (theme: ThemeConfig) => {
   } else {
     root.style.setProperty("--window-tint", "transparent");
   }
+
+  // Device status bar / overscroll color (iPhone uses real chrome; we only tint the page).
+  const statusBarBg = isDark ? "#1e1e1e" : "#f5f5f7";
+  root.style.setProperty("--ios-status-bar-bg", statusBarBg);
+  root.style.backgroundColor = statusBarBg;
+  if (document.body) {
+    document.body.style.backgroundColor = statusBarBg;
+  }
+  let themeMeta = document.querySelector(
+    'meta[name="theme-color"]'
+  ) as HTMLMetaElement | null;
+  if (!themeMeta) {
+    themeMeta = document.createElement("meta");
+    themeMeta.name = "theme-color";
+    document.head.appendChild(themeMeta);
+  }
+  themeMeta.content = statusBarBg;
 };
 
 export const accentLabel = (id: AccentColorId): string => {

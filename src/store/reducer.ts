@@ -3,17 +3,21 @@ import { IAppState, initialState } from ".";
 import { ActionType, AppActions } from "./actions";
 import { getApplication } from "../applications";
 import { Application } from "../applications/application";
-import { isMobileShell } from "../hooks/useOsFormFactor";
+import {
+  getOsFormFactor,
+  isIosPhone,
+  isMobileShell,
+} from "../hooks/useOsFormFactor";
 
 const nextStackOrder = (apps: Application[]) =>
   Math.max(0, ...apps.map((app) => app.stackOrder ?? 0)) + 1;
 
-/** On ios/ipados: one foreground app; others stay in the switcher as minimized. */
-const applyMobileForeground = (
+/** iPhone only: one foreground app; others stay minimized for the switcher. */
+const applyIosForeground = (
   apps: Application[],
   foregroundId: string | null
 ): Application[] => {
-  if (!isMobileShell()) return apps;
+  if (!isIosPhone()) return apps;
 
   return apps.map((app) => {
     const isForeground = foregroundId !== null && app.id === foregroundId;
@@ -24,6 +28,15 @@ const applyMobileForeground = (
       fullscreen: isForeground ? true : app.fullscreen,
     };
   });
+};
+
+const ipadDefaultSize = () => {
+  const w = typeof window !== "undefined" ? window.innerWidth : 1024;
+  const h = typeof window !== "undefined" ? window.innerHeight : 768;
+  return {
+    width: Math.min(920, Math.max(640, w - 100)),
+    height: Math.min(680, Math.max(480, h - 140)),
+  };
 };
 
 export const appReducer = (
@@ -45,15 +58,24 @@ export const appReducer = (
         const opened = new App(action.config);
         opened.active = true;
         opened.stackOrder = nextStackOrder(state.applications);
-        if (isMobileShell()) {
+
+        const form = getOsFormFactor();
+        if (form === "ios") {
           opened.fullscreen = true;
           opened.minimized = false;
+        } else if (form === "ipados") {
+          const size = ipadDefaultSize();
+          opened.fullscreen = false;
+          opened.width = action.config?.width ?? size.width;
+          opened.height = action.config?.height ?? size.height;
+          opened.x = action.config?.x ?? 0;
+          opened.y = action.config?.y ?? 0;
         }
 
         const backgrounded = state.applications.map((app) => ({
           ...app,
           active: false,
-          ...(isMobileShell() ? { minimized: true } : {}),
+          ...(form === "ios" ? { minimized: true } : {}),
         }));
 
         return {
@@ -80,7 +102,7 @@ export const appReducer = (
 
         return {
           ...state,
-          applications: applyMobileForeground(
+          applications: applyIosForeground(
             apps,
             apps.find((a) => a.name === action.appName)?.id ?? null
           ),
@@ -127,7 +149,7 @@ export const appReducer = (
 
       return {
         ...state,
-        applications: applyMobileForeground(apps, action.appId),
+        applications: applyIosForeground(apps, action.appId),
         launchpad: false,
         appSwitcher: false,
       };

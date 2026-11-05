@@ -1,25 +1,31 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useWindowManager } from "../services/WindowManager";
-import Launchpad from "../icons/launchpad.png";
+import LaunchpadIcon from "../icons/launchpad.png";
 import { useAppContext } from "../store";
 import { toggleLaunchpad } from "../store/actions/toggleLaunchPad";
 import { MacOSDock } from "./ui/shadcn-io/mac-os-dock";
 import { startApp } from "@/store/actions/startApp";
-import { goHome } from "@/store/actions/goHome";
-import { toggleAppSwitcher } from "@/store/actions/toggleAppSwitcher";
 import { uniqBy } from "lodash";
 import { cn } from "@/lib/utils";
 import { useOsFormFactor } from "@/hooks/useOsFormFactor";
-import { House } from "lucide-react";
+import { HomeIndicator } from "./HomeIndicator";
+import { LayoutGrid } from "lucide-react";
 
 const BottomDock = () => {
   const { appIcon } = useWindowManager();
   const { state, dispatch } = useAppContext();
-  const { isMobileShell, isMacos } = useOsFormFactor();
-  const swipeStartY = useRef<number | null>(null);
+  const { isMobileShell, isMacos, isIos } = useOsFormFactor();
 
   const hasFullscreenApp = state.applications.some((app) => app.fullscreen);
-  const hideForFullscreen = isMacos && hasFullscreenApp;
+  const onHome = !state.applications.some((app) => !app.minimized);
+
+  // iPhone: dock only on Home Screen. iPad / macOS: dock stays (macOS hides if FS).
+  const showDock =
+    isMacos
+      ? !hasFullscreenApp
+      : isIos
+        ? onHome && !state.appSwitcher
+        : !state.appSwitcher;
 
   const apps = uniqBy(
     [
@@ -28,20 +34,20 @@ const BottomDock = () => {
             {
               id: "launchpad",
               name: "Launchpad",
-              icon: <img src={Launchpad} alt="Launchpad" />,
+              icon: <img src={LaunchpadIcon} alt="Launchpad" />,
               action: () => toggleLaunchpad()(dispatch),
             },
           ]
         : [
             {
-              id: "home",
-              name: "Home",
+              id: "app-library",
+              name: "App Library",
               icon: (
-                <span className="flex size-full items-center justify-center rounded-[22%] bg-gradient-to-br from-blue-400 to-blue-600 text-white">
-                  <House className="size-[55%]" strokeWidth={2.25} />
+                <span className="flex size-full items-center justify-center rounded-[22%] bg-gradient-to-br from-slate-200 to-slate-400 text-slate-800 dark:from-slate-500 dark:to-slate-700 dark:text-white">
+                  <LayoutGrid className="size-[50%]" strokeWidth={2.25} />
                 </span>
               ),
-              action: () => goHome()(dispatch),
+              action: () => toggleLaunchpad()(dispatch),
             },
           ]),
       {
@@ -75,47 +81,34 @@ const BottomDock = () => {
   return (
     <div
       className={cn(
-        "fixed z-30 bottom-0 right-0 left-0 flex flex-col items-center justify-end",
-        isMobileShell ? "pb-[max(8px,env(safe-area-inset-bottom))]" : "p-4"
+        // pointer-events-none so this layer never steals scroll from apps underneath
+        "pointer-events-none fixed z-30 bottom-0 right-0 left-0 flex flex-col items-center justify-end",
+        isMobileShell
+          ? "pb-[max(8px,env(safe-area-inset-bottom))]"
+          : "p-4"
       )}
-      onTouchStart={(e) => {
-        if (!isMobileShell) return;
-        swipeStartY.current = e.touches[0]?.clientY ?? null;
-      }}
-      onTouchEnd={(e) => {
-        if (!isMobileShell) return;
-        const start = swipeStartY.current;
-        swipeStartY.current = null;
-        if (start == null) return;
-        const end = e.changedTouches[0]?.clientY;
-        if (end != null && start - end > 48) {
-          toggleAppSwitcher(true)(dispatch);
-        }
-      }}
     >
-      {isMobileShell ? (
-        <button
-          type="button"
-          aria-label="Open App Switcher"
-          className="mb-2 h-1 w-32 rounded-full bg-white/55 shadow-sm border-0 cursor-pointer"
-          onClick={() => toggleAppSwitcher(true)(dispatch)}
-        />
+      {showDock ? (
+        <div className="pointer-events-auto">
+          <MacOSDock
+            className={cn(isIos && "mb-1")}
+            magnification={!isMobileShell}
+            apps={apps}
+            onAppClick={(appId) => {
+              const app = apps.find((a) => a.id === appId);
+              if (app) app.action();
+            }}
+            openApps={state.applications
+              .filter((app) => !app.minimized)
+              .map((app) => app.id)}
+          />
+        </div>
       ) : null}
-
-      <MacOSDock
-        className={cn(hideForFullscreen && "hidden")}
-        magnification={!isMobileShell}
-        apps={apps}
-        onAppClick={(appId) => {
-          const app = apps.find((a) => a.id === appId);
-          if (app) {
-            app.action();
-          }
-        }}
-        openApps={state.applications
-          .filter((app) => !app.minimized)
-          .map((app) => app.id)}
-      />
+      {isMobileShell ? (
+        <div className="pointer-events-auto">
+          <HomeIndicator />
+        </div>
+      ) : null}
     </div>
   );
 };

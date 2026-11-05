@@ -210,10 +210,23 @@
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-html[data-os-form-factor="ios"],
+/* iPhone: no mocked status bar — device chrome + safe-area only */
+html[data-os-form-factor="ios"] {
+  --status-strip-height: var(--safe-area-top);
+  --mobile-dock-offset: calc(22px + var(--safe-area-bottom));
+  --home-dock-offset: calc(96px + var(--safe-area-bottom));
+  background-color: var(--ios-status-bar-bg, #f5f5f7);
+}
+
+html[data-os-form-factor="ios"].dark {
+  background-color: var(--ios-status-bar-bg, #1e1e1e);
+}
+
+/* iPadOS: Mac-like menu bar + persistent Dock */
 html[data-os-form-factor="ipados"] {
-  --status-strip-height: calc(44px + var(--safe-area-top));
-  --mobile-dock-offset: calc(88px + var(--safe-area-bottom));
+  --status-strip-height: calc(32px + var(--safe-area-top));
+  --mobile-dock-offset: calc(96px + var(--safe-area-bottom));
+  --home-dock-offset: var(--mobile-dock-offset);
 }
 
 /* ===== OS chrome type (plain CSS — do not @apply these) ===== */
