@@ -41,11 +41,12 @@ const Home = () => {
 
   const shell = (
     <>
+      {/* Wallpaper icons behind windows */}
+      {isMobileShell ? <HomeScreen /> : <Desktop />}
+
       {applications.map((app) => (
         <ApplicationWindow key={app.id} {...app} />
       ))}
-
-      {isMobileShell ? <HomeScreen /> : <Desktop />}
 
       {isMacos ? <LaunchPad /> : null}
       {isMobileShell ? (

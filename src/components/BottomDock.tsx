@@ -9,7 +9,6 @@ import { uniqBy } from "lodash";
 import { cn } from "@/lib/utils";
 import { useOsFormFactor } from "@/hooks/useOsFormFactor";
 import { HomeIndicator } from "./HomeIndicator";
-import { LayoutGrid } from "lucide-react";
 
 const BottomDock = () => {
   const { appIcon } = useWindowManager();
@@ -29,27 +28,12 @@ const BottomDock = () => {
 
   const apps = uniqBy(
     [
-      ...(isMacos
-        ? [
-            {
-              id: "launchpad",
-              name: "Launchpad",
-              icon: <img src={LaunchpadIcon} alt="Launchpad" />,
-              action: () => toggleLaunchpad()(dispatch),
-            },
-          ]
-        : [
-            {
-              id: "app-library",
-              name: "App Library",
-              icon: (
-                <span className="flex size-full items-center justify-center rounded-[22%] bg-gradient-to-br from-slate-200 to-slate-400 text-slate-800 dark:from-slate-500 dark:to-slate-700 dark:text-white">
-                  <LayoutGrid className="size-[50%]" strokeWidth={2.25} />
-                </span>
-              ),
-              action: () => toggleLaunchpad()(dispatch),
-            },
-          ]),
+      {
+        id: isMacos ? "launchpad" : "app-library",
+        name: isMacos ? "Launchpad" : "App Library",
+        icon: <img src={LaunchpadIcon} alt={isMacos ? "Launchpad" : "App Library"} />,
+        action: () => toggleLaunchpad()(dispatch),
+      },
       {
         id: "finder",
         name: "Finder",

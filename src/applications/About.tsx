@@ -33,8 +33,10 @@ export class About extends Application {
   static icon = () => <AppIcon src={Icon} alt="About" />;
   public category = "default";
 
-  width = window.innerWidth > 900 ? 800 : window.innerWidth - 100;
-  height = window.innerHeight > 1000 ? 720 : window.innerHeight - 200;
+  // macOS default — matches the designed two-column layout (screenshot).
+  // iPadOS overrides via ipadDefaultSize() in the app reducer.
+  width = 928;
+  height = 698;
 
   y = 100;
 
@@ -125,6 +127,12 @@ export const AboutApp = (id: string) => {
             </p>
           </div>
 
+          <img
+            src={Headshot}
+            alt="Martijn van der Eijk"
+            className="w-full max-w-[220px] aspect-square object-cover rounded-2xl @3xl/window:hidden"
+          />
+
           <div className="flex flex-col gap-3">
             <h2 className="fat">{t("apps:about.aboutMe")}</h2>
             <p className="os-chrome text-[13px] leading-relaxed">
@@ -188,7 +196,7 @@ export const AboutApp = (id: string) => {
           <img
             src={Headshot}
             alt="Martijn van der Eijk"
-            className="w-full max-w-[220px] aspect-square object-cover rounded-2xl"
+            className="hidden @3xl/window:block w-full max-w-[220px] aspect-square object-cover rounded-2xl"
           />
           <div className="flex flex-col gap-2">
             <h4 className="fat">{t("apps:about.contact")}</h4>

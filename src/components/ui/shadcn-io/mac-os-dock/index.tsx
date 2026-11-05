@@ -294,9 +294,14 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
         }}
       >
         {apps.map((app, index) => {
-          const scale = currentScales[index];
-          const position = currentPositions[index] || 0;
+          const scale = Number.isFinite(currentScales[index])
+            ? currentScales[index]
+            : 1;
+          const position = Number.isFinite(currentPositions[index])
+            ? currentPositions[index]
+            : index * (baseIconSize + baseSpacing) + baseIconSize / 2;
           const scaledSize = baseIconSize * scale;
+          const z = Math.round(scale * 10);
 
           return (
             <div
@@ -313,7 +318,7 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
                 width: `${scaledSize}px`,
                 height: `${scaledSize}px`,
                 transformOrigin: "bottom center",
-                zIndex: Math.round(scale * 10),
+                zIndex: Number.isFinite(z) ? z : 1,
               }}
             >
               <div

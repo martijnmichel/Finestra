@@ -791,10 +791,20 @@ html[data-os-form-factor="ipados"] {
 }
 
 .badge {
-  @apply flex items-center bg-gray-100 shadow shadow-gray-200 px-2 py-1 rounded-full;
+  @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[13px] font-medium no-underline;
+  background: var(--control-fill);
+  color: var(--foreground);
+  border: 0.5px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+  box-shadow: none;
+}
+
+.badge svg {
+  width: 14px;
+  height: 14px;
 }
 
 .badge:hover {
+  background: color-mix(in srgb, var(--control-fill) 85%, var(--foreground));
   svg {
     @apply scale-125 transition-all;
   }
@@ -822,7 +832,8 @@ a svg {
 
 .animate-underline:before {
   content: " ";
-  @apply h-[1px] bg-black w-full absolute top-full transition-all scale-x-0 origin-left delay-100 duration-500;
+  @apply h-[1px] w-full absolute top-full transition-all scale-x-0 origin-left delay-100 duration-500;
+  background: var(--foreground);
 }
 
 .animate-underline:hover:before {
@@ -868,7 +879,8 @@ h5,
 }
 
 .fat {
-  @apply font-bold tracking-wider text-blue-500 uppercase text-base;
+  @apply font-bold tracking-wider uppercase text-base;
+  color: var(--macos-accent);
 }
 
 .normal {
