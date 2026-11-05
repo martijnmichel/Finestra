@@ -17,6 +17,10 @@ interface MacOSDockProps {
   className?: string;
   /** Mouse-X magnification; disable on touch / mobile shell. Default true. */
   magnification?: boolean;
+  /** Stretch to parent width (iPhone Home Screen dock). */
+  fullWidth?: boolean;
+  /** Override responsive icon size (px). */
+  iconSize?: number;
 }
 
 const MacOSDock: React.FC<MacOSDockProps> = ({
@@ -25,6 +29,8 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
   openApps = [],
   className = "",
   magnification = true,
+  fullWidth = false,
+  iconSize,
 }) => {
   const [mouseX, setMouseX] = useState<number | null>(null);
   const [currentScales, setCurrentScales] = useState<number[]>(
@@ -37,6 +43,10 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
   const lastMouseMoveTime = useRef<number>(0);
 
   const getResponsiveConfig = useCallback(() => {
+    if (iconSize != null) {
+      return { baseIconSize: iconSize, maxScale: 1.4, effectWidth: 240 };
+    }
+
     if (typeof window === "undefined") {
       return { baseIconSize: 64, maxScale: 1.6, effectWidth: 240 };
     }
@@ -68,7 +78,7 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
         effectWidth: 300,
       };
     }
-  }, []);
+  }, [iconSize]);
 
   const [config, setConfig] = useState(getResponsiveConfig);
   const { baseIconSize, maxScale, effectWidth } = config;
@@ -76,6 +86,7 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
   const baseSpacing = Math.max(4, baseIconSize * 0.08);
 
   useEffect(() => {
+    setConfig(getResponsiveConfig());
     const handleResize = () => {
       setConfig(getResponsiveConfig());
     };
@@ -254,7 +265,114 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
         )
       : apps.length * (baseIconSize + baseSpacing) - baseSpacing;
 
-  const padding = Math.max(8, baseIconSize * 0.12);
+  const padding = fullWidth
+    ? Math.max(16, baseIconSize * 0.22)
+    : Math.max(8, baseIconSize * 0.12);
+
+  const glassStyle: React.CSSProperties = {
+    background: "var(--dock-bg)",
+    backdropFilter:
+      "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
+    WebkitBackdropFilter:
+      "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
+    borderRadius: fullWidth
+      ? `${Math.max(32, baseIconSize * 0.5)}px`
+      : `${Math.max(16, baseIconSize * 0.45)}px`,
+    border: "0.5px solid rgba(255, 255, 255, 0.35)",
+    boxShadow: `
+      0 ${Math.max(8, baseIconSize * 0.18)}px ${Math.max(
+      28,
+      baseIconSize * 0.55
+    )}px rgba(0, 0, 0, 0.28),
+      0 ${Math.max(2, baseIconSize * 0.05)}px ${Math.max(
+      8,
+      baseIconSize * 0.2
+    )}px rgba(0, 0, 0, 0.12),
+      inset 0 0.5px 0 rgba(255, 255, 255, 0.65),
+      inset 0 -0.5px 0 rgba(0, 0, 0, 0.08)
+    `,
+    // iPhone: tighter vertical pad so icons read larger in the capsule
+    padding: fullWidth
+      ? `${Math.max(8, baseIconSize * 0.1)}px ${padding}px`
+      : `${padding}px`,
+  };
+
+  const renderIcon = (app: DockApp, index: number, size: number) => (
+    <>
+      <div
+        className="flex size-full items-center justify-center overflow-hidden"
+        style={{
+          filter: `drop-shadow(0 ${Math.max(
+            1,
+            baseIconSize * 0.03
+          )}px ${Math.max(2, baseIconSize * 0.06)}px rgba(0,0,0,0.22))`,
+        }}
+      >
+        {typeof app.icon === "string" ? (
+          <img
+            src={app.icon}
+            alt={app.name}
+            width={size}
+            height={size}
+            className="size-full object-contain"
+            draggable={false}
+          />
+        ) : (
+          app.icon
+        )}
+      </div>
+      {openApps.includes(app.id) && (
+        <div
+          className="absolute"
+          style={{
+            bottom: `${Math.max(-2, -baseIconSize * 0.05)}px`,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: `${Math.max(3, baseIconSize * 0.06)}px`,
+            height: `${Math.max(3, baseIconSize * 0.06)}px`,
+            borderRadius: "50%",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            boxShadow: "0 0 4px rgba(0, 0, 0, 0.3)",
+          }}
+        />
+      )}
+    </>
+  );
+
+  // iPhone: stretch dock, evenly space up to 4 large icons (no magnification).
+  if (fullWidth) {
+    return (
+      <div
+        ref={dockRef}
+        className={cn("w-full backdrop-blur-md", className)}
+        style={glassStyle}
+      >
+        <div
+          className="flex w-full items-end justify-evenly"
+          style={{ minHeight: `${baseIconSize}px` }}
+        >
+          {apps.map((app, index) => (
+            <div
+              key={app.id}
+              ref={(el) => {
+                iconRefs.current[index] = el;
+              }}
+              className="relative flex cursor-pointer flex-col items-center justify-end"
+              title={app.name}
+              onClick={() => handleAppClick(app.id, index)}
+              style={{
+                width: `${baseIconSize}px`,
+                height: `${baseIconSize}px`,
+                transformOrigin: "bottom center",
+              }}
+            >
+              {renderIcon(app, index, baseIconSize)}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -262,26 +380,7 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
       className={cn("backdrop-blur-md", className)}
       style={{
         width: `${contentWidth + padding * 2}px`,
-        background: "var(--dock-bg)",
-        backdropFilter:
-          "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
-        WebkitBackdropFilter:
-          "blur(var(--glass-blur)) saturate(var(--glass-saturate))",
-        borderRadius: `${Math.max(16, baseIconSize * 0.45)}px`,
-        border: "0.5px solid rgba(255, 255, 255, 0.35)",
-        boxShadow: `
-          0 ${Math.max(8, baseIconSize * 0.18)}px ${Math.max(
-          28,
-          baseIconSize * 0.55
-        )}px rgba(0, 0, 0, 0.28),
-          0 ${Math.max(2, baseIconSize * 0.05)}px ${Math.max(
-          8,
-          baseIconSize * 0.2
-        )}px rgba(0, 0, 0, 0.12),
-          inset 0 0.5px 0 rgba(255, 255, 255, 0.65),
-          inset 0 -0.5px 0 rgba(0, 0, 0, 0.08)
-        `,
-        padding: `${padding}px`,
+        ...glassStyle,
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -309,7 +408,7 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
               ref={(el) => {
                 iconRefs.current[index] = el;
               }}
-              className="absolute cursor-pointer flex flex-col items-center justify-end"
+              className="absolute flex cursor-pointer flex-col items-center justify-end"
               title={app.name}
               onClick={() => handleAppClick(app.id, index)}
               style={{
@@ -322,7 +421,7 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
               }}
             >
               <div
-                className="w-full h-full flex items-center justify-center overflow-hidden"
+                className="flex size-full items-center justify-center overflow-hidden"
                 style={{
                   filter: `drop-shadow(0 ${
                     scale > 1.2

@@ -39,18 +39,21 @@ function genieFromProgress(
     };
   }
 
-  // Phase blend: card follow → genie neck into home indicator.
-  const card = Math.min(1, p / 0.45);
-  const pour = Math.max(0, (p - 0.35) / 0.65);
+  // 0→~0.55 (scrub / cancelable): card follows finger + gentle shrink.
+  // 0.55→1 (past commit): neck + pour into the home indicator.
+  const card = Math.min(1, p / 0.55);
+  const pour = Math.max(0, (p - 0.55) / 0.45);
   const pourE = easeInCubic(pour);
+  const cardE = easeOutCubic(card);
 
-  const scaleX = lerp(1, 0.1, easeOutCubic(p));
-  const scaleY = lerp(1, 0.045, easeInCubic(Math.min(1, p * 1.05)));
-  // Converge horizontally to center as it pours; keep finger Y early, then suck down.
+  const scaleX = lerp(1, 0.72, cardE) * lerp(1, 0.14, pourE);
+  const scaleY = lerp(1, 0.78, cardE) * lerp(1, 0.06, pourE);
+  // Stay with the finger while cancelable; after commit, converge + suck down.
   const tx = dx * (1 - pourE * 0.92);
-  const ty = dy * (1 - pourE * 0.35) + pourE * (window.innerHeight * 0.42);
-  const radius = lerp(0, 44, Math.min(1, card * 1.2 + pourE * 0.4));
-  const opacity = p > 0.78 ? 1 - (p - 0.78) / 0.22 : 1;
+  const ty =
+    dy * (1 - pourE * 0.25) + pourE * (window.innerHeight * 0.42);
+  const radius = lerp(0, 28, cardE) + pourE * 16;
+  const opacity = p > 0.82 ? 1 - (p - 0.82) / 0.18 : 1;
 
   return {
     transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scaleX}, ${scaleY})`,

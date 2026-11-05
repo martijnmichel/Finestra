@@ -4,24 +4,27 @@ import { goHome } from "../store/actions/goHome";
 import { toggleAppSwitcher } from "../store/actions/toggleAppSwitcher";
 import { toggleLaunchpad } from "../store/actions/toggleLaunchPad";
 import {
+  GENIE_CANCEL,
   GENIE_SETTLE,
   useShellGesture,
 } from "./shell/ShellGestureContext";
 
-const HOLD_MS = 300;
-const SWIPE_PX = 24;
-const FAST_MS = 360;
-const SCRUB_DISTANCE = 260;
-const COMMIT = 0.4;
-const DISMISS_PROGRESS = 0.72;
-const DISMISS_VELOCITY = 1.1; // px/ms
+/** Hold past dismiss threshold before App Switcher opens. */
+const HOLD_MS = 2000;
+/** Finger travel (px) that maps to progress 0→1 — drag is the timeline. */
+const SCRUB_DISTANCE = 420;
+/** Release at/above this progress commits dismiss; hold only arms at/above this. */
+const COMMIT = 0.55;
+/** Strong upward flick can commit a bit earlier, but still needs real scrub. */
+const FLICK_COMMIT = 0.42;
+const DISMISS_VELOCITY = 1.35; // px/ms
 
 /**
  * Home indicator gestures:
- * - Home + drag → App Library scrubs in
- * - App + drag → window follows finger, genie-scales down
- * - App + hold mid-drag → App Switcher
- * - App + fast / far flick → genie dismiss to Home
+ * - Home + drag → App Library scrubs with the finger (release past threshold opens)
+ * - App + drag → dismiss timeline follows the finger; drag back down cancels
+ * - App + hold several seconds after dismiss threshold → App Switcher
+ * - Release past threshold → finish genie / open library
  */
 export const HomeIndicator = () => {
   const { state, dispatch } = useAppContext();
@@ -45,6 +48,12 @@ export const HomeIndicator = () => {
     holdArmed.current = false;
   };
 
+  const stopSettling = () => {
+    gesture.progress.stop();
+    gesture.dragX.stop();
+    gesture.dragY.stop();
+  };
+
   const onHome = !state.applications.some((app) => !app.minimized);
   const libraryOpen = state.launchpad;
   const switcherOpen = state.appSwitcher;
@@ -53,6 +62,12 @@ export const HomeIndicator = () => {
     if (holdArmed.current || didHold.current || libraryOpen || onHome) return;
     holdArmed.current = true;
     holdTimer.current = setTimeout(() => {
+      // Still past dismiss threshold when the hold completes?
+      if (gesture.progress.get() < COMMIT) {
+        holdArmed.current = false;
+        holdTimer.current = null;
+        return;
+      }
       didHold.current = true;
       gesture.setMode("switcher");
       toggleAppSwitcher(true)(dispatch);
@@ -61,28 +76,42 @@ export const HomeIndicator = () => {
 
   const commitLibrary = async () => {
     gesture.setMode("library");
-    await gesture.settleProgress(1);
-    await gesture.settleDrag();
+    const remaining = Math.max(0.15, 1 - gesture.progress.get());
+    await Promise.all([
+      gesture.settleProgress(1, {
+        ...GENIE_SETTLE,
+        duration: 0.35 + remaining * 0.45,
+      }),
+      gesture.settleDrag(GENIE_SETTLE),
+    ]);
     if (!state.launchpad) toggleLaunchpad()(dispatch);
     gesture.setMode("idle");
   };
 
   const commitHome = async () => {
     gesture.setMode("home");
-    // Tween (not spring) so the genie suck doesn't overshoot and stutter.
+    const remaining = Math.max(0.12, 1 - gesture.progress.get());
+    // Only animate the unfinished tail — scrub already played up to release.
     await Promise.all([
-      gesture.settleProgress(1, GENIE_SETTLE),
-      gesture.settleDrag(GENIE_SETTLE),
+      gesture.settleProgress(1, {
+        ...GENIE_SETTLE,
+        duration: 0.4 + remaining * 0.55,
+      }),
+      gesture.settleDrag({
+        ...GENIE_SETTLE,
+        duration: 0.35 + remaining * 0.4,
+      }),
     ]);
     goHome()(dispatch);
-    // Delay reset so the poured frame stays until Transition unmounts
-    // (reset → progress 0 would otherwise snap the window full-size).
     window.setTimeout(() => gesture.reset(), 80);
   };
 
   const cancelScrub = async () => {
     clearHold();
-    await Promise.all([gesture.settleProgress(0), gesture.settleDrag()]);
+    await Promise.all([
+      gesture.settleProgress(0, GENIE_CANCEL),
+      gesture.settleDrag(GENIE_CANCEL),
+    ]);
     gesture.setMode("idle");
   };
 
@@ -95,6 +124,7 @@ export const HomeIndicator = () => {
       }}
       onPointerDown={(e) => {
         if (switcherOpen) return;
+        stopSettling();
         startY.current = e.clientY;
         startX.current = e.clientX;
         startAt.current = performance.now();
@@ -105,6 +135,7 @@ export const HomeIndicator = () => {
         dragging.current = true;
         clearHold();
         gesture.setMode(onHome ? "library" : "home");
+        gesture.setProgress(0);
         gesture.setDragOffset(0, 0);
         try {
           (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
@@ -126,12 +157,17 @@ export const HomeIndicator = () => {
         lastY.current = e.clientY;
         lastT.current = now;
 
+        // Drag position IS the timeline (incl. dragging back down toward 0).
         const p = Math.min(1, dy / SCRUB_DISTANCE);
         gesture.setProgress(p);
-        // Follow the finger: upward drag + horizontal freedom.
         gesture.setDragOffset(dx * 0.85, -dy * 0.55);
 
-        if (dy > SWIPE_PX) armHold();
+        // Switcher only after dismiss threshold + long hold; drag back cancels arm.
+        if (p >= COMMIT) {
+          armHold();
+        } else if (holdArmed.current) {
+          clearHold();
+        }
       }}
       onPointerUp={async (e) => {
         const sy = startY.current;
@@ -155,15 +191,14 @@ export const HomeIndicator = () => {
           return;
         }
 
+        // Decide from release position — not from peak. Dragging back cancels.
         const dy = Math.max(0, sy - e.clientY);
-        const elapsed = performance.now() - startAt.current;
         const p = Math.min(1, dy / SCRUB_DISTANCE);
-        const fastUp = dy > SWIPE_PX && elapsed < FAST_MS;
-        const flickDismiss =
+        const flickAssist =
           !onHome &&
-          (p >= DISMISS_PROGRESS ||
-            (fastUp && velocityY.current >= DISMISS_VELOCITY));
-        const committed = p >= COMMIT || fastUp;
+          p >= FLICK_COMMIT &&
+          velocityY.current >= DISMISS_VELOCITY;
+        const committed = p >= COMMIT || flickAssist;
 
         if (!committed) {
           await cancelScrub();
@@ -172,10 +207,8 @@ export const HomeIndicator = () => {
 
         if (onHome) {
           await commitLibrary();
-        } else if (flickDismiss || committed) {
-          await commitHome();
         } else {
-          await cancelScrub();
+          await commitHome();
         }
       }}
       onPointerCancel={async () => {
@@ -196,7 +229,8 @@ export const HomeIndicator = () => {
         aria-hidden
       />
       <span className="sr-only">
-        Drag up to shrink the app. Hold for App Switcher. Flick to go Home.
+        Drag up to scrub dismiss. Drag back down to cancel. Hold past the
+        dismiss threshold for App Switcher.
       </span>
     </div>
   );
