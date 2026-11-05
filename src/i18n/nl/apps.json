@@ -3,9 +3,55 @@
     "subtitle": "Full Stack Developer met een sterk gevoel voor detail.",
     "aboutMe": "Over mij",
     "aboutMeText": "Ik ben al sinds mijn jeugd bezig met computers en coderen. Eerst als hobby en vanaf 2021 als fulltime job. Hiervoor werkte ik als gitaardocent. Samen met mijn vrouw nam ik de beslissing om naar Italië te verhuizen. Daarbij maakte ik direct het plan om mij bezig te houden met de ontwikkeling van websites en apps. Nu woon ik in Noord-Toscane. Hier is goede koffie, optimale WiFi en een goed bureau om aan te werken. Alles wat ik nodig heb om goede code te schrijven! In mijn vrije tijd ga ik graag tennissen, hiken, koken of doe ik een bordspel.",
-    "experience": "ervaring",
-    "address": "Adres",
-    "skills": "Kennis",
+    "tagline": "Freelance sinds 2017 · eerder ecBase",
+    "selectedWork": "Geselecteerd werk",
+    "selectedWorkHint": "Open een project via desktop of launchpad — en vraag daarna iets in die richting aan.",
+    "requestProject": "Project aanvragen",
+    "browseThenRequest": "Bekijk projecten",
+    "exportCv": "CV exporteren",
+    "contact": "Contact",
     "present": "nu"
+  },
+  "request": {
+    "title": "Project aanvragen",
+    "subtitle": "Vertel wat je wilt bouwen. Ik reageer per e-mail.",
+    "submit": "Verstuur aanvraag",
+    "sending": "Versturen…",
+    "error": "Er ging iets mis. Probeer opnieuw of mail me direct.",
+    "thanksTitle": "Bedankt — aanvraag verstuurd",
+    "thanksBody": "Ik reageer zo snel mogelijk per e-mail.",
+    "sendAnother": "Nog een aanvraag sturen",
+    "requestLikeThis": "Vraag iets vergelijkbaars aan",
+    "optional": "Optioneel",
+    "fields": {
+      "name": "Naam",
+      "email": "E-mail",
+      "company": "Bedrijf",
+      "projectType": "Type project",
+      "relatedProject": "Gerelateerd aan",
+      "relatedProjectPlaceholder": "Kies een project",
+      "relatedProjectNone": "Geen",
+      "budget": "Budget",
+      "timeline": "Planning",
+      "message": "Wat heb je nodig?"
+    },
+    "projectTypes": {
+      "app": "App (iOS / Android)",
+      "web": "Web / product",
+      "cms": "CMS / contenttools",
+      "other": "Anders"
+    },
+    "budgets": {
+      "under5k": "Onder €5k",
+      "5k15k": "€5k – €15k",
+      "15k50k": "€15k – €50k",
+      "50kplus": "€50k+"
+    },
+    "timelines": {
+      "asap": "Zo snel mogelijk",
+      "1to3months": "1–3 maanden",
+      "3to6months": "3–6 maanden",
+      "flexible": "Flexibel"
+    }
   }
 }

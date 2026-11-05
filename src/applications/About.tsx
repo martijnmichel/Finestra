@@ -4,20 +4,23 @@ import { Inbox, MessageCircle, Network } from "lucide-react";
 
 import Icon from "../icons/user.png";
 import Headshot from "../../profile/assets/headshot.png";
-import dayjs from "dayjs";
-import { Project, projects } from "./projects/projects";
-import { App, Applications, NavMenu } from ".";
+import { projects } from "./projects/projects";
+import type { NavMenu } from "./types";
 import { map } from "lodash";
-import { Frameworks, IFrameworks } from "./projects/frameworks";
+import { Frameworks } from "./projects/frameworks";
 import XTooltip from "../components/Tooltip";
 
 import { useTranslation } from "react-i18next";
-import { useAppContext, useAppState } from "../store";
+import { useAppContext } from "../store";
 import { startApp } from "../store/actions/startApp";
+import { toggleLaunchpad } from "../store/actions/toggleLaunchPad";
 import { ShepherdTour } from "../components/ShepherdTour";
 import { languages } from "../i18n";
 import i18next from "i18next";
 import { AppNavigation } from "../components/application/AppNavigation";
+import { Button } from "@/components/ui/button";
+import { exportCvPdf } from "@/lib/exportCvPdf";
+
 export const AboutApplication = {
   name: "About",
   icon: () => <img src={Icon} alt="Logo" />,
@@ -30,7 +33,7 @@ export class About extends Application {
   public category = "default";
 
   width = window.innerWidth > 900 ? 800 : window.innerWidth - 100;
-  height = window.innerHeight > 1000 ? 850 : window.innerHeight - 200;
+  height = window.innerHeight > 1000 ? 720 : window.innerHeight - 200;
 
   y = 100;
 
@@ -41,141 +44,48 @@ export class About extends Application {
   }
 }
 
-export type FieldExperience = {
-  company: string;
-  type: string;
-  jobTitle: string;
-  jobDescription: string;
-  from: string;
-  to: string;
-  projects: ProjectInfo[];
-};
-
-export type ProjectInfo = {
-  app: string;
-  title: string;
-} & Project;
-
 export const AboutApp = (id: string) => {
   const { t } = useTranslation();
-
   const { dispatch } = useAppContext();
-  const fieldExperiences: FieldExperience[] = [
-    {
-      company: "Kurbo / independent",
-      type: "Freelance",
-      jobTitle: "Full Stack Developer",
-      jobDescription: t("common:experience.freelance"),
-      from: dayjs("01-11-2017").format("YYYY"),
-      to: "NOW",
-      projects: [
-        { ...projects().directusMobile, app: "DirectusMobile" },
-        { ...projects().sonid, app: "Sonid" },
-        { ...projects().capo, app: "Capo" },
-        { ...projects().toka, app: "Toka" },
-        { ...projects().classroom, app: "Classroom" },
-        { ...projects().sites, app: "WordPress" },
-        { ...projects().metaAssembled, app: "MetaAssembled" },
-      ],
-    },
-    {
-      company: "ecBase",
-      type: "Remote",
-      jobTitle: "Medior Full Stack Developer",
-      jobDescription: t("common:experience.ecbase"),
-      from: dayjs("01-11-2021").format("YYYY"),
-      to: "2026",
-      projects: [
-        { ...projects().wms, app: "WMS" },
-        { ...projects().starterApp, app: "ECBaseBestelExpo" },
-        { ...projects().starterTemplateNext, app: "ECBaseBestelNext" },
-      ],
-    },
+  const allProjects = projects();
+
+  const featured = [
+    { key: "directusMobile", app: "DirectusMobile", ...allProjects.directusMobile },
+    { key: "sonid", app: "Sonid", ...allProjects.sonid },
+    { key: "capo", app: "Capo", ...allProjects.capo },
+    { key: "toka", app: "Toka", ...allProjects.toka },
+    { key: "classroom", app: "Classroom", ...allProjects.classroom },
+    { key: "wms", app: "WMS", ...allProjects.wms },
   ];
 
-  const Experience = ({
-    company,
-    type,
-    jobTitle,
-    jobDescription,
-    from,
-    to,
-    projects,
-  }: FieldExperience) => {
-    return (
-      <section className="flex flex-col">
-        <h5 className="font-merriweather text-lg">
-          <span className="font-bold">{company}, </span>
-          <span className="">{type} &#8212; </span>
-          <span className="italic font-thin">{jobTitle}</span>
-        </h5>
-
-        <p className="italic text-sm text-zinc-600 py-2">{jobDescription}</p>
-
-        <p className="uppercase text-zinc-400">
-          {from} &#8212; {to}
-        </p>
-
-        {map(projects, ({ title, frameworks, icon, app }) => {
-          return (
-            <div
-              role="button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                startApp(app)(dispatch);
-              }}
-              className="flex items-center gap-2 subtitle text-xs mt-1"
-              key={`project-card-${title}`}
-            >
-              <img
-                src={icon as string}
-                className="w-5 h-5 object-cover rounded"
-              />
-              <span className="font-bold">{title} &#8212; </span>
-              <div className="flex items-center gap-1 text-lg">
-                {map(frameworks, (f) => {
-                  const config = Frameworks()[f];
-                  return (
-                    <XTooltip
-                      label={config.label}
-                      key={`icon-f-${config.label}`}
-                    >
-                      {config.icon}
-                    </XTooltip>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </section>
-    );
+  const exportCv = () => {
+    exportCvPdf({
+      name: "Martijn van der Eijk",
+      subtitle: t("apps:about.subtitle"),
+      about: t("apps:about.aboutMeText"),
+      tagline: t("apps:about.tagline"),
+      email: "martijn.michel@gmail.com",
+      linkedIn: "linkedin.com/in/martijn-ensing-159582207",
+      projects: Object.values(allProjects).map((project) => ({
+        title: project.title,
+        desc: project.desc,
+        frameworks: project.frameworks?.map((f) => Frameworks()[f]?.label ?? f),
+      })),
+    });
   };
-
-  const {
-    PHP,
-    Typescript,
-    ES6,
-    Tailwind,
-    Firebase,
-    Sass,
-    LoDash,
-    React,
-    Next,
-    Express,
-    NodeJS,
-    Expo,
-    Vite,
-    MySQL,
-    Github,
-    Vercel,
-  } = Frameworks();
 
   const navigation: NavMenu[] = [
     {
       label: "File",
       items: [
+        {
+          label: t("apps:about.requestProject"),
+          function: () => startApp("Request")(dispatch),
+        },
+        {
+          label: t("apps:about.exportCv"),
+          function: exportCv,
+        },
         {
           label: "New Email",
           function: () => {
@@ -185,9 +95,12 @@ export const AboutApp = (id: string) => {
         {
           label: "New Message",
           function: () => {
-            window.open(`https://wa.me/0031624852964?text=${encodeURIComponent(
-              "Hoi Martijn, ik nodig je graag uit voor een gesprek."
-            )}`, "_blank");
+            window.open(
+              `https://wa.me/0031624852964?text=${encodeURIComponent(
+                "Hoi Martijn, ik nodig je graag uit voor een gesprek."
+              )}`,
+              "_blank"
+            );
           },
         },
       ],
@@ -222,6 +135,7 @@ export const AboutApp = (id: string) => {
           <div id="step-about" className="flex flex-col gap-3">
             <h2 className="text-h1">Martijn van der Eijk</h2>
             <p className="subtitle">{t("apps:about.subtitle")}</p>
+            <p className="text-sm text-zinc-500">{t("apps:about.tagline")}</p>
           </div>
 
           <div className="flex flex-col gap-3">
@@ -229,24 +143,64 @@ export const AboutApp = (id: string) => {
             <p>{t("apps:about.aboutMeText")}</p>
           </div>
 
-          <div className="flex flex-col gap-5">
-            <h2 className="fat">{t("apps:about.experience")}</h2>
+          <div className="flex flex-wrap gap-2">
+            <Button onClick={() => startApp("Request")(dispatch)}>
+              {t("apps:about.requestProject")}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => toggleLaunchpad()(dispatch)}
+            >
+              {t("apps:about.browseThenRequest")}
+            </Button>
+          </div>
 
-            {fieldExperiences.map((exp) => {
-              return <Experience {...exp} key={`field-${exp.company}`} />;
-            })}
+          <div className="flex flex-col gap-4">
+            <h2 className="fat">{t("apps:about.selectedWork")}</h2>
+            <p className="text-sm text-zinc-600">
+              {t("apps:about.selectedWorkHint")}
+            </p>
+            <div className="flex flex-col gap-2">
+              {featured.map(({ title, frameworks, icon, app, key }) => (
+                <button
+                  type="button"
+                  key={`featured-${key}`}
+                  onClick={() => startApp(app)(dispatch)}
+                  className="flex items-center gap-2 subtitle text-xs text-left hover:opacity-80"
+                >
+                  <img
+                    src={icon as string}
+                    className="w-5 h-5 object-cover rounded"
+                    alt=""
+                  />
+                  <span className="font-bold">{title}</span>
+                  <div className="flex items-center gap-1 text-lg">
+                    {map(frameworks.slice(0, 4), (f) => {
+                      const config = Frameworks()[f];
+                      return (
+                        <XTooltip
+                          label={config.label}
+                          key={`icon-f-${key}-${config.label}`}
+                        >
+                          {config.icon}
+                        </XTooltip>
+                      );
+                    })}
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-8">
           <img
             src={Headshot}
             alt="Martijn van der Eijk"
             className="w-full max-w-[220px] aspect-square object-cover rounded-2xl"
           />
           <div className="flex flex-col gap-2">
-            <h4 className="fat">{t("apps:about.address")}</h4>
-            <p>Via ca' del monte 6, Villafranca in Lunigiana, MS, Italie</p>
+            <h4 className="fat">{t("apps:about.contact")}</h4>
             <a
               target="_blank"
               className="animate-underline"
@@ -272,42 +226,6 @@ export const AboutApp = (id: string) => {
             >
               <Network className="inline size-4" /> LinkedIn
             </a>
-            <p></p>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <h4 className="fat">{t("apps:about.skills")}</h4>
-            {/** frontend */}
-            <div className="flex items-center gap-2 text-xl">
-              <XTooltip label={React.label}>{React.icon}</XTooltip>
-              <XTooltip label={Typescript.label}>{Typescript.icon}</XTooltip>
-              <XTooltip label={ES6.label}>{ES6.icon}</XTooltip>
-              <XTooltip label={Tailwind.label}>{Tailwind.icon}</XTooltip>
-              <XTooltip label={LoDash.label}>{LoDash.icon}</XTooltip>
-              <XTooltip label={Sass.label}>{Sass.icon}</XTooltip>
-            </div>
-
-            {/** backend */}
-            <div className="flex items-center gap-2 text-xl">
-              <XTooltip label={NodeJS.label}>{NodeJS.icon}</XTooltip>
-              <XTooltip label={Express.label}>{Express.icon}</XTooltip>
-              <XTooltip label={PHP.label}>{PHP.icon}</XTooltip>
-
-              <XTooltip label={MySQL.label}>{MySQL.icon}</XTooltip>
-              <XTooltip label={Firebase.label}>{Firebase.icon}</XTooltip>
-            </div>
-
-            {/** frameworks */}
-            <div className="flex items-center gap-2 text-xl">
-              <XTooltip label={Next.label}>{Next.icon}</XTooltip>
-              <XTooltip label={Expo.label}>{Expo.icon}</XTooltip>
-              <XTooltip label={Vite.label}>{Vite.icon}</XTooltip>
-            </div>
-
-            <div className="flex items-center gap-2 text-xl">
-              <XTooltip label={Github.label}>{Github.icon}</XTooltip>
-              <XTooltip label={Vercel.label}>{Vercel.icon}</XTooltip>
-            </div>
           </div>
 
           <div className="flex flex-col gap-2">

@@ -22,5 +22,5 @@ export class DirectusMobile extends Application {
 }
 
 export const DirectusMobileApp = () => {
-  return <ProjectTemplate {...projects().directusMobile} />;
+  return <ProjectTemplate {...projects().directusMobile} projectKey="directusMobile" />;
 };

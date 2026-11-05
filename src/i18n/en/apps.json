@@ -3,9 +3,55 @@
     "subtitle": "Full Stack developer with an eye for detail.",
     "aboutMe": "About me",
     "aboutMeText": "In 2021 I moved to Italy and still love it. I live with my wife, two cats and a dog in a small village in northern Tuscany — good food, excellent coffee, and stable Wi‑Fi. When I’m not coding I play tennis, read Marvel comics, or work in the garden.",
-    "experience": "Experience",
-    "address": "Address",
-    "skills": "Skills",
+    "tagline": "Freelance since 2017 · previously ecBase",
+    "selectedWork": "Selected work",
+    "selectedWorkHint": "Open a project on the desktop or launchpad — then request something in that direction.",
+    "requestProject": "Request a project",
+    "browseThenRequest": "Browse projects",
+    "exportCv": "Export CV",
+    "contact": "Contact",
     "present": "present"
+  },
+  "request": {
+    "title": "Request a project",
+    "subtitle": "Tell me what you want to build. I’ll get back to you by email.",
+    "submit": "Send request",
+    "sending": "Sending…",
+    "error": "Something went wrong. Try again or email me directly.",
+    "thanksTitle": "Thanks — request sent",
+    "thanksBody": "I’ll reply by email as soon as I can.",
+    "sendAnother": "Send another request",
+    "requestLikeThis": "Request something like this",
+    "optional": "Optional",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "projectType": "Project type",
+      "relatedProject": "Related to",
+      "relatedProjectPlaceholder": "Pick a project",
+      "relatedProjectNone": "None",
+      "budget": "Budget",
+      "timeline": "Timeline",
+      "message": "What do you need?"
+    },
+    "projectTypes": {
+      "app": "App (iOS / Android)",
+      "web": "Web / product",
+      "cms": "CMS / content tools",
+      "other": "Other"
+    },
+    "budgets": {
+      "under5k": "Under €5k",
+      "5k15k": "€5k – €15k",
+      "15k50k": "€15k – €50k",
+      "50kplus": "€50k+"
+    },
+    "timelines": {
+      "asap": "ASAP",
+      "1to3months": "1–3 months",
+      "3to6months": "3–6 months",
+      "flexible": "Flexible"
+    }
   }
 }

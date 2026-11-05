@@ -3,10 +3,56 @@
     "subtitle": "Full Stack developer con occhio per i dettagli.",
     "aboutMe": "Su di me",
     "aboutMeText": "Nel 2021 mi sono trasferito in Italia e mi piace ancora moltissimo. Vivo con mia moglie, due gatti e un cane in un piccolo paese della Toscana settentrionale — buon cibo, ottimo caffè e Wi‑Fi stabile. Quando non programmo gioco a tennis, leggo fumetti Marvel o lavoro in giardino.",
-    "experience": "Esperienza",
-    "address": "Indirizzo",
-    "skills": "Competenze",
+    "tagline": "Freelance dal 2017 · precedentemente ecBase",
+    "selectedWork": "Lavori selezionati",
+    "selectedWorkHint": "Apri un progetto dal desktop o dal launchpad — poi richiedi qualcosa in quella direzione.",
+    "requestProject": "Richiedi un progetto",
+    "browseThenRequest": "Sfoglia progetti",
+    "exportCv": "Esporta CV",
+    "contact": "Contatti",
     "present": "oggi"
+  },
+  "request": {
+    "title": "Richiedi un progetto",
+    "subtitle": "Dimmi cosa vuoi costruire. Ti rispondo via email.",
+    "submit": "Invia richiesta",
+    "sending": "Invio…",
+    "error": "Qualcosa è andato storto. Riprova o scrivimi direttamente.",
+    "thanksTitle": "Grazie — richiesta inviata",
+    "thanksBody": "Ti risponderò via email il prima possibile.",
+    "sendAnother": "Invia un’altra richiesta",
+    "requestLikeThis": "Richiedi qualcosa di simile",
+    "optional": "Opzionale",
+    "fields": {
+      "name": "Nome",
+      "email": "Email",
+      "company": "Azienda",
+      "projectType": "Tipo di progetto",
+      "relatedProject": "Correlato a",
+      "relatedProjectPlaceholder": "Scegli un progetto",
+      "relatedProjectNone": "Nessuno",
+      "budget": "Budget",
+      "timeline": "Tempistiche",
+      "message": "Di cosa hai bisogno?"
+    },
+    "projectTypes": {
+      "app": "App (iOS / Android)",
+      "web": "Web / prodotto",
+      "cms": "CMS / strumenti content",
+      "other": "Altro"
+    },
+    "budgets": {
+      "under5k": "Sotto €5k",
+      "5k15k": "€5k – €15k",
+      "15k50k": "€15k – €50k",
+      "50kplus": "€50k+"
+    },
+    "timelines": {
+      "asap": "Il prima possibile",
+      "1to3months": "1–3 mesi",
+      "3to6months": "3–6 mesi",
+      "flexible": "Flessibile"
+    }
   },
   "sonid": {
     "title": "Impara la teoria musicale con Sonid"

@@ -25,5 +25,5 @@ export class ECBaseBestelNext extends Application {
 }
 
 export const ECBaseBestelApp = () => {
-  return <ProjectTemplate {...projects().starterTemplateNext} />;
+  return <ProjectTemplate {...projects().starterTemplateNext} projectKey="starterTemplateNext" />;
 };

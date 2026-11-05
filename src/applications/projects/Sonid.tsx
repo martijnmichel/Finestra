@@ -22,5 +22,5 @@ export class Sonid extends Application {
 }
 
 export const SonidApp = () => {
-  return <ProjectTemplate {...projects().sonid} />;
+  return <ProjectTemplate {...projects().sonid} projectKey="sonid" />;
 };

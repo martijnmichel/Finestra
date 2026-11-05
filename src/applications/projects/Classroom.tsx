@@ -22,5 +22,5 @@ export class Classroom extends Application {
 }
 
 export const ClassroomApp = () => {
-  return <ProjectTemplate {...projects().classroom} />;
+  return <ProjectTemplate {...projects().classroom} projectKey="classroom" />;
 };

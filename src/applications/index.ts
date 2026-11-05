@@ -6,7 +6,9 @@ import { Youtube } from "./Youtube";
 import { Spotify } from "./Spotify";
 import { Settings } from "./Settings";
 import { About } from "./About";
+import { RequestApplication } from "./Request";
 import { Sonid } from "./projects/Sonid";
+export type { NavMenu, NavMenuItem } from "./types";
 import { Capo } from "./projects/Capo";
 import { Toka } from "./projects/Toka";
 import { Classroom } from "./projects/Classroom";
@@ -26,6 +28,7 @@ export type App =
   | "Spotify"
   | "Settings"
   | "About"
+  | "Request"
   | "Sonid"
   | "Capo"
   | "Toka"
@@ -47,6 +50,7 @@ export const Applications: { [x in App]: Apps } = {
   Spotify: Spotify,
   Settings: Settings,
   About: About,
+  Request: RequestApplication,
   Sonid: Sonid,
   Capo: Capo,
   Toka: Toka,
@@ -72,6 +76,7 @@ export type Apps =
   | typeof Spotify
   | typeof Settings
   | typeof About
+  | typeof RequestApplication
   | typeof Sonid
   | typeof Capo
   | typeof Toka
@@ -84,16 +89,3 @@ export type Apps =
   | typeof Terminal
   | typeof DirectusMobile;
 
-export interface NavMenuItem {
-  label: string;
-  function?: () => void;
-  shortcut?: string;
-  disabled?: boolean;
-  type?: "checkbox";
-  checked?: boolean;
-  submenu?: NavMenuItem[];
-}
-export interface NavMenu {
-  label: string;
-  items: NavMenuItem[];
-}

@@ -22,5 +22,5 @@ export class Capo extends Application {
 }
 
 export const CapoApp = () => {
-  return <ProjectTemplate {...projects().capo} />;
+  return <ProjectTemplate {...projects().capo} projectKey="capo" />;
 };

@@ -22,5 +22,5 @@ export class WMS extends Application {
 }
 
 export const WMSApp = () => {
-  return <ProjectTemplate {...projects().wms} />;
+  return <ProjectTemplate {...projects().wms} projectKey="wms" />;
 };

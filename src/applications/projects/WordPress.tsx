@@ -25,5 +25,5 @@ export class WordPress extends Application {
 }
 
 export const WordPressApp = () => {
-  return <ProjectTemplate {...projects().sites} />;
+  return <ProjectTemplate {...projects().sites} projectKey="sites" />;
 };

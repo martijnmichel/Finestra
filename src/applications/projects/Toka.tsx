@@ -22,5 +22,5 @@ export class Toka extends Application {
 }
 
 export const TokaApp = () => {
-  return <ProjectTemplate {...projects().toka} />;
+  return <ProjectTemplate {...projects().toka} projectKey="toka" />;
 };

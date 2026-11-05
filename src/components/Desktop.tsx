@@ -9,6 +9,7 @@ export const Desktop = () => {
 
   const desktopApps = [
     Applications.About,
+    Applications.Request,
     Applications.VSCode,
     Applications.Terminal,
     Applications.Sonid,

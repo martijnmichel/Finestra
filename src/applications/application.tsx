@@ -8,6 +8,8 @@ export type AppConfig = {
   height?: number;
   x?: number;
   y?: number;
+  /** Prefill for Request app (project key from projects()). */
+  relatedProject?: string;
 };
 
 export class Application {
@@ -31,6 +33,8 @@ export class Application {
 
   titleBar = false;
 
+  relatedProject?: string;
+
   static icon: (() => React.ReactNode) | undefined = () => (
     <Icon icon="fxemoji:redapple" />
   );
@@ -44,5 +48,6 @@ export class Application {
     if (config?.height) this.height = config?.height;
     if (config?.x) this.x = config?.x;
     if (config?.y) this.y = config?.y;
+    if (config?.relatedProject) this.relatedProject = config.relatedProject;
   }
 }

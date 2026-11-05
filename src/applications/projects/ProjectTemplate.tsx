@@ -4,7 +4,10 @@ import { map } from "lodash";
 import { ExternalLink } from "lucide-react";
 import { Frameworks } from "./frameworks";
 import XTooltip from "../../components/Tooltip";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import { Button } from "@/components/ui/button";
+import { useAppContext } from "@/store";
+import { startApp } from "@/store/actions/startApp";
 
 export const ProjectTemplate = ({
   title,
@@ -13,8 +16,10 @@ export const ProjectTemplate = ({
   icon,
   links,
   frameworks,
-}: Project) => {
-  console.log(Text);
+  projectKey,
+}: Project & { projectKey: string }) => {
+  const { t } = useTranslation();
+  const { dispatch } = useAppContext();
 
   return (
     <section className="content h-full p-5 overflow-y-auto flex flex-col gap-6">
@@ -40,6 +45,16 @@ export const ProjectTemplate = ({
         })}
       </div>
 
+      <div>
+        <Button
+          onClick={() =>
+            startApp("Request", { relatedProject: projectKey })(dispatch)
+          }
+        >
+          {t("apps:request.requestLikeThis")}
+        </Button>
+      </div>
+
       <div className="flex flex-col gap-3">
         <h3 className="fat">{t("common:aboutProject")}</h3>
         {Text}
@@ -49,7 +64,7 @@ export const ProjectTemplate = ({
         <div className="flex flex-col gap-3">
           <h3 className="fat">Links</h3>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             {map(links, (link) => (
               <a
                 key={`link-${link.href}`}
@@ -57,8 +72,7 @@ export const ProjectTemplate = ({
                 target="_blank"
                 href={link.href}
               >
-                {link.label}{" "}
-                <ExternalLink className="inline size-3.5" />
+                {link.label} <ExternalLink className="inline size-3.5" />
               </a>
             ))}
           </div>

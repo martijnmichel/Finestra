@@ -32,10 +32,29 @@ export const appReducer = (
           applications: newState,
           launchpad: false,
         };
-      } else
+      }
+
+      if (App && activeAppWindow) {
         return {
           ...state,
+          applications: state.applications.map((app) => ({
+            ...app,
+            active: app.name === action.appName,
+            minimized:
+              app.name === action.appName ? false : app.minimized,
+            relatedProject:
+              app.name === action.appName &&
+              action.config?.relatedProject !== undefined
+                ? action.config.relatedProject
+                : app.relatedProject,
+          })),
+          launchpad: false,
         };
+      }
+
+      return {
+        ...state,
+      };
     }
     case ActionType.TOGGLE_FULLSCREEN: {
       const newState = [

@@ -26,5 +26,5 @@ export class MetaAssembled extends Application {
 }
 
 export const MetaAssembledApp = () => {
-  return <ProjectTemplate {...projects().metaAssembled} />;
+  return <ProjectTemplate {...projects().metaAssembled} projectKey="metaAssembled" />;
 };

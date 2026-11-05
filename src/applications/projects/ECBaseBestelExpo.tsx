@@ -23,5 +23,5 @@ export class ECBaseBestelExpo extends Application {
 }
 
 export const ECBaseBestelApp = () => {
-  return <ProjectTemplate {...projects().starterApp} />;
+  return <ProjectTemplate {...projects().starterApp} projectKey="starterApp" />;
 };
