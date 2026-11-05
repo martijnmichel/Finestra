@@ -97,7 +97,7 @@ export const AboutApp = (id: string) => {
           label: "LinkedIn",
           function: () => {
             window.open(
-              "https://www.linkedin.com/in/martijn-ensing-159582207/",
+              "https://www.linkedin.com/in/martijn-van-der-eijk-159582207/",
               "_blank"
             );
           },
@@ -213,7 +213,7 @@ export const AboutApp = (id: string) => {
             <a
               target="_blank"
               className="os-chrome animate-underline inline-flex items-center gap-1.5"
-              href={`https://www.linkedin.com/in/martijn-ensing-159582207/`}
+              href={`https://www.linkedin.com/in/martijn-van-der-eijk-159582207/`}
             >
               <Network className="size-3.5 shrink-0" /> LinkedIn
             </a>

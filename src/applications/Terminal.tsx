@@ -149,10 +149,10 @@ const runCommand = (
         window.open("https://github.com/martijnmichel", "_blank");
       } else if (target === "linkedin") {
         term.writeln(
-          "Opening \x1b[34mhttps://www.linkedin.com/in/martijn-ensing-159582207/\x1b[0m"
+          "Opening \x1b[34mhttps://www.linkedin.com/in/martijn-van-der-eijk-159582207/\x1b[0m"
         );
         window.open(
-          "https://www.linkedin.com/in/martijn-ensing-159582207/",
+          "https://www.linkedin.com/in/martijn-van-der-eijk-159582207/",
           "_blank"
         );
       } else {
@@ -167,7 +167,7 @@ const runCommand = (
         "GitHub:   \x1b[34mhttps://github.com/martijnmichel\x1b[0m"
       );
       term.writeln(
-        "LinkedIn: \x1b[34mhttps://www.linkedin.com/in/martijn-ensing-159582207/\x1b[0m"
+        "LinkedIn: \x1b[34mhttps://www.linkedin.com/in/martijn-van-der-eijk-159582207/\x1b[0m"
       );
       term.writeln('Tip: try \x1b[33mopen github\x1b[0m');
       break;
