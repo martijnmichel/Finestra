@@ -6,10 +6,21 @@ import {
   DEFAULT_THEME,
   type ThemeConfig,
 } from "../lib/appearance";
+import { storageKey } from "../lib/os";
+
+const THEME_KEY = storageKey("theme");
+
+// One-time migrate from legacy Finestra key
+if (typeof window !== "undefined") {
+  const legacy = window.localStorage.getItem("finestra-theme");
+  if (legacy && !window.localStorage.getItem(THEME_KEY)) {
+    window.localStorage.setItem(THEME_KEY, legacy);
+  }
+}
 
 export const useTheme = () => {
   const [theme, setTheme] = useLocalStorage<ThemeConfig>(
-    "finestra-theme",
+    THEME_KEY,
     DEFAULT_THEME
   );
 

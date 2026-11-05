@@ -15,8 +15,12 @@ export const ApplicationWindow = (app: Application) => {
   const position = useRef({ x: app.x, y: app.y });
   const { state, dispatch } = useAppContext();
 
-  const handleWindowClick = () => {
-    toggleApp(app.id)(dispatch);
+  // Focus on mousedown so in-window "open app" clicks (which fire on click)
+  // don't bubble back and re-activate this window after the new one opens.
+  const handleWindowFocus = () => {
+    if (!app.active) {
+      toggleApp(app.id)(dispatch);
+    }
   };
 
   function handleCanvas(div: HTMLElement) {
@@ -106,7 +110,8 @@ export const ApplicationWindow = (app: Application) => {
         transform: app.fullscreen
           ? "translate(0, 0)"
           : `translateX(${app.x}px) translateY(${app.y}px)`,
-        zIndex: app.fullscreen ? 3 : app.active ? 2 : 1,
+        // Keep windows below dock (z-30) / menubar (z-40); fullscreen sits above others.
+        zIndex: (app.fullscreen ? 20 : 1) + (app.stackOrder ?? 0),
         borderRadius: app.fullscreen ? "0" : "var(--window-radius)",
         border: app.fullscreen ? "none" : "0.5px solid var(--window-border)",
         filter: app.active ? "none" : "saturate(0.9) brightness(0.98)",
@@ -123,7 +128,7 @@ export const ApplicationWindow = (app: Application) => {
       leaveFrom={`opacity-100 scale-100`}
       leaveTo={`opacity-0 translate-y-[80vh] scale-x-[0.2] scale-y-[0.6]`}
       show={!app.minimized}
-      onClick={handleWindowClick}
+      onMouseDown={handleWindowFocus}
       afterLeave={() => {
         var canvas = document.getElementById(app.id);
         if (canvas) interact(canvas).off(["drag", "resize"]);

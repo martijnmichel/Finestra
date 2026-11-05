@@ -17,10 +17,10 @@
     "restart": "Riavvia…",
     "shutDown": "Spegni…",
     "lockScreen": "Blocca schermo",
-    "logOut": "Esci…",
+    "logOut": "Esci da MartijnOS…",
     "controlCenter": "Centro di Controllo",
     "wifi": "Wi-Fi",
-    "wifiConnected": "FinestraNet",
+    "wifiConnected": "MartijnNet",
     "wifiSettings": "Impostazioni Wi-Fi…",
     "turnOnWifi": "Attiva Wi-Fi",
     "turnOffWifi": "Disattiva Wi-Fi",
@@ -49,5 +49,33 @@
     "spotlight": "Spotlight",
     "viewAsAnalog": "Visualizza come analogico",
     "clockSettings": "Impostazioni orologio…"
+  },
+  "aboutMac": {
+    "version": "Versione {{version}} ({{build}})",
+    "chip": "Chip",
+    "cores": "Core",
+    "memory": "Memoria",
+    "display": "Display",
+    "startupDisk": "Disco di avvio",
+    "language": "Lingua",
+    "network": "Rete",
+    "moreInfo": "Altre info…",
+    "ok": "OK"
+  },
+  "systemAlerts": {
+    "forceQuitTitle": "Forza uscita dalle app",
+    "forceQuitBody": "Se un’app non risponde, selezionala e fai clic su Forza uscita.",
+    "forceQuitApp": "Forza uscita",
+    "noApps": "Nessuna app aperta",
+    "restartTitle": "Vuoi davvero riavviare il computer?",
+    "restartBody": "{{os}} verrà riavviato. Le modifiche non salvate potrebbero andare perse. (Stub — questo OS portfolio non si riavvia davvero.)",
+    "shutDownTitle": "Vuoi davvero spegnere il computer?",
+    "shutDownBody": "{{os}} verrà spento. (Stub — questo OS portfolio non si spegne davvero.)",
+    "logOutTitle": "Vuoi chiudere tutte le app e uscire?",
+    "logOutBody": "Uscire da {{os}}? (Stub — resti connesso a questo portfolio.)",
+    "appStoreTitle": "App Store",
+    "appStoreBody": "L’App Store non è ancora disponibile in {{os}}.",
+    "cancel": "Annulla",
+    "unlockHint": "Fai clic per sbloccare"
   }
 }

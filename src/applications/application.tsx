@@ -19,6 +19,8 @@ export class Application {
   static appName = "Default App";
   public name = "Default App";
   id = v4();
+  /** Higher = closer to front. Bumped on open/focus. */
+  stackOrder = 0;
 
   multiple = false;
   fullscreen = false;

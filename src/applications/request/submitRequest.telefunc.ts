@@ -19,7 +19,7 @@ export async function submitRequest(input: RequestFormValues) {
   }
 
   const data = parsed.data;
-  const subject = `Finestra request from ${data.name}${
+  const subject = `MartijnOS request from ${data.name}${
     data.company ? ` (${data.company})` : ""
   }`;
 

@@ -2,6 +2,10 @@ import { find } from "lodash";
 import { IAppState, initialState } from ".";
 import { ActionType, AppActions } from "./actions";
 import { getApplication } from "../applications";
+import { Application } from "../applications/application";
+
+const nextStackOrder = (apps: Application[]) =>
+  Math.max(0, ...apps.map((app) => app.stackOrder ?? 0)) + 1;
 
 export const appReducer = (
   state: IAppState,
@@ -19,12 +23,16 @@ export const appReducer = (
       );
 
       if (App && !activeAppWindow) {
+        const opened = new App(action.config);
+        opened.active = true;
+        opened.stackOrder = nextStackOrder(state.applications);
+
         const newState = [
           ...state.applications.map((app) => ({
             ...app,
             active: false,
           })),
-          new App(action.config),
+          opened,
         ];
 
         return {
@@ -35,11 +43,14 @@ export const appReducer = (
       }
 
       if (App && activeAppWindow) {
+        const order = nextStackOrder(state.applications);
         return {
           ...state,
           applications: state.applications.map((app) => ({
             ...app,
             active: app.name === action.appName,
+            stackOrder:
+              app.name === action.appName ? order : app.stackOrder,
             minimized:
               app.name === action.appName ? false : app.minimized,
             relatedProject:
@@ -80,11 +91,12 @@ export const appReducer = (
     }
 
     case ActionType.TOGGLE_APP: {
-      
+      const order = nextStackOrder(state.applications);
       const newState = [
         ...state.applications.map((app) => ({
           ...app,
           active: app.id === action.appId,
+          stackOrder: app.id === action.appId ? order : app.stackOrder,
           minimized: app.id === action.appId ? false : app.minimized,
         })),
       ];

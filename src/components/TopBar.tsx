@@ -15,12 +15,13 @@ import {
 } from "./topbar/StatusMenus";
 import { useLocalStorage } from "usehooks-ts";
 import { cn } from "@/lib/utils";
+import { storageKey } from "@/lib/os";
 
 const TopBar = () => {
   const { launchpad } = useAppState();
   const [dateTime, setDateTime] = useState<number>(Date.now());
-  const [focus] = useLocalStorage("finestra-focus", false);
-  const [brightness] = useLocalStorage("finestra-brightness", 85);
+  const [focus] = useLocalStorage(storageKey("focus"), false);
+  const [brightness] = useLocalStorage(storageKey("brightness"), 85);
   const { t } = useTranslation();
 
   useEffect(() => {

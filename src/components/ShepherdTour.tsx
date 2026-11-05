@@ -22,7 +22,7 @@ export const ShepherdTour = () => {
   const init = () => {
     tour.current.addStep({
       id: "step-about",
-      text: "Hoi! Welkom bij FinestraOS, mijn online portfolio/cv.",
+      text: "Hoi! Welkom bij MartijnOS, mijn online portfolio/cv.",
       attachTo: {
         element: "#step-about",
         on: "top",

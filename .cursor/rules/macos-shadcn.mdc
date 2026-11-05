@@ -1,5 +1,5 @@
 ---
-description: macOS look for shadcn UI components in Finestra
+description: macOS look for shadcn UI components in MartijnOS
 globs: src/components/ui/**
 alwaysApply: false
 ---

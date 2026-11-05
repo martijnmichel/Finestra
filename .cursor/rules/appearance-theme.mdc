@@ -1,11 +1,11 @@
 ---
-description: Finestra OS appearance, Liquid Glass, accent/highlight theming
+description: MartijnOS appearance, Liquid Glass, accent/highlight theming
 alwaysApply: true
 ---
 
 # Appearance & theming
 
-Appearance is OS-wide and owned by `useTheme` + `src/lib/appearance.ts`. Persist in `finestra-theme` localStorage. Apply with `applyAppearance()` (sets `html` class/data attrs + CSS vars).
+Appearance is OS-wide and owned by `useTheme` + `src/lib/appearance.ts`. Persist in `martijnos-theme` localStorage. Apply with `applyAppearance()` (sets `html` class/data attrs + CSS vars).
 
 ## Controls (Settings → Appearance)
 

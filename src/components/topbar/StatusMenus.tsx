@@ -21,6 +21,7 @@ import { languages } from "@/i18n";
 import { startApp } from "@/store/actions/startApp";
 import { useAppContext } from "@/store";
 import { cn } from "@/lib/utils";
+import { storageKey } from "@/lib/os";
 import { useState } from "react";
 
 function StatusTrigger({
@@ -55,7 +56,7 @@ export const WifiMenu = () => {
   const { t } = useTranslation();
   const { dispatch } = useAppContext();
   const [open, setOpen] = useState(false);
-  const [wifi, setWifi] = useLocalStorage("finestra-wifi", true);
+  const [wifi, setWifi] = useLocalStorage(storageKey("wifi"), true);
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -74,7 +75,7 @@ export const WifiMenu = () => {
             <DropdownMenuSeparator />
             <DropdownMenuItem className="gap-2" disabled>
               <Check className="!size-3.5 text-[var(--macos-accent)]" />
-              FinestraNet
+              MartijnNet
             </DropdownMenuItem>
             <DropdownMenuItem disabled>Other Networks…</DropdownMenuItem>
           </>
@@ -92,7 +93,7 @@ export const BluetoothMenu = () => {
   const { t } = useTranslation();
   const { dispatch } = useAppContext();
   const [open, setOpen] = useState(false);
-  const [bluetooth, setBluetooth] = useLocalStorage("finestra-bluetooth", true);
+  const [bluetooth, setBluetooth] = useLocalStorage(storageKey("bluetooth"), true);
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -138,7 +139,7 @@ export const BatteryMenu = () => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [powerMode, setPowerMode] = useLocalStorage(
-    "finestra-low-power",
+    storageKey("low-power"),
     false
   );
 

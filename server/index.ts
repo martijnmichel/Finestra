@@ -33,6 +33,6 @@ app.get("*", async (c) => {
   }
 });
 
-console.log(`Finestra listening on http://localhost:${port}`);
+console.log(`MartijnOS listening on http://localhost:${port}`);
 const server = serve({ fetch: app.fetch, port });
 telefunc.installWebSocket(server);

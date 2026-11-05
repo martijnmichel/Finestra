@@ -17,10 +17,10 @@
     "restart": "Herstart…",
     "shutDown": "Zet uit…",
     "lockScreen": "Vergrendel scherm",
-    "logOut": "Log uit…",
+    "logOut": "Log uit van MartijnOS…",
     "controlCenter": "Regelcentrum",
     "wifi": "Wi-Fi",
-    "wifiConnected": "FinestraNet",
+    "wifiConnected": "MartijnNet",
     "wifiSettings": "Wi-Fi-instellingen…",
     "turnOnWifi": "Zet Wi-Fi aan",
     "turnOffWifi": "Zet Wi-Fi uit",
@@ -49,5 +49,33 @@
     "spotlight": "Spotlight-zoeken",
     "viewAsAnalog": "Weergeven als analoog",
     "clockSettings": "Klokinstellingen…"
+  },
+  "aboutMac": {
+    "version": "Versie {{version}} ({{build}})",
+    "chip": "Chip",
+    "cores": "Kernen",
+    "memory": "Geheugen",
+    "display": "Beeldscherm",
+    "startupDisk": "Opstartschijf",
+    "language": "Taal",
+    "network": "Netwerk",
+    "moreInfo": "Meer info…",
+    "ok": "OK"
+  },
+  "systemAlerts": {
+    "forceQuitTitle": "Forceer stop van programma’s",
+    "forceQuitBody": "Als een app niet reageert, selecteer je die en klik je op Forceer stop.",
+    "forceQuitApp": "Forceer stop",
+    "noApps": "Geen geopende apps",
+    "restartTitle": "Weet je zeker dat je de computer wilt herstarten?",
+    "restartBody": "{{os}} wordt herstart. Niet-opgeslagen wijzigingen kunnen verloren gaan. (Stub — dit portfolio-OS herstart niet echt.)",
+    "shutDownTitle": "Weet je zeker dat je de computer wilt uitzetten?",
+    "shutDownBody": "{{os}} wordt uitgeschakeld. (Stub — dit portfolio-OS gaat niet echt uit.)",
+    "logOutTitle": "Weet je zeker dat je alle apps wilt stoppen en wilt uitloggen?",
+    "logOutBody": "Uitloggen bij {{os}}? (Stub — je blijft ingelogd in dit portfolio.)",
+    "appStoreTitle": "App Store",
+    "appStoreBody": "De App Store is nog niet beschikbaar in {{os}}.",
+    "cancel": "Annuleer",
+    "unlockHint": "Klik om te ontgrendelen"
   }
 }

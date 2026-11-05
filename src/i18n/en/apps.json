@@ -59,7 +59,7 @@
     "search": "Search",
     "appleAccount": "Apple Account",
     "comingSoon": "Coming soon",
-    "stubBody": "{{label}} settings are not available in this portfolio OS yet.",
+    "stubBody": "{{label}} settings are not available in MartijnOS yet.",
     "panes": {
       "wifi": "Wi-Fi",
       "bluetooth": "Bluetooth",

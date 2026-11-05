@@ -21,6 +21,7 @@ import { languages } from "@/i18n";
 import { startApp } from "@/store/actions/startApp";
 import { useAppContext } from "@/store";
 import { cn } from "@/lib/utils";
+import { storageKey } from "@/lib/os";
 
 const modeIcon = (mode: AppearanceMode) => {
   if (mode === "dark") return Moon;
@@ -124,12 +125,12 @@ export const ControlCenter = () => {
   const { dispatch } = useAppContext();
   const [open, setOpen] = useState(false);
 
-  const [wifi, setWifi] = useLocalStorage("finestra-wifi", true);
-  const [bluetooth, setBluetooth] = useLocalStorage("finestra-bluetooth", true);
-  const [airdrop, setAirdrop] = useLocalStorage("finestra-airdrop", false);
-  const [focus, setFocus] = useLocalStorage("finestra-focus", false);
-  const [brightness, setBrightness] = useLocalStorage("finestra-brightness", 85);
-  const [volume, setVolume] = useLocalStorage("finestra-volume", 55);
+  const [wifi, setWifi] = useLocalStorage(storageKey("wifi"), true);
+  const [bluetooth, setBluetooth] = useLocalStorage(storageKey("bluetooth"), true);
+  const [airdrop, setAirdrop] = useLocalStorage(storageKey("airdrop"), false);
+  const [focus, setFocus] = useLocalStorage(storageKey("focus"), false);
+  const [brightness, setBrightness] = useLocalStorage(storageKey("brightness"), 85);
+  const [volume, setVolume] = useLocalStorage(storageKey("volume"), 55);
 
   useEffect(() => {
     document.documentElement.style.setProperty(

@@ -17,10 +17,10 @@
     "restart": "Restart…",
     "shutDown": "Shut Down…",
     "lockScreen": "Lock Screen",
-    "logOut": "Log Out…",
+    "logOut": "Log Out MartijnOS…",
     "controlCenter": "Control Centre",
     "wifi": "Wi-Fi",
-    "wifiConnected": "FinestraNet",
+    "wifiConnected": "MartijnNet",
     "wifiSettings": "Wi-Fi Settings…",
     "turnOnWifi": "Turn Wi-Fi On",
     "turnOffWifi": "Turn Wi-Fi Off",
@@ -49,5 +49,33 @@
     "spotlight": "Spotlight Search",
     "viewAsAnalog": "View as Analog",
     "clockSettings": "Clock Settings…"
+  },
+  "aboutMac": {
+    "version": "Version {{version}} ({{build}})",
+    "chip": "Chip",
+    "cores": "Cores",
+    "memory": "Memory",
+    "display": "Display",
+    "startupDisk": "Startup disk",
+    "language": "Language",
+    "network": "Network",
+    "moreInfo": "More Info…",
+    "ok": "OK"
+  },
+  "systemAlerts": {
+    "forceQuitTitle": "Force Quit Applications",
+    "forceQuitBody": "If an app is not responding, select it and click Force Quit.",
+    "forceQuitApp": "Force Quit",
+    "noApps": "No open applications",
+    "restartTitle": "Are you sure you want to restart your computer?",
+    "restartBody": "{{os}} will restart. Unsaved changes may be lost. (Stub — this portfolio OS does not actually restart.)",
+    "shutDownTitle": "Are you sure you want to shut down your computer?",
+    "shutDownBody": "{{os}} will shut down. (Stub — this portfolio OS does not actually shut down.)",
+    "logOutTitle": "Are you sure you want to quit all applications and log out?",
+    "logOutBody": "Log out of {{os}}? (Stub — you stay signed in to this portfolio.)",
+    "appStoreTitle": "App Store",
+    "appStoreBody": "The App Store is not available in {{os}} yet.",
+    "cancel": "Cancel",
+    "unlockHint": "Click to unlock"
   }
 }
