@@ -46,7 +46,34 @@ export const appReducer = (
   console.log({ action, state });
 
   switch (action.type) {
+    case ActionType.OPEN_SIRI:
+      return {
+        ...state,
+        siriOpen: true,
+        launchpad: false,
+        appSwitcher: false,
+      };
+    case ActionType.CLOSE_SIRI:
+      return { ...state, siriOpen: false };
+    case ActionType.SET_SIRI_OPEN:
+      return {
+        ...state,
+        siriOpen: action.open,
+        ...(action.open ? { launchpad: false, appSwitcher: false } : {}),
+      };
+
     case ActionType.START_APP: {
+      // Siri is an overlay (Spotlight-style), never a window.
+      if (action.appName === "Siri") {
+        return {
+          ...state,
+          siriOpen: true,
+          launchpad: false,
+          appSwitcher: false,
+          applications: state.applications.filter((app) => app.name !== "Siri"),
+        };
+      }
+
       const App = getApplication(action.appName);
 
       const activeAppWindow = find(

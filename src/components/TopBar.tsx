@@ -16,7 +16,7 @@ import {
 import { useLocalStorage } from "usehooks-ts";
 import { cn } from "@/lib/utils";
 import { storageKey } from "@/lib/os";
-import { startApp } from "@/store/actions/startApp";
+import { openSiri } from "@/store/actions/siri";
 import SiriIcon from "../icons/siri.png";
 
 const TopBar = () => {
@@ -114,7 +114,7 @@ const TopBar = () => {
             className="topnav-button focus:outline-none"
             aria-label={t("common:menuBar.siri")}
             title={t("common:menuBar.siri")}
-            onClick={() => startApp("Siri")(dispatch)}
+            onClick={() => openSiri()(dispatch)}
           >
             <img
               src={SiriIcon}

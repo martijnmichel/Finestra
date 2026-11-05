@@ -14,7 +14,8 @@ import { useOsFormFactor } from "../hooks/useOsFormFactor";
 import { ShellGestureProvider } from "../components/shell/ShellGestureContext";
 import { useLocalStorage } from "usehooks-ts";
 import { storageKey } from "@/lib/os";
-import { startApp } from "@/store/actions/startApp";
+import { openSiri } from "@/store/actions/siri";
+import { SiriOverlay } from "@/components/SiriOverlay";
 
 const SIRI_SEEN_KEY = storageKey("siri-seen");
 
@@ -46,7 +47,7 @@ const Home = () => {
     siriIntroScheduled.current = true;
     const timer = window.setTimeout(() => {
       localStorage.setItem(SIRI_SEEN_KEY, "1");
-      startApp("Siri")(dispatch);
+      openSiri()(dispatch);
     }, 3000);
 
     return () => window.clearTimeout(timer);
@@ -87,6 +88,7 @@ const Home = () => {
 
       <BottomDock />
       {topChrome}
+      <SiriOverlay />
     </>
   );
 

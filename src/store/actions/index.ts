@@ -9,6 +9,11 @@ import { ActionSetApplications } from "./setApplications";
 import { ActionToggleFullscreen } from "./toggleFullscreen";
 import { ActionGoHome } from "./goHome";
 import { ActionToggleAppSwitcher } from "./toggleAppSwitcher";
+import {
+  ActionCloseSiri,
+  ActionOpenSiri,
+  ActionSetSiriOpen,
+} from "./siri";
 
 export enum ActionType {
   TOGGLE_LAUNCHPAD = "TOGGLE_LAUNCHPAD",
@@ -22,6 +27,9 @@ export enum ActionType {
   TOGGLE_FULLSCREEN = "TOGGLE_FULLSCREEN",
   UPDATE_APP_WINDOW = "UPDATE_APP_WINDOW",
   SET_APPLICATIONS = "SET_APPLICATIONS",
+  OPEN_SIRI = "OPEN_SIRI",
+  CLOSE_SIRI = "CLOSE_SIRI",
+  SET_SIRI_OPEN = "SET_SIRI_OPEN",
 }
 
 export type AppActions =
@@ -35,4 +43,7 @@ export type AppActions =
   | ActionUpdateAppWindow
   | ActionToggleOrOpenApp
   | ActionSetApplications
-  | ActionToggleFullscreen;
+  | ActionToggleFullscreen
+  | ActionOpenSiri
+  | ActionCloseSiri
+  | ActionSetSiriOpen;

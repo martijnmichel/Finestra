@@ -7,12 +7,14 @@ export interface IAppState {
   applications: Application[];
   launchpad: boolean;
   appSwitcher: boolean;
+  siriOpen: boolean;
 }
 
 export const initialState: IAppState = {
   applications: [],
   launchpad: false,
   appSwitcher: false,
+  siriOpen: false,
 };
 export interface IAppContext {
   state: IAppState;
@@ -40,13 +42,16 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const applications = localStorage.getItem("martijnvde-applications");
     if (applications) {
-      JSON.parse(applications).sort((a: Application, b: Application) => a.active ? 1 : -1).forEach((application: Application) => {
-        dispatch({
-          type: ActionType.START_APP,
-          appName: application.name,
-          config: application,
+      JSON.parse(applications)
+        .filter((application: Application) => application.name !== "Siri")
+        .sort((a: Application, b: Application) => (a.active ? 1 : -1))
+        .forEach((application: Application) => {
+          dispatch({
+            type: ActionType.START_APP,
+            appName: application.name,
+            config: application,
+          });
         });
-      });
     } else {
       dispatch({ type: ActionType.START_APP, appName: "About" });
     }
