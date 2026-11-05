@@ -119,7 +119,7 @@ export const HomeIndicator = () => {
     <div
       className="fixed z-[45] inset-x-0 bottom-0 flex flex-col items-center justify-end"
       style={{
-        height: "calc(28px + max(8px, env(safe-area-inset-bottom)))",
+        height: "calc(52px + max(8px, env(safe-area-inset-bottom)))",
         touchAction: "none",
       }}
       onPointerDown={(e) => {

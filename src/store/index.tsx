@@ -3,6 +3,7 @@ import { Application } from "../applications/application";
 import React, { useContext, useEffect, useState } from "react";
 import { ActionType, AppActions } from "./actions";
 import { appReducer } from "./reducer";
+import { getOsFormFactor } from "@/hooks/useOsFormFactor";
 export interface IAppState {
   applications: Application[];
   launchpad: boolean;
@@ -40,6 +41,12 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   }, [state.applications]);
 
   useEffect(() => {
+    // iPhone: land on Home — no restored windows, no default About.
+    if (getOsFormFactor() === "ios") {
+      setInit(true);
+      return;
+    }
+
     const applications = localStorage.getItem("martijnvde-applications");
     if (applications) {
       JSON.parse(applications)

@@ -12,6 +12,9 @@
     "contact": "Contact",
     "present": "nu"
   },
+  "widgets": {
+    "today": "Vandaag"
+  },
   "siri": {
     "greeting": "Hoi — waarmee kan ik helpen?",
     "subtitle": "Kies een suggestie of zoek iets in MartijnOS.",

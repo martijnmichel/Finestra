@@ -12,6 +12,9 @@
     "contact": "Contatti",
     "present": "oggi"
   },
+  "widgets": {
+    "today": "Oggi"
+  },
   "siri": {
     "greeting": "Ciao — come posso aiutarti?",
     "subtitle": "Scegli un suggerimento o cerca qualcosa in MartijnOS.",

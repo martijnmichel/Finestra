@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Applications } from "../applications";
 import { AppButton } from "./application/AppButton";
 import { filter } from "lodash";
@@ -14,11 +14,18 @@ import {
   useMotionValueEvent,
   useTransform,
 } from "motion/react";
-import { useShellGesture } from "./shell/ShellGestureContext";
+import { GENIE_CANCEL, useShellGesture } from "./shell/ShellGestureContext";
 import { useOsFormFactor } from "@/hooks/useOsFormFactor";
 import { cn } from "@/lib/utils";
 
 type AppClass = (typeof Applications)[keyof typeof Applications];
+
+/** Finger travel (px) that maps open→closed while swiping down. */
+const DISMISS_SCRUB = 280;
+const DISMISS_COMMIT = 0.45;
+const DISMISS_FLICK = 0.28;
+/** Downward velocity (px/ms) that assists dismiss. */
+const DISMISS_VELOCITY = 0.85;
 
 /** iOS / iPadOS App Library — list on iPhone, icon grid on iPad. */
 export const AppLibrary = () => {
@@ -28,7 +35,21 @@ export const AppLibrary = () => {
   const [raised, setRaised] = useState(false);
   const { width } = useWindowSize();
   const { isIos } = useOsFormFactor();
-  const { progress, mode, settleProgress, setMode, reset } = useShellGesture();
+  const {
+    progress,
+    mode,
+    settleProgress,
+    setProgress,
+    setMode,
+    reset,
+  } = useShellGesture();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const startY = useRef<number | null>(null);
+  const startX = useRef<number | null>(null);
+  const lastY = useRef(0);
+  const lastT = useRef(0);
+  const velocityY = useRef(0);
+  const scrubbing = useRef(false);
   // Only scrub library visuals from Home — ignore shared progress during app→home / switcher.
   const libraryProgress = useMotionValue(0);
 
@@ -99,15 +120,93 @@ export const AppLibrary = () => {
 
   const launch = (appName: string) => startApp(appName)(dispatch);
 
+  const endScrub = async (clientY: number) => {
+    if (!scrubbing.current || startY.current == null) {
+      scrubbing.current = false;
+      startY.current = null;
+      startX.current = null;
+      return;
+    }
+
+    const dy = Math.max(0, clientY - startY.current);
+    const p = Math.min(1, Math.max(0, 1 - dy / DISMISS_SCRUB));
+    const flick =
+      p <= 1 - DISMISS_FLICK && velocityY.current >= DISMISS_VELOCITY;
+    const commit = p <= 1 - DISMISS_COMMIT || flick;
+
+    scrubbing.current = false;
+    startY.current = null;
+    startX.current = null;
+
+    if (commit) {
+      dismiss();
+      return;
+    }
+
+    await settleProgress(1, GENIE_CANCEL);
+  };
+
   return (
     <div
+      ref={rootRef}
       id="app-library"
-      className="fixed inset-0 w-screen h-screen overflow-y-auto overflow-x-hidden"
+      className="fixed inset-0 w-screen h-screen overflow-y-auto overflow-x-hidden overscroll-y-contain"
       style={{
         zIndex: raised ? 50 : -10,
         pointerEvents: open ? "auto" : "none",
+        touchAction: "pan-y",
       }}
       aria-hidden={!open}
+      onPointerDown={(e) => {
+        if (!open || e.button !== 0) return;
+        // Don't fight text selection / search caret.
+        if ((e.target as HTMLElement).closest("input, textarea")) return;
+        startY.current = e.clientY;
+        startX.current = e.clientX;
+        lastY.current = e.clientY;
+        lastT.current = performance.now();
+        velocityY.current = 0;
+        scrubbing.current = false;
+      }}
+      onPointerMove={(e) => {
+        if (!open || startY.current == null || startX.current == null) return;
+
+        const now = performance.now();
+        const dt = Math.max(1, now - lastT.current);
+        // Positive = finger moving down.
+        velocityY.current = (e.clientY - lastY.current) / dt;
+        lastY.current = e.clientY;
+        lastT.current = now;
+
+        const dy = e.clientY - startY.current;
+        const dx = e.clientX - startX.current;
+        const atTop = (rootRef.current?.scrollTop ?? 0) <= 0;
+
+        if (!scrubbing.current) {
+          // Only start dismiss when pulled down from the top of the list.
+          if (!atTop || dy < 12) return;
+          if (dy < Math.abs(dx) * 1.15) return;
+          scrubbing.current = true;
+          progress.stop();
+          setMode("library");
+          try {
+            rootRef.current?.setPointerCapture(e.pointerId);
+          } catch {
+            /* ignore */
+          }
+        }
+
+        e.preventDefault();
+        if (rootRef.current) rootRef.current.scrollTop = 0;
+        const p = Math.min(1, Math.max(0, 1 - Math.max(0, dy) / DISMISS_SCRUB));
+        setProgress(p);
+      }}
+      onPointerUp={(e) => {
+        void endScrub(e.clientY);
+      }}
+      onPointerCancel={(e) => {
+        void endScrub(e.clientY);
+      }}
     >
       <motion.button
         type="button"
