@@ -7,8 +7,7 @@ type FloatingSidebarShellProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 /**
- * Window chrome shell: left padding so the sidebar can float; content stays flush.
- * Put `<FloatingSidebar>` then your main pane as children.
+ * Window chrome shell with inset padding so both sidebar and content can float.
  */
 export const FloatingSidebarShell = React.forwardRef<
   HTMLDivElement,
@@ -17,7 +16,7 @@ export const FloatingSidebarShell = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex h-full min-h-0 w-full gap-2.5 pl-2.5 py-2.5 pr-0",
+      "macos-floating-shell flex h-full min-h-0 w-full gap-2.5 p-2.5",
       className
     )}
     style={{ ...shellStyle, ...style }}
@@ -32,7 +31,7 @@ type FloatingSidebarProps = React.HTMLAttributes<HTMLElement> & {
   collapseBelow?: "@xl" | "never";
 };
 
-/** Inset Liquid Glass sidebar — floats; content beside it should stay flush. */
+/** Inset Liquid Glass sidebar — floats with full rounding. */
 export const FloatingSidebar = React.forwardRef<
   HTMLElement,
   FloatingSidebarProps
@@ -67,7 +66,9 @@ export const FloatingSidebar = React.forwardRef<
 );
 FloatingSidebar.displayName = "FloatingSidebar";
 
-/** Flush main pane next to FloatingSidebar (not a second floating card). */
+/**
+ * Floating main pane next to FloatingSidebar — full 16px rounding on all corners.
+ */
 export const FloatingSidebarContent = React.forwardRef<
   HTMLElement,
   React.HTMLAttributes<HTMLElement>
@@ -75,7 +76,7 @@ export const FloatingSidebarContent = React.forwardRef<
   <main
     ref={ref}
     className={cn(
-      "relative flex flex-1 min-w-0 min-h-0 flex-col overflow-hidden",
+      "macos-floating-pane relative flex flex-1 min-w-0 min-h-0 flex-col overflow-hidden rounded-[16px]",
       className
     )}
     style={style}

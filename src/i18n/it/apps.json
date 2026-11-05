@@ -56,5 +56,172 @@
   },
   "sonid": {
     "title": "Impara la teoria musicale con Sonid"
+  },
+  "settings": {
+    "name": "Impostazioni",
+    "search": "Cerca",
+    "appleAccount": "Account Apple",
+    "comingSoon": "Prossimamente",
+    "stubBody": "Le impostazioni di {{label}} non sono ancora disponibili in questo OS portfolio.",
+    "panes": {
+      "wifi": "Wi-Fi",
+      "bluetooth": "Bluetooth",
+      "network": "Rete",
+      "vpn": "VPN",
+      "energy": "Energia",
+      "general": "Generali",
+      "accessibility": "Accessibilità",
+      "appearance": "Aspetto",
+      "apple-intelligence": "Apple Intelligence e Siri",
+      "control-center": "Centro di Controllo",
+      "desktop-dock": "Desktop e Dock",
+      "displays": "Monitor",
+      "menu-bar": "Barra dei menu",
+      "spotlight": "Spotlight",
+      "wallpaper": "Sfondo",
+      "notifications": "Notifiche",
+      "sound": "Suono",
+      "focus": "Concentrazione",
+      "screen-time": "Tempo di utilizzo",
+      "lock-screen": "Schermata di blocco",
+      "privacy": "Privacy e sicurezza",
+      "touch-id": "Password di accesso",
+      "users": "Utenti e gruppi",
+      "internet-accounts": "Account internet",
+      "game-center": "Game Center",
+      "icloud": "iCloud",
+      "wallet": "Wallet e Apple Pay",
+      "keyboard": "Tastiera",
+      "mouse": "Mouse",
+      "trackpad": "Trackpad",
+      "printers": "Stampanti e scanner"
+    },
+    "descriptions": {
+      "general": "Gestisci le impostazioni di sistema generali, lo spazio di archiviazione e gli aggiornamenti software",
+      "appearance": "Chiaro, Scuro, Liquid Glass, colori di accento e evidenziazione"
+    },
+    "general": {
+      "about": "Informazioni",
+      "softwareUpdate": "Aggiornamento software",
+      "storage": "Archiviazione",
+      "appleCare": "AppleCare e garanzia",
+      "dateTime": "Data e ora",
+      "languageRegion": "Lingua e zona",
+      "transferReset": "Trasferisci o ripristina"
+    },
+    "appearance": {
+      "title": "Aspetto",
+      "modes": {
+        "auto": "Automatico",
+        "light": "Chiaro",
+        "dark": "Scuro"
+      },
+      "liquidGlassHint": "Scegli l’aspetto preferito per Liquid Glass.",
+      "glass": {
+        "clear": "Trasparente",
+        "tinted": "Tinta"
+      },
+      "theme": "Tema",
+      "colour": "Colore",
+      "textHighlight": "Colore evidenziazione testo",
+      "iconWidgetStyle": "Stile icone e widget",
+      "iconStyles": {
+        "default": "Predefinito",
+        "dark": "Scuro",
+        "clear": "Trasparente",
+        "tinted": "Tinta"
+      },
+      "folderColour": "Colore cartella",
+      "automatic": "Automatico",
+      "windows": "Finestre",
+      "sidebarIconSize": "Dimensione icone barra laterale",
+      "sizes": {
+        "small": "Piccola",
+        "medium": "Media",
+        "large": "Grande"
+      },
+      "tintWindows": "Tinta lo sfondo delle finestre con il colore dello sfondo",
+      "showScrollBars": "Mostra barre di scorrimento",
+      "scrollBars": {
+        "automatic": "Automaticamente in base a mouse o trackpad",
+        "when-scrolling": "Durante lo scorrimento",
+        "always": "Sempre"
+      },
+      "clickScrollBar": "Fai clic nella barra di scorrimento per",
+      "scrollClick": {
+        "page": "Passare alla pagina successiva",
+        "spot": "Saltare al punto cliccato"
+      },
+      "colors": {
+        "multicolor": "Multicolore",
+        "blue": "Blu",
+        "purple": "Viola",
+        "pink": "Rosa",
+        "red": "Rosso",
+        "orange": "Arancione",
+        "yellow": "Giallo",
+        "green": "Verde",
+        "graphite": "Grafite"
+      }
+    }
+  },
+  "finder": {
+    "name": "Finder",
+    "search": "Cerca",
+    "empty": "Nessun elemento da mostrare",
+    "columns": {
+      "name": "Nome",
+      "dateModified": "Data di modifica",
+      "size": "Dimensione"
+    },
+    "sections": {
+      "favorites": "Preferiti",
+      "icloud": "iCloud",
+      "locations": "Posizioni",
+      "tags": "Tag"
+    },
+    "sidebar": {
+      "recents": "Recenti",
+      "applications": "Applicazioni",
+      "desktop": "Scrivania",
+      "documents": "Documenti",
+      "downloads": "Download",
+      "pictures": "Immagini",
+      "music": "Musica",
+      "movies": "Film",
+      "icloud-drive": "iCloud Drive",
+      "shared": "Condivisi",
+      "martijn-mac": "MacBook Pro di Martijn",
+      "macintosh-hd": "Macintosh HD",
+      "network": "Rete",
+      "tag-red": "Rosso",
+      "tag-orange": "Arancione",
+      "tag-yellow": "Giallo",
+      "tag-green": "Verde",
+      "tag-blue": "Blu",
+      "tag-purple": "Viola",
+      "tag-grey": "Grigio"
+    },
+    "menus": {
+      "file": "File",
+      "edit": "Modifica",
+      "view": "Vista",
+      "go": "Vai",
+      "newWindow": "Nuova finestra del Finder",
+      "newFolder": "Nuova cartella",
+      "closeWindow": "Chiudi finestra",
+      "undo": "Annulla",
+      "cut": "Taglia",
+      "copy": "Copia",
+      "paste": "Incolla",
+      "selectAll": "Seleziona tutto",
+      "asIcons": "come icone",
+      "asList": "come elenco",
+      "asColumns": "come colonne",
+      "asGallery": "come galleria",
+      "recents": "Recenti",
+      "documents": "Documenti",
+      "downloads": "Download"
+    }
   }
 }

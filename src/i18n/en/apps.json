@@ -53,5 +53,172 @@
       "3to6months": "3–6 months",
       "flexible": "Flexible"
     }
+  },
+  "settings": {
+    "name": "Settings",
+    "search": "Search",
+    "appleAccount": "Apple Account",
+    "comingSoon": "Coming soon",
+    "stubBody": "{{label}} settings are not available in this portfolio OS yet.",
+    "panes": {
+      "wifi": "Wi-Fi",
+      "bluetooth": "Bluetooth",
+      "network": "Network",
+      "vpn": "VPN",
+      "energy": "Energy",
+      "general": "General",
+      "accessibility": "Accessibility",
+      "appearance": "Appearance",
+      "apple-intelligence": "Apple Intelligence & Siri",
+      "control-center": "Control Centre",
+      "desktop-dock": "Desktop & Dock",
+      "displays": "Displays",
+      "menu-bar": "Menu Bar",
+      "spotlight": "Spotlight",
+      "wallpaper": "Wallpaper",
+      "notifications": "Notifications",
+      "sound": "Sound",
+      "focus": "Focus",
+      "screen-time": "Screen Time",
+      "lock-screen": "Lock Screen",
+      "privacy": "Privacy & Security",
+      "touch-id": "Login Password",
+      "users": "Users & Groups",
+      "internet-accounts": "Internet Accounts",
+      "game-center": "Game Center",
+      "icloud": "iCloud",
+      "wallet": "Wallet & Apple Pay",
+      "keyboard": "Keyboard",
+      "mouse": "Mouse",
+      "trackpad": "Trackpad",
+      "printers": "Printers & Scanners"
+    },
+    "descriptions": {
+      "general": "Manage general system settings, storage and software updates",
+      "appearance": "Light, Dark, Liquid Glass, accent and highlight colours"
+    },
+    "general": {
+      "about": "About",
+      "softwareUpdate": "Software Update",
+      "storage": "Storage",
+      "appleCare": "Apple Care & Warranty",
+      "dateTime": "Date & Time",
+      "languageRegion": "Language & Region",
+      "transferReset": "Transfer or Reset"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "modes": {
+        "auto": "Auto",
+        "light": "Light",
+        "dark": "Dark"
+      },
+      "liquidGlassHint": "Choose your preferred look for Liquid Glass.",
+      "glass": {
+        "clear": "Clear",
+        "tinted": "Tinted"
+      },
+      "theme": "Theme",
+      "colour": "Colour",
+      "textHighlight": "Text highlight colour",
+      "iconWidgetStyle": "Icon & widget style",
+      "iconStyles": {
+        "default": "Default",
+        "dark": "Dark",
+        "clear": "Clear",
+        "tinted": "Tinted"
+      },
+      "folderColour": "Folder colour",
+      "automatic": "Automatic",
+      "windows": "Windows",
+      "sidebarIconSize": "Sidebar icon size",
+      "sizes": {
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
+      },
+      "tintWindows": "Tint window background with wallpaper colour",
+      "showScrollBars": "Show scroll bars",
+      "scrollBars": {
+        "automatic": "Automatically based on mouse or trackpad",
+        "when-scrolling": "When scrolling",
+        "always": "Always"
+      },
+      "clickScrollBar": "Click in the scroll bar to",
+      "scrollClick": {
+        "page": "Jump to the next page",
+        "spot": "Jump to the spot that's clicked"
+      },
+      "colors": {
+        "multicolor": "Multicolor",
+        "blue": "Blue",
+        "purple": "Purple",
+        "pink": "Pink",
+        "red": "Red",
+        "orange": "Orange",
+        "yellow": "Yellow",
+        "green": "Green",
+        "graphite": "Graphite"
+      }
+    }
+  },
+  "finder": {
+    "name": "Finder",
+    "search": "Search",
+    "empty": "No items to show",
+    "columns": {
+      "name": "Name",
+      "dateModified": "Date Modified",
+      "size": "Size"
+    },
+    "sections": {
+      "favorites": "Favorites",
+      "icloud": "iCloud",
+      "locations": "Locations",
+      "tags": "Tags"
+    },
+    "sidebar": {
+      "recents": "Recents",
+      "applications": "Applications",
+      "desktop": "Desktop",
+      "documents": "Documents",
+      "downloads": "Downloads",
+      "pictures": "Pictures",
+      "music": "Music",
+      "movies": "Movies",
+      "icloud-drive": "iCloud Drive",
+      "shared": "Shared",
+      "martijn-mac": "Martijn’s MacBook Pro",
+      "macintosh-hd": "Macintosh HD",
+      "network": "Network",
+      "tag-red": "Red",
+      "tag-orange": "Orange",
+      "tag-yellow": "Yellow",
+      "tag-green": "Green",
+      "tag-blue": "Blue",
+      "tag-purple": "Purple",
+      "tag-grey": "Grey"
+    },
+    "menus": {
+      "file": "File",
+      "edit": "Edit",
+      "view": "View",
+      "go": "Go",
+      "newWindow": "New Finder Window",
+      "newFolder": "New Folder",
+      "closeWindow": "Close Window",
+      "undo": "Undo",
+      "cut": "Cut",
+      "copy": "Copy",
+      "paste": "Paste",
+      "selectAll": "Select All",
+      "asIcons": "as Icons",
+      "asList": "as List",
+      "asColumns": "as Columns",
+      "asGallery": "as Gallery",
+      "recents": "Recents",
+      "documents": "Documents",
+      "downloads": "Downloads"
+    }
   }
 }

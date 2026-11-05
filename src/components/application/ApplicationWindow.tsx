@@ -12,7 +12,7 @@ import { toggleApp } from "../../store/actions/toggleApp";
 import { updateAppWindow } from "../../store/actions/updateAppWindow";
 
 export const ApplicationWindow = (app: Application) => {
-  const position = useRef({ x: 0, y: 0 });
+  const position = useRef({ x: app.x, y: app.y });
   const { state, dispatch } = useAppContext();
 
   const handleWindowClick = () => {
@@ -20,7 +20,6 @@ export const ApplicationWindow = (app: Application) => {
   };
 
   function handleCanvas(div: HTMLElement) {
-    console.log(div);
     interact(div)
       .draggable({
         allowFrom: `[data-handle="${app.id}"]`,
@@ -30,8 +29,8 @@ export const ApplicationWindow = (app: Application) => {
             position.current.x += event.dx;
             position.current.y += event.dy;
 
-            div.setAttribute("data-x", event.dx);
-            div.setAttribute("data-y", event.dy);
+            div.setAttribute("data-x", String(position.current.x));
+            div.setAttribute("data-y", String(position.current.y));
 
             event.target.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
           },
@@ -83,13 +82,15 @@ export const ApplicationWindow = (app: Application) => {
   }
 
   useEffect(() => {
+    position.current = { x: app.x, y: app.y };
+  }, [app.x, app.y]);
+
+  useEffect(() => {
     var canvas = document.getElementById(app.id);
     if (canvas) {
       handleCanvas(canvas);
     }
   }, []);
-
-  useEffect(() => console.log(app), [app]);
 
   return (
     <Transition

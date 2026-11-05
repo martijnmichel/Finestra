@@ -12,10 +12,10 @@ Controls should read as current macOS (Tahoe / Liquid Glass) — context decides
 
 | Class | When | Look |
 |-------|------|------|
-| `.macos-input` (default Input/Textarea) | Boxed entry (time fields, compact fields) | Subtle grey well + soft `0.5px` border + ~6px radius |
-| `.macos-input-plain` | Stacked label forms (Request) | Transparent, no border |
-| `.macos-select` | Settings row values | Text + `ChevronsUpDown` only, no well |
-| `.macos-search` | Finder / Settings / Safari search | Capsule fill, no hard border |
+| `.macos-input` / `.macos-select` (defaults) | Forms everywhere (Request, etc.) | Light fill + `1px` border + ~8px radius; accent focus ring |
+| `.macos-input-plain` / `.macos-select-plain` | Settings row values | Transparent, text + chevrons only |
+| `.macos-search` | Finder / Settings sidebar | Capsule fill, no hard border |
+| `.macos-button-primary` (Button default) | Primary actions | `var(--macos-accent)` fill, white label |
 
 - Focus on boxed fields: accent ring via `color-mix(... var(--macos-accent) ...)`
 - Never hardcode `#007aff` — use `var(--macos-accent)`
@@ -25,9 +25,8 @@ Controls should read as current macOS (Tahoe / Liquid Glass) — context decides
 - Switch: accent on, flat `#e5e5ea` off, white thumb
 - Radio: flat grey off; accent + white center dot on
 
-## Floating chrome (Tahoe) — two patterns
+## Floating chrome (Tahoe)
 
-- Toolbar actions: `FloatingGroup` / `FloatingGroupButton`
-- **Settings-style:** `FloatingSidebar` (+ Shell/Content) — **sidebar floats**, content flush
-- **Finder-style:** flush dark chrome + sidebar; **`FloatingContent`** inset card floats (top toolbar stays on chrome; search often plain/`macos-input-plain`)
-- Don’t mix both floating surfaces in one window
+- Toolbar actions: `FloatingGroup` / `FloatingGroupButton` (icons must stay readable in dark — use `.macos-floating-btn` colours)
+- Apps with a left nav (Settings, Finder): `FloatingSidebarShell` + `FloatingSidebar` + `FloatingSidebarContent`
+- Both sidebar and content float: full `rounded-[16px]` on all corners, shell padding on every side, gap between panes

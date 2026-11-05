@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Accessibility,
   AtSign,
@@ -90,6 +91,15 @@ const ICONS: Record<string, LucideIcon> = {
   printer: Printer,
 };
 
+const paneLabel = (t: (key: string) => string, id: SettingsPaneId) =>
+  t(`apps:settings.panes.${id}`);
+
+const paneDescription = (t: (key: string) => string, id: SettingsPaneId) => {
+  const key = `apps:settings.descriptions.${id}`;
+  const value = t(key);
+  return value === key ? undefined : value;
+};
+
 const SettingsIconBadge = ({
   item,
   size = "sm",
@@ -106,9 +116,7 @@ const SettingsIconBadge = ({
       data-settings-icon
       className={cn(
         "settings-icon-badge inline-flex items-center justify-center shrink-0 shadow-sm",
-        size === "lg"
-          ? "size-14 rounded-[14px]"
-          : "rounded-[6px]",
+        size === "lg" ? "size-14 rounded-[14px]" : "rounded-[6px]",
         needsDarkIcon ? "text-black border border-black/10" : "text-white"
       )}
       style={
@@ -129,59 +137,51 @@ const SettingsIconBadge = ({
   );
 };
 
-const StubPane = ({ item }: { item: SettingsNavItem }) => (
-  <div className="os-chrome max-w-[560px] mx-auto w-full flex flex-col items-center text-center pt-10 gap-3">
-    <SettingsIconBadge item={item} size="lg" />
-    <h2 className="text-[15px] font-semibold tracking-[-0.2px] text-foreground">
-      {item.label}
-    </h2>
-    <p className="text-[13px] text-muted-foreground max-w-sm leading-relaxed">
-      {item.description ??
-        `${item.label} settings are not available in this portfolio OS yet.`}
-    </p>
-    <div
-      className="w-full mt-4 rounded-[10px] px-3.5 py-8 text-[13px] text-muted-foreground"
-      style={{ background: "var(--settings-group)" }}
-    >
-      Coming soon
+const StubPane = ({ item }: { item: SettingsNavItem }) => {
+  const { t } = useTranslation();
+  const label = paneLabel(t, item.id);
+
+  return (
+    <div className="os-chrome max-w-[560px] mx-auto w-full flex flex-col items-center text-center pt-10 gap-3">
+      <SettingsIconBadge item={item} size="lg" />
+      <h2 className="text-[15px] font-semibold tracking-[-0.2px] text-foreground">
+        {label}
+      </h2>
+      <p className="text-[13px] text-muted-foreground max-w-sm leading-relaxed">
+        {paneDescription(t, item.id) ??
+          t("apps:settings.stubBody", { label })}
+      </p>
+      <div
+        className="w-full mt-4 rounded-[10px] px-3.5 py-8 text-[13px] text-muted-foreground"
+        style={{ background: "var(--settings-group)" }}
+      >
+        {t("apps:settings.comingSoon")}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
+  const { t } = useTranslation();
   const rows = [
-    { label: "About", iconBg: "#8e8e93", icon: "settings" as const },
-    {
-      label: "Software Update",
-      iconBg: "#007aff",
-      icon: "sparkles" as const,
-    },
-    { label: "Storage", iconBg: "#8e8e93", icon: "monitor" as const },
-    {
-      label: "Apple Care & Warranty",
-      iconBg: "#007aff",
-      icon: "shield" as const,
-    },
-    { label: "Date & Time", iconBg: "#007aff", icon: "hourglass" as const },
-    {
-      label: "Language & Region",
-      iconBg: "#007aff",
-      icon: "globe" as const,
-    },
-    {
-      label: "Transfer or Reset",
-      iconBg: "#8e8e93",
-      icon: "settings" as const,
-    },
+    { id: "about", iconBg: "#8e8e93", icon: "settings" as const },
+    { id: "softwareUpdate", iconBg: "#007aff", icon: "sparkles" as const },
+    { id: "storage", iconBg: "#8e8e93", icon: "monitor" as const },
+    { id: "appleCare", iconBg: "#007aff", icon: "shield" as const },
+    { id: "dateTime", iconBg: "#007aff", icon: "hourglass" as const },
+    { id: "languageRegion", iconBg: "#007aff", icon: "globe" as const },
+    { id: "transferReset", iconBg: "#8e8e93", icon: "settings" as const },
   ];
 
   return (
     <div className="os-chrome max-w-[560px] mx-auto w-full flex flex-col gap-5">
       <div className="flex flex-col items-center text-center gap-2 pt-2 pb-1">
         <SettingsIconBadge item={item} size="lg" />
-        <h2 className="text-[15px] font-semibold tracking-[-0.2px]">{item.label}</h2>
+        <h2 className="text-[15px] font-semibold tracking-[-0.2px]">
+          {paneLabel(t, item.id)}
+        </h2>
         <p className="text-[13px] text-muted-foreground max-w-sm">
-          {item.description}
+          {paneDescription(t, item.id)}
         </p>
       </div>
       <div
@@ -190,9 +190,10 @@ const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
       >
         {rows.map((row) => {
           const Icon = ICONS[row.icon] ?? SettingsIcon;
+          const label = t(`apps:settings.general.${row.id}`);
           return (
             <button
-              key={row.label}
+              key={row.id}
               type="button"
               className="w-full flex items-center gap-3 px-3.5 py-2.5 text-left cursor-default hover:bg-black/[0.03] dark:hover:bg-white/[0.04]"
             >
@@ -202,7 +203,7 @@ const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
               >
                 <Icon className="size-3.5" strokeWidth={2.25} />
               </span>
-              <span className="flex-1 truncate">{row.label}</span>
+              <span className="flex-1 truncate">{label}</span>
               <ChevronRight className="size-4 text-black/25 dark:text-white/30" />
             </button>
           );
@@ -213,6 +214,7 @@ const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
 };
 
 export const SettingsApp = (id: string) => {
+  const { t } = useTranslation();
   const [active, setActive] = useState<SettingsPaneId>("appearance");
   const [query, setQuery] = useState("");
   const [history, setHistory] = useState<SettingsPaneId[]>(["appearance"]);
@@ -221,8 +223,10 @@ export const SettingsApp = (id: string) => {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return SETTINGS_NAV;
-    return SETTINGS_NAV.filter((item) => item.label.toLowerCase().includes(q));
-  }, [query]);
+    return SETTINGS_NAV.filter((item) =>
+      paneLabel(t, item.id).toLowerCase().includes(q)
+    );
+  }, [query, t]);
 
   const activeItem =
     SETTINGS_NAV.find((item) => item.id === active) ?? SETTINGS_NAV[0];
@@ -251,9 +255,7 @@ export const SettingsApp = (id: string) => {
   };
 
   return (
-    <FloatingSidebarShell
-      shellStyle={{ background: "var(--settings-content)" }}
-    >
+    <FloatingSidebarShell>
       <FloatingSidebar width={220}>
         <div className="px-2 pt-1 pb-1" data-handle={id}>
           <AppActions id={id} />
@@ -265,7 +267,7 @@ export const SettingsApp = (id: string) => {
             <Input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search"
+              placeholder={t("apps:settings.search")}
               className="macos-search h-[28px] pl-7 pr-2 text-[13px]"
             />
           </div>
@@ -283,7 +285,7 @@ export const SettingsApp = (id: string) => {
               Martijn van der E…
             </span>
             <span className="block os-chrome-sm text-muted-foreground font-normal">
-              Apple Account
+              {t("apps:settings.appleAccount")}
             </span>
           </span>
         </button>
@@ -310,7 +312,7 @@ export const SettingsApp = (id: string) => {
               >
                 <SettingsIconBadge item={item} />
                 <span className="os-chrome truncate text-[13px]">
-                  {item.label}
+                  {paneLabel(t, item.id)}
                 </span>
               </button>
             );
@@ -318,9 +320,9 @@ export const SettingsApp = (id: string) => {
         </div>
       </FloatingSidebar>
 
-      <FloatingSidebarContent className="rounded-tl-[16px] bg-white/70 dark:bg-[#1c1c1e]/55">
+      <FloatingSidebarContent>
         <div
-          className="absolute inset-0 pointer-events-none rounded-tl-[16px]"
+          className="absolute inset-0 pointer-events-none rounded-[16px]"
           style={{ background: "var(--window-tint)" }}
         />
 
@@ -343,7 +345,7 @@ export const SettingsApp = (id: string) => {
             </FloatingGroupButton>
           </FloatingGroup>
           <span className="os-chrome text-[13px] font-semibold tracking-[-0.08px] text-foreground">
-            {activeItem.label}
+            {paneLabel(t, activeItem.id)}
           </span>
         </header>
 

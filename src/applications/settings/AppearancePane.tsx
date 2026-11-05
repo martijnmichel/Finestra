@@ -1,9 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@/hooks/useTheme";
 import {
   ACCENT_COLORS,
   ACCENT_SWATCH_ORDER,
-  accentLabel,
   type AccentColorId,
   type AppearanceMode,
   type HighlightColorId,
@@ -66,10 +66,12 @@ const ModePreview = ({
   mode,
   selected,
   onSelect,
+  label,
 }: {
   mode: AppearanceMode;
   selected: boolean;
   onSelect: () => void;
+  label: string;
 }) => {
   const isDark = mode === "dark";
   const isAuto = mode === "auto";
@@ -114,7 +116,7 @@ const ModePreview = ({
           selected ? "text-foreground" : "text-muted-foreground"
         )}
       >
-        {mode === "auto" ? "Auto" : mode === "light" ? "Light" : "Dark"}
+        {label}
       </span>
     </button>
   );
@@ -168,10 +170,12 @@ const GlassPreview = ({
   variant,
   selected,
   onSelect,
+  label,
 }: {
   variant: LiquidGlass;
   selected: boolean;
   onSelect: () => void;
+  label: string;
 }) => (
   <button
     type="button"
@@ -204,7 +208,7 @@ const GlassPreview = ({
         selected ? "text-foreground" : "text-muted-foreground"
       )}
     >
-      {variant === "clear" ? "Clear" : "Tinted"}
+      {label}
     </span>
   </button>
 );
@@ -213,10 +217,12 @@ const IconStylePreview = ({
   style,
   selected,
   onSelect,
+  label,
 }: {
   style: IconStyle;
   selected: boolean;
   onSelect: () => void;
+  label: string;
 }) => {
   const tiles =
     style === "default"
@@ -266,11 +272,11 @@ const IconStylePreview = ({
       </div>
       <span
         className={cn(
-          "os-chrome text-[12px] capitalize",
+          "os-chrome text-[12px]",
           selected ? "text-foreground" : "text-muted-foreground"
         )}
       >
-        {style}
+        {label}
       </span>
     </button>
   );
@@ -280,10 +286,12 @@ const ColorSwatch = ({
   id,
   selected,
   onSelect,
+  label,
 }: {
   id: AccentColorId;
   selected: boolean;
   onSelect: () => void;
+  label: string;
 }) => {
   const fill =
     id === "multicolor"
@@ -293,14 +301,15 @@ const ColorSwatch = ({
   return (
     <button
       type="button"
-      title={accentLabel(id)}
+      title={label}
       onClick={onSelect}
       className={cn(
         "size-[22px] rounded-full shrink-0 cursor-default transition-shadow",
-        selected && "ring-[2.5px] ring-[var(--macos-accent)] ring-offset-2 ring-offset-[var(--settings-group)]"
+        selected &&
+          "ring-[2.5px] ring-[var(--macos-accent)] ring-offset-2 ring-offset-[var(--settings-group)]"
       )}
       style={{ background: fill }}
-      aria-label={accentLabel(id)}
+      aria-label={label}
     />
   );
 };
@@ -318,12 +327,21 @@ const ColorDot = ({ id }: { id: AccentColorId }) => (
 );
 
 export const AppearancePane = () => {
+  const { t } = useTranslation();
   const { theme, updateTheme } = useTheme();
+
+  const colorName = (id: AccentColorId) =>
+    t(`apps:settings.appearance.colors.${id}`);
+
+  const folderLabel =
+    theme.folderColor === "automatic"
+      ? t("apps:settings.appearance.automatic")
+      : colorName(theme.folderColor as AccentColorId);
 
   return (
     <div className="os-chrome flex flex-col gap-5 max-w-[560px] mx-auto w-full pb-8">
       <section>
-        <GroupHeader title="Appearance" />
+        <GroupHeader title={t("apps:settings.appearance.title")} />
         <SettingsGroup>
           <div className="flex justify-center gap-6 px-4 py-5">
             {(["auto", "light", "dark"] as AppearanceMode[]).map((mode) => (
@@ -332,6 +350,7 @@ export const AppearancePane = () => {
                 mode={mode}
                 selected={theme.mode === mode}
                 onSelect={() => updateTheme({ mode })}
+                label={t(`apps:settings.appearance.modes.${mode}`)}
               />
             ))}
           </div>
@@ -339,7 +358,9 @@ export const AppearancePane = () => {
       </section>
 
       <section>
-        <GroupHeader description="Choose your preferred look for Liquid Glass." />
+        <GroupHeader
+          description={t("apps:settings.appearance.liquidGlassHint")}
+        />
         <SettingsGroup>
           <div className="flex justify-center gap-8 px-4 py-5">
             {(["clear", "tinted"] as LiquidGlass[]).map((variant) => (
@@ -348,6 +369,7 @@ export const AppearancePane = () => {
                 variant={variant}
                 selected={theme.liquidGlass === variant}
                 onSelect={() => updateTheme({ liquidGlass: variant })}
+                label={t(`apps:settings.appearance.glass.${variant}`)}
               />
             ))}
           </div>
@@ -355,15 +377,16 @@ export const AppearancePane = () => {
       </section>
 
       <section>
-        <GroupHeader title="Theme" />
+        <GroupHeader title={t("apps:settings.appearance.theme")} />
         <SettingsGroup>
           <div className="flex items-center justify-between gap-4 px-3.5 py-3">
-            <span>Colour</span>
+            <span>{t("apps:settings.appearance.colour")}</span>
             <div className="flex items-center gap-2.5 flex-wrap justify-end">
               {ACCENT_SWATCH_ORDER.map((id) => (
                 <ColorSwatch
                   key={id}
                   id={id}
+                  label={colorName(id)}
                   selected={theme.accentColor === id}
                   onSelect={() =>
                     updateTheme({
@@ -378,18 +401,18 @@ export const AppearancePane = () => {
             </div>
           </div>
           <div className="flex items-center justify-between gap-4 px-3.5 py-2.5">
-            <span>Text highlight colour</span>
+            <span>{t("apps:settings.appearance.textHighlight")}</span>
             <Select
               value={theme.highlightColor}
               onValueChange={(v) =>
                 updateTheme({ highlightColor: v as HighlightColorId })
               }
             >
-              <SelectTrigger className="macos-select w-auto justify-end">
+              <SelectTrigger className="macos-select-plain w-auto justify-end">
                 <SelectValue>
                   <span className="flex items-center gap-1.5">
                     <ColorDot id={theme.highlightColor} />
-                    {accentLabel(theme.highlightColor)}
+                    {colorName(theme.highlightColor)}
                   </span>
                 </SelectValue>
               </SelectTrigger>
@@ -399,7 +422,7 @@ export const AppearancePane = () => {
                     <SelectItem key={id} value={id}>
                       <span className="flex items-center gap-2">
                         <ColorDot id={id} />
-                        {accentLabel(id)}
+                        {colorName(id)}
                       </span>
                     </SelectItem>
                   )
@@ -411,7 +434,7 @@ export const AppearancePane = () => {
       </section>
 
       <section>
-        <GroupHeader title="Icon & widget style" />
+        <GroupHeader title={t("apps:settings.appearance.iconWidgetStyle")} />
         <SettingsGroup>
           <div className="flex justify-center gap-5 px-4 py-5">
             {(["default", "dark", "clear", "tinted"] as IconStyle[]).map(
@@ -421,12 +444,13 @@ export const AppearancePane = () => {
                   style={style}
                   selected={theme.iconStyle === style}
                   onSelect={() => updateTheme({ iconStyle: style })}
+                  label={t(`apps:settings.appearance.iconStyles.${style}`)}
                 />
               )
             )}
           </div>
           <div className="flex items-center justify-between gap-4 px-3.5 py-2.5">
-            <span>Folder colour</span>
+            <span>{t("apps:settings.appearance.folderColour")}</span>
             <Select
               value={theme.folderColor}
               onValueChange={(v) =>
@@ -435,14 +459,25 @@ export const AppearancePane = () => {
                 })
               }
             >
-              <SelectTrigger className="macos-select w-auto justify-end">
-                <SelectValue />
+              <SelectTrigger className="macos-select-plain w-auto justify-end">
+                <SelectValue>
+                  <span className="flex items-center gap-2">
+                    <ColorDot
+                      id={
+                        theme.folderColor === "automatic"
+                          ? "blue"
+                          : (theme.folderColor as AccentColorId)
+                      }
+                    />
+                    {folderLabel}
+                  </span>
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="automatic">
                   <span className="flex items-center gap-2">
                     <ColorDot id="blue" />
-                    Automatic
+                    {t("apps:settings.appearance.automatic")}
                   </span>
                 </SelectItem>
                 {ACCENT_SWATCH_ORDER.filter((id) => id !== "multicolor").map(
@@ -450,7 +485,7 @@ export const AppearancePane = () => {
                     <SelectItem key={id} value={id}>
                       <span className="flex items-center gap-2">
                         <ColorDot id={id} />
-                        {accentLabel(id)}
+                        {colorName(id)}
                       </span>
                     </SelectItem>
                   )
@@ -462,29 +497,37 @@ export const AppearancePane = () => {
       </section>
 
       <section>
-        <GroupHeader title="Windows" />
+        <GroupHeader title={t("apps:settings.appearance.windows")} />
         <SettingsGroup>
           <div className="flex items-center justify-between gap-4 px-3.5 py-2.5">
-            <span>Sidebar icon size</span>
+            <span>{t("apps:settings.appearance.sidebarIconSize")}</span>
             <Select
               value={theme.sidebarIconSize}
               onValueChange={(v) =>
                 updateTheme({ sidebarIconSize: v as SidebarIconSize })
               }
             >
-              <SelectTrigger className="macos-select w-auto justify-end">
-                <SelectValue />
+              <SelectTrigger className="macos-select-plain w-auto justify-end">
+                <SelectValue>
+                  {t(`apps:settings.appearance.sizes.${theme.sidebarIconSize}`)}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="small">Small</SelectItem>
-                <SelectItem value="medium">Medium</SelectItem>
-                <SelectItem value="large">Large</SelectItem>
+                <SelectItem value="small">
+                  {t("apps:settings.appearance.sizes.small")}
+                </SelectItem>
+                <SelectItem value="medium">
+                  {t("apps:settings.appearance.sizes.medium")}
+                </SelectItem>
+                <SelectItem value="large">
+                  {t("apps:settings.appearance.sizes.large")}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="flex items-center justify-between gap-4 px-3.5 py-2.5">
             <Label htmlFor="wallpaper-tint" className="os-chrome font-normal">
-              Tint window background with wallpaper colour
+              {t("apps:settings.appearance.tintWindows")}
             </Label>
             <Switch
               id="wallpaper-tint"
@@ -498,7 +541,7 @@ export const AppearancePane = () => {
       </section>
 
       <section>
-        <GroupHeader title="Show scroll bars" />
+        <GroupHeader title={t("apps:settings.appearance.showScrollBars")} />
         <SettingsGroup>
           <RadioGroup
             value={theme.showScrollBars}
@@ -508,18 +551,14 @@ export const AppearancePane = () => {
             className="gap-0 divide-y divide-black/[0.08] dark:divide-white/[0.08]"
           >
             {(
-              [
-                ["automatic", "Automatically based on mouse or trackpad"],
-                ["when-scrolling", "When scrolling"],
-                ["always", "Always"],
-              ] as const
-            ).map(([value, label]) => (
+              ["automatic", "when-scrolling", "always"] as ScrollBarVisibility[]
+            ).map((value) => (
               <label
                 key={value}
                 className="flex items-center gap-2.5 px-3.5 py-2.5 cursor-default"
               >
                 <RadioGroupItem value={value} id={`scroll-${value}`} />
-                <span>{label}</span>
+                <span>{t(`apps:settings.appearance.scrollBars.${value}`)}</span>
               </label>
             ))}
           </RadioGroup>
@@ -527,7 +566,7 @@ export const AppearancePane = () => {
       </section>
 
       <section>
-        <GroupHeader title="Click in the scroll bar to" />
+        <GroupHeader title={t("apps:settings.appearance.clickScrollBar")} />
         <SettingsGroup>
           <RadioGroup
             value={theme.scrollBarClick}
@@ -536,18 +575,15 @@ export const AppearancePane = () => {
             }
             className="gap-0 divide-y divide-black/[0.08] dark:divide-white/[0.08]"
           >
-            {(
-              [
-                ["page", "Jump to the next page"],
-                ["spot", "Jump to the spot that's clicked"],
-              ] as const
-            ).map(([value, label]) => (
+            {(["page", "spot"] as ScrollBarClick[]).map((value) => (
               <label
                 key={value}
                 className="flex items-center gap-2.5 px-3.5 py-2.5 cursor-default"
               >
                 <RadioGroupItem value={value} id={`click-${value}`} />
-                <span>{label}</span>
+                <span>
+                  {t(`apps:settings.appearance.scrollClick.${value}`)}
+                </span>
               </label>
             ))}
           </RadioGroup>

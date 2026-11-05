@@ -8,7 +8,6 @@ export type FinderFile = {
 
 export type FinderSidebarItem = {
   id: string;
-  label: string;
   /** Lucide icon key */
   icon:
     | "clock"
@@ -31,98 +30,26 @@ export type FinderSidebarItem = {
 };
 
 export const FINDER_SIDEBAR: FinderSidebarItem[] = [
-  { id: "recents", label: "Recents", icon: "clock", section: "favorites" },
-  {
-    id: "applications",
-    label: "Applications",
-    icon: "app-window",
-    section: "favorites",
-  },
-  { id: "desktop", label: "Desktop", icon: "monitor", section: "favorites" },
-  {
-    id: "documents",
-    label: "Documents",
-    icon: "file-text",
-    section: "favorites",
-  },
-  {
-    id: "downloads",
-    label: "Downloads",
-    icon: "download",
-    section: "favorites",
-  },
-  { id: "pictures", label: "Pictures", icon: "image", section: "favorites" },
-  { id: "music", label: "Music", icon: "music", section: "favorites" },
-  { id: "movies", label: "Movies", icon: "film", section: "favorites" },
-  {
-    id: "icloud-drive",
-    label: "iCloud Drive",
-    icon: "cloud",
-    section: "icloud",
-  },
-  { id: "shared", label: "Shared", icon: "users", section: "icloud" },
-  {
-    id: "martijn-mac",
-    label: "Martijn’s MacBook Pro",
-    icon: "laptop",
-    section: "locations",
-  },
-  {
-    id: "macintosh-hd",
-    label: "Macintosh HD",
-    icon: "hard-drive",
-    section: "locations",
-  },
-  { id: "network", label: "Network", icon: "network", section: "locations" },
-  {
-    id: "tag-red",
-    label: "Red",
-    icon: "home",
-    section: "tags",
-    tagColor: "#ff3b30",
-  },
-  {
-    id: "tag-orange",
-    label: "Orange",
-    icon: "home",
-    section: "tags",
-    tagColor: "#ff9500",
-  },
-  {
-    id: "tag-yellow",
-    label: "Yellow",
-    icon: "home",
-    section: "tags",
-    tagColor: "#ffcc00",
-  },
-  {
-    id: "tag-green",
-    label: "Green",
-    icon: "home",
-    section: "tags",
-    tagColor: "#34c759",
-  },
-  {
-    id: "tag-blue",
-    label: "Blue",
-    icon: "home",
-    section: "tags",
-    tagColor: "#007aff",
-  },
-  {
-    id: "tag-purple",
-    label: "Purple",
-    icon: "home",
-    section: "tags",
-    tagColor: "#af52de",
-  },
-  {
-    id: "tag-grey",
-    label: "Grey",
-    icon: "home",
-    section: "tags",
-    tagColor: "#8e8e93",
-  },
+  { id: "recents", icon: "clock", section: "favorites" },
+  { id: "applications", icon: "app-window", section: "favorites" },
+  { id: "desktop", icon: "monitor", section: "favorites" },
+  { id: "documents", icon: "file-text", section: "favorites" },
+  { id: "downloads", icon: "download", section: "favorites" },
+  { id: "pictures", icon: "image", section: "favorites" },
+  { id: "music", icon: "music", section: "favorites" },
+  { id: "movies", icon: "film", section: "favorites" },
+  { id: "icloud-drive", icon: "cloud", section: "icloud" },
+  { id: "shared", icon: "users", section: "icloud" },
+  { id: "martijn-mac", icon: "laptop", section: "locations" },
+  { id: "macintosh-hd", icon: "hard-drive", section: "locations" },
+  { id: "network", icon: "network", section: "locations" },
+  { id: "tag-red", icon: "home", section: "tags", tagColor: "#ff3b30" },
+  { id: "tag-orange", icon: "home", section: "tags", tagColor: "#ff9500" },
+  { id: "tag-yellow", icon: "home", section: "tags", tagColor: "#ffcc00" },
+  { id: "tag-green", icon: "home", section: "tags", tagColor: "#34c759" },
+  { id: "tag-blue", icon: "home", section: "tags", tagColor: "#007aff" },
+  { id: "tag-purple", icon: "home", section: "tags", tagColor: "#af52de" },
+  { id: "tag-grey", icon: "home", section: "tags", tagColor: "#8e8e93" },
 ];
 
 const FILE_POOL: Omit<FinderFile, "id">[] = [

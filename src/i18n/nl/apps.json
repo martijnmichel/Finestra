@@ -53,5 +53,172 @@
       "3to6months": "3–6 maanden",
       "flexible": "Flexibel"
     }
+  },
+  "settings": {
+    "name": "Instellingen",
+    "search": "Zoeken",
+    "appleAccount": "Apple-account",
+    "comingSoon": "Binnenkort",
+    "stubBody": "{{label}}-instellingen zijn nog niet beschikbaar in dit portfolio-OS.",
+    "panes": {
+      "wifi": "Wi-Fi",
+      "bluetooth": "Bluetooth",
+      "network": "Netwerk",
+      "vpn": "VPN",
+      "energy": "Energie",
+      "general": "Algemeen",
+      "accessibility": "Toegankelijkheid",
+      "appearance": "Weergave",
+      "apple-intelligence": "Apple Intelligence & Siri",
+      "control-center": "Regelcentrum",
+      "desktop-dock": "Bureaublad & Dock",
+      "displays": "Beeldschermen",
+      "menu-bar": "Menubalk",
+      "spotlight": "Spotlight",
+      "wallpaper": "Achtergrond",
+      "notifications": "Meldingen",
+      "sound": "Geluid",
+      "focus": "Concentratie",
+      "screen-time": "Schermtijd",
+      "lock-screen": "Toegangsscherm",
+      "privacy": "Privacy & beveiliging",
+      "touch-id": "Inlogwachtwoord",
+      "users": "Gebruikers & groepen",
+      "internet-accounts": "Internetaccounts",
+      "game-center": "Game Center",
+      "icloud": "iCloud",
+      "wallet": "Wallet & Apple Pay",
+      "keyboard": "Toetsenbord",
+      "mouse": "Muis",
+      "trackpad": "Trackpad",
+      "printers": "Printers & scanners"
+    },
+    "descriptions": {
+      "general": "Beheer algemene systeeminstellingen, opslag en software-updates",
+      "appearance": "Licht, Donker, Liquid Glass, accent- en markeerkleuren"
+    },
+    "general": {
+      "about": "Info",
+      "softwareUpdate": "Software-update",
+      "storage": "Opslag",
+      "appleCare": "AppleCare & garantie",
+      "dateTime": "Datum & tijd",
+      "languageRegion": "Taal & regio",
+      "transferReset": "Overzetten of wissen"
+    },
+    "appearance": {
+      "title": "Weergave",
+      "modes": {
+        "auto": "Automatisch",
+        "light": "Licht",
+        "dark": "Donker"
+      },
+      "liquidGlassHint": "Kies de gewenste look voor Liquid Glass.",
+      "glass": {
+        "clear": "Helder",
+        "tinted": "Getint"
+      },
+      "theme": "Thema",
+      "colour": "Kleur",
+      "textHighlight": "Tekstmarkeerkleur",
+      "iconWidgetStyle": "Stijl van symbolen & widgets",
+      "iconStyles": {
+        "default": "Standaard",
+        "dark": "Donker",
+        "clear": "Helder",
+        "tinted": "Getint"
+      },
+      "folderColour": "Mapkleur",
+      "automatic": "Automatisch",
+      "windows": "Vensters",
+      "sidebarIconSize": "Grootte zijbalksymbolen",
+      "sizes": {
+        "small": "Klein",
+        "medium": "Gemiddeld",
+        "large": "Groot"
+      },
+      "tintWindows": "Vensterachtergrond tinten met achtergrondkleur",
+      "showScrollBars": "Schuifbalken tonen",
+      "scrollBars": {
+        "automatic": "Automatisch op basis van muis of trackpad",
+        "when-scrolling": "Tijdens scrollen",
+        "always": "Altijd"
+      },
+      "clickScrollBar": "Klik in de schuifbalk om",
+      "scrollClick": {
+        "page": "Naar de volgende pagina te springen",
+        "spot": "Naar de aangeklikte plek te springen"
+      },
+      "colors": {
+        "multicolor": "Meerkleurig",
+        "blue": "Blauw",
+        "purple": "Paars",
+        "pink": "Roze",
+        "red": "Rood",
+        "orange": "Oranje",
+        "yellow": "Geel",
+        "green": "Groen",
+        "graphite": "Grafiet"
+      }
+    }
+  },
+  "finder": {
+    "name": "Finder",
+    "search": "Zoeken",
+    "empty": "Geen items om te tonen",
+    "columns": {
+      "name": "Naam",
+      "dateModified": "Gewijzigd op",
+      "size": "Grootte"
+    },
+    "sections": {
+      "favorites": "Favorieten",
+      "icloud": "iCloud",
+      "locations": "Locaties",
+      "tags": "Labels"
+    },
+    "sidebar": {
+      "recents": "Recent",
+      "applications": "Programma’s",
+      "desktop": "Bureaublad",
+      "documents": "Documenten",
+      "downloads": "Downloads",
+      "pictures": "Afbeeldingen",
+      "music": "Muziek",
+      "movies": "Films",
+      "icloud-drive": "iCloud Drive",
+      "shared": "Gedeeld",
+      "martijn-mac": "Martijn’s MacBook Pro",
+      "macintosh-hd": "Macintosh HD",
+      "network": "Netwerk",
+      "tag-red": "Rood",
+      "tag-orange": "Oranje",
+      "tag-yellow": "Geel",
+      "tag-green": "Groen",
+      "tag-blue": "Blauw",
+      "tag-purple": "Paars",
+      "tag-grey": "Grijs"
+    },
+    "menus": {
+      "file": "Archief",
+      "edit": "Wijzig",
+      "view": "Weergave",
+      "go": "Ga",
+      "newWindow": "Nieuw Finder-venster",
+      "newFolder": "Nieuwe map",
+      "closeWindow": "Sluit venster",
+      "undo": "Herstel",
+      "cut": "Knip",
+      "copy": "Kopieer",
+      "paste": "Plak",
+      "selectAll": "Selecteer alles",
+      "asIcons": "als symbolen",
+      "asList": "als lijst",
+      "asColumns": "als kolommen",
+      "asGallery": "als galerie",
+      "recents": "Recent",
+      "documents": "Documenten",
+      "downloads": "Downloads"
+    }
   }
 }

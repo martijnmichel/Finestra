@@ -176,11 +176,7 @@ export const RequestForm = (id: string) => {
                   <FormItem>
                     <FormLabel>{t("apps:request.fields.name")}</FormLabel>
                     <FormControl>
-                      <Input
-                        autoComplete="name"
-                        className="macos-input-plain"
-                        {...field}
-                      />
+                      <Input autoComplete="name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -194,12 +190,7 @@ export const RequestForm = (id: string) => {
                   <FormItem>
                     <FormLabel>{t("apps:request.fields.email")}</FormLabel>
                     <FormControl>
-                      <Input
-                        type="email"
-                        autoComplete="email"
-                        className="macos-input-plain"
-                        {...field}
-                      />
+                      <Input type="email" autoComplete="email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -213,11 +204,7 @@ export const RequestForm = (id: string) => {
                   <FormItem>
                     <FormLabel>{t("apps:request.fields.company")}</FormLabel>
                     <FormControl>
-                      <Input
-                        autoComplete="organization"
-                        className="macos-input-plain"
-                        {...field}
-                      />
+                      <Input autoComplete="organization" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -384,11 +371,7 @@ export const RequestForm = (id: string) => {
                   <FormItem>
                     <FormLabel>{t("apps:request.fields.message")}</FormLabel>
                     <FormControl>
-                      <Textarea
-                        rows={5}
-                        className="macos-input-plain"
-                        {...field}
-                      />
+                      <Textarea rows={5} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

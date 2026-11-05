@@ -291,37 +291,38 @@
   }
 
   /*
-   * macOS form controls — context matters:
-   * - .macos-input / textarea: subtle well + soft border (time fields, boxed entry)
-   * - .macos-input-plain: transparent under stacked labels (Request form)
-   * - .macos-select: text + chevrons only (Settings row values)
-   * - .macos-search: capsule fill, no hard border (Finder / Settings sidebar)
+   * macOS-inspired form controls (border + light fill by default):
+   * - .macos-input / .macos-select: light well + border (forms everywhere)
+   * - .macos-select-plain / .macos-input-plain: text-only (Settings rows)
+   * - .macos-search: capsule fill (Finder / Settings sidebar)
    */
   .macos-input {
-    @apply os-chrome h-[28px] rounded-[6px] shadow-none px-2 text-[13px];
-    background: rgba(0, 0, 0, 0.04);
-    border: 0.5px solid rgba(0, 0, 0, 0.12);
-    box-shadow: inset 0 0.5px 0.5px rgba(0, 0, 0, 0.04);
+    @apply h-[32px] rounded-[8px] px-2.5 text-[13px];
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    box-shadow: inset 0 0.5px 1px rgba(0, 0, 0, 0.03);
     color: var(--foreground);
   }
 
   .dark .macos-input {
     background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.16);
     box-shadow: none;
   }
 
   .macos-input:hover {
-    background: rgba(0, 0, 0, 0.055);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.2);
   }
 
   .dark .macos-input:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.11);
+    border-color: rgba(255, 255, 255, 0.22);
   }
 
   .macos-input:focus-visible {
     outline: none;
-    border-color: color-mix(in srgb, var(--macos-accent) 55%, transparent);
+    border-color: var(--macos-accent);
     box-shadow: 0 0 0 3px
       color-mix(in srgb, var(--macos-accent) 28%, transparent);
   }
@@ -331,7 +332,7 @@
   }
 
   .macos-input-plain {
-    @apply os-chrome h-[28px] rounded-none border-0 shadow-none px-0 text-[13px];
+    @apply h-[28px] rounded-none border-0 shadow-none px-0 text-[13px];
     background: transparent !important;
     border: 0 !important;
     box-shadow: none !important;
@@ -344,7 +345,7 @@
   }
 
   .macos-search {
-    @apply os-chrome h-[28px] rounded-full border-0 shadow-none px-2 text-[13px];
+    @apply h-[28px] rounded-full border-0 shadow-none px-2 text-[13px];
     background: rgba(0, 0, 0, 0.06);
     color: var(--foreground);
   }
@@ -364,18 +365,52 @@
   }
 
   .macos-select {
-    @apply os-chrome h-[28px] rounded-none border-0 shadow-none px-0 text-[13px] gap-1;
-    background: transparent;
+    @apply h-[32px] rounded-[8px] px-2.5 text-[13px] gap-1.5;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    box-shadow: inset 0 0.5px 1px rgba(0, 0, 0, 0.03);
+    color: var(--foreground);
+    min-width: 0;
+  }
+
+  .dark .macos-select {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: none;
+  }
+
+  .macos-select:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .dark .macos-select:hover {
+    background: rgba(255, 255, 255, 0.11);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .macos-select:focus {
+    outline: none;
+    border-color: var(--macos-accent);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--macos-accent) 28%, transparent);
+  }
+
+  .macos-select-plain {
+    @apply h-[28px] rounded-none border-0 shadow-none px-0 text-[13px] gap-1;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
     color: var(--foreground);
     width: auto;
     min-width: 0;
   }
 
-  .macos-select:hover,
-  .macos-select:focus {
-    background: transparent;
+  .macos-select-plain:hover,
+  .macos-select-plain:focus {
+    background: transparent !important;
     outline: none;
-    box-shadow: none;
+    box-shadow: none !important;
   }
 
   /* Floating toolbar islands — always readable in light + dark */
@@ -415,7 +450,15 @@
     color: rgba(245, 245, 247, 0.35);
   }
 
-  /* Settings-style floating sidebar — distinct card, heavy rounding */
+  /* Shell behind floating panes — translucent so wallpaper shows in gutters */
+  .macos-floating-shell {
+    background: var(--settings-content);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur))
+      saturate(var(--glass-saturate));
+  }
+
+  /* Floating sidebar — distinct card, heavy rounding on all corners */
   .macos-floating-sidebar {
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.78);
@@ -436,6 +479,23 @@
       0 2px 8px rgba(0, 0, 0, 0.35),
       0 14px 40px rgba(0, 0, 0, 0.4),
       inset 0 0.5px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Floating content pane — full rounding; solid surface (not a new glass bg) */
+  .macos-floating-pane {
+    background: #ffffff;
+    border: 0.5px solid rgba(0, 0, 0, 0.06);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      inset 0 0.5px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .dark .macos-floating-pane {
+    background: #1c1c1e;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.25),
+      inset 0 0.5px 0 rgba(255, 255, 255, 0.06);
   }
 
   /* Finder content card — always a light readable surface */
@@ -460,7 +520,7 @@
   }
 
   .macos-button {
-    @apply os-chrome inline-flex items-center justify-center h-[28px] rounded-[6px] px-3 text-[13px] font-medium border-0 shadow-none;
+    @apply inline-flex items-center justify-center h-[28px] rounded-[6px] px-3 text-[13px] font-medium border-0 shadow-none;
     background: var(--control-fill);
     color: var(--foreground);
   }
@@ -472,11 +532,17 @@
   .macos-button-primary {
     background: var(--macos-accent);
     color: #fff;
+    border: 0;
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.12);
   }
 
   .macos-button-primary:hover {
-    filter: brightness(1.05);
+    filter: brightness(1.06);
     background: var(--macos-accent);
+  }
+
+  .macos-button-primary:active {
+    filter: brightness(0.96);
   }
 
   .window-separator {
