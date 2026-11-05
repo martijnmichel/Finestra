@@ -29,9 +29,9 @@ const Home = () => {
         backgroundSize: "100% 100%",
       }}
     >
-      {applications.map((app, index) => (
+      {applications.map((app) => (
         <ApplicationWindow
-          key={`app-window-${index}${app.name}`}
+          key={app.id}
           {...app}
         ></ApplicationWindow>
       ))}
@@ -39,6 +39,16 @@ const Home = () => {
       <Desktop />
 
       <LaunchPad />
+
+      {/* Display brightness veil — below menu bar, above desktop/windows */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-[35]"
+        style={{
+          background:
+            "rgba(0,0,0, calc((1 - var(--display-brightness, 1)) * 0.9))",
+        }}
+      />
 
       <BottomDock />
       <TopBar />

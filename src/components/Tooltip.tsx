@@ -9,13 +9,16 @@ const XTooltip = ({
   label: string;
 }) => {
   return (
-    <Tooltip.Provider delayDuration={100}>
+    <Tooltip.Provider delayDuration={200}>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>{children}</Tooltip.Trigger>
         <Tooltip.Portal>
-          <Tooltip.Content className="TooltipContent" sideOffset={5}>
+          <Tooltip.Content
+            className="TooltipContent os-chrome"
+            sideOffset={6}
+          >
             {label}
-            <Tooltip.Arrow className="TooltipArrow" />
+            <Tooltip.Arrow className="TooltipArrow" width={10} height={5} />
           </Tooltip.Content>
         </Tooltip.Portal>
       </Tooltip.Root>

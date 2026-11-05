@@ -1,48 +1,46 @@
-import React, { useEffect, useState } from "react";
-import dayjs from "dayjs";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { map } from "lodash";
-import { languages } from "../i18n";
-import { useAppContext, useAppState } from "../store";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import {
-  BatteryCharging,
-  Bluetooth,
-  Flag,
-  Search,
-  Settings2,
-  Wifi,
-} from "lucide-react";
-import { Icon } from "@iconify/react";
+import { Search } from "lucide-react";
+import { useAppState } from "../store";
 import { Dialog, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { DialogContent } from "@radix-ui/react-dialog";
-import { startApp } from "../store/actions/startApp";
+import { AppleMenu } from "./topbar/AppleMenu";
+import { ControlCenter } from "./topbar/ControlCenter";
+import {
+  BatteryMenu,
+  BluetoothMenu,
+  ClockMenu,
+  LanguageMenu,
+  WifiMenu,
+} from "./topbar/StatusMenus";
+import { useLocalStorage } from "usehooks-ts";
+import { cn } from "@/lib/utils";
 
 const TopBar = () => {
   const { launchpad } = useAppState();
-  const { dispatch } = useAppContext();
-  const [dateTime, setDateTime] = useState<number>();
+  const [dateTime, setDateTime] = useState<number>(Date.now());
+  const [focus] = useLocalStorage("finestra-focus", false);
+  const [brightness] = useLocalStorage("finestra-brightness", 85);
+  const { t } = useTranslation();
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setDateTime(Date.now());
-    }, 1000);
-
+    const timer = setInterval(() => setDateTime(Date.now()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  const { i18n } = useTranslation();
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--display-brightness",
+      String(Math.max(0.35, brightness / 100))
+    );
+  }, [brightness]);
 
   return (
     <nav
-      className={`os-chrome fixed z-40 top-0 right-0 left-0 flex h-[25px] items-center transform transition-all ${
-        launchpad ? "-translate-y-28" : ""
-      }`}
+      className={cn(
+        "os-chrome fixed z-40 top-0 right-0 left-0 flex h-[25px] items-center transform transition-all",
+        launchpad && "-translate-y-28"
+      )}
       style={{ color: "var(--menubar-fg)" }}
     >
       <div
@@ -58,9 +56,7 @@ const TopBar = () => {
       />
 
       <div className="relative z-[1] flex w-full h-full items-center px-1.5">
-        <div className="topnav-button">
-          <Icon icon="ant-design:apple-filled" className="!size-[14px]" />
-        </div>
+        <AppleMenu />
 
         <div className="flex-grow h-full flex items-center min-w-0">
           <div
@@ -70,75 +66,49 @@ const TopBar = () => {
         </div>
 
         <div className="flex-shrink-0 flex items-center gap-0.5 px-1">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="topnav-button focus:outline-none">
-                <Flag />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              {map(languages, (lang) => {
-                return (
-                  <DropdownMenuItem
-                    key={`lang-picker-${lang.label}`}
-                    onClick={() => {
-                      i18n.changeLanguage(lang.code);
-                    }}
-                    asChild
-                  >
-                    <div className="flex items-center gap-2">
-                      <img
-                        className="w-[20px] h-[20px] object-contain"
-                        src={lang.icon}
-                      />
-                      {lang.label}
-                    </div>
-                  </DropdownMenuItem>
-                );
-              })}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {focus ? (
+            <span
+              className="topnav-button pointer-events-none opacity-90"
+              title={t("common:menuBar.focusDoNotDisturb")}
+              aria-hidden
+            >
+              <span className="os-chrome-xs">☾</span>
+            </span>
+          ) : null}
 
-          <button className="topnav-button">
-            <BatteryCharging />
-          </button>
-          <button className="topnav-button">
-            <Bluetooth />
-          </button>
-          <button className="topnav-button">
-            <Wifi />
-          </button>
+          <LanguageMenu />
+          <BatteryMenu />
+          <BluetoothMenu />
+          <WifiMenu />
 
           <Dialog modal={false}>
             <DialogTrigger asChild>
-              <button className="topnav-button focus:outline-none">
+              <button
+                type="button"
+                className="topnav-button focus:outline-none"
+                aria-label={t("common:menuBar.spotlight")}
+              >
                 <Search />
               </button>
             </DialogTrigger>
-            <DialogContent className="fixed top-[20vh] left-1/2 -translate-x-1/2 bg-popover backdrop-blur-xl w-[280px] md:w-[420px] rounded-2xl">
+            <DialogContent className="fixed top-[20vh] left-1/2 -translate-x-1/2 bg-popover backdrop-blur-xl w-[280px] md:w-[420px] rounded-2xl border border-black/10 shadow-2xl p-2 z-[80]">
               <DialogHeader className="sr-only">
-                <DialogTitle>Search</DialogTitle>
+                <DialogTitle>{t("common:menuBar.spotlight")}</DialogTitle>
               </DialogHeader>
               <div className="flex flex-col gap-2 relative">
-                <Search className="absolute left-2 top-1/2 -translate-y-1/2 size-5 text-[#86868b]" />
+                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-5 text-[#86868b]" />
                 <input
-                  placeholder="Search"
-                  className="os-chrome w-full pl-9 placeholder:text-[#86868b] font-[400] text-[15px] tracking-[-0.2px] h-[40px] rounded-xl bg-transparent outline-none"
+                  placeholder={t("common:menuBar.spotlight")}
+                  className="os-chrome w-full pl-10 placeholder:text-[#86868b] font-[400] text-[15px] tracking-[-0.2px] h-[40px] rounded-xl bg-transparent outline-none"
                 />
               </div>
             </DialogContent>
           </Dialog>
-          <button
-            className="topnav-button"
-            onClick={() => startApp("Settings")(dispatch)}
-          >
-            <Settings2 />
-          </button>
+
+          <ControlCenter />
         </div>
 
-        <div className="os-chrome px-2 tabular-nums text-[13px] tracking-[-0.08px]">
-          {dayjs(dateTime).format("ddd D MMM HH:mm")}
-        </div>
+        <ClockMenu dateTime={dateTime} />
       </div>
     </nav>
   );

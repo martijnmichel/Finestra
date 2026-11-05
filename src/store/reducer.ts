@@ -119,25 +119,16 @@ export const appReducer = (
     }
     case ActionType.UPDATE_APP_WINDOW: {
       const newState = [
-        ...state.applications.map((app) => ({
-          ...app,
-          width:
-            app.id === action.appId && action.config.width
-              ? action.config.width
-              : app.width,
-          height:
-            app.id === action.appId && action.config.height
-              ? action.config.height
-              : app.height,
-          x:
-            app.id === action.appId && action.config.x
-              ? action.config.x
-              : app.x,
-          y:
-            app.id === action.appId && action.config.y
-              ? action.config.y
-              : app.y,
-        })),
+        ...state.applications.map((app) => {
+          if (app.id !== action.appId) return { ...app };
+          return {
+            ...app,
+            width: action.config.width ?? app.width,
+            height: action.config.height ?? app.height,
+            x: action.config.x ?? app.x,
+            y: action.config.y ?? app.y,
+          };
+        }),
       ];
 
       return {

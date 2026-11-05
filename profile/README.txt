@@ -7,5 +7,5 @@ bio-short.txt     — short bio
 rates.txt         — suggested USD/EUR band
 projects-plan.txt — which projects to list
 projects/*.txt    — per-project paste fields
-cv/               — one-page CV + original backup
+cv/               — one-page CV PDF (exported from About) + Word sources
 assets/headshot.png

@@ -30,7 +30,7 @@ export const ProjectTemplate = ({
         />
         <div>
           <h1 className="text-h2">{title}</h1>
-          <p className="subtitle">{desc}</p>
+          <p className="os-chrome-muted">{desc}</p>
         </div>
       </div>
 

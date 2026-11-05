@@ -59,22 +59,6 @@ export const AboutApp = (id: string) => {
     { key: "wms", app: "WMS", ...allProjects.wms },
   ];
 
-  const exportCv = () => {
-    exportCvPdf({
-      name: "Martijn van der Eijk",
-      subtitle: t("apps:about.subtitle"),
-      about: t("apps:about.aboutMeText"),
-      tagline: t("apps:about.tagline"),
-      email: "martijn.michel@gmail.com",
-      linkedIn: "linkedin.com/in/martijn-ensing-159582207",
-      projects: Object.values(allProjects).map((project) => ({
-        title: project.title,
-        desc: project.desc,
-        frameworks: project.frameworks?.map((f) => Frameworks()[f]?.label ?? f),
-      })),
-    });
-  };
-
   const navigation: NavMenu[] = [
     {
       label: "File",
@@ -85,7 +69,7 @@ export const AboutApp = (id: string) => {
         },
         {
           label: t("apps:about.exportCv"),
-          function: exportCv,
+          function: exportCvPdf,
         },
         {
           label: "New Email",
@@ -135,13 +119,17 @@ export const AboutApp = (id: string) => {
         <div className="col-span-2 flex flex-shrink flex-col gap-6">
           <div id="step-about" className="flex flex-col gap-3">
             <h2 className="text-h1">Martijn van der Eijk</h2>
-            <p className="subtitle">{t("apps:about.subtitle")}</p>
-            <p className="text-sm text-zinc-500">{t("apps:about.tagline")}</p>
+            <p className="os-chrome-muted">{t("apps:about.subtitle")}</p>
+            <p className="os-chrome-sm text-muted-foreground font-normal">
+              {t("apps:about.tagline")}
+            </p>
           </div>
 
           <div className="flex flex-col gap-3">
             <h2 className="fat">{t("apps:about.aboutMe")}</h2>
-            <p>{t("apps:about.aboutMeText")}</p>
+            <p className="os-chrome text-[13px] leading-relaxed">
+              {t("apps:about.aboutMeText")}
+            </p>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -158,24 +146,26 @@ export const AboutApp = (id: string) => {
 
           <div className="flex flex-col gap-4">
             <h2 className="fat">{t("apps:about.selectedWork")}</h2>
-            <p className="text-sm text-zinc-600">
+            <p className="os-chrome-muted">
               {t("apps:about.selectedWorkHint")}
             </p>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
               {featured.map(({ title, frameworks, icon, app, key }) => (
                 <button
                   type="button"
                   key={`featured-${key}`}
                   onClick={() => startApp(app)(dispatch)}
-                  className="flex items-center gap-2 subtitle text-xs text-left hover:opacity-80"
+                  className="os-chrome flex items-center gap-2.5 rounded-[6px] px-1.5 py-1 text-left cursor-default hover:bg-black/[0.05] dark:hover:bg-white/[0.08]"
                 >
                   <img
                     src={icon as string}
-                    className="w-5 h-5 object-cover rounded"
+                    className="size-5 object-cover rounded-[4px] shrink-0"
                     alt=""
                   />
-                  <span className="font-bold">{title}</span>
-                  <div className="flex items-center gap-1 text-lg">
+                  <span className="os-chrome-em text-[13px] truncate">
+                    {title}
+                  </span>
+                  <div className="flex items-center gap-1 text-[15px] ml-auto shrink-0 opacity-80">
                     {map(frameworks.slice(0, 4), (f) => {
                       const config = Frameworks()[f];
                       return (
@@ -204,28 +194,28 @@ export const AboutApp = (id: string) => {
             <h4 className="fat">{t("apps:about.contact")}</h4>
             <a
               target="_blank"
-              className="animate-underline"
+              className="os-chrome animate-underline inline-flex items-center gap-1.5"
               href={`https://wa.me/0031624852964?text=${encodeURIComponent(
                 "Hoi Martijn, ik nodig je graag uit voor een gesprek."
               )}`}
             >
-              <MessageCircle className="inline size-4" /> +31624852964
+              <MessageCircle className="size-3.5 shrink-0" /> +31624852964
             </a>
 
             <a
               target="_blank"
-              className="animate-underline"
+              className="os-chrome animate-underline inline-flex items-center gap-1.5"
               href={`mailto:martijn.michel@gmail.com`}
             >
-              <Inbox className="inline size-4" /> martijn.michel@gmail.com
+              <Inbox className="size-3.5 shrink-0" /> martijn.michel@gmail.com
             </a>
 
             <a
               target="_blank"
-              className="animate-underline"
+              className="os-chrome animate-underline inline-flex items-center gap-1.5"
               href={`https://www.linkedin.com/in/martijn-ensing-159582207/`}
             >
-              <Network className="inline size-4" /> LinkedIn
+              <Network className="size-3.5 shrink-0" /> LinkedIn
             </a>
           </div>
 
@@ -234,18 +224,19 @@ export const AboutApp = (id: string) => {
             {map(languages, (lang) => {
               return (
                 <button
+                  type="button"
                   key={`lang-picker-${lang.label}`}
                   onClick={() => {
                     i18next.changeLanguage(lang.code);
                   }}
+                  className="os-chrome flex items-center gap-2 rounded-[6px] px-1.5 py-1 text-left cursor-default hover:bg-black/[0.05] dark:hover:bg-white/[0.08]"
                 >
-                  <div className="flex items-center gap-1 text-xs">
-                    <img
-                      className="w-[24px] h-[24px] object-contain"
-                      src={lang.icon}
-                    />
-                    {lang.label}
-                  </div>
+                  <img
+                    className="size-5 object-contain rounded-[2px]"
+                    src={lang.icon}
+                    alt=""
+                  />
+                  {lang.label}
                 </button>
               );
             })}

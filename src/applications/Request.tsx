@@ -151,7 +151,7 @@ export const RequestForm = (id: string) => {
       {submitted ? (
         <div className="flex flex-col gap-4 max-w-md mx-auto pt-10 text-center">
           <h2 className="text-h1">{t("apps:request.thanksTitle")}</h2>
-          <p className="subtitle">{t("apps:request.thanksBody")}</p>
+          <p className="os-chrome-muted">{t("apps:request.thanksBody")}</p>
           <Button
             type="button"
             variant="outline"
@@ -164,7 +164,7 @@ export const RequestForm = (id: string) => {
         <div className="flex flex-col gap-5 max-w-md mx-auto">
           <div className="flex flex-col gap-2">
             <h2 className="text-h1">{t("apps:request.title")}</h2>
-            <p className="subtitle">{t("apps:request.subtitle")}</p>
+            <p className="os-chrome-muted">{t("apps:request.subtitle")}</p>
           </div>
 
           <Form {...form}>

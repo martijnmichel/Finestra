@@ -239,6 +239,17 @@
   color: #86868b;
 }
 
+.os-chrome-muted {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",
+    sans-serif;
+  font-size: 13px;
+  line-height: 1.23077;
+  letter-spacing: -0.08px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  color: var(--muted-foreground);
+}
+
 @layer components {
   .topnav-button {
     @apply flex items-center justify-center h-[24px] w-[24px] rounded-[5px];
@@ -250,8 +261,49 @@
     background: rgba(0, 0, 0, 0.06);
   }
 
+  .dark .topnav-button:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
   .topnav-button svg {
     @apply size-[14px];
+  }
+
+  .cc-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.12);
+    outline: none;
+    cursor: default;
+  }
+
+  .dark .cc-slider {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .cc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow:
+      0 0.5px 1px rgba(0, 0, 0, 0.2),
+      0 0 0 0.5px rgba(0, 0, 0, 0.08);
+  }
+
+  .cc-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow:
+      0 0.5px 1px rgba(0, 0, 0, 0.2),
+      0 0 0 0.5px rgba(0, 0, 0, 0.08);
   }
 
   .window-titlebar {
@@ -678,7 +730,14 @@ h5,
 }
 
 .subtitle {
-  @apply text-zinc-500 tracking-wider font-merriweather text-base font-thin leading-relaxed;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",
+    sans-serif;
+  font-size: 13px;
+  line-height: 1.3846;
+  letter-spacing: -0.08px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  color: var(--muted-foreground);
 }
 
 .fat {
@@ -694,19 +753,33 @@ h5,
 }
 
 .TooltipContent {
-  border-radius: 4px;
   z-index: 1000;
-  padding: 10px 15px;
-  font-size: 12px;
-  line-height: 1;
-  color: var(--violet-11);
-  background-color: white;
-  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
-    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  max-width: 240px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  background: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.06),
+    0 6px 24px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",
+    sans-serif;
+  font-size: 11px;
+  line-height: 1.27;
+  letter-spacing: -0.06px;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
   user-select: none;
-  animation-duration: 400ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-duration: 120ms;
+  animation-timing-function: ease-out;
   will-change: transform, opacity;
+}
+
+.dark .TooltipContent {
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .TooltipContent[data-state="delayed-open"][data-side="top"] {
@@ -726,7 +799,7 @@ h5,
 }
 
 .TooltipArrow {
-  fill: white;
+  fill: var(--popover);
 }
 
 .IconButton {

@@ -62,7 +62,7 @@ export const ACCENT_SWATCH_ORDER: AccentColorId[] = [
 
 export const DEFAULT_THEME: ThemeConfig = {
   background: backgrounds[0],
-  mode: "light",
+  mode: "auto",
   liquidGlass: "clear",
   accentColor: "blue",
   highlightColor: "blue",
