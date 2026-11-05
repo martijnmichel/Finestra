@@ -21,11 +21,11 @@ import { cn } from "@/lib/utils";
 type AppClass = (typeof Applications)[keyof typeof Applications];
 
 /** Finger travel (px) that maps open→closed while swiping down. */
-const DISMISS_SCRUB = 280;
-const DISMISS_COMMIT = 0.45;
-const DISMISS_FLICK = 0.28;
+const DISMISS_SCRUB = 240;
+const DISMISS_COMMIT = 0.42;
+const DISMISS_FLICK = 0.22;
 /** Downward velocity (px/ms) that assists dismiss. */
-const DISMISS_VELOCITY = 0.85;
+const DISMISS_VELOCITY = 0.55;
 
 /** iOS / iPadOS App Library — list on iPhone, icon grid on iPad. */
 export const AppLibrary = () => {
@@ -43,15 +43,13 @@ export const AppLibrary = () => {
     setMode,
     reset,
   } = useShellGesture();
-  const rootRef = useRef<HTMLDivElement>(null);
-  const startY = useRef<number | null>(null);
-  const startX = useRef<number | null>(null);
-  const lastY = useRef(0);
-  const lastT = useRef(0);
-  const velocityY = useRef(0);
-  const scrubbing = useRef(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const openRef = useRef(open);
+  const dismissRef = useRef<() => void>(() => {});
   // Only scrub library visuals from Home — ignore shared progress during app→home / switcher.
   const libraryProgress = useMotionValue(0);
+
+  openRef.current = open;
 
   const syncLibraryProgress = (p: number, m = mode.get()) => {
     const active = open || m === "library";
@@ -84,6 +82,133 @@ export const AppLibrary = () => {
     if (!open) setSearch("");
   }, [open]);
 
+  const dismiss = () => {
+    if (openRef.current) toggleLaunchpad()(dispatch);
+  };
+  dismissRef.current = dismiss;
+
+  /**
+   * Native non-passive touch listeners — React's onPointerMove is passive for
+   * touch on iOS, so preventDefault never wins against scroll and the gesture dies.
+   */
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || !open) return;
+
+    let startY: number | null = null;
+    let startX: number | null = null;
+    let lastY = 0;
+    let lastT = 0;
+    let velocityY = 0;
+    let scrubbing = false;
+    let suppressClick = false;
+
+    const onStart = (e: TouchEvent) => {
+      if (!openRef.current || e.touches.length !== 1) return;
+      if ((e.target as HTMLElement).closest("input, textarea")) {
+        startY = null;
+        return;
+      }
+      const t = e.touches[0];
+      startY = t.clientY;
+      startX = t.clientX;
+      lastY = t.clientY;
+      lastT = performance.now();
+      velocityY = 0;
+      scrubbing = false;
+      suppressClick = false;
+    };
+
+    const onMove = (e: TouchEvent) => {
+      if (!openRef.current || startY == null || startX == null) return;
+      if (e.touches.length !== 1) return;
+
+      const t = e.touches[0];
+      const now = performance.now();
+      const dt = Math.max(1, now - lastT);
+      velocityY = (t.clientY - lastY) / dt;
+      lastY = t.clientY;
+      lastT = now;
+
+      const dy = t.clientY - startY;
+      const dx = t.clientX - startX;
+      const atTop = el.scrollTop <= 1;
+
+      if (!scrubbing) {
+        if (!atTop || dy < 8) return;
+        if (dy < Math.abs(dx) * 1.05) return;
+        scrubbing = true;
+        suppressClick = true;
+        progress.stop();
+        setMode("library");
+      }
+
+      // Must be non-passive — blocks iOS scroll so the dismiss scrub can run.
+      e.preventDefault();
+      el.scrollTop = 0;
+      const p = Math.min(1, Math.max(0, 1 - Math.max(0, dy) / DISMISS_SCRUB));
+      setProgress(p);
+    };
+
+    const finish = async (clientY: number) => {
+      if (!scrubbing || startY == null) {
+        startY = null;
+        startX = null;
+        scrubbing = false;
+        return;
+      }
+
+      const dy = Math.max(0, clientY - startY);
+      const p = Math.min(1, Math.max(0, 1 - dy / DISMISS_SCRUB));
+      const flick =
+        p <= 1 - DISMISS_FLICK && velocityY >= DISMISS_VELOCITY;
+      const commit = p <= 1 - DISMISS_COMMIT || flick;
+
+      scrubbing = false;
+      startY = null;
+      startX = null;
+
+      if (commit) {
+        dismissRef.current();
+        return;
+      }
+
+      await settleProgress(1, GENIE_CANCEL);
+    };
+
+    const onEnd = (e: TouchEvent) => {
+      const y = e.changedTouches[0]?.clientY ?? lastY;
+      void finish(y);
+    };
+
+    const onCancel = () => {
+      void finish(lastY);
+    };
+
+    // Kill the synthetic click after a dismiss scrub so list rows don't launch.
+    const onClickCapture = (e: MouseEvent) => {
+      if (!suppressClick) return;
+      e.preventDefault();
+      e.stopPropagation();
+      suppressClick = false;
+    };
+
+    // Capture + non-passive so iOS can't steal the gesture for scroll first.
+    el.addEventListener("touchstart", onStart, { passive: true, capture: true });
+    el.addEventListener("touchmove", onMove, { passive: false, capture: true });
+    el.addEventListener("touchend", onEnd, { capture: true });
+    el.addEventListener("touchcancel", onCancel, { capture: true });
+    el.addEventListener("click", onClickCapture, true);
+
+    return () => {
+      el.removeEventListener("touchstart", onStart, true);
+      el.removeEventListener("touchmove", onMove, true);
+      el.removeEventListener("touchend", onEnd, true);
+      el.removeEventListener("touchcancel", onCancel, true);
+      el.removeEventListener("click", onClickCapture, true);
+    };
+  }, [open, progress, setMode, setProgress, settleProgress]);
+
   const iconSize = width >= 768 ? "100px" : "72px";
   const q = search.toLowerCase();
 
@@ -114,105 +239,23 @@ export const AppLibrary = () => {
   const searchY = useTransform(libraryProgress, [0, 1], [-28, 0]);
   const searchOpacity = useTransform(libraryProgress, [0, 0.4, 1], [0, 0, 1]);
 
-  const dismiss = () => {
-    if (open) toggleLaunchpad()(dispatch);
-  };
-
   const launch = (appName: string) => startApp(appName)(dispatch);
-
-  const endScrub = async (clientY: number) => {
-    if (!scrubbing.current || startY.current == null) {
-      scrubbing.current = false;
-      startY.current = null;
-      startX.current = null;
-      return;
-    }
-
-    const dy = Math.max(0, clientY - startY.current);
-    const p = Math.min(1, Math.max(0, 1 - dy / DISMISS_SCRUB));
-    const flick =
-      p <= 1 - DISMISS_FLICK && velocityY.current >= DISMISS_VELOCITY;
-    const commit = p <= 1 - DISMISS_COMMIT || flick;
-
-    scrubbing.current = false;
-    startY.current = null;
-    startX.current = null;
-
-    if (commit) {
-      dismiss();
-      return;
-    }
-
-    await settleProgress(1, GENIE_CANCEL);
-  };
 
   return (
     <div
-      ref={rootRef}
       id="app-library"
-      className="fixed inset-0 w-screen h-screen overflow-y-auto overflow-x-hidden overscroll-y-contain"
+      className="fixed inset-0 flex w-screen flex-col overflow-hidden"
       style={{
         zIndex: raised ? 50 : -10,
         pointerEvents: open ? "auto" : "none",
-        touchAction: "pan-y",
       }}
       aria-hidden={!open}
-      onPointerDown={(e) => {
-        if (!open || e.button !== 0) return;
-        // Don't fight text selection / search caret.
-        if ((e.target as HTMLElement).closest("input, textarea")) return;
-        startY.current = e.clientY;
-        startX.current = e.clientX;
-        lastY.current = e.clientY;
-        lastT.current = performance.now();
-        velocityY.current = 0;
-        scrubbing.current = false;
-      }}
-      onPointerMove={(e) => {
-        if (!open || startY.current == null || startX.current == null) return;
-
-        const now = performance.now();
-        const dt = Math.max(1, now - lastT.current);
-        // Positive = finger moving down.
-        velocityY.current = (e.clientY - lastY.current) / dt;
-        lastY.current = e.clientY;
-        lastT.current = now;
-
-        const dy = e.clientY - startY.current;
-        const dx = e.clientX - startX.current;
-        const atTop = (rootRef.current?.scrollTop ?? 0) <= 0;
-
-        if (!scrubbing.current) {
-          // Only start dismiss when pulled down from the top of the list.
-          if (!atTop || dy < 12) return;
-          if (dy < Math.abs(dx) * 1.15) return;
-          scrubbing.current = true;
-          progress.stop();
-          setMode("library");
-          try {
-            rootRef.current?.setPointerCapture(e.pointerId);
-          } catch {
-            /* ignore */
-          }
-        }
-
-        e.preventDefault();
-        if (rootRef.current) rootRef.current.scrollTop = 0;
-        const p = Math.min(1, Math.max(0, 1 - Math.max(0, dy) / DISMISS_SCRUB));
-        setProgress(p);
-      }}
-      onPointerUp={(e) => {
-        void endScrub(e.clientY);
-      }}
-      onPointerCancel={(e) => {
-        void endScrub(e.clientY);
-      }}
     >
       <motion.button
         type="button"
         aria-label="Dismiss App Library"
         onClick={dismiss}
-        className="fixed inset-0 z-0 border-0 cursor-default"
+        className="absolute inset-0 z-0 border-0 cursor-default"
         style={{
           opacity: overlayOpacity,
           backgroundColor: "rgba(0,0,0,0.5)",
@@ -222,7 +265,7 @@ export const AppLibrary = () => {
       />
 
       <motion.div
-        className="pointer-events-none fixed left-1/2 z-[1] -translate-x-1/2 w-[min(340px,88vw)] flex items-center justify-center"
+        className="pointer-events-none absolute left-1/2 z-[2] -translate-x-1/2 w-[min(340px,88vw)] flex items-center justify-center"
         style={{
           top: "calc(var(--status-strip-height) + 8px)",
           y: searchY,
@@ -242,8 +285,9 @@ export const AppLibrary = () => {
       </motion.div>
 
       <motion.div
+        ref={scrollRef}
         className={cn(
-          "pointer-events-none relative z-[1] mx-auto px-4",
+          "relative z-[1] mx-auto min-h-0 w-full flex-1 overflow-y-auto overflow-x-hidden overscroll-y-contain px-4",
           isIos ? "max-w-lg" : "max-w-3xl px-6"
         )}
         style={{
@@ -253,6 +297,8 @@ export const AppLibrary = () => {
           opacity: contentOpacity,
           scale: contentScale,
           transformOrigin: "center top",
+          WebkitOverflowScrolling: "touch",
+          touchAction: "pan-y",
         }}
       >
         {isIos ? (
@@ -264,6 +310,8 @@ export const AppLibrary = () => {
               onLaunch={launch}
               className="mt-8"
             />
+            {/* Extra pull room so swipe-down is easy even with short lists */}
+            <div className="h-24" aria-hidden />
           </>
         ) : (
           <>
@@ -317,11 +365,11 @@ function LibraryListSection({
   if (apps.length === 0) return null;
 
   return (
-    <section className={className}>
+    <section className={cn("pointer-events-auto", className)}>
       <h2 className="os-chrome-em mb-2 px-1 text-[13px] tracking-[-0.08px] text-white/55 uppercase">
         {title}
       </h2>
-      <ul className="pointer-events-auto overflow-hidden rounded-[14px] bg-white/12 backdrop-blur-xl border border-white/10">
+      <ul className="overflow-hidden rounded-[14px] bg-white/12 backdrop-blur-xl border border-white/10">
         {apps.map((app, i) => (
           <li key={`lib-row-${app.appName}`}>
             <button
