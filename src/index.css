@@ -202,6 +202,20 @@
   }
 }
 
+/* ===== OS form factor (ios / ipados / macos) ===== */
+:root {
+  --status-strip-height: 0px;
+  --mobile-dock-offset: 0px;
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html[data-os-form-factor="ios"],
+html[data-os-form-factor="ipados"] {
+  --status-strip-height: calc(44px + var(--safe-area-top));
+  --mobile-dock-offset: calc(88px + var(--safe-area-bottom));
+}
+
 /* ===== OS chrome type (plain CSS — do not @apply these) ===== */
 .os-chrome {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",

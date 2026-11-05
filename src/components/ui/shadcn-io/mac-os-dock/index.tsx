@@ -15,6 +15,8 @@ interface MacOSDockProps {
   onAppClick: (appId: string) => void;
   openApps?: string[];
   className?: string;
+  /** Mouse-X magnification; disable on touch / mobile shell. Default true. */
+  magnification?: boolean;
 }
 
 const MacOSDock: React.FC<MacOSDockProps> = ({
@@ -22,6 +24,7 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
   onAppClick,
   openApps = [],
   className = "",
+  magnification = true,
 }) => {
   const [mouseX, setMouseX] = useState<number | null>(null);
   const [currentScales, setCurrentScales] = useState<number[]>(
@@ -80,6 +83,10 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [getResponsiveConfig]);
+
+  useEffect(() => {
+    if (!magnification) setMouseX(null);
+  }, [magnification]);
 
   const calculateTargetMagnification = useCallback(
     (mousePosition: number | null) => {
@@ -180,6 +187,8 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
+      if (!magnification) return;
+
       const now = performance.now();
 
       if (now - lastMouseMoveTime.current < 16) {
@@ -194,7 +203,7 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
         setMouseX(e.clientX - rect.left - padding);
       }
     },
-    [baseIconSize]
+    [baseIconSize, magnification]
   );
 
   const handleMouseLeave = useCallback(() => {

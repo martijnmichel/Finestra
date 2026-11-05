@@ -6,11 +6,13 @@ import { appReducer } from "./reducer";
 export interface IAppState {
   applications: Application[];
   launchpad: boolean;
+  appSwitcher: boolean;
 }
 
 export const initialState: IAppState = {
   applications: [],
   launchpad: false,
+  appSwitcher: false,
 };
 export interface IAppContext {
   state: IAppState;

@@ -7,9 +7,13 @@ import { ActionToggleLaunchpad } from "./toggleLaunchPad";
 import { ActionUpdateAppWindow } from "./updateAppWindow";
 import { ActionSetApplications } from "./setApplications";
 import { ActionToggleFullscreen } from "./toggleFullscreen";
+import { ActionGoHome } from "./goHome";
+import { ActionToggleAppSwitcher } from "./toggleAppSwitcher";
 
 export enum ActionType {
   TOGGLE_LAUNCHPAD = "TOGGLE_LAUNCHPAD",
+  TOGGLE_APP_SWITCHER = "TOGGLE_APP_SWITCHER",
+  GO_HOME = "GO_HOME",
   START_APP = "START_APP",
   CLOSE_APP = "CLOSE_APP",
   HIDE_APP = "HIDE_APP",
@@ -22,6 +26,8 @@ export enum ActionType {
 
 export type AppActions =
   | ActionToggleLaunchpad
+  | ActionToggleAppSwitcher
+  | ActionGoHome
   | ActionStartApp
   | ActionCloseApp
   | ActionToggleApp

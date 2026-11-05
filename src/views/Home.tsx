@@ -1,25 +1,22 @@
-import React, { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import React from "react";
 import { ApplicationWindow } from "../components/application/ApplicationWindow";
 import BottomDock from "../components/BottomDock";
 import { LaunchPad } from "../components/Launchpad";
 import TopBar from "../components/TopBar";
 import { useTheme } from "../hooks/useTheme";
 import { Desktop } from "../components/Desktop";
+import { HomeScreen } from "../components/HomeScreen";
+import { AppSwitcher } from "../components/AppSwitcher";
+import { StatusStrip } from "../components/StatusStrip";
 import { useAppContext } from "../store";
-import { startApp } from "../store/actions/startApp";
+import { useOsFormFactor } from "../hooks/useOsFormFactor";
 
 const Home = () => {
   const {
     state: { applications },
-    dispatch,
   } = useAppContext();
-
-  useEffect(() => console.log(applications), [applications]);
-
- 
-
   const { theme } = useTheme();
+  const { isMobileShell, isMacos } = useOsFormFactor();
 
   return (
     <main
@@ -30,17 +27,13 @@ const Home = () => {
       }}
     >
       {applications.map((app) => (
-        <ApplicationWindow
-          key={app.id}
-          {...app}
-        ></ApplicationWindow>
+        <ApplicationWindow key={app.id} {...app} />
       ))}
 
-      <Desktop />
+      {isMobileShell ? <HomeScreen /> : <Desktop />}
 
-      <LaunchPad />
+      {isMacos ? <LaunchPad /> : <AppSwitcher />}
 
-      {/* Display brightness veil — below menu bar, above desktop/windows */}
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 z-[35]"
@@ -51,7 +44,7 @@ const Home = () => {
       />
 
       <BottomDock />
-      <TopBar />
+      {isMacos ? <TopBar /> : <StatusStrip />}
     </main>
   );
 };
