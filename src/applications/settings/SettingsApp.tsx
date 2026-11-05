@@ -172,7 +172,13 @@ const StubPane = ({ item }: { item: SettingsNavItem }) => {
   );
 };
 
-const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
+const GeneralPane = ({
+  item,
+  onNavigate,
+}: {
+  item: SettingsNavItem;
+  onNavigate: (pane: SettingsPaneId) => void;
+}) => {
   const { t } = useTranslation();
   const rows = [
     { id: "about", iconBg: "#8e8e93", icon: "settings" as const },
@@ -180,7 +186,12 @@ const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
     { id: "storage", iconBg: "#8e8e93", icon: "monitor" as const },
     { id: "appleCare", iconBg: "#007aff", icon: "shield" as const },
     { id: "dateTime", iconBg: "#007aff", icon: "hourglass" as const },
-    { id: "languageRegion", iconBg: "#007aff", icon: "globe" as const },
+    {
+      id: "languageRegion",
+      iconBg: "#007aff",
+      icon: "globe" as const,
+      pane: "language-region" as const,
+    },
     { id: "transferReset", iconBg: "#8e8e93", icon: "settings" as const },
   ];
 
@@ -206,6 +217,7 @@ const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
             <button
               key={row.id}
               type="button"
+              onClick={row.pane ? () => onNavigate(row.pane) : undefined}
               className="w-full flex items-center gap-3 px-3.5 py-2.5 text-left cursor-default hover:bg-black/[0.03] dark:hover:bg-white/[0.04]"
             >
               <span
@@ -224,18 +236,19 @@ const GeneralPane = ({ item }: { item: SettingsNavItem }) => {
   );
 };
 
-const isSettingsPaneId = (value: string | undefined): value is SettingsPaneId =>
-  !!value && SETTINGS_NAV.some((item) => item.id === value);
-
 const PaneBody = ({
   active,
   activeItem,
+  onNavigate,
 }: {
   active: SettingsPaneId;
   activeItem: SettingsNavItem;
+  onNavigate: (pane: SettingsPaneId) => void;
 }) => {
   if (active === "appearance") return <AppearancePane />;
-  if (active === "general") return <GeneralPane item={activeItem} />;
+  if (active === "general")
+    return <GeneralPane item={activeItem} onNavigate={onNavigate} />;
+  if (active === "language-region") return <LanguageRegionPane />;
   return <StubPane item={activeItem} />;
 };
 
@@ -276,7 +289,8 @@ export const SettingsApp = (id: string) => {
   }, [query, t]);
 
   const activeItem =
-    SETTINGS_NAV.find((item) => item.id === active) ?? SETTINGS_NAV[0];
+    getSettingsPaneItem(active) ?? SETTINGS_NAV[0];
+  const sidebarSelection = settingsSidebarSelection(active);
 
   const navigate = (pane: SettingsPaneId) => {
     if (pane !== active) {
@@ -377,7 +391,11 @@ export const SettingsApp = (id: string) => {
               backLabel={t("apps:settings.name", { defaultValue: "Settings" })}
             />
             <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-8 pt-4">
-              <PaneBody active={active} activeItem={activeItem} />
+              <PaneBody
+                active={active}
+                activeItem={activeItem}
+                onNavigate={navigate}
+              />
             </div>
           </>
         )}
@@ -423,7 +441,7 @@ export const SettingsApp = (id: string) => {
 
         <div className="flex-1 min-h-0 overflow-y-auto px-2 pb-3 space-y-[1px]">
           {filtered.map((item) => {
-            const selected = item.id === active;
+            const selected = item.id === sidebarSelection;
             return (
               <button
                 key={item.id}
@@ -481,7 +499,11 @@ export const SettingsApp = (id: string) => {
         </header>
 
         <div className="relative z-[1] flex-1 min-h-0 overflow-y-auto px-8 pb-6">
-          <PaneBody active={active} activeItem={activeItem} />
+          <PaneBody
+            active={active}
+            activeItem={activeItem}
+            onNavigate={navigate}
+          />
         </div>
       </FloatingSidebarContent>
     </FloatingSidebarShell>

@@ -88,6 +88,7 @@
       "vpn": "VPN",
       "energy": "Energy",
       "general": "General",
+      "language-region": "Language & Region",
       "accessibility": "Accessibility",
       "appearance": "Appearance",
       "apple-intelligence": "Apple Intelligence & Siri",
@@ -116,7 +117,8 @@
     },
     "descriptions": {
       "general": "Manage general system settings, storage and software updates",
-      "appearance": "Light, Dark, Liquid Glass, accent and highlight colours"
+      "appearance": "Light, Dark, Liquid Glass, accent and highlight colours",
+      "language-region": "Choose the language used across MartijnOS"
     },
     "general": {
       "about": "About",
@@ -127,6 +129,11 @@
       "languageRegion": "Language & Region",
       "transferReset": "Transfer or Reset"
     },
+    "languageRegion": {
+      "preferredLanguage": "Preferred languages",
+      "region": "Region"
+    },
+
     "appearance": {
       "title": "Appearance",
       "modes": {

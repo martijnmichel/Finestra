@@ -47,6 +47,20 @@ export class Settings extends Application {
       run: openSettingsPane("appearance"),
     },
     {
+      id: "settings:language-region",
+      labelKey: "apps:settings.panes.language-region",
+      keywords: [
+        "language",
+        "region",
+        "locale",
+        "taal",
+        "lingua",
+        "i18n",
+      ],
+      run: openSettingsPane("language-region"),
+    },
+
+    {
       id: "settings:wifi",
       labelKey: "apps:settings.panes.wifi",
       keywords: ["wifi", "wi-fi", "network", "internet"],

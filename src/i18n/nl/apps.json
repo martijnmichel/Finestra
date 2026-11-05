@@ -88,6 +88,7 @@
       "vpn": "VPN",
       "energy": "Energie",
       "general": "Algemeen",
+      "language-region": "Taal & regio",
       "accessibility": "Toegankelijkheid",
       "appearance": "Weergave",
       "apple-intelligence": "Apple Intelligence & Siri",
@@ -116,7 +117,8 @@
     },
     "descriptions": {
       "general": "Beheer algemene systeeminstellingen, opslag en software-updates",
-      "appearance": "Licht, Donker, Liquid Glass, accent- en markeerkleuren"
+      "appearance": "Licht, Donker, Liquid Glass, accent- en markeerkleuren",
+      "language-region": "Kies de taal die in MartijnOS wordt gebruikt"
     },
     "general": {
       "about": "Info",
@@ -127,6 +129,11 @@
       "languageRegion": "Taal & regio",
       "transferReset": "Overzetten of wissen"
     },
+    "languageRegion": {
+      "preferredLanguage": "Voorkeurstalen",
+      "region": "Regio"
+    },
+
     "appearance": {
       "title": "Weergave",
       "modes": {

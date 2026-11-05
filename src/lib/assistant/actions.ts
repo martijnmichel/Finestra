@@ -1,5 +1,3 @@
-import i18n from "i18next";
-import { languages } from "@/i18n";
 import { Applications } from "@/applications";
 import { Application } from "@/applications/application";
 import { startApp } from "@/store/actions/startApp";
@@ -14,16 +12,6 @@ import { resolveActionLabel } from "./types";
 export type { AssistantAction, AssistantActionDef, AssistantContext };
 export { resolveActionLabel };
 
-const langCodes = Object.keys(languages) as (keyof typeof languages)[];
-
-const cycleLanguage = () => {
-  const current =
-    (i18n.language?.slice(0, 2) as keyof typeof languages) || "en";
-  const idx = langCodes.indexOf(current);
-  const next = langCodes[(idx + 1) % langCodes.length];
-  void i18n.changeLanguage(languages[next].code);
-};
-
 /** OS-level actions not owned by a single app window. */
 const systemAssistantActions: AssistantActionDef[] = [
   {
@@ -34,12 +22,14 @@ const systemAssistantActions: AssistantActionDef[] = [
       "taal",
       "lingua",
       "i18n",
+      "locale",
       "english",
       "nederlands",
       "italiano",
     ],
     suggest: true,
-    run: () => cycleLanguage(),
+    run: ({ dispatch }) =>
+      startApp("Settings", { settingsPane: "language-region" })(dispatch),
   },
   {
     id: "system:see-projects",
