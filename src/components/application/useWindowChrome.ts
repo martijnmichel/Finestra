@@ -81,15 +81,12 @@ export function useWindowChrome(
     };
 
     const beginChrome = () => {
+      // Drag class (e.g. `.window-dragging`) disables blur/shadow in CSS.
+      // Mutating inline backdropFilter here would wipe React's glass styles.
       const cls = optsRef.current.onDragClass;
       if (cls) el.classList.add(cls);
       el.style.willChange = "transform, width, height";
       el.style.transition = "none";
-      el.style.boxShadow = "none";
-      el.style.backdropFilter = "none";
-      (
-        el.style as CSSStyleDeclaration & { webkitBackdropFilter?: string }
-      ).webkitBackdropFilter = "none";
     };
 
     const endChrome = () => {
@@ -97,11 +94,6 @@ export function useWindowChrome(
       if (cls) el.classList.remove(cls);
       el.style.willChange = "";
       el.style.transition = "";
-      el.style.boxShadow = "";
-      el.style.backdropFilter = "";
-      (
-        el.style as CSSStyleDeclaration & { webkitBackdropFilter?: string }
-      ).webkitBackdropFilter = "";
     };
 
     const onMove = (e: PointerEvent) => {

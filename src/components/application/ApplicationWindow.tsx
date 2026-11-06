@@ -182,16 +182,11 @@ export const ApplicationWindow = (app: Application) => {
         listeners: {
           start(event) {
             const el = event.target as HTMLElement;
+            // `.window-dragging` kills blur/shadow via CSS — don't touch inline
+            // backdropFilter or React won't put the glass back after drag.
             el.classList.add("window-dragging");
             el.style.willChange = "transform";
             el.style.transition = "none";
-            el.style.boxShadow = "none";
-            el.style.backdropFilter = "none";
-            (
-              el.style as CSSStyleDeclaration & {
-                webkitBackdropFilter?: string;
-              }
-            ).webkitBackdropFilter = "none";
           },
           move(event) {
             position.current.x += event.dx;
@@ -203,15 +198,6 @@ export const ApplicationWindow = (app: Application) => {
             el.classList.remove("window-dragging");
             el.style.willChange = "";
             el.style.transition = "";
-            el.style.boxShadow = "";
-            if (!isIpados) {
-              el.style.backdropFilter = "";
-              (
-                el.style as CSSStyleDeclaration & {
-                  webkitBackdropFilter?: string;
-                }
-              ).webkitBackdropFilter = "";
-            }
             updateAppWindow(app.id, {
               x: position.current.x,
               y: position.current.y,
