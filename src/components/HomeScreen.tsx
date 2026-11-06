@@ -71,7 +71,7 @@ function HomeGridPage({
     <div
       className={cn("mx-auto grid w-full content-start", colsClass, gapClass)}
       style={{
-        gridTemplateRows: `repeat(${Math.max(maxRow, 1)}, minmax(${rowHeight}px, auto))`,
+        gridTemplateRows: `repeat(${Math.max(maxRow, 1)}, minmax(0, ${rowHeight}px))`,
       }}
     >
       {items.map((item) => {
@@ -131,7 +131,7 @@ function PageDots({
   if (count <= 1) return null;
   return (
     <div
-      className="flex shrink-0 items-center justify-center gap-1.5 pb-1 pt-2"
+      className="flex items-center justify-center gap-1.5"
       role="tablist"
       aria-label="Home pages"
     >
@@ -161,6 +161,8 @@ function PagedHome({
   gapClass,
   iconSize,
   rowHeight,
+  /** First N pages (Today) keep clear of the dock; home icons may underlap. */
+  dockPadPageCount = 0,
 }: {
   pages: PlacedHomeItem[][];
   initialPage: number;
@@ -168,6 +170,7 @@ function PagedHome({
   gapClass: string;
   iconSize: string;
   rowHeight: number;
+  dockPadPageCount?: number;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(initialPage);
@@ -203,31 +206,61 @@ function PagedHome({
   };
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
+    // Full-bleed under dock + dots (iOS). Only horizontal pan — no vertical scroll.
+    <div className="relative h-full min-h-0 overflow-hidden">
       <div
         ref={scrollerRef}
         className={cn(
-          "flex min-h-0 flex-1 snap-x snap-mandatory overflow-x-auto overflow-y-hidden",
-          "overscroll-x-contain touch-pan-x",
+          "absolute inset-0 flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden",
+          "overscroll-x-contain",
           "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         )}
       >
-        {pages.map((items, i) => (
-          <section
-            key={i}
-            className="h-full w-full min-w-full shrink-0 basis-full snap-center overflow-y-hidden overscroll-contain px-0.5"
-          >
-            <HomeGridPage
-              items={items}
-              colsClass={colsClass}
-              gapClass={gapClass}
-              iconSize={iconSize}
-              rowHeight={rowHeight}
-            />
-          </section>
-        ))}
+        {pages.map((items, i) => {
+          const isToday = i < dockPadPageCount;
+          return (
+            <section
+              key={i}
+              className={cn(
+                "h-full w-full min-w-full shrink-0 basis-full snap-center px-0.5",
+                // Today: vertical scroll + dock inset. Home: no vertical scroll (keeps side-swipe).
+                isToday
+                  ? "overflow-y-auto overflow-x-hidden overscroll-y-contain"
+                  : "overflow-hidden"
+              )}
+              style={{
+                touchAction: isToday ? "pan-x pan-y" : "pan-x",
+                ...(isToday
+                  ? {
+                      paddingBottom:
+                        "calc(var(--home-dock-offset, var(--mobile-dock-offset, 0px)) + 8px)",
+                    }
+                  : null),
+              }}
+            >
+              <HomeGridPage
+                items={items}
+                colsClass={colsClass}
+                gapClass={gapClass}
+                iconSize={iconSize}
+                rowHeight={rowHeight}
+              />
+            </section>
+          );
+        })}
       </div>
-      <PageDots count={pages.length} page={page} onSelect={goTo} />
+      {/* Float above dock; content continues underneath */}
+      <div
+        className="pointer-events-none absolute inset-x-0 z-10 flex justify-center"
+        style={{
+          bottom:
+            "calc(var(--home-dock-offset, var(--mobile-dock-offset, 0px)) - 6px)",
+        }}
+      >
+        <div className="pointer-events-auto">
+          <PageDots count={pages.length} page={page} onSelect={goTo} />
+        </div>
+      </div>
     </div>
   );
 }
@@ -241,7 +274,7 @@ export const HomeScreen = () => {
   const grid = homeGridFor(isIos ? "ios" : "ipados");
   const rowHeight = isIos ? 92 : 96;
 
-  const pages = useMemo(() => {
+  const { pages, todayPageCount } = useMemo(() => {
     const home = paginateHomeItems(
       buildHomeItems(isIos ? "ios" : "ipados", homeAppNames),
       grid.cols,
@@ -254,14 +287,14 @@ export const HomeScreen = () => {
         grid.cols,
         grid.rowsPerPage
       );
-      return [...today, ...home];
+      return { pages: [...today, ...home], todayPageCount: today.length };
     }
 
-    return home;
+    return { pages: home, todayPageCount: 0 };
   }, [isIos, grid.cols, grid.rowsPerPage]);
 
   // iPhone: Today is page 0; land on first Home page.
-  const initialPage = isIos ? 1 : 0;
+  const initialPage = isIos ? todayPageCount : 0;
 
   return (
     <div
@@ -270,16 +303,15 @@ export const HomeScreen = () => {
         hasForegroundApp && "pointer-events-none"
       )}
       style={{
+        // No shell bottom padding — home icons underlap dock; Today scrolls + pads
         paddingTop: "calc(var(--status-strip-height) + 16px)",
-        paddingBottom:
-          "calc(var(--home-dock-offset, var(--mobile-dock-offset)) + 16px)",
         paddingLeft: "max(16px, env(safe-area-inset-left, 0px))",
         paddingRight: "max(16px, env(safe-area-inset-right, 0px))",
       }}
       aria-hidden={hasForegroundApp}
       data-os-form-factor={formFactor}
     >
-      <div className="mx-auto h-full w-full max-w-3xl">
+      <div className="mx-auto h-full w-full max-w-3xl overflow-hidden">
         <PagedHome
           pages={pages}
           initialPage={Math.min(initialPage, pages.length - 1)}
@@ -287,6 +319,7 @@ export const HomeScreen = () => {
           gapClass={grid.gapClass}
           iconSize={grid.iconSize}
           rowHeight={rowHeight}
+          dockPadPageCount={todayPageCount}
         />
       </div>
     </div>

@@ -49,7 +49,7 @@ export function ClockWidget({
           {now.format("HH:mm")}
         </p>
         {!compact ? (
-          <p className="os-chrome-muted mt-1 text-[12px]">{now.format("MMMM YYYY")}</p>
+          <p className="widget-secondary mt-1 text-[12px]">{now.format("MMMM YYYY")}</p>
         ) : null}
       </div>
     </WidgetShell>

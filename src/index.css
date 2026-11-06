@@ -279,6 +279,19 @@ html[data-os-form-factor="ipados"] {
   color: var(--muted-foreground);
 }
 
+/* Secondary copy on Liquid Glass widgets (wallpaper shows through — needs stronger contrast) */
+.widget-secondary {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",
+    sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.dark .widget-secondary {
+  color: rgba(255, 255, 255, 0.82);
+}
+
 @layer components {
   .topnav-button {
     @apply flex items-center justify-center h-[24px] w-[24px] rounded-[5px];

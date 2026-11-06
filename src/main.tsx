@@ -9,9 +9,9 @@ import App from "./App";
 telefuncConfig.telefuncUrl = "/api/telefunc";
 
 import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
+import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import { createRoot } from "react-dom/client";
+import { createRoot, type Root } from "react-dom/client";
 
 import en_apps from "./i18n/en/apps.json";
 import en_projects from "./i18n/en/projects";
@@ -57,5 +57,10 @@ i18n
   });
 
 const container = document.getElementById("root");
-const root = createRoot(container!);
+// Reuse the root across HMR so we don't remount the whole OS on every edit.
+const root: Root =
+  (import.meta.hot?.data.root as Root | undefined) ?? createRoot(container!);
+if (import.meta.hot) {
+  import.meta.hot.data.root = root;
+}
 root.render(<App />);

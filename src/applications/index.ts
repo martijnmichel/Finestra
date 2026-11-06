@@ -15,7 +15,10 @@ import { Toka } from "./projects/Toka";
 import { Classroom } from "./projects/Classroom";
 import { Terminal } from "./Terminal";
 import { WMS } from "./projects/WMS";
-import { WordPress } from "./projects/WordPress";
+import { JeruzalemKerk } from "./projects/JeruzalemKerk";
+import { VincentNiekerk } from "./projects/VincentNiekerk";
+import { Terrybak } from "./projects/Terrybak";
+import { EsploraNatura } from "./projects/EsploraNatura";
 import { ECBaseBestelExpo } from "./projects/ECBaseBestelExpo";
 import { ECBaseBestelNext } from "./projects/ECBaseBestelNext";
 import { MetaAssembled } from "./projects/MetaAssembled";
@@ -36,7 +39,10 @@ export type App =
   | "Toka"
   | "Classroom"
   | "WMS"
-  | "WordPress"
+  | "JeruzalemKerk"
+  | "VincentNiekerk"
+  | "Terrybak"
+  | "EsploraNatura"
   | "MetaAssembled"
   | "ECBaseBestelExpo"
   | "ECBaseBestelNext"
@@ -60,7 +66,10 @@ export const Applications: { [x in App]: Apps } = {
   Classroom: Classroom,
   WMS: WMS,
   MetaAssembled: MetaAssembled,
-  WordPress: WordPress,
+  JeruzalemKerk: JeruzalemKerk,
+  VincentNiekerk: VincentNiekerk,
+  Terrybak: Terrybak,
+  EsploraNatura: EsploraNatura,
   ECBaseBestelExpo: ECBaseBestelExpo,
   ECBaseBestelNext: ECBaseBestelNext,
   Terminal: Terminal,
@@ -87,9 +96,11 @@ export type Apps =
   | typeof Classroom
   | typeof WMS
   | typeof MetaAssembled
-  | typeof WordPress
+  | typeof JeruzalemKerk
+  | typeof VincentNiekerk
+  | typeof Terrybak
+  | typeof EsploraNatura
   | typeof ECBaseBestelExpo
   | typeof ECBaseBestelNext
   | typeof Terminal
   | typeof DirectusMobile;
-

@@ -2,10 +2,13 @@
   "about": {
     "subtitle": "Full Stack Developer met een sterk gevoel voor detail.",
     "aboutMe": "Over mij",
-    "aboutMeText": "Ik ben al sinds mijn jeugd bezig met computers en coderen. Eerst als hobby en vanaf 2021 als fulltime job. Hiervoor werkte ik als gitaardocent. Samen met mijn vrouw nam ik de beslissing om naar Italië te verhuizen. Daarbij maakte ik direct het plan om mij bezig te houden met de ontwikkeling van websites en apps. Nu woon ik in Noord-Toscane. Hier is goede koffie, optimale WiFi en een goed bureau om aan te werken. Alles wat ik nodig heb om goede code te schrijven! In mijn vrije tijd ga ik graag tennissen, hiken, koken of doe ik een bordspel.",
+    "aboutMeText": [
+      "Ik ben al sinds mijn jeugd met computers en coderen bezig — eerst als hobby, sinds 2021 fulltime, na jaren als gitaardocent. Samen met mijn vrouw verhuisde ik naar een dorp in Noord-Toscane: goede koffie, stabiele Wi‑Fi en een bureau waar écht aan gewerkt wordt.",
+      "In mijn vrije tijd tennis ik, hike ik, kook ik of speel ik een bordspel, meestal met twee katten en een hond in de buurt. Overdag bouw ik apps, websites, PWA’s en product-UI’s voor klanten en als eigen producten."
+    ],
     "tagline": "Freelance sinds 2017 · eerder ecBase",
     "selectedWork": "Geselecteerd werk",
-    "selectedWorkHint": "Open een project via desktop of launchpad — en vraag daarna iets in die richting aan.",
+    "selectedWorkHint": "Open een project via desktop of launchpad.",
     "requestProject": "Project aanvragen",
     "browseThenRequest": "Bekijk projecten",
     "exportCv": "CV exporteren",

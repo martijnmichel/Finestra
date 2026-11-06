@@ -152,9 +152,20 @@ export const AboutApp = (id: string) => {
 
           <div className="flex flex-col gap-3">
             <h2 className="fat">{t("apps:about.aboutMe")}</h2>
-            <p className="os-chrome text-[13px] leading-relaxed">
-              {t("apps:about.aboutMeText")}
-            </p>
+            <div className="flex flex-col gap-2">
+              {(
+                t("apps:about.aboutMeText", {
+                  returnObjects: true,
+                }) as string[]
+              ).map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="os-chrome text-[13px] leading-relaxed"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-2">

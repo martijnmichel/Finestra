@@ -2,10 +2,13 @@
   "about": {
     "subtitle": "Full Stack developer with an eye for detail.",
     "aboutMe": "About me",
-    "aboutMeText": "In 2021 I moved to Italy and still love it. I live with my wife, two cats and a dog in a small village in northern Tuscany — good food, excellent coffee, and stable Wi‑Fi. When I’m not coding I play tennis, read Marvel comics, or work in the garden.",
+    "aboutMeText": [
+      "I’ve been into computers and coding since I was a kid — first as a hobby, full-time since 2021 after years as a guitar teacher. My wife and I moved to a village in northern Tuscany: good coffee, stable Wi‑Fi, and a desk that actually gets used.",
+      "In my free time I play tennis, hike, cook, or play a board game, usually with two cats and a dog nearby. Day to day I build apps, websites, PWAs, and product UIs for clients and as my own products."
+    ],
     "tagline": "Freelance since 2017 · previously ecBase",
     "selectedWork": "Selected work",
-    "selectedWorkHint": "Open a project on the desktop or launchpad — then request something in that direction.",
+    "selectedWorkHint": "Open a project on the desktop or launchpad.",
     "requestProject": "Request a project",
     "browseThenRequest": "Browse projects",
     "exportCv": "Export CV",

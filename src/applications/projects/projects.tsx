@@ -12,7 +12,10 @@ import { useTranslation } from "react-i18next";
 import { IFrameworks } from "./frameworks";
 import { TranslationElement } from "../../components/TranslationElement";
 import Next from "../../icons/demo-agf.webp";
-import Wordpress from "../../icons/wordpress.png";
+import JeruzalemKerk from "../../icons/jeruzalemkerk.png";
+import VincentNiekerk from "../../icons/vincentniekerk.png";
+import Terrybak from "../../icons/terrybak.png";
+import EsploraNatura from "../../icons/esploranatura.png";
 
 export type Project = {
   title: string;
@@ -169,22 +172,33 @@ export const projects: () => { [x: string]: Project } = () => {
       frameworks: [IFrameworks.Vue, IFrameworks.Firebase, IFrameworks.GSAP],
     },
 
-    sites: {
-      title: t("projects:sites.title"),
-      desc: t("projects:sites.desc"),
-      icon: Wordpress,
-      Text: <TranslationElement i18nKey="projects:sites.htmlText" />,
+    jeruzalemKerk: {
+      title: t("projects:jeruzalemKerk.title"),
+      desc: t("projects:jeruzalemKerk.desc"),
+      icon: JeruzalemKerk,
+      Text: <TranslationElement i18nKey="projects:jeruzalemKerk.htmlText" />,
       links: [
         {
-          label: "Jeruzalem Kerk",
-          href: "https://jeruzalem-kerk.nl/",
+          label: "Website",
+          href: "https://www.jeruzalem-kerk.nl/",
         },
+      ],
+      frameworks: [
+        IFrameworks.Wordpress,
+        IFrameworks.jQuery,
+        IFrameworks.Bootstrap,
+        IFrameworks.PHP,
+      ],
+    },
+
+    vincentNiekerk: {
+      title: t("projects:vincentNiekerk.title"),
+      desc: t("projects:vincentNiekerk.desc"),
+      icon: VincentNiekerk,
+      Text: <TranslationElement i18nKey="projects:vincentNiekerk.htmlText" />,
+      links: [
         {
-          label: "Bartoon",
-          href: "https://bartoon.nl/",
-        },
-        {
-          label: "Vincent Niekerk",
+          label: "Website",
           href: "https://vincentniekerk.nl/",
         },
       ],
@@ -193,6 +207,46 @@ export const projects: () => { [x: string]: Project } = () => {
         IFrameworks.jQuery,
         IFrameworks.Bootstrap,
         IFrameworks.PHP,
+      ],
+    },
+
+    terrybak: {
+      title: t("projects:terrybak.title"),
+      desc: t("projects:terrybak.desc"),
+      icon: Terrybak,
+      Text: <TranslationElement i18nKey="projects:terrybak.htmlText" />,
+      links: [
+        {
+          label: "Website",
+          href: "https://terrybak.com/",
+        },
+      ],
+      frameworks: [
+        IFrameworks.Next,
+        IFrameworks.Directus,
+        IFrameworks.Shadcn,
+        IFrameworks.Typescript,
+        IFrameworks.Tailwind,
+      ],
+    },
+
+    esploraNatura: {
+      title: t("projects:esploraNatura.title"),
+      desc: t("projects:esploraNatura.desc"),
+      icon: EsploraNatura,
+      Text: <TranslationElement i18nKey="projects:esploraNatura.htmlText" />,
+      links: [
+        {
+          label: "Website",
+          href: "https://esploranatura.com/",
+        },
+      ],
+      frameworks: [
+        IFrameworks.Next,
+        IFrameworks.Directus,
+        IFrameworks.Shadcn,
+        IFrameworks.Typescript,
+        IFrameworks.Tailwind,
       ],
     },
 

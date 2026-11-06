@@ -10,7 +10,8 @@ import Icon from "../icons/siri.png";
 export class Siri extends Application {
   static appName = "Siri";
   public name = "Siri";
-  static icon = () => <AppIcon src={Icon} alt="Siri" squircle />;
+  // Full-size like Settings/Launchpad — padding lives in the PNG, not squircle scale.
+  static icon = () => <AppIcon src={Icon} alt="Siri" />;
   public category = "default";
 
   component = () => null;

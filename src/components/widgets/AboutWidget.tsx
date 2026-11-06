@@ -39,14 +39,14 @@ export function AboutWidget({
         )}
       />
       <div className={cn("min-w-0", compact && "w-full")}>
-        <p className="os-chrome-em truncate text-[15px] tracking-[-0.2px]">
+        <p className="os-chrome-em truncate text-[15px] tracking-[-0.2px] text-foreground">
           Martijn van der Eijk
         </p>
-        <p className="os-chrome-muted mt-0.5 line-clamp-2 text-[12px] leading-snug">
+        <p className="widget-secondary mt-0.5 line-clamp-2 text-[12px] leading-snug">
           {t("apps:about.subtitle")}
         </p>
         {!compact ? (
-          <p className="os-chrome-muted mt-1.5 truncate text-[11px]">
+          <p className="widget-secondary mt-1.5 truncate text-[11px]">
             {t("apps:about.tagline")}
           </p>
         ) : null}

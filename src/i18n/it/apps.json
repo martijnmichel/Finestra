@@ -2,10 +2,13 @@
   "about": {
     "subtitle": "Full Stack developer con occhio per i dettagli.",
     "aboutMe": "Su di me",
-    "aboutMeText": "Nel 2021 mi sono trasferito in Italia e mi piace ancora moltissimo. Vivo con mia moglie, due gatti e un cane in un piccolo paese della Toscana settentrionale — buon cibo, ottimo caffè e Wi‑Fi stabile. Quando non programmo gioco a tennis, leggo fumetti Marvel o lavoro in giardino.",
+    "aboutMeText": [
+      "Mi occupo di computer e programmazione fin da ragazzo — prima come hobby, a tempo pieno dal 2021 dopo anni come insegnante di chitarra. Con mia moglie mi sono trasferito in un paese della Toscana settentrionale: buon caffè, Wi‑Fi stabile e una scrivania che viene davvero usata.",
+      "Nel tempo libero gioco a tennis, faccio hiking, cucino o gioco a un gioco da tavolo, di solito con due gatti e un cane nelle vicinanze. Nel quotidiano realizzo app, siti, PWA e UI di prodotto per clienti e come prodotti miei."
+    ],
     "tagline": "Freelance dal 2017 · precedentemente ecBase",
     "selectedWork": "Lavori selezionati",
-    "selectedWorkHint": "Apri un progetto dal desktop o dal launchpad — poi richiedi qualcosa in quella direzione.",
+    "selectedWorkHint": "Apri un progetto dal desktop o dal launchpad.",
     "requestProject": "Richiedi un progetto",
     "browseThenRequest": "Sfoglia progetti",
     "exportCv": "Esporta CV",

@@ -37,6 +37,7 @@ export enum IFrameworks {
   Kotlin = "Kotlin",
   Postgres = "Postgres",
   Directus = "Directus",
+  Shadcn = "Shadcn",
 }
 
 export type Framework = {
@@ -186,5 +187,9 @@ export const Frameworks: () => { [x in IFrameworks]: Framework } = () => ({
   Directus: {
     label: "Directus",
     icon: <Icon icon="simple-icons:directus" />,
+  },
+  Shadcn: {
+    label: "shadcn/ui",
+    icon: <Icon icon="simple-icons:shadcnui" />,
   },
 });

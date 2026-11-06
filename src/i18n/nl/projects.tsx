@@ -110,28 +110,73 @@ export default {
     ),
   },
 
-  sites: {
-    title: "WordPress",
-    desc: "Klantwebsites",
+  jeruzalemKerk: {
+    title: "Jeruzalem Kerk",
+    desc: "Kerksite met zelfbeheer van content",
     htmlText: () => (
       <article className="content">
+        <Info title="Opdrachtgever" text="Jeruzalemkerk Amsterdam-West" />
         <Info
-          title="Jeruzalem Kerk"
-          text={
-            "Nieuwe WordPress-site voor Jeruzalem Kerk Amsterdam, zodat vrijwilligers zelf blogs en events kunnen beheren, met een frissere uitstraling voor een breder publiek."
-          }
+          title="Beschrijving"
+          text={`WordPress-site voor de Jeruzalemkerk in Amsterdam-West: diensten, livestream, activiteiten en gemeente-info. Gebouwd zodat vrijwilligers zelf blogs en events kunnen beheren, met een frissere uitstraling voor een breder publiek.`}
         />
         <Info
-          title="Bartoon"
-          text={
-            "Kleine portfoliosite voor cartoonist Bart Kranenburg om zijn werk te tonen."
-          }
+          title="Wat ik deed"
+          text={`Custom WordPress-theme, contentstructuur voor blog en events, en een setup die vrijwilligers zonder developer kunnen bijwerken.`}
+        />
+      </article>
+    ),
+  },
+
+  vincentNiekerk: {
+    title: "Vincent Niekerk",
+    desc: "Portfolio voor een meubelmaker",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Opdrachtgever" text="Vincent Niekerk Meubelmaker" />
+        <Info
+          title="Beschrijving"
+          text={`Portfoliosite voor een Amsterdamse meubelmaker en vormgever — kasten, keukens, bedden en maatwerk. Bracht nieuwe klanten en scoort goed in Google.`}
         />
         <Info
-          title="Vincent Niekerk"
-          text={
-            "Portfoliosite voor een Amsterdamse timmerman. Bracht nieuwe klanten en scoort goed in Google."
-          }
+          title="Wat ik deed"
+          text={`WordPress-portfolio met projectgalerijen, over/contact-flows en een SEO-vriendelijke structuur voor lokale zoekopdrachten.`}
+        />
+      </article>
+    ),
+  },
+
+  terrybak: {
+    title: "Terrybak",
+    desc: "Kunstenaarsportfolio (Next.js + Directus)",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Opdrachtgever" text="Terry Vreeburg" />
+        <Info
+          title="Beschrijving"
+          text={`Portfolio voor beeldend kunstenaar Terry Vreeburg: werk per jaar, projectpagina’s en media via een headless CMS. Live op terrybak.com.`}
+        />
+        <Info
+          title="Wat ik deed"
+          text={`Next.js-front-end met shadcn/ui, Directus CMS voor uploads en projectcontent, en een heldere gallery-/navigatie-ervaring.`}
+        />
+      </article>
+    ),
+  },
+
+  esploraNatura: {
+    title: "Esplora Natura",
+    desc: "Begeleide wandeltochten (Next.js + Directus)",
+    htmlText: () => (
+      <article className="content">
+        <Info title="Opdrachtgever" text="Esplora Natura" />
+        <Info
+          title="Beschrijving"
+          text={`Website voor begeleide hiking, trekking en e-bike tours in Ligurië en Toscane. Toont aankomende events en de aanpak van de gids voor veilige, bewuste outdoor-ervaringen. Live op esploranatura.com.`}
+        />
+        <Info
+          title="Wat ik deed"
+          text={`Next.js-front-end met shadcn/ui, Directus voor events en media, en een boekingsgerichte contentstructuur voor een lokale outdoor-merk.`}
         />
       </article>
     ),
