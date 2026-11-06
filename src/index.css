@@ -759,7 +759,7 @@ html[data-os-form-factor="ipados"] {
   }
 }
 
-/* Siri FAB orb — soft swirl on the real icon PNG */
+/* Siri FAB orb — soft swirl on the circular orb PNG (not the app-icon squircle) */
 @keyframes siri-orb-spin {
   0% {
     transform: rotate(0deg) scale(1);

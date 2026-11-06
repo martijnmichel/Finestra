@@ -12,7 +12,7 @@ import {
 } from "@/lib/assistant/actions";
 import { cn } from "@/lib/utils";
 import { useOsFormFactor } from "@/hooks/useOsFormFactor";
-import SiriIcon from "@/icons/siri.png";
+import SiriOrb from "@/icons/siri-orb.png";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -61,14 +61,8 @@ export const SiriOverlay = () => {
       onOpenChange={(open) => setSiriOpen(open)(dispatch)}
     >
       <Dialog.Portal>
-        <Dialog.Overlay
-          className={cn(
-            "fixed inset-0 z-[90]",
-            "bg-black/25 dark:bg-black/40",
-            "data-[state=open]:animate-in data-[state=closed]:animate-out",
-            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
-          )}
-        />
+        {/* Transparent hit-target only — no dim scrim */}
+        <Dialog.Overlay className="fixed inset-0 z-[90] bg-transparent" />
         <Dialog.Content
           className={cn(
             "fixed z-[91] outline-none",
@@ -232,10 +226,10 @@ export const SiriOverlay = () => {
             }}
           >
             <img
-              src={SiriIcon}
+              src={SiriOrb}
               alt=""
               draggable={false}
-              className="siri-orb-spin pointer-events-none absolute inset-0 size-full select-none object-cover"
+              className="siri-orb-spin pointer-events-none absolute inset-0 size-full select-none object-contain"
             />
           </motion.button>
         </Dialog.Content>
