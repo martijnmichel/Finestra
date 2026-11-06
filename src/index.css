@@ -670,8 +670,8 @@ html[data-os-form-factor="ipados"] {
     border-radius: 10px;
     padding: 5px;
     border: 0.5px solid rgba(0, 0, 0, 0.18);
-    /* Use --popover as-is — don't thin it further with color-mix */
-    background: var(--popover);
+    /* Menu-only: mix opaque fill so Clear glass doesn't show desktop through */
+    background: color-mix(in srgb, var(--popover) 65%, #f5f5f7);
     color: var(--popover-foreground);
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
     -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
@@ -683,7 +683,7 @@ html[data-os-form-factor="ipados"] {
 
   .dark .macos-menu {
     border-color: rgba(255, 255, 255, 0.14);
-    background: color-mix(in srgb, var(--popover) 92%, #1c1c1e);
+    background: color-mix(in srgb, var(--popover) 60%, #1c1c1e);
     box-shadow:
       0 0 0 0.5px rgba(255, 255, 255, 0.08) inset,
       0 0 0 0.5px rgba(0, 0, 0, 0.4),
