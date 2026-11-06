@@ -41,6 +41,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.23",
+    "dotenv": "^18.0.9",
     "hono": "^4.13.16",
     "i18next": "^26.7.1",
     "i18next-browser-languagedetector": "^8.3.0",
@@ -63,6 +64,7 @@
     "tailwindcss": "^4.3.4",
     "tailwindcss-animate": "^1.0.7",
     "telefunc": "^0.3.1",
+    "tsx": "^4.23.15",
     "usehooks-ts": "^3.1.1",
     "uuid": "^14.0.3",
     "zod": "^4.6.7"
@@ -75,11 +77,9 @@
     "@types/react-router-dom": "^5.3.3",
     "autoprefixer": "^10.6.2",
     "babel-preset-es2015": "^6.24.1",
-    "dotenv": "^18.0.9",
     "postcss": "^8.5.32",
     "sass": "^1.107.1",
     "tailwindcss-themeable": "^1.3.0",
-    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vite": "^8.3.5"
   },

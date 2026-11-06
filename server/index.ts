@@ -14,6 +14,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const dist = path.join(root, "dist");
 const port = Number(process.env.PORT) || 3000;
+const hostname = process.env.HOST || "0.0.0.0";
 
 const app = new Hono();
 
@@ -32,6 +33,6 @@ app.get("*", async (c) => {
   }
 });
 
-console.log(`MartijnOS listening on http://localhost:${port}`);
-const server = serve({ fetch: app.fetch, port });
+console.log(`MartijnOS listening on http://${hostname}:${port}`);
+const server = serve({ fetch: app.fetch, port, hostname });
 telefunc.installWebSocket(server);

@@ -1,0 +1,32 @@
+# Secrets outside the git checkout on the VPS:
+#   MARTIJNOS_ENV_FILE=/root/secrets/martijnos.env  (compose project `.env`)
+#
+# Local default: .env.local
+#
+#   docker compose up -d --build
+
+name: martijnos
+
+services:
+  martijnos:
+    build: .
+    ports:
+      - "4678:4678"
+    env_file:
+      - ${MARTIJNOS_ENV_FILE:-.env.local}
+    environment:
+      PORT: 4678
+      HOST: 0.0.0.0
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "-qO-",
+          "http://127.0.0.1:4678/",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
