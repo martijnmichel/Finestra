@@ -1,7 +1,11 @@
 import React from "react";
 import { AppIcon } from "../components/application/AppIcon";
 import { Application } from "./application";
-import { Inbox, MessageCircle, Network } from "lucide-react";
+import {
+  EmailIcon,
+  LinkedInIcon,
+  WhatsAppIcon,
+} from "@/components/icons/ContactBrandIcons";
 
 import Icon from "../icons/user.png";
 import Headshot from "../../profile/assets/headshot.png";
@@ -235,7 +239,7 @@ export const AboutApp = (id: string) => {
                 "Hoi Martijn, ik nodig je graag uit voor een gesprek."
               )}`}
             >
-              <MessageCircle className="size-3.5 shrink-0" /> +31624852964
+              <WhatsAppIcon className="size-3.5 shrink-0" /> +31624852964
             </a>
 
             <a
@@ -243,7 +247,7 @@ export const AboutApp = (id: string) => {
               className="os-chrome animate-underline inline-flex items-center gap-1.5"
               href={`mailto:martijn.michel@gmail.com`}
             >
-              <Inbox className="size-3.5 shrink-0" /> martijn.michel@gmail.com
+              <EmailIcon className="size-3.5 shrink-0" /> martijn.michel@gmail.com
             </a>
 
             <a
@@ -251,7 +255,7 @@ export const AboutApp = (id: string) => {
               className="os-chrome animate-underline inline-flex items-center gap-1.5"
               href={`https://www.linkedin.com/in/martijn-van-der-eijk-159582207/`}
             >
-              <Network className="size-3.5 shrink-0" /> LinkedIn
+              <LinkedInIcon className="size-3.5 shrink-0" /> LinkedIn
             </a>
           </div>
 

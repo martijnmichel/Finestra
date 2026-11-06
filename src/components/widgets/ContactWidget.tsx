@@ -1,31 +1,28 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Inbox, MessageCircle, Network } from "lucide-react";
 import { WidgetShell, type WidgetSize } from "./WidgetShell";
+import { ContactBrandBadge } from "@/components/icons/ContactBrandIcons";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
   {
-    id: "whatsapp",
+    id: "whatsapp" as const,
     label: "WhatsApp",
-    icon: MessageCircle,
     href: `https://wa.me/0031624852964?text=${encodeURIComponent(
       "Hoi Martijn, ik nodig je graag uit voor een gesprek."
     )}`,
   },
   {
-    id: "email",
+    id: "email" as const,
     label: "Email",
-    icon: Inbox,
     href: "mailto:martijn.michel@gmail.com",
   },
   {
-    id: "linkedin",
+    id: "linkedin" as const,
     label: "LinkedIn",
-    icon: Network,
     href: "https://www.linkedin.com/in/martijn-van-der-eijk-159582207/",
   },
-] as const;
+];
 
 /** Quick contact actions. */
 export function ContactWidget({
@@ -52,7 +49,7 @@ export function ContactWidget({
           size === "sm" ? "grid-cols-1" : "grid-cols-3"
         )}
       >
-        {LINKS.map(({ id, label, icon: Icon, href }) => (
+        {LINKS.map(({ id, label, href }) => (
           <a
             key={id}
             href={href}
@@ -66,9 +63,7 @@ export function ContactWidget({
                 : "flex-col justify-center text-center"
             )}
           >
-            <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--macos-accent)] text-white">
-              <Icon className="size-3.5" />
-            </span>
+            <ContactBrandBadge id={id} />
             <span className="os-chrome-sm truncate">{label}</span>
           </a>
         ))}
