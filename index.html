@@ -6,19 +6,161 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>MartijnOS</title>
+
+    <title>Martijn van der Eijk — Full Stack Developer | MartijnOS</title>
+    <meta
+      name="description"
+      content="Freelance full-stack developer based in Tuscany. I build mobile apps, websites, PWAs, and product UIs — for clients and my own products. Explore MartijnOS, an interactive portfolio."
+    />
+    <meta
+      name="author"
+      content="Martijn van der Eijk"
+    />
+    <link rel="canonical" href="https://www.martijnvde.nl/" />
+
+    <!-- Favicon / app icons (headshot) -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MartijnOS" />
+    <meta property="og:url" content="https://www.martijnvde.nl/" />
+    <meta
+      property="og:title"
+      content="Martijn van der Eijk — Full Stack Developer"
+    />
+    <meta
+      property="og:description"
+      content="Freelance full-stack developer based in Tuscany. Mobile apps, websites, PWAs, and product UIs — explore an interactive portfolio."
+    />
+    <meta property="og:image" content="https://www.martijnvde.nl/og.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="MartijnOS — interactive portfolio desktop with About and selected work"
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="nl_NL" />
+    <meta property="og:locale:alternate" content="it_IT" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Martijn van der Eijk — Full Stack Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Freelance full-stack developer based in Tuscany. Mobile apps, websites, PWAs, and product UIs — explore an interactive portfolio."
+    />
+    <meta name="twitter:image" content="https://www.martijnvde.nl/og.jpg" />
+
     <!-- Real device status bar: translucent; page bg / theme-color fill the safe area -->
     <meta name="theme-color" content="#f5f5f7" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="MartijnOS" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <meta
-      property="og:image"
-      content="https://og-image.vercel.app/%E2%9A%A1%EF%B8%8F%20Vite%20+%20React%20+%20Tailwind.png"
-    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.martijnvde.nl/#website",
+            "url": "https://www.martijnvde.nl/",
+            "name": "MartijnOS",
+            "description": "Interactive portfolio of Martijn van der Eijk — full-stack developer.",
+            "inLanguage": ["en", "nl", "it"],
+            "publisher": { "@id": "https://www.martijnvde.nl/#person" },
+            "about": { "@id": "https://www.martijnvde.nl/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://www.martijnvde.nl/#person",
+            "name": "Martijn van der Eijk",
+            "url": "https://www.martijnvde.nl/",
+            "image": "https://www.martijnvde.nl/icon-512.png",
+            "jobTitle": "Full Stack Developer",
+            "description": "Freelance full-stack developer based in Tuscany. Builds mobile apps, websites, PWAs, and product UIs for clients and as own products.",
+            "email": "mailto:martijn.michel@gmail.com",
+            "telephone": "+31624852964",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "Tuscany",
+              "addressCountry": "IT"
+            },
+            "knowsAbout": [
+              "Full-stack development",
+              "Mobile apps",
+              "Swift",
+              "Kotlin",
+              "Expo",
+              "React Native",
+              "Next.js",
+              "React",
+              "TypeScript",
+              "PWAs",
+              "Directus",
+              "Product UI",
+              "Dashboards",
+              "APIs"
+            ],
+            "knowsLanguage": ["en", "nl", "it"],
+            "sameAs": [
+              "https://www.linkedin.com/in/martijn-van-der-eijk-159582207/",
+              "https://github.com/martijnmichel"
+            ],
+            "worksFor": { "@id": "https://www.martijnvde.nl/#service" }
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.martijnvde.nl/#service",
+            "name": "Martijn van der Eijk — Software Development",
+            "url": "https://www.martijnvde.nl/",
+            "image": "https://www.martijnvde.nl/og.jpg",
+            "description": "Freelance software development: mobile apps (Swift, Kotlin, Expo), websites and PWAs (Next.js), dashboards, and APIs.",
+            "priceRange": "$$",
+            "areaServed": [
+              { "@type": "Country", "name": "Netherlands" },
+              { "@type": "Country", "name": "Italy" },
+              { "@type": "Place", "name": "Remote / Worldwide" }
+            ],
+            "serviceType": [
+              "Mobile app development",
+              "Web development",
+              "Progressive web apps",
+              "Product UI engineering",
+              "API and dashboard development"
+            ],
+            "provider": { "@id": "https://www.martijnvde.nl/#person" },
+            "founder": { "@id": "https://www.martijnvde.nl/#person" },
+            "email": "mailto:martijn.michel@gmail.com",
+            "telephone": "+31624852964",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "Tuscany",
+              "addressCountry": "IT"
+            },
+            "sameAs": [
+              "https://www.linkedin.com/in/martijn-van-der-eijk-159582207/",
+              "https://github.com/martijnmichel"
+            ]
+          }
+        ]
+      }
+    </script>
+
     <script
       defer
       src="https://analytics.kurbo.dev/script.js"
