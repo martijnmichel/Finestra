@@ -1,6 +1,5 @@
-# Secrets outside the git checkout on the VPS:
-#   MARTIJNOS_ENV_FILE=/root/secrets/martijnos.env  (compose project `.env`)
-#
+# Secrets outside the git checkout (same pattern as sonid-turborepo):
+#   Compose project `.env` sets MARTIJNOS_ENV_FILE=/root/secrets/martijnos.env
 # Local default: .env.local
 #
 #   docker compose up -d --build

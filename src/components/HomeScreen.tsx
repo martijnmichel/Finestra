@@ -22,14 +22,10 @@ import {
   type PlacedHomeItem,
 } from "./home/homeGrid";
 
+/** Dock: Siri / Request / Settings — keep home grid free of those. */
 const homeApps = [
   Applications.About,
-  Applications.Siri,
-  Applications.Request,
-  Applications.Finder,
-  Applications.Safari,
   Applications.Settings,
-  Applications.Terminal,
   Applications.Sonid,
   Applications.DirectusMobile,
 ] as const;
@@ -219,7 +215,7 @@ function PagedHome({
         {pages.map((items, i) => (
           <section
             key={i}
-            className="h-full w-full min-w-full shrink-0 basis-full snap-center overflow-y-auto overscroll-contain px-0.5"
+            className="h-full w-full min-w-full shrink-0 basis-full snap-center overflow-y-hidden overscroll-contain px-0.5"
           >
             <HomeGridPage
               items={items}

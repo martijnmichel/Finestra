@@ -13,7 +13,6 @@ export const Desktop = () => {
     Applications.About,
     Applications.Request,
     Applications.VSCode,
-    Applications.Terminal,
     Applications.Sonid,
     Applications.DirectusMobile,
   ] as const;
