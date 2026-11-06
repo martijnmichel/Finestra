@@ -8,19 +8,22 @@ import { telefunc } from "telefunc/vite";
 loadEnv({ path: ".env.local" });
 loadEnv();
 
+/** Keep in sync with server/telefuncSetup.ts and main.tsx */
+const TELEFUNC_URL = "/api/telefunc";
+
 /**
- * telefunc@0.3.1 Vite middleware matches `url === '/_telefunc'` exactly, but the
- * client posts to `/_telefunc?_telefunc=txt`. Strip the query so the middleware
- * still handles the request (request kind is also sent via header).
+ * telefunc@0.3.1 Vite middleware matches `url === telefuncUrl` exactly, but the
+ * client posts to `${telefuncUrl}?_telefunc=txt`. Strip the query so the
+ * middleware still handles the request (request kind is also sent via header).
  */
 function telefuncQueryCompat() {
   const strip = (middlewares) => {
     middlewares.use((req, _res, next) => {
       const raw = req.originalUrl || req.url || "";
       const pathname = raw.split("?")[0];
-      if (pathname === "/_telefunc" && raw.includes("?")) {
-        req.url = "/_telefunc";
-        if ("originalUrl" in req) req.originalUrl = "/_telefunc";
+      if (pathname === TELEFUNC_URL && raw.includes("?")) {
+        req.url = TELEFUNC_URL;
+        if ("originalUrl" in req) req.originalUrl = TELEFUNC_URL;
       }
       next();
     });
@@ -47,7 +50,12 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    plugins: [telefuncQueryCompat(), react(), tailwindcss(), telefunc()],
+    plugins: [
+      telefuncQueryCompat(),
+      react(),
+      tailwindcss(),
+      telefunc({ telefuncUrl: TELEFUNC_URL }),
+    ],
     resolve: {
       alias: {
         "@": path.resolve(import.meta.dirname, "./src"),

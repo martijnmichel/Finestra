@@ -1,8 +1,12 @@
 import React from "react";
+import { config as telefuncConfig } from "telefunc/client";
 
 import "./index.css";
 import "./hooks/useOsFormFactor";
 import App from "./App";
+
+// Must match server/telefuncSetup.ts (Vercel `api/telefunc.ts`)
+telefuncConfig.telefuncUrl = "/api/telefunc";
 
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";

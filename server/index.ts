@@ -2,10 +2,10 @@ import { config as loadEnv } from "dotenv";
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { Telefunc } from "telefunc/node";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { TELEFUNC_URL, telefunc } from "./telefuncSetup";
 
 loadEnv({ path: ".env.local" });
 loadEnv();
@@ -16,9 +16,8 @@ const dist = path.join(root, "dist");
 const port = Number(process.env.PORT) || 3000;
 
 const app = new Hono();
-const telefunc = new Telefunc();
 
-app.all("/_telefunc", async (c) => {
+app.all(TELEFUNC_URL, async (c) => {
   const response = await telefunc.serve({ request: c.req.raw });
   return response ?? c.notFound();
 });
