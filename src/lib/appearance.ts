@@ -98,7 +98,7 @@ const glassTokens = (liquidGlass: LiquidGlass, isDark: boolean) => {
     return {
       menubarBg: isDark ? "rgba(30, 30, 32, 0.42)" : "rgba(255, 255, 255, 0.42)",
       sidebar: isDark ? "rgba(40, 40, 42, 0.55)" : "rgba(246, 246, 246, 0.55)",
-      popover: isDark ? "rgba(40, 40, 42, 0.62)" : "rgba(255, 255, 255, 0.62)",
+      popover: isDark ? "rgba(40, 40, 42, 0.82)" : "rgba(255, 255, 255, 0.82)",
       windowTitlebar: isDark
         ? "linear-gradient(180deg, rgba(58,58,60,0.72) 0%, rgba(44,44,46,0.68) 100%)"
         : "linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(242,242,242,0.68) 100%)",
@@ -121,7 +121,7 @@ const glassTokens = (liquidGlass: LiquidGlass, isDark: boolean) => {
   return {
     menubarBg: isDark ? "rgba(30, 30, 32, 0.72)" : "rgba(255, 255, 255, 0.72)",
     sidebar: isDark ? "rgba(40, 40, 42, 0.82)" : "rgba(246, 246, 246, 0.82)",
-    popover: isDark ? "rgba(40, 40, 42, 0.88)" : "rgba(255, 255, 255, 0.88)",
+    popover: isDark ? "rgba(40, 40, 42, 0.94)" : "rgba(255, 255, 255, 0.94)",
     windowTitlebar: isDark
       ? "linear-gradient(180deg, #3a3a3c 0%, #2c2c2e 100%)"
       : "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(242,242,242,0.9) 100%)",
